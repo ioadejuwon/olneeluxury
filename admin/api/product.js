@@ -29,7 +29,7 @@ $(document).ready(function () {
 
         // Proceed with AJAX request if validation passes
         $.ajax({
-            url: '../api/upload_product_details.php',
+            url: 'inc/upload_product_details.php',
             type: 'POST',
             data: $('#product-details-form').serialize(),
             success: function (response) {
@@ -58,7 +58,7 @@ $(document).ready(function () {
         const productId = $(this).data('productid');
         const productElement = $('#product-' + productId);
         $.ajax({
-            url: '../inc/deleteproduct.php',
+            url: 'inc/deleteproduct.php',
             type: 'POST',
             data: { product_id: productId },
             dataType: 'json',
@@ -89,7 +89,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: 'POST',
-            url: '../inc/update_product.php',
+            url: 'inc/update_product.php',
             data: formData,
             success: function (response) {
                 var jsonResponse = JSON.parse(response);
@@ -101,7 +101,7 @@ $(document).ready(function () {
 
                     // Hide and remove notification after 3 seconds
                     setTimeout(() => {
-                        window.location.href = 'products';
+                        window.location.href = 'product';
                     }, 2000);
                 } else {
                     // $('#error-message').text(jsonResponse.message);
@@ -127,7 +127,7 @@ document.querySelectorAll('.thumbnail-form').forEach(form => {
     form.addEventListener('submit', function (event) {
         event.preventDefault();
         const formData = new FormData(this);
-        fetch('../api/update_thumbnail.php', {
+        fetch('inc/update_thumbnail.php', {
             method: 'POST',
             body: formData
         })
@@ -174,6 +174,7 @@ Dropzone.options.productImagesDropzone = {
             window.location.href = 'thumbnail?productid=' + response.product_id;
         } else {
             console.log('Upload error:', response.message);
+            showNotification(response.message, 'error'); // Show notification
         }
     },
     error: function (file, response) {

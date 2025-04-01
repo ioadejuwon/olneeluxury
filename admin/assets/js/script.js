@@ -71,8 +71,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Check if the current path is within the section or matches the link
         if (relativeCurrentPathname === relativeLinkHref || 
             (relativeLinkHref === 'orders' && relativeCurrentPathname.startsWith('order')) || 
-            (relativeLinkHref === 'create' && (relativeCurrentPathname.startsWith('image') || relativeCurrentPathname.startsWith('thumbnail'))) ||
-            (relativeLinkHref === 'products' && (relativeCurrentPathname.startsWith('edit') || relativeCurrentPathname.startsWith('create')))
+            (relativeLinkHref === 'product' && (relativeCurrentPathname.startsWith('image') || relativeCurrentPathname.startsWith('thumbnail'))) ||
+            (relativeLinkHref === 'product' && (relativeCurrentPathname.startsWith('edit') || relativeCurrentPathname.startsWith('create')))
         ) {
             link.parentElement.classList.add('-is-active');
         }

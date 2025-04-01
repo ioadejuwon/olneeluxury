@@ -26,7 +26,7 @@
           // Get the thumbnail image
           $prodsql_img_thumbnail = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '$product_id' AND thumbnail = 1");
           $row_prod_img_thumbnail = mysqli_fetch_assoc($prodsql_img_thumbnail);
-          $image_path_thumbnail = $row_prod_img_thumbnail['image_path'];
+          $image_path_thumbnail = 'admin/'.$row_prod_img_thumbnail['image_path'];
           $product_img = $image_path_thumbnail;
 
           // Get the non-thumbnail images

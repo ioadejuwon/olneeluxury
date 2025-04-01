@@ -54,7 +54,7 @@ define('SIGNUP', ADMIN_URL.'signup');
 define('DASHBOARD', ADMIN_URL);
 define('ADD_PRODUCT', ADMIN_URL.'create');
 define('CATEGORIES', ADMIN_URL.'categories');
-define('PRODUCTS', ADMIN_URL.'products');
+define('PRODUCTS', ADMIN_URL.'product');
 define('REVIEWS', ADMIN_URL.'reviews');
 define('ORDERS', ADMIN_URL.'orders');
 define('DELIVERY', ADMIN_URL.'delivery');

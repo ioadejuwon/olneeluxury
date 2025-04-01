@@ -43,7 +43,7 @@
 
                                             <div class="d-flex items-center ">
                                                 <div class="shrink-0">
-                                                    <img src="assets/img/dashboard/actions/1.png" alt="image">
+                                                    <img src="" alt="image">
                                                 </div>
                                                 <div class="ml-12">
                                                     <h4 class="text-15 lh-1 fw-500">Your resume updated!</h4>

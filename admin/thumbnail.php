@@ -101,7 +101,7 @@ $fname = $row['fname'];
             <?php
             $prodsql = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '$product_id'");
             while ($row_prod = mysqli_fetch_assoc($prodsql)) {
-              $image_path = '../' . $row_prod['image_path'];
+              $image_path =   $row_prod['image_path'];
               $image_id = $row_prod['img_id'];
               $is_thumbnail = $row_prod['thumbnail'] == 1 ? 'thumbnail-selected' : '';
             ?>
@@ -128,11 +128,11 @@ $fname = $row['fname'];
           <div class="row y-gap-20 justify-between pt-30">
             <div class="col-auto">
               <!-- <button class="button -md -outline-deep-green-1 text-deep-green-1">Prev</button> -->
-              <a href="<?php echo ADD_IMAGE . '?productid=' . $product_id ?>" class="button -md -outline-deep-green-1 text-deep-green-1">Prev</a>
+              <a href="<?php echo ADD_IMAGE . '?productid=' . $product_id ?>" class="button -icon -outline-deep-green-1 text-deep-green-1">Prev</a>
             </div>
 
             <div class="col-auto">
-              <a href="<?php echo PRODUCTS ?>" class="button -md text-white -deep-green-1">Done</a>
+              <a href="<?php echo PRODUCTS ?>" class="button -icon text-white -deep-green-1">Done</a>
             </div>
           </div>
         </div>

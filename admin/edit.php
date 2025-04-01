@@ -120,7 +120,7 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories");
                 <?php
                 $prodsql = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '$product_id'");
                 while ($row_prod = mysqli_fetch_assoc($prodsql)) {
-                  $image_path = '../' . $row_prod['image_path'];
+                  $image_path =  $row_prod['image_path'];
                   $image_id = $row_prod['img_id'];
                   $is_thumbnail = $row_prod['thumbnail'] == 1 ? 'thumbnail-selected' : '';
                 ?>
