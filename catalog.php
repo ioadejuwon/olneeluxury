@@ -18,7 +18,7 @@ include_once "comp/header.php"
             <div class="row justify-cente text-left">
                 <div class="col-auto pt-30 pb-30">
                     <div data-anim="slide-up delay-1">
-                        <h1 class="page-header__title text-white">Our Collection</h1>
+                        <h1 class="page-header__title text-white">Our Catalog</h1>
                     </div>
 
                     <div data-anim="slide-up delay-2">
