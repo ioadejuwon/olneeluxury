@@ -67,7 +67,8 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories ORDER BY creat
                   <td><?php echo $categoryname ?></td>
                   <td><?php echo $count_row_store ?></td>
                   <td class="dropdown">
-                    <span class="material-symbols-outlined">more_horiz</span>
+                    <img src="assets/img/more_horiz.png" alt="">
+                    <img src="assets/img/more_horiz.png" alt="">
                     <div class="dropdown-content">
                       <a data-toggle="modal" data-target="#edit-<?php echo $category_id; ?>">Edit Category</a>
                       <a class="copyButton" data-info="<?php echo 'Category \'' . $categoryname . '\' link copied' ?>" data-link="<?php echo BASE_URL . $category_id ?>" data-target="#copy-<?php echo $category_id; ?>">Copy Category link</a>
