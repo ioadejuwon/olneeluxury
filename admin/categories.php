@@ -1,9 +1,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js"></script>
 <?php
 session_start();
-include_once "../inc/config.php";
+include_once "inc/config.php";
 $pagetitle = "Categories";
-include_once "../inc/drc.php";
+include_once "inc/drc.php";
 if (!isset($_SESSION['user_id'])) {
   header("location: " . ADMIN_LOGIN . "?url=" . $current_url . "&t=" . $pagetitle); // redirect to login page if not signed in
   exit; // Make sure to exit after sending the redirection header
@@ -187,7 +187,7 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories ORDER BY creat
 </div>
 
 
-<script src="../api/category.js"></script>
+<script src="api/category.js"></script>
 <?php
 include_once "ad_comp/adm-footer.php";
 include_once "ad_comp/adm-tail.php";

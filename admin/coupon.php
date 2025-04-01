@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-include_once "../inc/config.php";
+include_once "inc/config.php";
 $pagetitle = "Coupon Codes";
-include_once "../inc/drc.php";
+include_once "inc/drc.php";
 
 $uriSegments = explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 $inventorycode = $uriSegments[$inventoryvalue];
@@ -203,7 +203,7 @@ $deliveries = mysqli_query($conn, "SELECT * FROM olnee_coupons");
 
 
 
-<script src="../api/coupon.js"></script>
+<script src="api/coupon.js"></script>
 <?php
 include_once "ad_comp/adm-footer.php";
 include_once "ad_comp/adm-tail.php";

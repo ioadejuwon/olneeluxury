@@ -1,5 +1,5 @@
 <?php
-include_once "../inc/auth.php"; 
+include_once "inc/auth.php"; 
 
 
 $pagetitle = "Sign Up";

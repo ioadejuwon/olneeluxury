@@ -16,9 +16,9 @@
 session_start();
 
 
-include_once "../inc/config.php";
+include_once "inc/config.php";
 $pagetitle = "Edit Product";
-include_once "../inc/drc.php";
+include_once "inc/drc.php";
 
 
 
@@ -176,7 +176,7 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories");
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="button -sm -deep-green-1 text-white" data-dismiss="modal">Close</button>
-                          <a type="button" href="../api/delete_img.php?productid=<?php echo $product_id . '&img_id=' . $image_id ?>" class="button -sm -red-1 text-white">Delete Image</a>
+                          <a type="button" href="api/delete_img.php?productid=<?php echo $product_id . '&img_id=' . $image_id ?>" class="button -sm -red-1 text-white">Delete Image</a>
                         </div>
                       </div>
                     </div>
@@ -274,7 +274,7 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories");
 
 
 
-<script src="../api/product.js"></script>
+<script src="api/product.js"></script>
 <?php
 include_once "ad_comp/adm-footer.php";
 include_once "ad_comp/adm-tail.php";

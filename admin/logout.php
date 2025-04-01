@@ -1,7 +1,7 @@
 <?php
 session_start();
-include_once "../inc/config.php"; // Include config at the beginning
-include_once "../inc/drc.php"; // Include config at the beginning
+include_once "inc/config.php"; // Include config at the beginning
+include_once "inc/drc.php"; // Include config at the beginning
 if (isset($_SESSION['user_id'])) {
     echo $logout_id = $_SESSION['user_id'];
 

@@ -15,9 +15,9 @@
 session_start();
 
 
-include_once "../inc/config.php";
+include_once "inc/config.php";
 $pagetitle = "Thumbnails";
-include_once "../inc/drc.php";
+include_once "inc/drc.php";
 
 
 $product_id = $_GET['productid'];
@@ -46,7 +46,7 @@ include_once "ad_comp/adm-head.php";
 include_once "ad_comp/adm-header.php";
 
 
-// include_once "../inc/add-course.php"; 
+// include_once "inc/add-course.php"; 
 
 
 $sql = mysqli_query($conn, "SELECT * FROM olnee_admin WHERE user_id = '{$_SESSION['user_id']}'");
@@ -146,7 +146,7 @@ $fname = $row['fname'];
 
 
 
-<script src="../api/product.js"></script>
+<script src="api/product.js"></script>
 <?php
 include_once "ad_comp/adm-footer.php";
 include_once "ad_comp/adm-tail.php";

@@ -12,9 +12,9 @@
 session_start();
 
 
-include_once "../inc/config.php";
+include_once "inc/config.php";
 $pagetitle = "Add New Course";
-include_once "../inc/drc.php";
+include_once "inc/drc.php";
 
 
 
@@ -94,7 +94,7 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories");
 
 
               <div class=" pt-30 ">
-                <form action="../api/edit_images.php" class="dropzone" id="edit-images-dropzone">
+                <form action="api/edit_images.php" class="dropzone" id="edit-images-dropzone">
                   <input type="hidden" name="productid" id="product_id" value="<?php echo $_GET['productid']; ?>">
                 </form>
                 <!-- <button type="button" id="upload-button">Upload Images</button> -->
@@ -123,7 +123,7 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories");
 
 
 
-<script src="../api/product.js"></script>
+<script src="api/product.js"></script>
 <?php
 include_once "ad_comp/adm-footer.php";
 include_once "ad_comp/adm-tail.php";

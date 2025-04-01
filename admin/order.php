@@ -2,9 +2,9 @@
     session_start();
     
 
-    include_once "../inc/config.php";
+    include_once "inc/config.php";
     $pagetitle = "Dashboard";
-    include_once "../inc/drc.php"; 
+    include_once "inc/drc.php"; 
 
     
 
@@ -16,10 +16,9 @@
         
     }
     
-    
+
     include_once "ad_comp/adm-head.php"; 
     include_once "ad_comp/adm-header.php"; 
-    // include_once "../inc/drc.php"; 
 
 
     $sql = mysqli_query($conn, "SELECT * FROM olnee_admin WHERE user_id = '{$_SESSION['user_id']}'");
