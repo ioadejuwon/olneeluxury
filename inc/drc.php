@@ -22,7 +22,7 @@ if ($_SERVER['HTTP_HOST'] == 'localhost:8888') {
     // Hosting environment
     // define('BASE_URL', 'https://bobthebuilder.shop/');
     // define('ADMIN_URL', 'https://admin.buildwithbob.shop/');
-    define('BASE_URL', 'https://olneeluxury.com');
+    define('BASE_URL', 'https://olneeluxury.com/');
     define('ADMIN_URL', 'https://admin.olneeluxury.com/');
 }
 
