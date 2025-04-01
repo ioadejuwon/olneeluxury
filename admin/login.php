@@ -65,5 +65,5 @@ include_once "ad_comp/adm-head.php";
     </div>
   </section>
 
-  <script src="../api/auth.js"></script>
+  <script src="api/auth.js"></script>
   <?php include_once "ad_comp/adm-tail.php"; ?>
