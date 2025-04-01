@@ -1,6 +1,6 @@
 
 $(document).ready(function () {
-    console.log('jQuery is loaded');
+    // console.log('jQuery is loaded');
     // Add category to the Database begin
     $('#categoryForm').on('submit', function (e) {
         e.preventDefault(); // Prevent the default form submission

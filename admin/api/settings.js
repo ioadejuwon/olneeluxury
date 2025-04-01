@@ -1,6 +1,6 @@
 
 $(document).ready(function() {
-    console.log('jQuery is loaded');
+    // console.log('jQuery is loaded');
     // Update the store in the Database begin
     $('#store-update').on('submit', function(event) {
         event.preventDefault(); // Prevent default form submission

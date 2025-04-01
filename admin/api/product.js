@@ -1,6 +1,6 @@
 
 $(document).ready(function () {
-    console.log('jQuery is loaded');
+    // console.log('jQuery is loaded');
 
 
     // Add product to the database Begin
