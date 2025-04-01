@@ -246,9 +246,8 @@
                         <div>
                             <div class="d-flex x-gap-15 text-dark-1">
                                 <a href="help">Help</a>
-                                <a href="terms.html">Privacy Policy</a>
-                                <a href="terms.html">Cookie Notice</a>
-                                <a href="terms.html">Terms of Use</a>
+                                <a href="help">Privacy Policy</a>
+                                <a href="help">Terms of Use</a>
                             </div>
                         </div>
 

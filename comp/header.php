@@ -128,7 +128,6 @@
             <div class="relative -before-border px-20 sm:px-15 no-icon-2">
               <!-- <button class="d-flex items-center text-dark-1" data-el-toggle=".js-cart-toggle"> -->
               <button class="d-flex items-center text-dark-1 cart-toggle-btn">
-
                 <i class="text-20 icon icon-basket"></i>
                 <span class="cart-items-number-header" style="border: 0px !important;">
                   <span class="cart-item-count-toolbar" style="font-size: 10px;">0</span>

@@ -8,7 +8,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: 'POST',
-            url: 'inc/account_auth.php',
+            url: '../inc/admin_auth.php',
             data: $(this).serialize() + '&login=true', // Serialize form data
             dataType: 'json',
             success: function (response) {

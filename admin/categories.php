@@ -50,7 +50,7 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories ORDER BY creat
           <tbody id="categoryTableBody">
             <?php
 
-            
+
 
             $count_row_cateegories = mysqli_num_rows($categories);
 
@@ -117,19 +117,19 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories ORDER BY creat
             } else {
 
               ?>
-              <tr class="layout-pt-lg layout-pb-lg section-bg mt-30 empty ">
+              <tr class="layout-pt-lg layout-pb-lg section-bg mt-30 empty">
                 <div class="section-bg__item bg-light-6"></div>
                 <td colspan="6" class="container desction">
                   <div class="row y-gap-20 justify-center text-center">
-                    <div class="col-auto">
-                      <img src="assets/img/store.png" style="width:20%">
+                    <div class="col-auto mt-10">
+                      <img class="mb-20" src="assets/img/store.png" style="width:15%">
                       <div class="sectionTitle ">
                         <h2 class="sectionTitle__title ">No Category added!</h2>
-                        <p class="sectionTitle__text h4 pt-15">
+                        <p class="sectionTitle__text h4 pt-5">
                           Your product categories will appear here!
                         </p>
                       </div>
-                      <div class="row justify-center pt-30">
+                      <div class="row justify-center pt-15">
                         <div class="col-auto">
                           <a data-toggle="modal" data-target="#modal-categories" class="button -icon  -deep-green-1 text-white">
                             Add New Category <i class="icon-arrow-top-right text-13 ml-10"></i>
