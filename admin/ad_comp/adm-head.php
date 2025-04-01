@@ -1,8 +1,3 @@
-<?php
-include_once "../inc/config.php";
-include_once "../inc/drc.php";
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 

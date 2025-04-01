@@ -1,15 +1,17 @@
 <?php
 session_start();
+include_once "../inc/config.php";
 
-include_once "ad_comp/adm-head.php";
 include_once "../inc/drc.php";
 if (!isset($_SESSION['user_id'])) {
   header("location: " . ADMIN_LOGIN . "?url=" . $current_url . "&t=" . $pagetitle); // redirect to login page if not signed in
   exit; // Make sure to exit after sending the redirection header
 } else {
+  $pagetitle = "Dashboard";
   $user_id = $_SESSION['user_id'];
 }
-$pagetitle = "Dashboard";
+
+include_once "ad_comp/adm-head.php";
 include_once "ad_comp/adm-header.php";
 
 $sql = mysqli_query($conn, "SELECT * FROM olnee_admin WHERE user_id = '{$_SESSION['user_id']}'");
