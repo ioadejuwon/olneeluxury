@@ -29,7 +29,7 @@ include_once "comp/header.php"
 </section>
 
 
-<section class="layout-pt-md layout-pb-lg">
+<section class="layout-pt-md layout-pb-lg d-none">
     <div class="container">
         <div class="row x-gap-60 ">
             <div class="col-lg-3 display-none">
@@ -239,6 +239,44 @@ include_once "comp/header.php"
     </div>
 </section>
 
+
+<section class="layout-pt-lg layout-pb-lg border-top-light">
+    <div data-anim-wrap class="container">
+       
+        <div class="pt-60 lg:pt-50 js-section-slider" data-gap="30" data-pagination data-slider-cols="xl-3 lg-3 md-2">
+            <div class="swiper-wraper row y-gap-30">
+
+              
+                <div class="swiper-slid col-lg-3">
+                    <div class=" bg-light-1 rounded-8 with-image-bg " style="background-image: url('admin/assets/img/landing.jpg');">
+                        <div class="eventCard -type-3 rounded-8">
+                            <div class="eventCard__date">
+                                <h3 class="text-30 lh-1 fw-500 ml-15 text-white">Senator</h3>
+                            </div>
+
+
+
+                            <div class="eventCard__button">
+
+                                <a href="#" class="button -icon -white text-deep-green-1">
+                                    View Collection
+                                    <i class="icon-arrow-top-right text-13 ml-10"></i>
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+             
+
+
+            </div>
+
+           
+        </div>
+    </div>
+</section>
 
 
 <?php

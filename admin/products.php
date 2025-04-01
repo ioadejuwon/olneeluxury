@@ -182,15 +182,15 @@ $fname = $row['fname'];
                         <div class="modal-content">
                           <div class="modal-body p-4">
 
-                            <h2 class="h4">Delete Product</h2>
+                            <h2 class="h4">Share Product</h2>
                             <p class="text-dark">Are you sure you want to delete the product "<span class="fw-600"><?php echo $product_name ?></span>". This process is irreversible.</p>
                             <p class="text-dark">Users who have added "<span class="fw-600"><?php echo $product_name ?></span>" to cart will still be able to process the order.</p>
                             <ul class="row gx-4 mt-4">
-                              <li class="col-6 d-none">
+                              <li class="col-auto d-noe">
                                 <button class="button -outline-dark-3 -md w-100" data-bs-dismiss="modal">Close</button>
                                 <!-- <button class="button -md -deep-green-1 text-white" type="submit" id="submit">nn</button> -->
                               </li>
-                              <li class="col-12">
+                              <li class="col-auto d-none">
                                 <a href="#" class="button -red-1 w-100 button -md -deep-green-1 text-white delete-product-btn" data-productid="<?php echo $product_id; ?>">Delete Product</a>
                                 <!-- <a href="#" class="button -sm -icon -red-1 text-white fw-500 delete-product-btn" data-productid="<?php echo $product_id; ?>">Delete</a> -->
                               </li>

@@ -60,6 +60,16 @@
   /* border-radius: 20%; */
 }
 
+.with-image-bg {
+  /* position: relative; */
+  /* background-image: url('../img/landing.jpg'); */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  /* border-radius: 20%; */
+}
+
 .page-header .overlay {
   position: absolute;
   top: 0;
