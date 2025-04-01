@@ -15,7 +15,8 @@
       $user_id = $_SESSION['user_id'];
         
     }
-
+    $order_id = $_GET['id'];
+    
     $orders_sql = mysqli_query($conn, "SELECT * FROM olnee_orders WHERE order_id = $order_id");
     $count_row_orders = mysqli_num_rows($orders_sql);
     if($count_row_orders < 1){
@@ -28,7 +29,7 @@
     include_once "ad_comp/adm-header.php"; 
 
 
-    $order_id = $_GET['id'];
+    
     $sql = mysqli_query($conn, "SELECT * FROM olnee_admin WHERE user_id = '{$_SESSION['user_id']}'");
     $row = mysqli_fetch_assoc($sql);
     // $user_id = $row["user_id"];
