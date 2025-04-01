@@ -1,6 +1,6 @@
 <?php
 session_start();
-$pagetitle = "Dashboard";
+
 include_once "ad_comp/adm-head.php";
 include_once "../inc/drc.php";
 if (!isset($_SESSION['user_id'])) {
@@ -9,6 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 } else {
   $user_id = $_SESSION['user_id'];
 }
+$pagetitle = "Dashboard";
 include_once "ad_comp/adm-header.php";
 
 $sql = mysqli_query($conn, "SELECT * FROM olnee_admin WHERE user_id = '{$_SESSION['user_id']}'");
