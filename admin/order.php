@@ -15,6 +15,13 @@
       $user_id = $_SESSION['user_id'];
         
     }
+
+    $orders_sql = mysqli_query($conn, "SELECT * FROM olnee_orders WHERE order_id = $order_id");
+    $count_row_orders = mysqli_num_rows($orders_sql);
+    if($count_row_orders < 1){
+      header( "location: ". ORDERS);
+    }
+
     
 
     include_once "ad_comp/adm-head.php"; 
@@ -37,12 +44,7 @@
 
 
     $total_amount = 0;
-    $orders_sql = mysqli_query($conn, "SELECT * FROM olnee_orders WHERE order_id = $order_id");
-    $count_row_orders = mysqli_num_rows($orders_sql);
-    if($count_row_orders < 1){
-      header( "location:". ORDERS); exit;
-    }
-
+  
     while ($row_orders = mysqli_fetch_assoc($orders_sql)) {
                             
       $order_amount = $row_orders['total'];
