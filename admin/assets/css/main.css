@@ -11221,6 +11221,10 @@ h1, h2, h3, h4, h5, h6 {
   margin-right: 90px !important;
 }
 
+.pb-150 {
+  padding-bottom: 120px !important;
+}
+
 @media (max-width: 1199px) {
   .xl\:py-0 {
     padding-top: 0px !important;
@@ -11768,6 +11772,9 @@ h1, h2, h3, h4, h5, h6 {
   }
   .xl\:mr-90 {
     margin-right: 90px !important;
+  }
+  .xl\:.pb-150 {
+    padding-bottom: 120px !important;
   }
 }
 
@@ -12319,6 +12326,9 @@ h1, h2, h3, h4, h5, h6 {
   .lg\:mr-90 {
     margin-right: 90px !important;
   }
+  .lg\:.pb-150 {
+    padding-bottom: 120px !important;
+  }
 }
 
 @media (max-width: 767px) {
@@ -12869,6 +12879,9 @@ h1, h2, h3, h4, h5, h6 {
   .md\:mr-90 {
     margin-right: 90px !important;
   }
+  .md\:.pb-150 {
+    padding-bottom: 120px !important;
+  }
 }
 
 @media (max-width: 575px) {
@@ -13418,6 +13431,9 @@ h1, h2, h3, h4, h5, h6 {
   }
   .sm\:mr-90 {
     margin-right: 90px !important;
+  }
+  .sm\:.pb-150 {
+    padding-bottom: 120px !important;
   }
 }
 
