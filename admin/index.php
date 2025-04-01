@@ -47,9 +47,9 @@ $total_amount = '&#8358;' . number_format($total_amount, 2);
       </div>
     </div>
   </div>
-  <div class="row y-gap-15" style="--bs-gutter-x:15px !important;">
+  <div class="row y-gap-5" style="--bs-gutter-x:5px !important;">
     <div class="col-6 col-xl-3">
-      <div class="d-flex justify-between items-center py-35 px-35 lg:py-20 lg:px-20 rounded-16 bg-white -dark-bg-dark-1 shadow-4">
+      <div class="d-flex justify-between items-center py-35 px-35 lg:py-20 lg:px-20 rounded-8 bg-white -dark-bg-dark-1 shadow-4">
         <div>
           <!-- <div class="text-24 lh-1 fw-700 text-dark-1">$10,800</div> -->
           <div class="text-24 lh-1 fw-700 text-dark-1"><?php echo $total_amount; ?></div>
@@ -65,7 +65,7 @@ $total_amount = '&#8358;' . number_format($total_amount, 2);
       </div>
     </div>
     <div class="col-6 col-xl-3">
-      <div class="d-flex justify-between items-center py-35 px-35 lg:py-20 lg:px-20 rounded-16 bg-white -dark-bg-dark-1 shadow-4">
+      <div class="d-flex justify-between items-center py-35 px-35 lg:py-20 lg:px-20 rounded-8 bg-white -dark-bg-dark-1 shadow-4">
         <div>
           <div class="text-24 lh-1 fw-700 text-dark-1"><?php echo $count_row_product ?></div>
           <div class="lh-1 fw-500 mt-10">
@@ -83,7 +83,7 @@ $total_amount = '&#8358;' . number_format($total_amount, 2);
       </div>
     </div>
     <div class="col-6 col-xl-3">
-      <div class="d-flex justify-between items-center py-35 px-35 lg:py-20 lg:px-20 rounded-16 bg-white -dark-bg-dark-1 shadow-4">
+      <div class="d-flex justify-between items-center py-35 px-35 lg:py-20 lg:px-20 rounded-8 bg-white -dark-bg-dark-1 shadow-4">
         <div>
           <div class="text-24 lh-1 fw-700 text-dark-1"><?php echo $count_row_orders ?></div>
           <div class="lh-1 fw-500 mt-10">
@@ -97,7 +97,7 @@ $total_amount = '&#8358;' . number_format($total_amount, 2);
     </div>
     <!-- <div class="col-xl-3 col-md-6"> -->
     <div class="col-6 col-xl-3">
-      <div class="d-flex justify-between items-center py-35 px-35 lg:py-20 lg:px-20 rounded-16 bg-white -dark-bg-dark-1 shadow-4">
+      <div class="d-flex justify-between items-center py-35 px-35 lg:py-20 lg:px-20 rounded-8 bg-white -dark-bg-dark-1 shadow-4">
         <div>
           <div class="text-24 lh-1 fw-700 text-dark-1"><?php echo $count_row_categories ?></div>
           <!-- <div class="lh-1 mt-25"><span class="text-deep-green-1">290+</span> Instructors</div> -->
@@ -110,9 +110,9 @@ $total_amount = '&#8358;' . number_format($total_amount, 2);
       </div>
     </div>
   </div>
-  <div class="row y-gap-15 pt-10" style="--bs-gutter-x:15px !important;">
+  <div class="row y-gap-15 pt-5" style="--bs-gutter-x:5px !important;">
     <div class="col-xl-12 col-md-12">
-      <div class="rounded-16 bg-white -dark-bg-dark-1 shadow-4 h-100">
+      <div class="rounded-8 bg-white -dark-bg-dark-1 shadow-4 h-100">
         <div class="d-flex justify-between items-center py-20 px-30 border-bottom-light">
           <h2 class="text-17 lh-1 fw-500">Orders</h2>
           <div class="">
