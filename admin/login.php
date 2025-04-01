@@ -1,7 +1,8 @@
 <?php
 // include_once "../inc/auth.php"; 
 $pagetitle = "Login";
-
+include_once "../inc/config.php";
+include_once "../inc/drc.php";
 include_once "ad_comp/adm-head.php";
 
 // include_once "header.php"; 
