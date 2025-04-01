@@ -25,10 +25,8 @@ include_once "ad_comp/adm-head.php";
             
             <div class="px-25 py-25 md:px-25 md:py-25 bg-white shadow-1 rounded-16">
               <!-- Terabyte Logo Icon (Only show on small screens) -->
-              <!-- <img src="assets/img/logo.png" alt="Bob Logo" class="no-big-scree mb-30" width="25%"> -->
-              <h2 class="text-30">
-                Olnee Luxury
-              </h2>
+              <img src="assets/img/logo.png" alt="Bob Logo" class="no-big-scree mb-30" width="25%">
+              
               <h3 class="text-30 lh-13">Login</h3>
               <p class="mt-10">Don't have an account yet? <a href="<?php echo SIGNUP ?>" class="text-deep-green-1">Sign up for free</a></p>
               

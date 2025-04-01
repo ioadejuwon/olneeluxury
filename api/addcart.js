@@ -227,7 +227,7 @@ function displayCartItems() {
                         <p class="cart-total price">${totalPrice}</p>
                     </td>
                     <td  class="pt-60 md:pt-50">
-                        <button class='remove-cart link remove' onclick="removeCartItem('${item.product_id}')"><img src="admin/assets/img/menus/close.png" alt="icon"></button>
+                        <button class='remove-cart link remove' onclick="removeCartItem('${item.product_id}')"><img src="admin/assets/img/close.png" alt="icon"></button>
                     </td>
                 </tr>
             `);
@@ -280,7 +280,7 @@ function displayCartHeader() {
                         </div>
                    
                         <div class="col-1 text-right">
-                            <button class='remove-cart link remove' onclick="removeCartItem('${item.product_id}')"><img src="admin/assets/img/menus/close.png" alt="icon"></button>
+                            <button class='remove-cart link remove' onclick="removeCartItem('${item.product_id}')"><img src="admin/assets/img/close.png" alt="icon"></button>
                         </div>
                     </div>
                 </div>

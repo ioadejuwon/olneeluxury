@@ -149,21 +149,17 @@
                 <div class="col-auto">
                     <div class="footer-header__logo">
 
+                        <img src="admin/assets/img/logo.png" alt="logo" width="70px">
                         <!-- <img src="admin/assets/img/logo.png" alt="logo"> -->
-                        <h2>
-                            Olnee Luxury
-                        </h2>
-
                     </div>
                 </div>
                 <div class="col-auto">
                     <div class="footer-header-socials">
                         <div class="footer-header-socials__title text-dark-1">Follow us on social media</div>
                         <div class="footer-header-socials__list">
-                            <a href="#" class="text-dark-1"><i class="icon-facebook"></i></a>
-                            <a href="#" class="text-dark-1"><i class="icon-twitter"></i></a>
-                            <a href="#" class="text-dark-1"><i class="icon-instagram"></i></a>
-                            <a href="#" class="text-dark-1"><i class="icon-linkedin"></i></a>
+                            <a href="https://instagram.com/olnee_luxury" class="text-dark-1"><i class="icon-instagram"></i></a>
+                            <a href="https://facebook.com/olnee_luxury" class="text-dark-1"><i class="icon-facebook"></i></a>
+                            <a href="https://twitter.com/olnee_luxury" class="text-dark-1"><i class="icon-twitter"></i></a>
                         </div>
                     </div>
                 </div>
@@ -249,10 +245,9 @@
                     <div class="d-flex x-gap-20 y-gap-20 items-center flex-wrap">
                         <div>
                             <div class="d-flex x-gap-15 text-dark-1">
-                                <a href="help-center.html">Help</a>
+                                <a href="help">Help</a>
                                 <a href="terms.html">Privacy Policy</a>
                                 <a href="terms.html">Cookie Notice</a>
-                                <a href="terms.html">Security</a>
                                 <a href="terms.html">Terms of Use</a>
                             </div>
                         </div>

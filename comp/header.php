@@ -10,10 +10,7 @@
         <div class="header-left d-flex items-center">
           <div class="header__logo pr-30 xl:pr-20 md:pr-0">
             <a data-barba="" href="<?php echo HOME ?>">
-              <!-- <img src="admin/assets/img/logo.png" alt="logo"> -->
-              <h2>
-                Olnee Luxury
-              </h2>
+              <img src="admin/assets/img/logo.png" alt="logo" width="50px">
             </a>
           </div>
         </div>
@@ -21,13 +18,9 @@
 
 
       <div class="col-auto">
-
         <div class="header-menu js-mobile-menu-toggle ">
           <div class="header-menu__content">
             <div class="mobile-bg js-mobile-bg"></div>
-
-         
-
             <div class="menu js-navList">
               <ul class="menu__nav text-dark-1 -is-active">
                 <li class="fw-600">
@@ -186,7 +179,7 @@
                       </div>
 
                       <div class="col-auto">
-                        <button><img src="admin/assets/img/menus/close.svg" alt="icon"></button>
+                        <button><img src="admin/assets/img/close.svg" alt="icon"></button>
                       </div>
                     </div>
 
