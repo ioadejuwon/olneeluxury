@@ -8,18 +8,8 @@ function generateUUID() {
     );
 }
 
-// Format number as Nigerian currency (₦)
-function formatCurrency(amount) {
-    return new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN' }).format(amount);
-}
 
-// Apply formatting to all elements with class "price"
-function formatAllPrices() {
-    $('.price').each(function () {
-        var priceText = $(this).text().replace(/[₦,]/g, ''); // Remove existing commas and ₦
-        $(this).text(formatCurrency(priceText));
-    });
-}
+
 
 function getShippingInfo() {
     return JSON.parse(localStorage.getItem('olnee_shipping')) || { id: '', cost: 0 };

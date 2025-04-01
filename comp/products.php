@@ -50,9 +50,9 @@
             // }
             ?>
         </h4>
-        <div class="text-17 fw-500 text-deep-green-1 mt-5">
+        <div class="text-17 fw-500 text-deep-green-1 mt-5 price">
             <!-- <span class="line-through opac-50 text-14"><?php echo $discounted_price; ?></span> -->
-            <?php echo $original_price; ?>
+            <?php echo $price; ?>
         </div>
         <div class="productCard__button d-inline-block add_to_cart_btn" style="width: 100% !important">
             <button type="button" class="button fs-16 w-100 text-white -deep-green-1  mt-5 add-to-cart-btn" data-product-id="<?php echo $product_id; ?>"

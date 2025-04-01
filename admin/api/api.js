@@ -19,11 +19,22 @@ function showNotification(message, type = 'success') {
         }, 500); // Match the transition duration
     }, 3000);
 }
+// Format number as Nigerian currency (₦)
+function formatCurrency(amount) {
+    return new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN' }).format(amount);
+}
 
-$(document).ready(function() {
+// Apply formatting to all elements with class "price"
+function formatAllPrices() {
+    $('.price').each(function () {
+        var priceText = $(this).text().replace(/[₦,]/g, ''); // Remove existing commas and ₦
+        $(this).text(formatCurrency(priceText));
+    });
+}
 
-    $('.copyButton').click(function() {
-    // $(document).on('click', '.copyButton', function() {
+function copyButton() {
+    $('.copyButton').click(function () {
+        // $(document).on('click', '.copyButton', function() {
         let textToCopy = $(this).data('link');
         let info = $(this).data('info');
         let tempInput = $('<input>');
@@ -34,4 +45,10 @@ $(document).ready(function() {
         // alert('Copied: ' + textToCopy);
         showNotification(info, 'info');
     });
+}
+
+$(document).ready(function () {
+    formatAllPrices(); // Ensure all prices are formatted
+    copyButton();
+
 });
