@@ -6949,6 +6949,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .categoryCard.-type-3 .categoryCard__title {
   transition: color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+  font-weight: 700;
 }
 
 .categoryCard.-type-3:hover {

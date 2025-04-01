@@ -64,7 +64,7 @@ include_once "comp/header.php";
 
 
 
-  <section class="layout-pt-md layout-pb-md bg-light-6">
+  <section class="layout-pt-md layout-pb-md bg-light-6 d-none">
     <div data-anim-wrap class="container">
       <div class="row justify-center">
         <div class="col text-center">
@@ -127,8 +127,8 @@ include_once "comp/header.php";
               <i class="icon icon-announcement text-35"></i>
             </div>
             <div class="categoryCard__content">
-              <h4 class="categoryCard__title text-17 fw-500">Free Shipping</h4>
-              <div class="categoryCard__text text-13 lh-1 mt-5">
+              <h4 class="categoryCard__title text-17">Free Shipping</h4>
+              <div class="categoryCard__text text-13 mt-5">
                 Free Shipping for order above <?php echo NAIRA ?>120,000
               </div>
             </div>
@@ -141,8 +141,8 @@ include_once "comp/header.php";
               <i class="icon icon-announcement text-35"></i>
             </div>
             <div class="categoryCard__content">
-              <h4 class="categoryCard__title text-17 fw-500">Flexible Payment</h4>
-              <div class="categoryCard__text text-13 lh-1 mt-5">
+              <h4 class="categoryCard__title text-17">Flexible Payment</h4>
+              <div class="categoryCard__text text-13 mt-5">
                 Pay with Multiple Credit Cards
               </div>
             </div>
@@ -155,8 +155,8 @@ include_once "comp/header.php";
               <i class="icon icon-announcement text-35"></i>
             </div>
             <div class="categoryCard__content">
-              <h4 class="categoryCard__title text-17 fw-500">14 Day Returns</h4>
-              <div class="categoryCard__text text-13 lh-1 mt-5">
+              <h4 class="categoryCard__title text-17">14 Day Returns</h4>
+              <div class="categoryCard__text text-13 mt-5">
                 Within 30 days for an exchange
               </div>
             </div>
@@ -169,8 +169,8 @@ include_once "comp/header.php";
               <i class="icon icon-announcement text-35"></i>
             </div>
             <div class="categoryCard__content">
-              <h4 class="categoryCard__title text-17 fw-500">Premium Support</h4>
-              <div class="categoryCard__text text-13 lh-1 mt-5">
+              <h4 class="categoryCard__title text-17">Premium Support</h4>
+              <div class="categoryCard__text text-13 mt-5">
                 Outstanding premium support
               </div>
             </div>
