@@ -14,7 +14,7 @@
 
                 <div class="header__logo ml-30 md:ml-20">
                     <a data-barba href="<?php echo BASE_URL ?>">
-                        <img class="no-big-screen" src="assets/img/icon.png" alt="logo1" width="50px">
+                        <img class="no-big-screen" src="assets/img/icon.png" alt="logo1" width="10px">
                         <img class="lg:d-none" src="assets/img/icon.png" alt="logo2">
 
                     </a>
