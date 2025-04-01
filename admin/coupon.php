@@ -25,7 +25,7 @@ $sql = mysqli_query($conn, "SELECT * FROM olnee_admin WHERE user_id = '{$_SESSIO
 $row = mysqli_fetch_assoc($sql);
 $fname = $row['fname'];
 include_once "ad_comp/adm-sidebar.php";
-$deliveries = mysqli_query($conn, "SELECT * FROM olnee_coupon");
+$deliveries = mysqli_query($conn, "SELECT * FROM olnee_coupons");
 ?>
 
 
