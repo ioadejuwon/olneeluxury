@@ -70,7 +70,7 @@ include_once "ad_comp/adm-sidebar.php"
               <?php
               $orders = mysqli_query($conn, "SELECT * FROM olnee_orders");
               $count_row_orders = mysqli_num_rows($orders);
-              if ($count_row_coupon != 0) {
+              if ($count_row_orders != 0) {
 
 
 
