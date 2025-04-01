@@ -58,12 +58,13 @@ include_once "ad_comp/adm-sidebar.php"
           <table class="table w-100">
             <thead>
               <tr>
-                <th>Order Date</th>
+                
                 <th>Order ID</th>
                 <th>Customer Name</th>
                 <th>Customer Email</th>
                 <th>Payment Status</th>
                 <th>Payment Total</th>
+                <th>Order Date</th>
               </tr>
             </thead>
             <tbody id="">
@@ -106,12 +107,13 @@ include_once "ad_comp/adm-sidebar.php"
 
               ?>
                   <tr>
-                    <td><?php echo date(' jS F, Y', $date) ?></td>
+                    
                     <td class="underline"><a href="<?php echo ORDER_DETAILS . $orders_id ?>"><?php echo $orders_id ?></a></td>
                     <td><?php echo $cus_name ?></td>
                     <td><?php echo $cus_email ?></td>
                     <td><?php echo $pay_status ?></td>
                     <td><?php echo $pay_total ?></td>
+                    <td><?php echo date(' jS F', $date) ?></td>
                     <!-- <td><?php echo $cus_phone ?></td>
                       <td><?php echo $cus_address ?></td>
                       <td><?php echo $cus_notes ?></td> -->
