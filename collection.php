@@ -1,10 +1,5 @@
-<style>
-
-</style>
 <?php
-
-
-$pagetitle = "Catalog";
+$pagetitle = "Collection";
 include_once "comp/head.php";
 include_once "comp/header.php"
 ?>
