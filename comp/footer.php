@@ -8,7 +8,7 @@
 
                 <div class="col-auto">
                     <div class="footer-footer__copyright d-flex items-center h-100">
-                        <div class="footer-footer__copyright">© <?php echo FOOTERYEAR ?> Build With Bob. All Right Reserved.</div>
+                        <div class="footer-footer__copyright">© <?php echo FOOTERYEAR ?> Olnee Luxury. All Right Reserved.</div>
                     </div>
                 </div>
 
@@ -241,7 +241,7 @@
             <div class="row justify-between items-center y-gap-20">
                 <div class="col-auto">
                     <div class="d-flex items-center h-100 text-dark-1">
-                        © <?php echo FOOTERYEAR ?> Build With Bob. All Right Reserved.
+                        © <?php echo FOOTERYEAR ?> Olnee Luxury. All Right Reserved.
                     </div>
                 </div>
 

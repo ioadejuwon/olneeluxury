@@ -2,7 +2,7 @@
             <footer class="footer -dashboard py-30">
               <div class="row items-center justify-between">
                 <div class="col-auto">
-                  <div class="text-13 lh-1">© <?php echo FOOTERYEAR ?> Build With Bob. All Right Reserved.</div>
+                  <div class="text-13 lh-1">© <?php echo FOOTERYEAR ?> Olnee Luxury. All Right Reserved.</div>
                 </div>
 
                 <div class="col-auto">

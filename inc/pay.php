@@ -163,7 +163,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     "name" => $firstName . ' ' . $lastName,
                 ],
                 "customizations" => [
-                    "title" => "Build With Bob",
+                    "title" => "Olnee Luxury",
                     "description" => "Payment for items in cart",
                     "logo" => ADMIN_URL . "assets/img/icon.png",
                 ],
@@ -238,7 +238,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } elseif ($paymentOption == '4') {
 
             $plural_mainMSG = ($itemCount > 1) ? "these items:" : "this item:";
-            $mainMSG = 'Hi, Build With Bob' . "!\r\n\r\n";
+            $mainMSG = 'Hi, Olnee Luxury' . "!\r\n\r\n";
             $mainMSG .= 'I would like to buy ' . $plural_mainMSG . "\r\n\r\n";
 
             $mainMSG .= $sendMessage . "\r\n\r\n";

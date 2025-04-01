@@ -17,7 +17,7 @@
 
     <meta name="description" content="Learn the best way possible." />
     
-    <meta property="og:title" content="<?php echo $pagetitle.' - Build With Bob' ?>"/>
+    <meta property="og:title" content="<?php echo $pagetitle.' - Olnee Luxury' ?>"/>
     <meta property="og:url" content="https://buildwithbob.shop"/>
     <meta name="og:description" content="Learn the best way possible." />
 
@@ -68,7 +68,7 @@
     <script src="assets/js/page-loader.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="../assets/js/jquery.min.js"></script>
-    <title><?php echo $pagetitle; ?>  - Build With Bob</title>
+    <title><?php echo $pagetitle; ?>  - Olnee Luxury</title>
 
     
 </head>
