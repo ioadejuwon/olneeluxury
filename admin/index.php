@@ -7,7 +7,7 @@ if (!isset($_SESSION['user_id'])) {
   header("location: " . ADMIN_LOGIN . "?url=" . $current_url . "&t=" . $pagetitle); // redirect to login page if not signed in
   exit; // Make sure to exit after sending the redirection header
 } else {
-  
+
   $user_id = $_SESSION['user_id'];
 }
 
@@ -47,13 +47,16 @@ $total_amount = '&#8358;' . number_format($total_amount, 2);
       </div>
     </div>
   </div>
-  <div class="row y-gap-5" style="--bs-gutter-x:15px !important;">
-    <div class="col-xl-3 col-md-6">
-      <div class="d-flex justify-between items-center py-35 px-30 rounded-16 bg-white -dark-bg-dark-1 shadow-4">
+  <div class="row y-gap-15" style="--bs-gutter-x:15px !important;">
+    <div class="col-6 col-xl-3">
+      <div class="d-flex justify-between items-center py-35 px-35 lg:py-20 lg:px-20 rounded-16 bg-white -dark-bg-dark-1 shadow-4">
         <div>
           <!-- <div class="text-24 lh-1 fw-700 text-dark-1">$10,800</div> -->
           <div class="text-24 lh-1 fw-700 text-dark-1"><?php echo $total_amount; ?></div>
-          <div class="lh-1 fw-500 mt-10">Total Sales</div>
+          <div class="lh-1 fw-500 mt-10">
+            <!-- Total Sales -->
+            <span class="lg:d-none">Total </span>Sales
+          </div>
           <!-- <div class="lh-1 mt-25"><span class="text-deep-green-1">$50</span> New Sales</div> -->
         </div>
         <!-- <i class="text-40 fa fa-box text-deep-green-1"></i> -->
@@ -61,11 +64,14 @@ $total_amount = '&#8358;' . number_format($total_amount, 2);
         <img src="assets/img/icons/wallet.png" alt="" width="20%">
       </div>
     </div>
-    <div class="col-xl-3 col-md-6">
-      <div class="d-flex justify-between items-center py-35 px-30 rounded-16 bg-white -dark-bg-dark-1 shadow-4">
+    <div class="col-6 col-xl-3">
+      <div class="d-flex justify-between items-center py-35 px-35 lg:py-20 lg:px-20 rounded-16 bg-white -dark-bg-dark-1 shadow-4">
         <div>
           <div class="text-24 lh-1 fw-700 text-dark-1"><?php echo $count_row_product ?></div>
-          <div class="lh-1 fw-500 mt-10">Total Products</div>
+          <div class="lh-1 fw-500 mt-10">
+            <!-- Total  -->
+            <span class="lg:d-none">Total </span>Products
+          </div>
           <!-- <div class="lh-1 mt-25"><span class="text-deep-green-1">40+</span> New Courses</div> -->
         </div>
         <!-- <i class="text-40 fa fa-box text-deep-green-1"></i> -->
@@ -76,22 +82,29 @@ $total_amount = '&#8358;' . number_format($total_amount, 2);
 
       </div>
     </div>
-    <div class="col-xl-3 col-md-6">
-      <div class="d-flex justify-between items-center py-35 px-30 rounded-16 bg-white -dark-bg-dark-1 shadow-4">
+    <div class="col-6 col-xl-3">
+      <div class="d-flex justify-between items-center py-35 px-35 lg:py-20 lg:px-20 rounded-16 bg-white -dark-bg-dark-1 shadow-4">
         <div>
           <div class="text-24 lh-1 fw-700 text-dark-1"><?php echo $count_row_orders ?></div>
-          <div class="lh-1 fw-500 mt-10">Total Orders</div>
+          <div class="lh-1 fw-500 mt-10">
+            <!-- Total Orders -->
+            <span class="lg:d-none">Total </span>Orders
+          </div>
           <!-- <div class="lh-1 mt-25"><span class="text-deep-green-1">90+</span> New Students</div> -->
         </div>
         <img src="assets/img/icons/orders.png" alt="" width="20%">
       </div>
     </div>
-    <div class="col-xl-3 col-md-6">
-      <div class="d-flex justify-between items-center py-35 px-30 rounded-16 bg-white -dark-bg-dark-1 shadow-4">
+    <!-- <div class="col-xl-3 col-md-6"> -->
+    <div class="col-6 col-xl-3">
+      <div class="d-flex justify-between items-center py-35 px-35 lg:py-20 lg:px-20 rounded-16 bg-white -dark-bg-dark-1 shadow-4">
         <div>
           <div class="text-24 lh-1 fw-700 text-dark-1"><?php echo $count_row_categories ?></div>
           <!-- <div class="lh-1 mt-25"><span class="text-deep-green-1">290+</span> Instructors</div> -->
-          <div class="lh-1 fw-500 mt-10">Total Categories</div>
+          <div class="lh-1 fw-500 mt-10">
+            <!-- Total Categories -->
+            <span class="lg:d-none">Total </span>Categories
+          </div>
         </div>
         <img src="assets/img/icons/category.png" alt="" width="20%">
       </div>
