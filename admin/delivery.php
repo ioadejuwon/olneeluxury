@@ -127,7 +127,7 @@ $deliveries = mysqli_query($conn, "SELECT * FROM olnee_delivery");
 											<?php echo $deliveryCost ?>
 										</td>
 										<td class="dropdown">
-											<img src="assets/img/more_horiz.png" alt="">
+											<img src="assets/img/icons/more_horiz.png" alt="">
 											<div class="dropdown-content">
 												<a data-toggle="modal" data-target="#edit-<?php echo $deliveryid; ?>">Edit Rate</a>
 												<a data-toggle="modal" data-target="#delete-<?php echo $deliveryid; ?>">Delete</a>
