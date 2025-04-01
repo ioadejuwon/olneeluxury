@@ -67,7 +67,7 @@ define('EDIT_PRODUCT', ADMIN_URL.'edit');
 // define('DELETE_CAT', BASE_URL.'inc/deletecat');
 define('EDIT_THUMBNAIL', ADMIN_URL.'editthumbnail');
 define('EDIT_IMAGES', ADMIN_URL.'editimages');
-define('ORDER_DETAILS', ADMIN_URL.'order?o=');
+define('ORDER_DETAILS', ADMIN_URL.'order?id=');
 
 
 define('ADMIN_LOGOUT', ADMIN_URL.'logout'); // Logout Link

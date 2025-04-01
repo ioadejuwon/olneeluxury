@@ -21,12 +21,12 @@
     include_once "ad_comp/adm-header.php"; 
 
 
+    $order_id = $_GET['id'];
     $sql = mysqli_query($conn, "SELECT * FROM olnee_admin WHERE user_id = '{$_SESSION['user_id']}'");
     $row = mysqli_fetch_assoc($sql);
     // $user_id = $row["user_id"];
 
-    $instructor = $row["instructor"];
-    $admin = $row["admin"];
+  
 
 
     $products_sql = mysqli_query($conn, "SELECT * FROM products ");
@@ -37,8 +37,11 @@
 
 
     $total_amount = 0;
-    $orders_sql = mysqli_query($conn, "SELECT * FROM olnee_orders");
+    $orders_sql = mysqli_query($conn, "SELECT * FROM olnee_orders WHERE order_id = $order_id");
     $count_row_orders = mysqli_num_rows($orders_sql);
+    if($count_row_orders < 1){
+      header( "location:". ORDERS); exit;
+    }
 
     while ($row_orders = mysqli_fetch_assoc($orders_sql)) {
                             
@@ -60,7 +63,7 @@
         <div class="row pb- mb-10">
           <div class="col-auto">
 
-            <h1 class="text-30 lh-12 fw-700">Messages</h1>
+            <h1 class="text-30 lh-12 fw-700">Order ID: <?php echo $orderid ?></h1>
             <div class="mt-10">Lorem ipsum dolor sit amet, consectetur.</div>
 
           </div>
