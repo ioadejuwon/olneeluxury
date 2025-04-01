@@ -33,7 +33,7 @@ $(document).ready(function () {
                             <td>` + categoryName + `</td>
                             <td>0</td>
                             <td class="dropdown">
-                                <img src="assets/img/icons/more_horiz.png" alt="">
+                                <img src="assets/img/icons/more_horiz.png" alt="" width="50%">
                                 <div class="dropdown-content">
                                     <a data-toggle="modal" data-target="#edit-` + response.category_id + `">Edit Category</a>
                                     <a class="copyButton" data-info="Category `+ categoryName + ` link copied" data-link="` + response.category_id + `" >Copy Category link</a>

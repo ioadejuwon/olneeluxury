@@ -42,7 +42,7 @@ $(document).ready(function () {
                             <td class="underline">` + response.deliveryname + `</td>
                             <td>` + response.deliverycost + `</td>
                             <td class="dropdown">
-                                <img src="assets/img/icons/more_horiz.png" alt="">
+                                <img src="assets/img/icons/more_horiz.png" alt="" width="50%">
                                 <div class="dropdown-content">
                                     <a data-toggle="modal" data-target="#edit-` + response.delivery_id + `">Edit Delivery Rate</a>
                                     <a data-toggle="modal" data-target="#delete-`+ response.delivery_id + `">Delete</a>
