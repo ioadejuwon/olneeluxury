@@ -14,10 +14,10 @@ include_once "inc/drc.php";
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="author" content="MartVille Technologies">
 
-    <meta name="description" content="Premium Quality products that will keep you cool and comfortable all day long." />
+    <meta name="description" content="Experience the Perfect Blend of Style and Comfort with our Premium Men’s Fabric." />
     <meta property="og:title" content="<?php echo $pagetitle.' Olnee Luxury' ?>" />
     <meta property="og:url" content="https://olneeluxury.com" />
-    <meta name="og:description" content="Premium Quality products that will keep you cool and comfortable all day long." />
+    <meta name="og:description" content="Experience the Perfect Blend of Style and Comfort with our Premium Men’s Fabric." />
 
     <meta name="twitter:site" content="@" />
     <meta name="twitter:card" content="summary" />
