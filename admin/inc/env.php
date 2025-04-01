@@ -1,0 +1,5 @@
+<?php
+
+
+define('SECRET_KEY', 'FLWSECK_TEST-092091172c366ec6441c6b73d4b35cae-X');
+// define('SECRET_KEY', 'FLWSECK-6087b9659c16c537038672cfb8d4ac4d-18adfa38c92vt-X');
