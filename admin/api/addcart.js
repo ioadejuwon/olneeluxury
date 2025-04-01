@@ -634,7 +634,7 @@ $('#checkoutForm').on('submit', function(event) {
     // console.log('Sending data:', data); // Debug message
 
     $.ajax({
-        url: 'inc/pay.php', // Replace with the path to your PHP script
+        url: 'admin/inc/pay.php', // Replace with the path to your PHP script
         type: 'POST',
         data: data,
         success: function(response) {

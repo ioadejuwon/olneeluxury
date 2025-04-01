@@ -285,7 +285,7 @@ $deliveries = mysqli_query($conn, "SELECT * FROM olnee_delivery");
 </section>
 
 
-<script src="api/payment.js"></script>
+<script src="admin/api/payment.js"></script>
 <?php
 include_once "comp/footer.php";
 include_once "comp/tail.php";
