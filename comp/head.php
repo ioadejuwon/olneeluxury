@@ -15,7 +15,7 @@ include_once "inc/drc.php";
     <meta name="author" content="MartVille Technologies">
 
     <meta name="description" content="Experience the Perfect Blend of Style and Comfort with our Premium Men’s Fabric." />
-    <meta property="og:title" content="<?php echo $pagetitle.' Olnee Luxury' ?>" />
+    <meta property="og:title" content="<?php echo $pagetitle.' - Olnee Luxury' ?>" />
     <meta property="og:url" content="https://olneeluxury.com" />
     <meta name="og:description" content="Experience the Perfect Blend of Style and Comfort with our Premium Men’s Fabric." />
 

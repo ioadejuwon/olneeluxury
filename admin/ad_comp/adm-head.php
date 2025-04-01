@@ -18,7 +18,7 @@ include_once "../inc/drc.php";
     <meta name="description" content="Learn the best way possible." />
 
     <meta property="og:title" content="<?php echo $pagetitle . ' - Olnee Luxury' ?>" />
-    <meta property="og:url" content="https://buildwithbob.shop" />
+    <meta property="og:url" content="https://olneeluxury.com" />
     <meta name="og:description" content="Learn the best way possible." />
 
     <meta name="twitter:site" content="@jointerabyte" />
