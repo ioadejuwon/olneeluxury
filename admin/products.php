@@ -135,7 +135,7 @@ $fname = $row['fname'];
                             <img class="absolute-full-center rounded-8" src="<?php echo $image_path_thumbnail; ?>" alt="product image">
                           </div>
                           <div class="productCard__controls z-3">
-                            <a href="#" class="productCard__icon">
+                            <a data-toggle="modal" data-target="<?php echo '#share-' . $product_id ?>"  class="productCard__icon">
                               <i class="fa-regular fa-send"></i>
                             </a>
                             <a data-barba href="<?php echo $image_path_thumbnail; ?>" class="gallery__item js-gallery productCard__icon" data-gallery="<?php echo $product_id ?>">
@@ -177,6 +177,28 @@ $fname = $row['fname'];
                       <?php endforeach; ?>
                     </div>
 
+                    <div class="modal fade" id="share-<?php echo $product_id; ?>" tabindex="-1">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-body p-4">
+
+                            <h2 class="h4">Delete Product</h2>
+                            <p class="text-dark">Are you sure you want to delete the product "<span class="fw-600"><?php echo $product_name ?></span>". This process is irreversible.</p>
+                            <p class="text-dark">Users who have added "<span class="fw-600"><?php echo $product_name ?></span>" to cart will still be able to process the order.</p>
+                            <ul class="row gx-4 mt-4">
+                              <li class="col-6 d-none">
+                                <button class="button -outline-dark-3 -md w-100" data-bs-dismiss="modal">Close</button>
+                                <!-- <button class="button -md -deep-green-1 text-white" type="submit" id="submit">nn</button> -->
+                              </li>
+                              <li class="col-12">
+                                <a href="#" class="button -red-1 w-100 button -md -deep-green-1 text-white delete-product-btn" data-productid="<?php echo $product_id; ?>">Delete Product</a>
+                                <!-- <a href="#" class="button -sm -icon -red-1 text-white fw-500 delete-product-btn" data-productid="<?php echo $product_id; ?>">Delete</a> -->
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
                     <div class="modal fade" id="delete-<?php echo $product_id; ?>" tabindex="-1">
                       <div class="modal-dialog modal-dialog-centered">

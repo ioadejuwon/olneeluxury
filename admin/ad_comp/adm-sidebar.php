@@ -22,12 +22,7 @@
         </a>
     </div>
 
-    <div class="sidebar__item">
-      <a href="<?php echo PROFILE ?>" class="d-flex items-center text-17 lh-1 fw-500 ">
-        <i class="text-20 icon-bookmark mr-15"></i>
-        Profile
-      </a>
-    </div>
+    
 
     <div class="sidebar__item">
       <a href="<?php echo PRODUCTS ?>" class="d-flex items-center text-17 lh-1 fw-500 ">
@@ -63,6 +58,12 @@
       <a href="<?php echo REVIEWS ?>" class="d-flex items-center text-17 lh-1 fw-500 ">
         <i class="text-20 icon-comment mr-15"></i>
         Reviews
+      </a>
+    </div>
+    <div class="sidebar__item">
+      <a href="<?php echo PROFILE ?>" class="d-flex items-center text-17 lh-1 fw-500 ">
+        <i class="text-20 icon-bookmark mr-15"></i>
+        Profile
       </a>
     </div>
     <div class="sidebar__item ">

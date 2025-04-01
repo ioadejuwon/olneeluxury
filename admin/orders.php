@@ -64,14 +64,6 @@ include_once "ad_comp/adm-sidebar.php"
                 <th>Customer Email</th>
                 <th>Payment Status</th>
                 <th>Payment Total</th>
-
-                <!-- <th>Customer Phone</th> -->
-                <!-- <th>Customer Address</th> -->
-                <!-- <th>Customer Notes</th> -->
-
-                <!-- <th>Customer Address</th> -->
-
-                <!-- <th>Quantity</th>  -->
               </tr>
             </thead>
             <tbody id="">

@@ -68,7 +68,7 @@ $total_amount = '&#8358;' . number_format($total_amount, 2);
         <!-- <i class="text-40 fa fa-box text-deep-green-1"></i> -->
         <!-- <span class="material-symbols-outlined text-30 text-deep-green-1">inventory_2</span> -->
         <!-- <span class=" text-30 text-deep-green-1"> -->
-          <img src="assets/img/icons/inventory.png" alt="" width="20%">
+        <img src="assets/img/icons/inventory.png" alt="" width="20%">
         <!-- </span> -->
 
       </div>
@@ -116,14 +116,105 @@ $total_amount = '&#8358;' . number_format($total_amount, 2);
             </div>
           </div>
         </div>
-        <div class="py-40 px-30">
+        <div class="py-10 px-30 table-responsive">
+          <table class="table w-100">
+            <thead>
+              <tr>
+                <!-- <th>Order Date</th> -->
+                <th>Order ID</th>
+                <th>Customer Name</th>
+
+                <th>Payment Status</th>
+                <th>Payment Total</th>
+              </tr>
+            </thead>
+            <tbody id="">
+              <?php
+              $orders = mysqli_query($conn, "SELECT * FROM olnee_orders");
+              $count_row_orders = mysqli_num_rows($orders);
+              if ($count_row_coupon != 0) {
+
+
+
+                while ($row_orders = mysqli_fetch_assoc($orders)) {
+                  $orders_id = $row_orders['order_id'];
+                  $firstname = $row_orders['first_name'];
+                  $lastname = $row_orders['last_name'];
+                  $cus_name = $firstname . " " . $lastname;
+                  $cus_email = $row_orders['email'];
+                  $cus_phone = $row_orders['phone'];
+                  $pay_status = $row_orders['status'];
+                  $pay_total = $row_orders['total'];
+                  $pay_total = '&#8358;' . number_format($pay_total, 2);
+                  $pay_shipping = $row_orders['shipping'];
+                  $cus_country = $row_orders['country'];
+                  $cus_state = $row_orders['state'];
+                  $cus_city = $row_orders['city'];
+                  $cus_street = $row_orders['street'];
+
+                  $cus_address = $cus_street . ", " . $cus_city . ", " . $cus_state . ", " . $cus_country;
+
+                  $cus_date = $row_orders['created_at'];
+                  $date = strtotime($cus_date);
+
+                  $cus_notes = $row_orders['notes'];
+
+                  if ($cus_notes == "") {
+                    $cus_notes = "No notes added!";
+                  } else {
+                    $cus_notes;
+                  }
+
+
+              ?>
+                  <tr>
+                    <!-- <td><?php echo date(' jS F, Y', $date) ?></td> -->
+                    <td class="underline"><a href="<?php echo ORDER_DETAILS . $orders_id ?>"><?php echo $orders_id ?></a></td>
+                    <td><?php echo $cus_name ?></td>
+                    <td><?php echo $pay_status ?></td>
+                    <td><?php echo $pay_total ?></td>
+                    <!-- <td><?php echo $cus_phone ?></td>
+                      <td><?php echo $cus_address ?></td>
+                      <td><?php echo $cus_notes ?></td> -->
+                  </tr>
+
+                <?php
+                }
+              } else {
+                // echo "No Coupon codes";
+                ?>
+                <tr class="layout-pt-lg layout-pb-lg section-bg mt-30 empty">
+                  <div class="section-bg__item bg-light-6"></div>
+                  <td colspan="6" class="container desction">
+                    <div class="row py-30 px-30 bg-light-4 rounded-8 border-light  justify-center text-center">
+                      <!-- <div class="row y-gap-20 justify-center text-center"> -->
+                      <!-- <div class="col-auto mt-10 justify-center"> -->
+                      <img class="mb-20" src="assets/img/store.png" style="width:15%">
+                      <div class="sectionTitle ">
+                        <h2 class="sectionTitle__title ">
+                          No Orders yet!
+                        </h2>
+                        <p class="sectionTitle__text h4 pt-5">
+                          When you have orders, they will appear here.
+                        </p>
+                      </div>
+                      <!-- </div> -->
+                    </div>
+                  </td>
+                </tr>
+              <?php
+              }
+              ?>
+
+            </tbody>
+          </table>
           <!-- <canvas id="lineChart"></canvas> -->
         </div>
       </div>
     </div>
-   
+
   </div>
-  
+
 </div>
 <?php
 include_once "ad_comp/adm-footer.php";
