@@ -1,0 +1,194 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js"></script>
+<?php
+session_start();
+include_once "../inc/config.php";
+$pagetitle = "Categories";
+include_once "../inc/drc.php";
+if (!isset($_SESSION['user_id'])) {
+  header("location: " . ADMIN_LOGIN . "?url=" . $current_url . "&t=" . $pagetitle); // redirect to login page if not signed in
+  exit; // Make sure to exit after sending the redirection header
+} else {
+  $user_id = $_SESSION['user_id'];
+}
+include_once "ad_comp/adm-head.php";
+include_once "ad_comp/adm-header.php";
+$sql = mysqli_query($conn, "SELECT * FROM olnee_admin WHERE user_id = '{$user_id}'");
+$row = mysqli_fetch_assoc($sql);
+$user_id = $row["user_id"];
+$fname = $row['fname'];
+$categories = mysqli_query($conn, "SELECT * FROM olnee_categories ORDER BY created_at DESC");
+?>
+<?php include_once "ad_comp/adm-sidebar.php" ?>
+
+<div class="dashboard__content bg-light-4">
+  <div class="row pb- justify-between">
+    <div class="col-auto">
+      <h1 class="text-30 lh-12 fw-700">Product Categories</h1>
+      <div class="mt-10">
+        Manage your Categories here
+      </div>
+    </div>
+    <div class="col-auto md:mt-20">
+      <a data-toggle="modal" data-target="#modal-categories" class="button -md -deep-green-1 text-white">Add New Category</a>
+    </div>
+  </div>
+
+
+
+  <div class="row y-gap-30 pt-30">
+    <div class="col-xl-12 col-md-12">
+      <div class="rounded-16 text-white shadow-4 h-100">
+        <!-- <div class="text-18 lh-1 text-dark-1 fw-500 mb-30">Table</div> -->
+        <table class="table w-1/1">
+          <thead>
+            <tr>
+              <th>Category Name</th>
+              <th>No. of Products</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="categoryTableBody">
+            <?php
+
+            
+
+            $count_row_cateegories = mysqli_num_rows($categories);
+
+            if ($count_row_cateegories != 0) {
+              while ($row_categories = mysqli_fetch_assoc($categories)) {
+                $categoryname = $row_categories['categoryName'];
+                $category_id = $row_categories['categoryid'];
+                $products_cat = mysqli_query($conn, "SELECT * FROM products WHERE productcategory = '$category_id'");
+                // while ($prod_categories = mysqli_fetch_assoc($products_cat)) {
+                // $prod_categories = mysqli_fetch_assoc($products_cat);
+                $count_row_store = mysqli_num_rows($products_cat);
+            ?>
+                <tr id="category-<?php echo $category_id; ?>">
+                  <td><?php echo $categoryname ?></td>
+                  <td><?php echo $count_row_store ?></td>
+                  <td class="dropdown">
+                    <span class="material-symbols-outlined">more_horiz</span>
+                    <div class="dropdown-content">
+                      <a data-toggle="modal" data-target="#edit-<?php echo $category_id; ?>">Edit Category</a>
+                      <a class="copyButton" data-info="<?php echo 'Category \'' . $categoryname . '\' link copied' ?>" data-link="<?php echo BASE_URL . $category_id ?>" data-target="#copy-<?php echo $category_id; ?>">Copy Category link</a>
+                      <a data-toggle="modal" data-target="#delete-<?php echo $category_id; ?>">Delete</a>
+                    </div>
+                  </td>
+                </tr>
+
+                <div id="modalTableBody">
+                  <div class="modal fade" id="delete-<?php echo $category_id; ?>" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <!-- <h5 class="modal-title"></h5> -->
+                          <h2 class="modal-title h4">Add Coupon Code</h2>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body p-4">
+
+
+                          <p class="text-dark">Are you sure you want to delete the category "<span class="fw-600"><?php echo $categoryname ?></span>". This process is irreversible.</p>
+                          <p class="text-dark">The products currently listed under the category "<span class="fw-600"><?php echo $categoryname ?></span>" will still be available.</p>
+                          <ul class="row gx-4 mt-4">
+                            <li class="col-6 d-none">
+                              <button class="button -outline-dark-3 -md w-100" data-bs-dismiss="modal">Close</button>
+                              <!-- <button class="button -md -deep-green-1 text-white" type="submit" id="submit">nn</button> -->
+                            </li>
+
+                            <li class="col-12">
+                              <a href="#" class="button -red-1 w-100 button -md -deep-green-1 text-white delete-category-btn" data-categoryid="<?php echo $category_id; ?>">Delete Category</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+
+              <?php
+              }
+            } else {
+
+              ?>
+              <tr class="layout-pt-lg layout-pb-lg section-bg mt-30 empty ">
+                <div class="section-bg__item bg-light-6"></div>
+                <td colspan="6" class="container desction">
+                  <div class="row y-gap-20 justify-center text-center">
+                    <div class="col-auto">
+                      <img src="assets/img/store.png" style="width:20%">
+                      <div class="sectionTitle ">
+                        <h2 class="sectionTitle__title ">No Category added!</h2>
+                        <p class="sectionTitle__text h4 pt-15">
+                          Your product categories will appear here!
+                        </p>
+                      </div>
+                      <div class="row justify-center pt-30">
+                        <div class="col-auto">
+                          <a data-toggle="modal" data-target="#modal-categories" class="button -icon  -deep-green-1 text-white">
+                            Add New Category <i class="icon-arrow-top-right text-13 ml-10"></i>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            <?php
+            }
+            ?>
+          </tbody>
+        </table>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="modal-categories" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add Category</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body pt-0">
+        <form class="contact-form row y-gap-30" id="categoryForm" method="POST">
+          <h4 class="text-16 lh-1 fw-500 text-dark-1">Category Name <span class="text-error-1">*</span> </h4>
+          <!-- <div id="error-message"></div> -->
+          <div class="col-12" id="error-message">
+            <input type="text" name="categoryname" id="category" placeholder="Enter the name of the category" required>
+          </div>
+
+          <div class="d-flex w-100  border-top-dark">
+            <!-- <button type="button" class="button -md -deep-green-1 flex-fill" data-dismiss="modal">Close</button> -->
+            <!-- <button type="button" class="button -md -deep-green-1 flex-fill">Save changes</button> -->
+            <button class="button -md -deep-green-1 text-white flex-fill" type="submit" id="submit">
+              Add Category
+            </button>
+          </div>
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="../api/category.js"></script>
+<?php
+include_once "ad_comp/adm-footer.php";
+include_once "ad_comp/adm-tail.php";
+?>

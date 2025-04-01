@@ -1,0 +1,86 @@
+<?php
+session_start();
+$user_id = $_SESSION['user_id'];
+
+$footeryear = date("Y");
+define('FOOTERYEAR', $footeryear);
+
+define('NAIRA', '₦');
+define('DOLLAR', '$');
+define('EURO', '€');
+
+// Check if the site is running locally or on a hosting site
+if ($_SERVER['HTTP_HOST'] == 'localhost:8888') {
+    // Local environment
+    define('BASE_URL', 'http://localhost:8888/olnee/');
+    define('ADMIN_URL', 'http://localhost:8888/olnee/admin/');
+}elseif ($_SERVER['HTTP_HOST'] == 'oreoluwas-macbook-pro.local:8888') {
+    // Local environment
+    define('BASE_URL', 'http://oreoluwas-macbook-pro.local:8888/olnee/');
+    define('ADMIN_URL', 'http://oreoluwas-macbook-pro.local:8888/olnee/admin/');
+} else {
+    // Hosting environment
+    // define('BASE_URL', 'https://bobthebuilder.shop/');
+    // define('ADMIN_URL', 'https://admin.buildwithbob.shop/');
+    define('BASE_URL', 'https://olneeluxury.com');
+    define('ADMIN_URL', 'https://admin.olneeluxury.com/');
+}
+
+// Pages
+define('HOME', BASE_URL);
+define('SHOP', BASE_URL.'catalog');
+define('PRODUCT_DETAIILS', BASE_URL.'product?item=');
+define('CART', BASE_URL.'cart');
+define('WISHLIST', BASE_URL.'wishlist');
+define('COLLECTION', BASE_URL.'collection');
+define('CATEGORY', BASE_URL.'category?id=');
+define('BLOG', BASE_URL.'blog');
+define('CHECKOUT', BASE_URL.'checkout');
+define('ORDER', BASE_URL.'order?id=');
+define('CONFIRM_PAY', BASE_URL.'inc/conxfirm');
+define('ACCOUNT', BASE_URL.'account');
+define('LOGIN', BASE_URL.'login');
+define('LOGOUT', BASE_URL.'logout');
+define('REGISTER', BASE_URL.'register');
+define('CONTACT', BASE_URL.'contact');
+define('WHATSAPP_NUMBER', '2348108806808');
+// define('WHATSAPP_ORDER', 'https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(data.mainMSG)}');
+
+
+
+
+define('ADMIN_LOGIN', ADMIN_URL.'login');
+define('SIGNUP', ADMIN_URL.'signup');
+define('DASHBOARD', ADMIN_URL);
+define('ADD_PRODUCT', ADMIN_URL.'create');
+define('CATEGORIES', ADMIN_URL.'categories');
+define('PRODUCTS', ADMIN_URL.'products');
+define('REVIEWS', ADMIN_URL.'reviews');
+define('ORDERS', ADMIN_URL.'orders');
+define('DELIVERY', ADMIN_URL.'delivery');
+define('COUPON', ADMIN_URL.'coupon');
+define('PROFILE', ADMIN_URL.'profile');
+define('SETTINGS', ADMIN_URL.'settings');
+define('ADD_IMAGE', ADMIN_URL.'image');
+define('EDIT_PRODUCT', ADMIN_URL.'edit');
+// define('DELETE_PRODUCT', ADMIN_URL.'inc/delete');
+// define('DELETE_CAT', BASE_URL.'inc/deletecat');
+define('EDIT_THUMBNAIL', ADMIN_URL.'editthumbnail');
+define('EDIT_IMAGES', ADMIN_URL.'editimages');
+define('ORDER_DETAILS', ADMIN_URL.'order?o=');
+
+
+define('ADMIN_LOGOUT', ADMIN_URL.'logout'); // Logout Link
+
+// define('LOGOUT', BASE_URL.'logout?id='.$user_id); // Logout Link
+
+
+
+
+$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://'; // Get the protocol (http or https)
+$host = $_SERVER['HTTP_HOST']; // Get the host (domain name)
+$uri = $_SERVER['REQUEST_URI']; // Get the current request URI
+$current_url = $protocol . $host . $uri; // Combine the protocol, host, and URI to get the full URL
+// echo "Current URL: $current_url"; // Output the current URL
+$t = $pagetitle;
+
