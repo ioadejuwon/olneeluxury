@@ -258,6 +258,25 @@
 }
 
 
+.parent {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  height: 300px; /* Set a height */
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.child {
+  /* background: lightgray; */
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+/* Push only the last child to the bottom */
+.child:last-child {
+  margin-top: auto;
+  /* background: lightblue; */
+}
 
 
 #notification-container {

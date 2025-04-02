@@ -45,6 +45,18 @@ if ($count_row_orders < 1) {
   $paymentOption  =  $order_row["paymentOption"];
   $status = $order_row["status"];
   $date = $order_row["crrated_at"];
+
+
+  if ($paymentOption == '1') {
+    $payment_mode = 'Flutterwave';
+  }else if ($paymentOption == '2') {
+    $payment_mode = 'Direct Transfer';
+  }else if ($paymentOption == '3') {
+    $payment_mode = 'Cash on Delivery';
+  }else if ($paymentOption == '4') {
+    $payment_mode = 'WhatsApp Order';
+  }
+
 }
 
 
@@ -61,27 +73,6 @@ $row = mysqli_fetch_assoc($sql);
 
 
 
-$products_sql = mysqli_query($conn, "SELECT * FROM products ");
-$count_row_product = mysqli_num_rows($products_sql);
-
-$categories_sql = mysqli_query($conn, "SELECT * FROM olnee_categories");
-$count_row_categories = mysqli_num_rows($categories_sql);
-
-
-// $total_amount = 0;
-
-// while ($row_orders = mysqli_fetch_assoc($orders_sql)) {
-
-//   $order_amount = $row_orders['total'];
-//   // Add the value to the total amount
-//   $total_amount += $order_amount;
-
-// }
-// $total_amount = '&#8358;'.number_format($total_amount,2);
-
-
-
-
 include_once "ad_comp/adm-sidebar.php"
 ?>
 
@@ -94,13 +85,14 @@ include_once "ad_comp/adm-sidebar.php"
     </div>
   </div>
 
+
+
   <div class="row y-gap-30">
     <div class="col-xl-7">
-      <div class="rounded-16 bg-white -dark-bg-dark-1 shadow-4 h-100">
-        <div class="py-20 px-30 border-bottom-light">
+      <div class="rounded-16 bg-white -dark-bg-dark-1 shadow-4 h-100 parent">
+        <div class="py-20 px-30 border-bottom-light child">
           <div class="row y-gap-20 justify-between">
             <div class="col-auto">
-              <!-- <div class="lh-11 text-17 fw-700 text-dark-1">Customer Information</div> -->
               <h2 class="text-17 lh-1 fw-700">Order Items</h2>
               <div class="text-14 lh-11 mt- uppercase">#<?php echo $order_id ?></div>
             </div>
@@ -135,24 +127,14 @@ include_once "ad_comp/adm-sidebar.php"
           $row = $result->fetch_assoc();
           $producttitle = $row['producttitle'];
 
-
-          $tag = $row['ptag'];
-          $quantity = $row_orders['pqty'];
-          $pdes = $row['pdes'];
-          $ppricedis = $row['ppricedis'];
           $price = $row['price'];
-          $categoryid = $row['category'];
-          $original_price = '&#8358;' . number_format($pprice);
-          $discounted_price = '&#8358;' . number_format($ppricedis);
-          $totalPrice += $pprice;
-          // $total_price = '&#8358;' . number_format($totalPrice, 2);
 
           $prodsql_img_thumbnail = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '$product_id' AND thumbnail = 1");
           $row_prod_img_thumbnail = mysqli_fetch_assoc($prodsql_img_thumbnail);
           // $image_path_thumbnail =  $row_prod_img_thumbnail['image_path'];
           $image_path_thumbnail =  $row_prod_img_thumbnail['image_path'];
         ?>
-          <div class="py-30 px-30">
+          <div class="py-30 px-30 child">
             <div class="d-flex justify-between">
               <div class="d-flex items-center">
                 <div class="size-50 rounded-8 brand-pic-display" style="background-image: url('<?php echo $image_path_thumbnail ?>'); "></div>
@@ -177,41 +159,43 @@ include_once "ad_comp/adm-sidebar.php"
         <?php
         }
         ?>
-        <div class="py-30 px-30">
-          <div class="border-top-light pt-20 mt-20">
-            <div class="d-flex justify-between border-top-dark mt-15">
-              <div class="d-flex items-center">
-                <div class="ml-">
-                  <div class="text-16 fw-700 lh-11 mb-5 text-dark-1">Order Summary</div>
+        <div class="border-top-light child">
+          <div class="py-30 px-30 ">
+            <div class=" ">
+              <div class="d-flex justify-between">
+                <div class="d-flex items-center">
+                  <div class="ml-">
+                    <div class="text-16 fw-700 lh-11 mb-5 text-dark-1">Order Summary</div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="row y-gap-20 justify-between">
-              <div class="col-auto">
-                <p class="text-14 lh-13 mt-5 uppercase">Subtotal</p>
-                <div class="text-16 fw-500 text-dark-1 price">
-                  <?php echo $subtotal; ?>
+              <div class="row y-gap-20 justify-between">
+                <div class="col-6">
+                  <p class="text-14 lh-13 mt-5 uppercase mb-0">Subtotal</p>
+                  <div class="text-16 fw-500 text-dark-1 price">
+                    <?php echo $subtotal; ?>
+                  </div>
                 </div>
-              </div>
-              <div class="col-auto">
-                <p class="text-14 lh-13 mt-5 uppercase">Discount</p>
-                <div class="text-16 fw-500 text-dark-1 price">
-                  <?php echo '-' . $discount; ?>
+                <div class="col-6">
+                  <p class="text-14 lh-13 mt-5 uppercase mb-0">Discount</p>
+                  <div class="text-16 fw-500 text-dark-1 price">
+                    <?php echo '-' . $discount; ?>
+                  </div>
                 </div>
-              </div>
-              <div class="col-auto">
-                <p class="text-14 lh-13 mt-5 uppercase">Shipping</p>
-                <div class="text-16 fw-500 text-dark-1 price">
-                  <?php echo $shipping; ?>
+                <div class="col-6">
+                  <p class="text-14 lh-13 mt-5 uppercase mb-0">Shipping</p>
+                  <div class="text-16 fw-500 text-dark-1 price">
+                    <?php echo $shipping; ?>
+                  </div>
                 </div>
-              </div>
-              <div class="col-auto">
-                <p class="text-14 lh-13 mt-5 uppercase">Total Paid</p>
-                <div class="text-16 fw-500 text-dark-1 price">
-                  <?php echo $total; ?>
+                <div class="col-6">
+                  <p class="text-14 lh-13 mt-5 uppercase mb-0">Total Paid</p>
+                  <div class="text-16 fw-500 text-dark-1 price">
+                    <?php echo $total; ?>
+                  </div>
                 </div>
-              </div>
 
+              </div>
             </div>
           </div>
         </div>
@@ -275,6 +259,30 @@ include_once "ad_comp/adm-sidebar.php"
                   <div class="text-14 lh-11 mb-5">Delivery Address</div>
                   <div class="lh-11 fw-500 text-dark-1">
                     <?php echo $cus_address ?>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-between">
+              <div class="d-flex items-center">
+                <div class="ml-">
+                  <div class="text-14 lh-11 mb-5">Payment Mode</div>
+                  <div class="lh-11 fw-500 text-dark-1">
+                    <?php echo $payment_mode ?>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-between">
+              <div class="d-flex items-center">
+                <div class="ml-">
+                  <div class="text-14 lh-11 mb-5">Payment Status</div>
+                  <div class="lh-11 fw-500 text-dark-1">
+                    <?php echo $status ?>
                   </div>
 
                 </div>
