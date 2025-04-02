@@ -97,8 +97,8 @@ include_once "ad_comp/adm-sidebar.php"
         <div class="py-20 px-30 border-bottom-light child">
           <div class="row y-gap-20 justify-between">
             <div class="col-auto">
-              <h2 class="text-17 lh-1 fw-700">Order Items</h2>
-              <div class="text-14 lh-11 mt- uppercase">#<?php echo $order_id ?></div>
+              <div class="text-17 lh-1 fw-700 text-dark-1">Order Items</div>
+              <div class="text-11 lh-1 mt-5 uppercase text-dark-1">#<?php echo $order_id ?></div>
             </div>
             <div class="col-auto d-none">
               <div class="text-16 fw-500 text-dark-1 img-outline" data-toggle="modal" data-target="#editorder">
@@ -212,8 +212,8 @@ include_once "ad_comp/adm-sidebar.php"
         <div class="py-20 px-30 border-bottom-light">
           <div class="row y-gap-20 justify-between">
             <div class="col-auto">
-              <div class="lh-11 text-17 fw-500 text-dark-1">Customer Information</div>
-              <div class="text-14 lh-11 mt-5 uppercase">#<?php echo $order_id ?></div>
+              <div class="lh-11 text-17 fw-700 text-dark-1">Customer Information</div>
+              <div class="text-11 lh-11 mt-5 uppercase">#<?php echo $order_id ?></div>
             </div>
             <div class="col-auto d-none">
               <div class="text-16 fw-500 text-dark-1 img-outline" data-toggle="modal" data-target="#editorder">
@@ -223,7 +223,7 @@ include_once "ad_comp/adm-sidebar.php"
           </div>
         </div>
         <div class="py-30 px-30">
-          <div class="y-gap-30">
+          <div class="y-gap-20">
             <div class="d-flex justify-between">
               <div class="d-flex items-center">
                 <div class="ml-">

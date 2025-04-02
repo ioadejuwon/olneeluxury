@@ -63,7 +63,7 @@ $fname = $row['fname'];
 
           <div class="tabs__content py-30 px-30 js-tabs-content">
             <div class="tabs__pane -tab-item-1 is-active">
-              <div class="row y-gap-10 justify-between">
+              <div class="row y-gap-10 justify-between d-none">
                 <div class="col-auto">
                   <form class="search-field border-light rounded-8 h-50" action="">
                     <input class="bg-white -dark-bg-dark-2 pr-50" type="text" placeholder="Search products">
@@ -98,7 +98,7 @@ $fname = $row['fname'];
                 </div>
               </div>
 
-              <div class="row y-gap-30 pt-30">
+              <div class="row y-gap-30 pt-">
 
                 <?php
                 $prodsql = mysqli_query($conn, "SELECT * FROM products");

@@ -176,6 +176,12 @@
 }
 
 @media (max-width: 991px) {
+  #notification-container {
+    min-width: 350px !important;
+    max-width: 90%; 
+    /* Center text */
+  }
+
   .authentication-left {
     display: none !important;
   }
@@ -262,7 +268,7 @@
   display: flex;
   flex-direction: column; /* Stack children vertically */
   height: 300px; /* Set a height */
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   /* padding: 10px; */
 }
 
@@ -285,8 +291,8 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 9999;
-  min-width: 350px !important;
-  max-width: 90%; 
+  /* min-width: 350px !important; */
+  /* max-width: 90%;  */
   text-align: center;
   /* Center text */
 }
