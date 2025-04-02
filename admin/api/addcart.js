@@ -162,19 +162,19 @@ function displayCartItems() {
     var emptyCartMessage = $('.tf-page-cart');
     var emptyCartWrap = $('.tf-page-cart-wrap');
     var emptycouponinputWrap = $('.shopCart-footer');
-    
+
     let cartContainer = $('#cartItems'); // Ensure this exists on the page
 
     if (!cartContainer.length) return; // Exit if not on cart page
 
     cartContainer.empty(); // Clear previous items
-    
-    
+
+
     if (cartItems.length === 0) {
         // cartContainer.html('<p>Your cart is empty.</p>');
         emptyCartMessage.show();
         emptyCartWrap.hide();
-        
+
         // updateCartTotal();
         return;
     } else {
@@ -300,7 +300,7 @@ function displayCheckoutItems() {
         emptyCartMessage.show();
         checkoutContainer.hide();
         return;
-    }else{
+    } else {
         emptyCartMessage.hide();
         checkoutContainer.show();
         cartItems.forEach(item => {
@@ -380,9 +380,9 @@ function updateCartTotal() {
 
     // Update UI
     $("#subtotal").text(formattedSubtotal);
-    $("#discount").text('-'+formattedDiscount); // Add an element for this
+    $("#discount").text('-' + formattedDiscount); // Add an element for this
     $("#total-price2, #headerTotal").text(formattedTotal);
-    
+
     formatAllPrices(); // Ensure all prices are formatted
 }
 
@@ -439,7 +439,7 @@ function updateYards(productId, change) {
 
 function applyCoupon() {
     let code = document.getElementById("couponCode").value.trim();
-    
+
     if (code === "") {
         alert("Please enter a coupon code.");
         return;
@@ -447,21 +447,25 @@ function applyCoupon() {
 
     // Send AJAX request to check coupon validity
     $.ajax({
-        url: "inc/check_coupon.php",
+        url: "admin/inc/check_coupon.php",
         method: "POST",
         data: { couponCode: code },
         dataType: "json",
-        success: function(response) {
+        success: function (response) {
             if (response.success) {
                 // Store discount details in local storage
                 localStorage.setItem("cartDiscount", JSON.stringify(response.discount));
                 // alert("Coupon Applied: " + response.discount.couponName);
-                showNotification('Discount Applied: '+ response.discount.couponName, 'info');
+                showNotification('Discount Applied: ' + response.discount.couponName, 'info');
                 updateCartTotal();
             } else {
                 // alert("Invalid or expired coupon.");
                 showNotification('Invalid or expired coupon.', 'error');
             }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            // console.error('Error:', textStatus, errorThrown); // Log any errors
+            showNotification('An error occurred while processing your request.', 'error');
         }
     });
 }
@@ -496,7 +500,7 @@ function updateCheckoutTotal() {
     discountAmount = Math.min(discountAmount, subtotal);
     // let total = subtotal + shippingCost;
 
-    let total = subtotal - discountAmount + shippingCost ; // Apply discount
+    let total = subtotal - discountAmount + shippingCost; // Apply discount
 
     // Ensure total is not negative
     total = total < 0 ? 0 : total;
@@ -552,7 +556,7 @@ function saveCustomerDetailsToLocalStorage() {
 function getCustomerDetails() {
     var customerDetailsKey = 'olnee_customerDetails';
     var customerDetails = JSON.parse(localStorage.getItem(customerDetailsKey)) || {};
-    
+
     if (Object.keys(customerDetails).length > 0) {
         $('input[name="firstName"]').val(customerDetails.firstName || '');
         $('input[name="lastName"]').val(customerDetails.lastName || '');
@@ -564,7 +568,7 @@ function getCustomerDetails() {
         $('select[name="country"]').val(customerDetails.country || '');
         // $('select[name="deliverycost"]').val(customerDetails.delivery || '');
         $('textarea[name="notes"]').val(customerDetails.notes || '');
-        
+
         // var deliveryPrice = customerDetails.delivery;
         // var formattedDeliveryPrice = formatCurrency(deliveryPrice);
         // $('.delivery-price').text(formattedDeliveryPrice);
@@ -581,7 +585,7 @@ function restoreCustomerDetails() {
 
 
 // Submit form for paymentBegin
-$('#checkoutForm').on('submit', function(event) {
+$('#checkoutForm').on('submit', function (event) {
     event.preventDefault(); // Prevent the form from submitting the traditional way
 
     // Retrieve items from localStorage
@@ -602,8 +606,8 @@ $('#checkoutForm').on('submit', function(event) {
         showNotification('Please select a payment option.', 'error');
         return;
     }
-    
-    
+
+
     // Serialize form data
     var formData = $(this).serializeArray();
 
@@ -613,11 +617,11 @@ $('#checkoutForm').on('submit', function(event) {
     formData.push({ name: 'discount', value: parseFloat(document.getElementById('discount').innerText.replace(/[^\d.]/g, '')) });
     formData.push({ name: 'shipping', value: parseFloat(document.getElementById('shipping').innerText.replace(/[^\d.]/g, '')) });
     formData.push({ name: 'checkout-total', value: parseFloat(document.getElementById('checkout-total').innerText.replace(/[^\d.]/g, '')) });
-    formData.push({name: 'paymentOption', value: selectedOption}); // Include payment option in request
+    formData.push({ name: 'paymentOption', value: selectedOption }); // Include payment option in request
 
     // Convert formData array to an object
     var data = {};
-    $.each(formData, function(index, field) {
+    $.each(formData, function (index, field) {
         data[field.name] = field.value;
     });
 
@@ -627,7 +631,7 @@ $('#checkoutForm').on('submit', function(event) {
         url: 'admin/inc/pay.php', // Replace with the path to your PHP script
         type: 'POST',
         data: data,
-        success: function(response) {
+        success: function (response) {
             // console.log('Form Data: ', formData); // Check the data being sent to the server
             // console.log('Response:', response); // Check the response from the server
             if (response.status === 'success') {
@@ -648,7 +652,7 @@ $('#checkoutForm').on('submit', function(event) {
                 showNotification('Failed to store items. Please try again.', 'error');
             }
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
             // console.error('Error:', textStatus, errorThrown); // Log any errors
             showNotification('An error occurred while processing your request.', 'error');
         }
@@ -673,7 +677,7 @@ $(document).ready(function () {
         addToCart(productId);
     });
 
-    
+
 
     updateCartTotal();
     updateCheckoutTotal();
