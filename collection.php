@@ -240,10 +240,10 @@ include_once "comp/header.php"
 </section>
 
 
-<section class="layout-pt-lg layout-pb-lg border-top-light">
+<section class="layout-pt-md layout-pb-lg border-top-light">
     <div data-anim-wrap class="container">
        
-        <div class="pt-60 lg:pt-50 js-section-slider" data-gap="30" data-pagination data-slider-cols="xl-3 lg-3 md-2">
+        <div class=" js-section-slider" data-gap="30" data-pagination data-slider-cols="xl-3 lg-3 md-2">
             <div class="swiper-wraper row y-gap-30">
 
               
