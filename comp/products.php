@@ -28,18 +28,9 @@
     <input type="hidden" name="product_img" value="<?php echo $image_path_thumbnail; ?>">
     <input type="hidden" name="price" value="<?php echo $price; ?>"> -->
     <input type="hidden" name="yards" value="1">
+    
     <div class="productCard__content mt-15">
-        <!-- <h4 class="text-17 fw-500 mt-15 no-big-screen">
-            <?php
-            // echo $product_name; 
-            if (strlen($product_name) > 18) {
-                echo substr($product_name, 0, 16) . '...';
-            } else {
-                echo $product_name;
-            }
-            ?>
-        </h4> -->
-        <h4 class="text-17 fw-500 mt- text-line-clamp-1">
+        <h4 class="text-17 fw-500 mt- text-line-clamp-1  mb-1">
             <?php echo $product_name; ?>
         </h4>
         <div class="text-17 fw-500 text-deep-green-1 mt-5 price">

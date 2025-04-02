@@ -149,9 +149,9 @@ $fname = $row['fname'];
                             </a>
                           </div>
                         </div>
-                        <div class="productCard__content mt-20">
-                          <h4 class="text-17 fw-500 mt-15"><?php echo $product_name; ?></h4>
-                          <div class="text-17 fw-500 text-deep-green-1 mt-5">
+                        <div class="productCard__content mt-15">
+                          <h4 class="text-17 fw-500 mt- text-line-clamp-1 mb-1"><?php echo $product_name; ?></h4>
+                          <div class="text-17 fw-500 text-deep-green-1 mt- price">
                             <?php echo $price; ?>
                           </div>
                         </div>
