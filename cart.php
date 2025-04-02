@@ -1,83 +1,11 @@
-<script>
-  // console.log('api page is loaded');
-// function showNotification(message, type = 'success') {
-//     const container = document.getElementById('notification-container');
-//     const notification = document.createElement('div');
-//     notification.className = `notification ${type}`;
-//     notification.textContent = message;
-//     container.appendChild(notification);
-
-//     // Show notification
-//     setTimeout(() => {
-//         notification.classList.add('show');
-//     }, 100);
-
-//     // Hide and remove notification after 3 seconds
-//     setTimeout(() => {
-//         notification.classList.remove('show');
-//         setTimeout(() => {
-//             container.removeChild(notification);
-//         }, 500); // Match the transition duration
-//     }, 10000);
-// }
-
-</script>
-<style>
-  /* .input-counter {
-    display: flex;
-    align-items: center;
-  }
-
-  .input-counter input {
-    width: 50px;
-    text-align: center;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-
-  .input-counter button {
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 5px;
-    margin: 0 2px;
-    cursor: pointer;
-  }
-
-  .input-counter button:hover {
-    background-color: #e0e0e0;
-  } */
-</style>
 <?php
 $pagetitle = "Cart";
 include_once "comp/head.php";
 include_once "comp/header.php";
-echo '<script>';
-echo 'var shop = "' . SHOP . '";';
-echo '</script>';
+// echo '<script>';
+// echo 'var shop = "' . SHOP . '";';
+// echo '</script>';
 
-// if (isset($_GET['code'])) {
-//   $couponcode = $_GET['code'];
-
-//   $couponquery = "SELECT * FROM olnee_coupons WHERE couponCode = ?";
-//   $stmt = mysqli_prepare($conn, $couponquery);
-//   mysqli_stmt_bind_param($stmt, "s", $couponcode); // Bind the parameter
-//   mysqli_stmt_execute($stmt); // Execute the prepared statement
-//   $result = mysqli_stmt_get_result($stmt); // Get the result
-//   $count_row = $result->num_rows;
-
-//   $row = $result->fetch_assoc();
-//   $couponPercent = $row['couponPercent'];
-
-
-
-//   if ($count_row < 1) {
-//     echo '<script>';
-//     echo "showNotification('Invalid Coupon Code', 'error');";
-//     echo '</script>';
-//   }
-// }
 ?>
 
 
@@ -163,10 +91,10 @@ echo '</script>';
               </div>
             </form> -->
 
-              <div class="d-flex justify-end border-dark">
-                <input style="border: solid 1px grey !important; width: 300px;" class="mr-4 rounded-8 px-25 py-10 form-control" id="couponCode" type="text" name="code" value="<?php echo $couponcode ?>" placeholder="Enter Coupon Code">
-                <button class="button text-white -md w-100 fw-500 -deep-green-1 ml-10" type="submit" onclick="applyCoupon()">Apply <span class="lg:d-none"> Coupon</span></button>
-              </div>
+            <div class="d-flex justify-end border-dark">
+              <input style="border: solid 1px grey !important; width: 300px;" class="mr-4 rounded-8 px-25 py-10 form-control" id="couponCode" type="text" name="code" value="<?php echo $couponcode ?>" placeholder="Enter Coupon Code">
+              <button class="button text-white -md w-100 fw-500 -deep-green-1 ml-10" type="submit" onclick="applyCoupon()">Apply <span class="lg:d-none"> Coupon</span></button>
+            </div>
 
           </div>
 
