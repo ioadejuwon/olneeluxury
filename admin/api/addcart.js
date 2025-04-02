@@ -441,7 +441,8 @@ function applyCoupon() {
     let code = document.getElementById("couponCode").value.trim();
 
     if (code === "") {
-        alert("Please enter a coupon code.");
+        // alert("");
+        showNotification('Please enter a coupon code.', 'error');
         return;
     }
 
