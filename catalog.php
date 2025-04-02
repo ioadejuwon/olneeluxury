@@ -147,7 +147,7 @@ include_once "comp/header.php"
             </div>
 
             <div class="col-lg-12" data-anim="slide-up delay-3">
-                <div class="row c justify-between items-center">
+                <div class="row c justify-between items-center d-none">
                     <div class="col-auto d-non">
                         <div class="text-14">
                             Showing <span class="fw-500 text-dark-1">250</span> total results
@@ -186,7 +186,7 @@ include_once "comp/header.php"
                     </div>
                 </div>
 
-                <div class="row y-gap-30 pt-30">
+                <div class="row y-gap-30 pt-">
                     <?php
                     $prodsql = mysqli_query($conn, "SELECT * FROM products");
                     while ($row_prod = mysqli_fetch_assoc($prodsql)) {
