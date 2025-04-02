@@ -166,9 +166,9 @@ $fname = $row['fname'];
                             echo $product_name;
                             ?>
                           </h4>
-                          <div class="text-17 fw-500 text-deep-green-1 mt-15">
+                          <div class="text-17 fw-500 text-deep-green-1 mt-5">
                             <!-- <span class="line-through opac-50 text-14"><?php echo $discounted_price; ?></span>  -->
-                            <?php echo $original_price; ?>
+                            <?php echo $price; ?>
                           </div>
                         </div>
                       </div>
