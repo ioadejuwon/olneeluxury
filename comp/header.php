@@ -162,7 +162,8 @@
                       <div class="col">
                         <div class="row x-gap-10 y-gap-10">
                           <div class="col-auto">
-                            <img src="admin/assets/img/menus/cart/1.png" alt="image">
+                            <!-- <img src="admin/assets/img/menus/cart/1.png" alt="image"> -->
+                            <img src="admin/assets/img/icon.png" alt="icon" width="20%">
 
                           </div>
 
@@ -178,7 +179,9 @@
                       </div>
 
                       <div class="col-auto">
-                        <button><img src="admin/assets/img/close.svg" alt="icon"></button>
+                        <button>
+                          <img src="admin/assets/img/icons/close.png" alt="icon">
+                        </button>
                       </div>
                     </div>
 
