@@ -112,7 +112,7 @@ include_once "ad_comp/adm-sidebar.php"
                     <td><?php echo $cus_name ?></td>
                     <td><?php echo $cus_email ?></td>
                     <td><?php echo $pay_status ?></td>
-                    <td class="pric"><?php echo $pay_total ?></td>
+                    <td class="price"><?php echo $pay_total ?></td>
                     <td><?php echo date('jS F', $date) ?></td>
                     <!-- <td><?php echo $cus_phone ?></td>
                       <td><?php echo $cus_address ?></td>
