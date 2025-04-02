@@ -16,15 +16,11 @@ include_once "comp/header.php";
       <div class="row justify-cente text-left">
         <div class="col-auto">
           <div data-anim="slide-up delay-1">
-
             <h1 class="page-header__title text-white"><?php echo $couponPercent ?>Shop Cart</h1>
-
           </div>
 
           <div data-anim="slide-up delay-2">
-
             <p class="page-header__text">We’re on a mission to deliver Comfortable Clothing at a reasonable price.</p>
-
           </div>
         </div>
       </div>
@@ -53,13 +49,11 @@ include_once "comp/header.php";
   </div>
 </section>
 
-
 <section class="layout-pt-md layout-pb-lg tf-page-cart-wrap">
-
   <div class="">
     <div class="container">
       <div class="table-responsive">
-        <table class="table w-1/1 d-non align-middle" id="cart-items-container">
+        <table class="table w-1/1 d-non align-middle" id="cart-items-container" data-anim="slide-up delay-3">
           <thead>
             <tr>
               <th style="width: 1% !important">Image</th>
@@ -70,7 +64,6 @@ include_once "comp/header.php";
               <th>Remove</th>
             </tr>
           </thead>
-
           <tbody id="cartItems" class="tf-cart-item-container ">
             <tr class="tf-cart-item file-delete">
               <td colspan="6">
@@ -81,21 +74,13 @@ include_once "comp/header.php";
         </table>
       </div>
 
-      <div class="shopCart-footer px-16 mt-30">
-        <div class="row justify-betwee justify-end y-gap-30">
+      <div class="shopCart-footer px-16 mt-30" data-anim="slide-up delay-3">
+        <div class="row justify-end y-gap-30">
           <div class="col-xl-7">
-            <!-- <form class="" action="<?php echo CART ?>">
-              <div class="d-flex justify-between border-dark">
-                <input class="rounded-8 px-25 py-20" type="text" name="code" value="<?php echo $couponcode ?>" placeholder="Coupon Code">
-                <button class="button text-white -md fw-500 -deep-green-1" type="submit">Apply coupon</button>
-              </div>
-            </form> -->
-
             <div class="d-flex justify-end border-dark">
               <input style="border: solid 1px grey !important; width: 300px;" class="mr-4 rounded-8 px-25 py-10 form-control" id="couponCode" type="text" name="code" value="<?php echo $couponcode ?>" placeholder="Enter Coupon Code">
-              <button class="button text-white -md w-100 fw-500 -deep-green-1 ml-10" type="submit" onclick="applyCoupon()">Apply <span class="lg:d-none"> Coupon</span></button>
+              <button class="button text-white -md w-100 fw-500 -deep-green-1 ml-10" type="submit" onclick="applyCoupon()">Apply<span class="lg:d-none"> coupon</span></button>
             </div>
-
           </div>
 
           <div class="col-auto d-none">
@@ -106,8 +91,7 @@ include_once "comp/header.php";
         </div>
       </div>
 
-
-      <div class="row justify-end">
+      <div class="row justify-end" data-anim="slide-up delay-4">
         <div class="col-xl-4 col-lg-5 layout-pt-lg">
           <div class="py-30 bg-light-4 rounded-8 border-light">
             <h5 class="px-30 text-20 fw-500">Cart Total</h5>
@@ -131,13 +115,9 @@ include_once "comp/header.php";
           <a href="<?php echo CHECKOUT ?>" class="button -md -deep-green-1 text-white col-12 mt-30">Proceed to checkout</a>
         </div>
       </div>
-
     </div>
   </div>
 </section>
-
-
-
 
 <!-- <section class="layout-pt-md layout-pb-lg d-none">
   <div class="container">
