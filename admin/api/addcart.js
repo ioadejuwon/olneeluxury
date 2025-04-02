@@ -456,11 +456,9 @@ function applyCoupon() {
             if (response.success) {
                 // Store discount details in local storage
                 localStorage.setItem("cartDiscount", JSON.stringify(response.discount));
-                // alert("Coupon Applied: " + response.discount.couponName);
                 showNotification('Discount Applied: ' + response.discount.couponName, 'info');
                 updateCartTotal();
             } else {
-                // alert("Invalid or expired coupon.");
                 showNotification('Invalid or expired coupon.', 'error');
             }
         },

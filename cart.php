@@ -165,7 +165,7 @@ echo '</script>';
 
               <div class="d-flex justify-end border-dark">
                 <input style="border: solid 1px grey !important; width: 300px;" class="mr-4 rounded-8 px-25 py-10 form-control" id="couponCode" type="text" name="code" value="<?php echo $couponcode ?>" placeholder="Enter Coupon Code">
-                <button class="button text-white -md w-100 fw-500 -deep-green-1 ml-10" type="submit" onclick="applyCoupon()">Apply<span class="lg:d-none"> Coupon</span></button>
+                <button class="button text-white -md w-100 fw-500 -deep-green-1 ml-10" type="submit" onclick="applyCoupon()">Apply <span class="lg:d-none"> Coupon</span></button>
               </div>
 
           </div>
