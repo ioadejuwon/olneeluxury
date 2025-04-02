@@ -3,7 +3,8 @@ session_start();
 
 
 include_once "inc/config.php";
-$pagetitle = "Dashboard";
+$order_id = $_GET['id'];
+$pagetitle = "Order Details #".$order_id;
 include_once "inc/drc.php";
 
 
@@ -14,7 +15,7 @@ if (!isset($_SESSION['user_id'])) {
 } else {
   $user_id = $_SESSION['user_id'];
 }
-$order_id = $_GET['id'];
+
 
 $orders_sql = mysqli_query($conn, "SELECT * FROM olnee_orders WHERE order_id = '$order_id'");
 $count_row_orders = mysqli_num_rows($orders_sql);
