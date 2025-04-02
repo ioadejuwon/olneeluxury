@@ -40,18 +40,9 @@
             ?>
         </h4> -->
         <h4 class="text-17 fw-500 mt- text-line-clamp-1">
-            <!-- <?php echo $product_name; ?> -->
-            <?php
-            echo $product_name; 
-            // if (strlen($product_name) > 18) {
-            //     echo substr($product_name, 0, 20) . '...';
-            // } else {
-            //     echo $product_name;
-            // }
-            ?>
+            <?php echo $product_name; ?>
         </h4>
         <div class="text-17 fw-500 text-deep-green-1 mt-5 price">
-            <!-- <span class="line-through opac-50 text-14"><?php echo $discounted_price; ?></span> -->
             <?php echo $price; ?>
         </div>
         <div class="productCard__button d-inline-block add_to_cart_btn" style="width: 100% !important">
