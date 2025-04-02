@@ -448,7 +448,7 @@ function applyCoupon() {
 
     // Send AJAX request to check coupon validity
     $.ajax({
-        url: "admi/inc/check_coupon.php",
+        url: "admin/inc/check_coupon.php",
         method: "POST",
         data: { couponCode: code },
         dataType: "json",

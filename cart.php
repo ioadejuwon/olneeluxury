@@ -165,7 +165,7 @@ echo '</script>';
 
               <div class="d-flex justify-end border-dark">
                 <input style="border: solid 1px grey !important; width: 300px;" class="mr-4 rounded-8 px-25 py-10 form-control" id="couponCode" type="text" name="code" value="<?php echo $couponcode ?>" placeholder="Enter Coupon Code">
-                <button class="button text-white -md w-100 fw-500 -deep-green-1 ml-10" type="submit" onclick="applyCoupon()">Apply Coupon</button>
+                <button class="button text-white -md w-100 fw-500 -deep-green-1 ml-10" type="submit" onclick="applyCoupon()">Apply<span class="lg:d-none"> Coupon</span></button>
               </div>
 
           </div>
@@ -211,7 +211,7 @@ echo '</script>';
 
 
 
-<section class="layout-pt-md layout-pb-lg d-none">
+<!-- <section class="layout-pt-md layout-pb-lg d-none">
   <div class="container">
     <div class="row justify-end">
       <div class="col-12">
@@ -421,7 +421,7 @@ echo '</script>';
               <form class="" action="https://creativelayers.net/themes/educrat-html/post">
                 <div class="d-flex justify-between border-dark">
                   <input class="rounded-8 px-25 py-20" type="text" placeholder="Coupon Code">
-                  <button class="text-black fw-500" type="submit">Apply coupon</button>
+                  <button class="text-black fw-500" type="submit">Apply<span class="lg:d-none"> coupon</span></button>
                 </div>
               </form>
             </div>
@@ -456,7 +456,7 @@ echo '</script>';
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <?php
 include_once "comp/otherproducts.php";
