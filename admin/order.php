@@ -44,7 +44,10 @@ if ($count_row_orders < 1) {
   $total = $order_row["total"];
   $paymentOption  =  $order_row["paymentOption"];
   $status = $order_row["status"];
-  $date = $order_row["crrated_at"];
+  $ord_date = $order_row["created_at"];
+  $date = strtotime($ord_date);
+
+  $order_date =  date('D, jS F, Y', $date);
 
 
   if ($paymentOption == '1') {
@@ -283,6 +286,18 @@ include_once "ad_comp/adm-sidebar.php"
                   <div class="text-14 lh-11 mb-5">Payment Status</div>
                   <div class="lh-11 fw-500 text-dark-1">
                     <?php echo $status ?>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-between">
+              <div class="d-flex items-center">
+                <div class="ml-">
+                  <div class="text-14 lh-11 mb-5">Order Date</div>
+                  <div class="lh-11 fw-500 text-dark-1">
+                    <?php echo $order_date ?>
                   </div>
 
                 </div>
