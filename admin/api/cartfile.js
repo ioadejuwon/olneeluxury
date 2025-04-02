@@ -196,7 +196,7 @@ function displayCartItems() {
                     </td>
                     <td class="pt-50 md:pt-20">
                         <div class="input-counter md:mt-20 js-input-counter">
-                            <input class="input-counter__counter" type="number"  name="number" placeholder="" value="${item.yards}">
+                            <input class="input-counter__counter" type="number"  name="yards" placeholder="" value="${item.yards}">
                             <div class="input-counter__controls">
                                 <button class="btn-quantity btndecrease input-counter__up js-down" onclick="updateYards('${item.product_id}', -1)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus icon">
