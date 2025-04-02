@@ -209,70 +209,70 @@ include_once "ad_comp/adm-sidebar.php"
 
 
         <?php
-        $totalPrice = 0;
-        $products_orders = mysqli_query($conn, "SELECT * FROM olnee_order_items WHERE order_id = '$order_id'");
-        while ($row_orders = mysqli_fetch_assoc($products_orders)) {
-          // Get the thumbnail image
-          $product_id = $row_orders['product_id'];
-          $yards = $row_orders['yards'];
+        // $totalPrice = 0;
+        // $products_orders = mysqli_query($conn, "SELECT * FROM olnee_order_items WHERE order_id = '$order_id'");
+        // while ($row_orders = mysqli_fetch_assoc($products_orders)) {
+        //   // Get the thumbnail image
+        //   $product_id = $row_orders['product_id'];
+        //   $yards = $row_orders['yards'];
 
-          $productquery = "SELECT * FROM products WHERE productid = ?";
-          $stmt = mysqli_prepare($conn, $productquery);
-          mysqli_stmt_bind_param($stmt, "s",  $product_id); // Bind the parameter
-          mysqli_stmt_execute($stmt); // Execute the prepared statement
-          $result = mysqli_stmt_get_result($stmt); // Get the result
-          $count_row_products = $result->num_rows;
-          $row = $result->fetch_assoc();
-          $producttitle = $row['producttitle'];
+        //   $productquery = "SELECT * FROM products WHERE productid = ?";
+        //   $stmt = mysqli_prepare($conn, $productquery);
+        //   mysqli_stmt_bind_param($stmt, "s",  $product_id); // Bind the parameter
+        //   mysqli_stmt_execute($stmt); // Execute the prepared statement
+        //   $result = mysqli_stmt_get_result($stmt); // Get the result
+        //   $count_row_products = $result->num_rows;
+        //   $row = $result->fetch_assoc();
+        //   $producttitle = $row['producttitle'];
 
 
-          $prod_id = $row['prod_id'];
-          $imgalt = $row['prod_id'];
-          $tag = $row['ptag'];
-          $quantity = $row_orders['pqty'];
-          $pdes = $row['pdes'];
-          $ppricedis = $row['ppricedis'];
-          $price = $row['price'];
-          $categoryid = $row['category'];
-          $original_price = '&#8358;' . number_format($pprice);
-          $discounted_price = '&#8358;' . number_format($ppricedis);
-          $totalPrice += $pprice;
-          $total_price = '&#8358;' . number_format($totalPrice, 2);
+        //   $prod_id = $row['prod_id'];
+        //   $imgalt = $row['prod_id'];
+        //   $tag = $row['ptag'];
+        //   $quantity = $row_orders['pqty'];
+        //   $pdes = $row['pdes'];
+        //   $ppricedis = $row['ppricedis'];
+        //   $price = $row['price'];
+        //   $categoryid = $row['category'];
+        //   $original_price = '&#8358;' . number_format($pprice);
+        //   $discounted_price = '&#8358;' . number_format($ppricedis);
+        //   $totalPrice += $pprice;
+        //   $total_price = '&#8358;' . number_format($totalPrice, 2);
 
-          $prodsql_img_thumbnail = mysqli_query($conn, "SELECT * FROM product_images WHERE productid = '$product_id' AND thumbnail = 1");
-          $row_prod_img_thumbnail = mysqli_fetch_assoc($prodsql_img_thumbnail);
-          // $image_path_thumbnail = IMAGE_URL . $row_prod_img_thumbnail['img'];
-        ?>
+        //   $prodsql_img_thumbnail = mysqli_query($conn, "SELECT * FROM product_images WHERE productid = '$product_id' AND thumbnail = 1");
+        //   $row_prod_img_thumbnail = mysqli_fetch_assoc($prodsql_img_thumbnail);
+        //   // $image_path_thumbnail = IMAGE_URL . $row_prod_img_thumbnail['img'];
+        // ?>
 
-          <div class="d-flex justify-between">
-            <div class="d-flex items-center">
-              <div class="size-50 rounded-16 brand-pic-display" style="background-image: url('<?php echo $image_path_thumbnail ?>'); "></div>
-              <div class="ml-10">
-                <div class="lh-11 fw-500 text-dark-1">
-                  <?php
-                  // echo $product_name; 
-                  if (strlen($ptitle) > 20) {
-                    echo substr($producttitle, 0, 20) . '...' . ' (' . $yards . ' yards)';
-                  } else {
-                    echo $producttitle . ' (' . $yards . ' yards)';
-                  }
-                  ?>
-                </div>
-                <div class="text-14 lh-11 mt-5">
-                  <?php echo $price; ?>
-                </div>
-              </div>
-            </div>
-            <!-- <div class="d-flex items-end flex-column pt-8">
-															<div class="text-13 lh-1">35 mins</div>
-															<div class="d-flex justify-center items-center size-20 bg-blue-3 rounded-full mt-8">
-																<span class="text-11 lh-1 text-white fw-500">5</span>
-															</div>
-														</div> -->
-          </div>
+        //   <div class="d-flex justify-between">
+        //     <div class="d-flex items-center">
+        //       <div class="size-50 rounded-16 brand-pic-display" style="background-image: url('<?php echo $image_path_thumbnail ?>'); "></div>
+        //       <div class="ml-10">
+        //         <div class="lh-11 fw-500 text-dark-1">
+        //           <?php
+        //           // echo $product_name; 
+        //           if (strlen($ptitle) > 20) {
+        //             echo substr($producttitle, 0, 20) . '...' . ' (' . $yards . ' yards)';
+        //           } else {
+        //             echo $producttitle . ' (' . $yards . ' yards)';
+        //           }
+        //           ?>
+        //         </div>
+        //         <div class="text-14 lh-11 mt-5">
+        //           <?php echo $price; ?>
+        //         </div>
+        //       </div>
+        //     </div>
+        //     <!-- <div class="d-flex items-end flex-column pt-8">
+				// 											<div class="text-13 lh-1">35 mins</div>
+				// 											<div class="d-flex justify-center items-center size-20 bg-blue-3 rounded-full mt-8">
+				// 												<span class="text-11 lh-1 text-white fw-500">5</span>
+				// 											</div>
+				// 										</div> -->
+        //   </div>
 
-        <?php
-        }
+        // <?php
+        // }
         ?>
 
         <div class="py-25 px-40 border-top-light">
