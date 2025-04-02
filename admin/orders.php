@@ -84,7 +84,7 @@ include_once "ad_comp/adm-sidebar.php"
                   $cus_phone = $row_orders['phone'];
                   $pay_status = $row_orders['status'];
                   $pay_total = $row_orders['total'];
-                  $pay_total = '&#8358;' . number_format($pay_total, 2);
+                  // $pay_total = '&#8358;' . number_format($pay_total, 2);
                   $pay_shipping = $row_orders['shipping'];
                   $cus_country = $row_orders['country'];
                   $cus_state = $row_orders['state'];
@@ -112,7 +112,7 @@ include_once "ad_comp/adm-sidebar.php"
                     <td><?php echo $cus_name ?></td>
                     <td><?php echo $cus_email ?></td>
                     <td><?php echo $pay_status ?></td>
-                    <td><?php echo $pay_total ?></td>
+                    <td class="pric"><?php echo $pay_total ?></td>
                     <td><?php echo date('jS F', $date) ?></td>
                     <!-- <td><?php echo $cus_phone ?></td>
                       <td><?php echo $cus_address ?></td>
