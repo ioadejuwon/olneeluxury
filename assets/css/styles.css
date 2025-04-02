@@ -6161,7 +6161,7 @@ header.header-bg {
 
 .offcanvas-backdrop {
   background-color: var(--backdrop);
-  cursor: url("../images/item/cursor-close.svg"), auto;
+  cursor: url("../img/icon/close.png"), auto;
 }
 .offcanvas-backdrop.show {
   opacity: 1;
@@ -6180,7 +6180,7 @@ header.header-bg {
 }
 
 .modal {
-  cursor: url("../images/item/cursor-close.svg"), auto;
+  cursor: url("../img/icon/close.png"), auto;
 }
 .modal.show .modal-dialog {
   transform: none;

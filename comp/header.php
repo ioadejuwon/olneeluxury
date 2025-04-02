@@ -103,7 +103,7 @@
                       <input type="text" class="col-12 text-18 lh-12 text-dark-1 fw-500" placeholder="What do you want to learn?">
 
                       <button class="d-flex items-center justify-center size-40 rounded-full bg-purple-3" data-el-toggle=".js-search-toggle">
-                        <img src="admin/assets/img/menus/close.svg" alt="icon">
+                        <img src="admin/assets/img/icons/close.png" alt="icon">
                       </button>
                     </div>
 
