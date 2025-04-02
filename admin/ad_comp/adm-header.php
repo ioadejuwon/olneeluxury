@@ -62,7 +62,7 @@
 
                     <div class="relative d-flex items-center ml-10 d-none">
                         <div data-el-toggle=".js-profile-toggle">
-                            <img class="size-50" src="assets/img/icon.png" alt="image">
+                            <img class="size-50 d-none" src="assets/img/icon.png" alt="image">
                         </div>
 
                         <div class="toggle-element js-profile-toggle">
