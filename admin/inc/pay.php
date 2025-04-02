@@ -87,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sendMessage = ''; // Initialize the $sendMessage variable
         // Insert order items
         foreach ($items as $item) {
-            if (!isset($item['product_id']) || !isset($item['name']) || !isset($item['quantity']) || !isset($item['price'])) {
+            if (!isset($item['product_id']) || !isset($item['name']) || !isset($item['yards']) || !isset($item['price'])) {
                 // throw new Exception("Invalid item data: " . print_r($item, true));
                 $response = [
                     'status' => 'error',
@@ -100,17 +100,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $product_id = $item['product_id'];
             $product_name = $item['name'];
             $product_price = (int) $item['price'];
-            $product_quantity = (int) $item['quantity'];
-            $totalProductPrice = $product_price * $product_quantity;
+            $product_yards = (int) $item['yards'];
+            $totalProductPrice = $product_price * $product_yards;
 
             $itemCount++;
-            $price = ($product_quantity > 1) ? $totalProductPrice : $product_price;
+            $price = ($product_yards > 1) ? $totalProductPrice : $product_price;
 
-            $itemMessage = '📦 ' . $product_name . ' - (' . $product_quantity . 'x) - ₦' . number_format($product_price, 2);
+            $itemMessage = '📦 ' . $product_name . ' - (' . $product_yards . 'yards) - ₦' . number_format($product_price, 2);
             $sendMessage .= $itemMessage . "\r\n";
 
 
-            $insert_item = "INSERT INTO olnee_order_items (order_id, product_id, product_name, quantity, price) VALUES (?, ?, ?, ?, ?)";
+            $insert_item = "INSERT INTO olnee_order_items (order_id, product_id, product_name, yards, price) VALUES (?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($insert_item);
             if (!$stmt) {
                 // throw new Exception("Item preparation failed: " . $conn->error);
@@ -121,7 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo json_encode($response);
                 exit;
             }
-            $stmt->bind_param("sssid", $order_id, $product_id, $product_name, $product_quantity, $product_price);
+            $stmt->bind_param("sssid", $order_id, $product_id, $product_name, $product_yards, $product_price);
             $stmt->execute();
             if ($stmt->error) {
                 // throw new Exception("Item execution failed: " . $stmt->error);

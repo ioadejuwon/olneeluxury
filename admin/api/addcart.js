@@ -67,14 +67,14 @@ function addToCart(productId) {
 
     var discountedPrice = productElement.data('discounted-price') || productPrice;
     var selectedSize = productElement.find('input[name="size"]').text();
-    var selectedQuantity = parseInt(productElement.find('input[name="quantity"]').val()) || 1;
+    var selectedYards = parseInt(productElement.find('input[name="yards"]').val()) || 1;
 
     // Check if the item already exists in the cart
     let existingItem = cartItems.find(item => item.product_id === productId);
 
     if (existingItem) {
-        existingItem.quantity += 1; // Increase quantity if item exists
-        showNotification('Product quantity increased.', 'success');
+        existingItem.yards += 1; // Increase Yards if item exists
+        showNotification('Yards increased.', 'success');
         // Remove product if it is already in the cart
         // cartItems.filter(item => item.product_id !== productId);
         // cartItems = cartItems.filter(item => item.product_id !== productId);
@@ -90,7 +90,7 @@ function addToCart(productId) {
             price: productPrice,
             discountedPrice: discountedPrice,
             image: productImage,
-            quantity: selectedQuantity,
+            yards: selectedYards,
             size: selectedSize
         });
         // showNotification(productName + ' added to cart', 'success');
@@ -182,7 +182,7 @@ function displayCartItems() {
         emptyCartMessage.hide();
         emptyCartWrap.show();
         cartItems.forEach(item => {
-            var totalPrice = (item.price * item.quantity).toFixed(2);
+            var totalPrice = (item.price * item.yards).toFixed(2);
             cartContainer.append(`
                 <tr>
                     <td>
@@ -196,15 +196,15 @@ function displayCartItems() {
                     </td>
                     <td class="pt-50 md:pt-20">
                         <div class="input-counter md:mt-20 js-input-counter">
-                            <input class="input-counter__counter" type="number"  name="number" placeholder="" value="${item.quantity}">
+                            <input class="input-counter__counter" type="number"  name="number" placeholder="" value="${item.yards}">
                             <div class="input-counter__controls">
-                                <button class="btn-quantity btndecrease input-counter__up js-down" onclick="updateQuantity('${item.product_id}', -1)">
+                                <button class="btn-quantity btndecrease input-counter__up js-down" onclick="updateYards('${item.product_id}', -1)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus icon">
                                     <line x1="5" y1="12" x2="19" y2="12"></line>
                                     </svg>
                                 </button>
 
-                                <button class="btn-quantity btnincrease input-counter__down js-up" onclick="updateQuantity('${item.product_id}', 1)">
+                                <button class="btn-quantity btnincrease input-counter__down js-up" onclick="updateYards('${item.product_id}', 1)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus icon">
                                     <line x1="12" y1="5" x2="12" y2="19"></line>
                                     <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -247,8 +247,8 @@ function displayCartHeader() {
         emptyCartWrap.show();
         cartItems.forEach(item => {
             // var totalPrice = (item.price * item.quantity).toFixed(2);
-            var itemQuanity = item.quantity;
-            if (itemQuanity > 1) {
+            var itemYards = item.yards;
+            if (itemYards > 1) {
                 statement = ' Pcs';
             } else {
                 statement = ' Pc';
@@ -263,7 +263,7 @@ function displayCartHeader() {
 
                         </div>
                         <div class="col-8 pl-5">
-                            <div class="text-dark-1 lh-15 h4 fw-500 text-line-clamp-1">${item.name} <span class="text-grey  h6">(${item.quantity}x)</span></div>
+                            <div class="text-dark-1 lh-15 h4 fw-500 text-line-clamp-1">${item.name} <span class="text-grey  h6">(${item.yards}x)</span></div>
                             <div class="d-flex items-center mt-">
                                 <div class="text-18 lh-12 fw-500 text-dark-1 price">₦${item.price}</div>
                             </div>
@@ -304,12 +304,12 @@ function displayCheckoutItems() {
         emptyCartMessage.hide();
         checkoutContainer.show();
         cartItems.forEach(item => {
-            var totalPrice = (item.price * item.quantity).toFixed(2);
+            var totalPrice = (item.price * item.yards).toFixed(2);
             checkoutContainer.append(`
                 <li class="checkout-product-item d-none" data-product-id="${item.product_id}">
                     <figure class="img-product">
                         <img src="${item.image}" alt="${item.name}">
-                        <span class="quantity">${item.quantity}</span>
+                        <span class="yards">${item.yards}</span>
                     </figure>
                     <div class="content">
                         <div class="info">
@@ -320,7 +320,7 @@ function displayCheckoutItems() {
                     </div>
                 </li>
                 <div class="d-flex justify-between px-30" data-product-id="${item.product_id}">
-                    <div class="py-15 text-grey "> ${item.name} x ${item.quantity}</div>
+                    <div class="py-15 text-grey "> ${item.name} x ${item.yards}</div>
                     <div class="py-15 text-grey price">${totalPrice}</div>
                 </div>
             `);
@@ -354,7 +354,7 @@ function removeCartItem(productId) {
 
 function updateCartTotal() {
     let cartItems = getCartItems();
-    let subtotal = cartItems.reduce((sum, item) => sum + (parseFloat(item.price) * item.quantity), 0);
+    let subtotal = cartItems.reduce((sum, item) => sum + (parseFloat(item.price) * item.yards), 0);
 
     // Retrieve stored discount from local storage
     let discountData = JSON.parse(localStorage.getItem("cartDiscount")) || { couponType: "none", couponValue: 0 };
@@ -421,12 +421,12 @@ function updateCartTotal() {
 
 
 
-// Update quantity
-function updateQuantity(productId, change) {
+// Update Yards
+function updateYards(productId, change) {
     let cartItems = getCartItems();
     cartItems = cartItems.map(item => {
         if (item.product_id === productId) {
-            item.quantity = Math.max(1, item.quantity + change); // Ensure quantity is at least 1
+            item.yards = Math.max(1, item.yards + change); // Ensure Yards is at least 1
         }
         return item;
     });
@@ -473,7 +473,7 @@ function applyCoupon() {
 // Update checkout total (subtotal + shipping)
 function updateCheckoutTotal() {
     let cartItems = getCartItems();
-    let subtotal = cartItems.reduce((sum, item) => sum + (parseFloat(item.price) * item.quantity), 0);
+    let subtotal = cartItems.reduce((sum, item) => sum + (parseFloat(item.price) * item.yards), 0);
 
     let selectedOption = $('select[name="deliverycost"]').find(':selected');
     let shippingCost = parseFloat(selectedOption.attr('data-cost')) || 0;
