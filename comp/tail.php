@@ -6,7 +6,7 @@
   <script src="admin/assets/js/vendors.js"></script>
   <script src="admin/assets/js/main.js"></script>
   <script src="admin/assets/js/script.js"></script>
-  <script src="admin/api/api.js"></script>
-  <script src="admin/api/cart.js"></script>
+  <script src="admin/api/mainapi.js"></script>
+  <script src="admin/api/maincart.js"></script>
 </body>
 </html>
