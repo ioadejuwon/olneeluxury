@@ -266,6 +266,7 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 9999;
+  min-width: 350px !important;
   max-width: 90%; 
   text-align: center;
   /* Center text */
