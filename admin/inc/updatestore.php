@@ -17,7 +17,7 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 	if (empty($_POST['email']) || empty($_POST['phone']) || empty($_POST['delivery']) || empty($_POST['return'])) {
         $response = [
             'status' => 'error',
-            'message' => 'Please fill all the required inputs with your details'
+            'message' => 'Please fill all the required inputs with your details' 
         ];
         echo json_encode($response);
         exit;

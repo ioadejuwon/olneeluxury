@@ -60,7 +60,7 @@
         Reviews
       </a>
     </div>
-    <div class="sidebar__item">
+    <div class="sidebar__item d-none">
       <a href="<?php echo PROFILE ?>" class="d-flex items-center text-17 lh-1 fw-500 ">
         <i class="text-20 icon-bookmark mr-15"></i>
         Profile

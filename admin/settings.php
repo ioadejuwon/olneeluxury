@@ -23,6 +23,13 @@ $phone = $countryCode . $phoneNumber;
 $phone = (!empty($countryCode) && !empty($phoneNumber)) ? $countryCode . $phoneNumber : 'No info entered';
 $email = $row['email'];
 $email = !empty($row["email"]) ? $row["email"] : "No info entered";
+
+
+$sql_store = mysqli_query($conn, "SELECT * FROM olnee_storedata");
+$row_store = mysqli_fetch_assoc($sql_store);
+// $unique_id = $row["user_id"];
+$delivery = !empty($row_store["deliveryPolicy"]) ? $row_store["deliveryPolicy"] : "No info entered";
+$return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No info entered";
 ?>
 <?php include_once "ad_comp/adm-sidebar.php" ?>
 <div class="dashboard__content bg-light-4">
@@ -42,32 +49,36 @@ $email = !empty($row["email"]) ? $row["email"] : "No info entered";
                             data-tab-target=".-tab-item-0" type="button">
                             Profile
                         </button>
-                        <button class="tabs__button text-light-1 js-tabs-button" data-tab-target=".-tab-item-1"
-                            type="button">
-                            Store information
+                        <button class="tabs__button text-light-1 js-tabs-button"
+                            data-tab-target=".-tab-item-1" type="button">
+                            Edit Profile
                         </button>
                         <button class="tabs__button text-light-1 js-tabs-button" data-tab-target=".-tab-item-2"
                             type="button">
-                            Password
+                            Store information
                         </button>
-                        <button class="tabs__button text-light-1 js-tabs-button d-none" data-tab-target=".-tab-item-3"
+                        <button class="tabs__button text-light-1 js-tabs-button" data-tab-target=".-tab-item-3"
                             type="button">
-                            Social Profiles
+                            Password
                         </button>
                         <button class="tabs__button text-light-1 js-tabs-button d-none" data-tab-target=".-tab-item-4"
                             type="button">
+                            Social Profiles
+                        </button>
+                        <button class="tabs__button text-light-1 js-tabs-button d-none" data-tab-target=".-tab-item-5"
+                            type="button">
                             Notifications
                         </button>
-                        <button class="tabs__button text-light-1 js-tabs-button" data-tab-target=".-tab-item-5"
+                        <button class="tabs__button text-light-1 js-tabs-button" data-tab-target=".-tab-item-6"
                             type="button">
                             Close Account
                         </button>
                     </div>
                     <div class="tabs__content py-30 px-30 js-tabs-content">
-                        <div class="tabs__pane -tab-item-0 ">
+                        <div class="tabs__pane -tab-item-0 is-active">
                             <div class="row y-gap-20 x-gap-20 items-center">
                                 <div class="col-auto">
-                                    <img class="size-100" src="assets/img/dashboard/edit/1.png" alt="image">
+                                    <img class="size-100" src="assets/img/fav.png" alt="image">
                                 </div>
                                 <div class="col-auto">
                                     <div class="text-20 fw-500 text-dark-1"><?php echo $fname . " " . $lname ?></div>
@@ -112,7 +123,8 @@ $email = !empty($row["email"]) ? $row["email"] : "No info entered";
                                 </div>
                             </div>
                         </div>
-                        <div class="tabs__pane -tab-item-1 is-active">
+                        
+                        <div class="tabs__pane -tab-item-1">
                             <div class="row y-gap-20 x-gap-20 items-center d-none">
                                 <div class="col-auto">
                                     <img class="size-100" src="assets/img/dashboard/edit/1.png" alt="image">
@@ -136,24 +148,59 @@ $email = !empty($row["email"]) ? $row["email"] : "No info entered";
                                     </div>
                                 </div>
                             </div>
-                            <div >
-                                <form action="" method="POST" id="store-update" class="contact-form row">
-
+                            <div class="border-top-light">
+                                <form action="#" class="contact-form row">
                                     <div class="col-md-6">
-                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Contact Email Address</label>
-                                        <input type="email"  name="email" value="<?php echo $email; ?>" placeholder="Email Address">
+                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">First Name</label>
+                                        <input type="text" value="<?php echo $fname; ?>" placeholder="First Name">
                                     </div>
+                                    <div class="col-md-6">
+                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Last Name</label>
+                                        <input type="text" value="<?php echo $lname; ?>" placeholder="Last Name">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Phone</label>
+                                        <input type="text" value="<?php echo $phone; ?>" placeholder="Phone">
+                                    </div>
+                                   
+                                    <div class="col-12">
+                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">About Yourself</label>
+                                        <textarea placeholder="Text..." value="<?php echo $about; ?>"
+                                            rows="7"></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="button -md -deep-green-1 text-white">Update Profile</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="tabs__pane -tab-item-2">
+                            
+                            <div >
+                                <form action="" method="POST" id="store-update" class="contact-form row y-gap-10">
                                     <div class="col-md-6">
                                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Contact Phone</label>
                                         <input type="text"  name="phone" value="<?php echo $phone; ?>" placeholder="Phone">
                                     </div>
-                                    <div class="col-12">
-                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Delivery Policy</label>
-                                        <textarea placeholder="Text..." name="delivery" value="<?php echo $delivery; ?>" rows="7"></textarea>
+                                    <div class="col-md-6">
+                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Address</label>
+                                        <input type="text" value="<?php echo $address; ?>" placeholder="Address">
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-md-6">
+                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">State</label>
+                                        <input type="text" value="<?php echo $state; ?>" placeholder="State">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Country</label>
+                                        <input type="text" value="<?php echo $country; ?>" placeholder="Country">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Delivery Policy</label>
+                                        <textarea placeholder="Text..." name="delivery" value="" rows="7"><?php echo $delivery; ?></textarea>
+                                    </div>
+                                    <div class="col-md-6">
                                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Return Policy</label>
-                                        <textarea placeholder="Text..." name="return" value="<?php echo $return; ?>" rows="7"></textarea>
+                                        <textarea placeholder="Text..." name="return" value="" rows="7"><?php echo $return; ?></textarea>
                                     </div>
 
                                     <div class="col-12">
@@ -162,7 +209,7 @@ $email = !empty($row["email"]) ? $row["email"] : "No info entered";
                                 </form>
                             </div>
                         </div>
-                        <div class="tabs__pane -tab-item-2">
+                        <div class="tabs__pane -tab-item-3">
                             <form action="#" class="contact-form row y-gap-30">
                                 <div class="col-md-7">
                                     <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Current password</label>
@@ -177,11 +224,11 @@ $email = !empty($row["email"]) ? $row["email"] : "No info entered";
                                     <input type="text" placeholder="Confirm New Password">
                                 </div>
                                 <div class="col-12">
-                                    <button class="button -md -terabyte-1 text-white">Save Password</button>
+                                    <button class="button -md -deep-green-1 text-white">Save Password</button>
                                 </div>
                             </form>
                         </div>
-                        <div class="tabs__pane -tab-item-3">
+                        <div class="tabs__pane -tab-item-4">
                             <form action="#" class="contact-form row y-gap-30">
                                 <div class="col-md-6">
                                     <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Twitter</label>
@@ -204,7 +251,7 @@ $email = !empty($row["email"]) ? $row["email"] : "No info entered";
                                 </div>
                             </form>
                         </div>
-                        <div class="tabs__pane -tab-item-4">
+                        <div class="tabs__pane -tab-item-5">
                             <form action="#" class="contact-form">
                                 <div class="row">
                                     <div class="col-12">
@@ -358,7 +405,7 @@ $email = !empty($row["email"]) ? $row["email"] : "No info entered";
                                 </div>
                             </form>
                         </div>
-                        <div class="tabs__pane -tab-item-5">
+                        <div class="tabs__pane -tab-item-6">
                             <form action="#" class="contact-form row y-gap-30">
                                 <div class="col-12">
                                     <div class="text-16 fw-500 text-dark-1">Close account</div>

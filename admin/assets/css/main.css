@@ -87,6 +87,7 @@
 :root {
   --color-white: #FFFFFF;
   --color-black: #000000;
+  --color-dark: #000000;
   --color-dark-1: #21565e;
   --color-dark-2: #21565e;
   --color-dark-3: #16383b;
@@ -1211,7 +1212,8 @@ body {
   width: 100%;
   max-width: 100%;
   background-color: white;
-  color: var(--color-light-1);
+  /* color: var(--color-deep-green-1); */
+  color: var(--color-dark);
   font-size: 15px;
   line-height: 1.7;
 }

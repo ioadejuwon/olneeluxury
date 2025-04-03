@@ -11,7 +11,7 @@ $(document).ready(function() {
         var formData = $(this).serialize();
         // Send AJAX request
         $.ajax({
-            url: '../inc/updatestore.php', // Replace with your server-side processing URL
+            url: 'inc/updatestore.php', // Replace with your server-side processing URL
             type: 'POST',
             data: formData,
             success: function(response) {
