@@ -183,7 +183,7 @@ include_once "ad_comp/adm-sidebar.php"
                 <div class="col-6">
                   <p class="text-14 lh-13 mt-5 uppercase mb-0">Discount</p>
                   <div class="text-16 fw-500 text-dark-1 price">
-                    <?php echo '-' . $discount; ?>
+                    <?php echo $discount; ?>
                   </div>
                 </div>
                 <div class="col-6">
@@ -320,7 +320,7 @@ include_once "ad_comp/adm-sidebar.php"
               </div>
               <div class="d-flex justify-between border-top-dark px-10">
                 <div class="py-1 fw-500">Discount</div>
-                <div class="py-1 fw-600 text-dark-1 price">-<?php echo $discount ?></div>
+                <div class="py-1 fw-600 text-dark-1 price"><?php echo $discount ?></div>
               </div>
               <div class="d-flex justify-between border-top-dark px-10">
                 <div class="py-1 fw-500 text-dark-1">Shipping</div>
@@ -331,7 +331,6 @@ include_once "ad_comp/adm-sidebar.php"
                 <div class="py-1 fw-600 text-dark-1 price"><?php echo $total ?></div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
