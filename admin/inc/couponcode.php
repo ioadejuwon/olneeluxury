@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }elseif (empty($couponcode) || preg_match('/[^a-zA-Z0-9-]/ ', $couponcode)) {
             $response['status'] = 'error';
             $response['message'] = 'Coupon Code - One or more characters is not allowed!';
-        }elseif (empty($couponname) || preg_match('/[^a-zA-Z0-9 -]/ ', $couponname)) {
+        }elseif (empty($couponname) || preg_match('/[^a-zA-Z0-9 -%]/ ', $couponname)) {
             $response['status'] = 'error';
             $response['message'] = 'Coupon Name - One or more characters is not allowed!';
         } else {
