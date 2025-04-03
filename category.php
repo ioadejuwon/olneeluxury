@@ -5,7 +5,7 @@ include_once "admin/inc/drc.php";
 
 $category_id = $_GET['id'];
 
-$categoryquery = "SELECT * FROM olnee_categories WHERE categoryid = ?";
+$categoryquery = "SELECT categoryName FROM olnee_categories WHERE categoryid = ?";
 $stmt = mysqli_prepare($conn, $categoryquery);
 mysqli_stmt_bind_param($stmt, "s", $category_id); // Bind the parameter
 mysqli_stmt_execute($stmt); // Execute the prepared statement
@@ -17,7 +17,7 @@ if ($count_row_category < 1) {
 }
 
 $row_categories = mysqli_fetch_assoc($result);
-$categoryname = $row_categories["categoryname"];
+$categoryname = $row_categories["categoryName"];
 include_once "comp/head.php";
 include_once "comp/header.php";
 
@@ -205,31 +205,63 @@ include_once "comp/header.php";
 
                 <div class="row y-gap-30 pt-">
                     <?php
-                    $prodsql = mysqli_query($conn, "SELECT * FROM products");
-                    while ($row_prod = mysqli_fetch_assoc($prodsql)) {
-                        $product_name = $row_prod['producttitle']; // Assuming the column name for the product name is 'product_name'
-                        $price = $row_prod['price']; // Assuming the column name for the original price is 'original_price'
-                        $dis_price = $row_prod['discount_price']; // Assuming the column name for the discounted price is 'discounted_price'
-                        $original_price = '&#8358;' . number_format($price);
-                        $discounted_price = '&#8358;' . number_format($dis_price);
-                        $product_id = $row_prod['productid'];
+                    // echo $category_id;
+                    $prodsql = mysqli_query($conn, "SELECT * FROM products WHERE productcategory = '$category_id'");
+                    $count_row_products = mysqli_num_rows($prodsql);
+                    if ($count_row_products > 0) {
+                        while ($row_prod = mysqli_fetch_assoc($prodsql)) {
+                            $product_name = $row_prod['producttitle']; // Assuming the column name for the product name is 'product_name'
+                            $price = $row_prod['price']; // Assuming the column name for the original price is 'original_price'
+                            $dis_price = $row_prod['discount_price']; // Assuming the column name for the discounted price is 'discounted_price'
+                            $original_price = '&#8358;' . number_format($price);
+                            $discounted_price = '&#8358;' . number_format($dis_price);
+                            $product_id = $row_prod['productid'];
 
-                        // Get the thumbnail image
-                        $prodsql_img_thumbnail = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '$product_id' AND thumbnail = 1");
-                        $row_prod_img_thumbnail = mysqli_fetch_assoc($prodsql_img_thumbnail);
-                        $image_path_thumbnail = 'admin/'.$row_prod_img_thumbnail['image_path'];
-                        $product_img = $image_path_thumbnail;
+                            // Get the thumbnail image
+                            $prodsql_img_thumbnail = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '$product_id' AND thumbnail = 1");
+                            $row_prod_img_thumbnail = mysqli_fetch_assoc($prodsql_img_thumbnail);
+                            $image_path_thumbnail = 'admin/' . $row_prod_img_thumbnail['image_path'];
+                            $product_img = $image_path_thumbnail;
 
-                        // Get the non-thumbnail images
-                        $prodsql_img = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '$product_id' AND thumbnail = 0");
-                        $other_images = [];
-                        while ($row_prod_img = mysqli_fetch_assoc($prodsql_img)) {
-                            $other_images[] = 'admin/'.$row_prod_img['image_path'];
-                            // $other_images[] += $row_prod_img['image_path'];
+                            // Get the non-thumbnail images
+                            $prodsql_img = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '$product_id' AND thumbnail = 0");
+                            $other_images = [];
+                            while ($row_prod_img = mysqli_fetch_assoc($prodsql_img)) {
+                                $other_images[] = 'admin/' . $row_prod_img['image_path'];
+                                // $other_images[] += $row_prod_img['image_path'];
+                            }
+
+
+                            include 'comp/products.php';
                         }
-
-
-                        include 'comp/products.php';
+                    } else {
+                        
+                    ?>
+                        <section class="layout-pt-lg layout-pb-lg section-bg mt-30" >
+                            <div class="section-bg__item bg-light-6"></div>
+                            <div class="container">
+                                <div class="row y-gap-20 justify-center text-center">
+                                    <div class="col-auto">
+                                        <div class="sectionTitle ">
+                                            <h2 class="sectionTitle__title ">No Products in this Category</h2>
+                                            <p class="sectionTitle__text h4 pt-15">
+                                                There are no products in this category yet!
+                                                <br>
+                                                Please check the other products we have in store.
+                                            </p>
+                                        </div>
+                                        <div class="row justify-center pt-60 lg:pt-40">
+                                            <div class="col-auto">
+                                                <a href="<?php echo SHOP ?>" class="button -icon  -deep-green-1 text-white">
+                                                    Return to Catalog <i class="icon-arrow-top-right text-13 ml-10"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    <?php
                     }
                     ?>
                 </div>
