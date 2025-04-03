@@ -61,7 +61,7 @@ include_once "ad_comp/adm-sidebar.php"
                 
                 <th>Order ID</th>
                 <th>Customer Name</th>
-                <th>Customer Email</th>
+                <!-- <th>Customer Email</th> -->
                 <th>Payment Status</th>
                 <th>Payment Total</th>
                 <th>Order Date</th>
@@ -110,7 +110,7 @@ include_once "ad_comp/adm-sidebar.php"
                     
                     <td class="underline"><a href="<?php echo ORDER_DETAILS . $orders_id ?>"><?php echo $orders_id ?></a></td>
                     <td><?php echo $cus_name ?></td>
-                    <td><?php echo $cus_email ?></td>
+                    <!-- <td><?php echo $cus_email ?></td> -->
                     <td><?php echo $pay_status ?></td>
                     <td class="price"><?php echo $pay_total ?></td>
                     <td><?php echo date('jS F', $date) ?></td>
