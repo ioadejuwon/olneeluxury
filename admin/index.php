@@ -20,15 +20,18 @@ $products_sql = mysqli_query($conn, "SELECT * FROM products ");
 $count_row_product = mysqli_num_rows($products_sql);
 $categories_sql = mysqli_query($conn, "SELECT * FROM olnee_categories");
 $count_row_categories = mysqli_num_rows($categories_sql);
-$total_amount = 0;
+
 $orders_sql = mysqli_query($conn, "SELECT * FROM olnee_orders");
 $count_row_orders = mysqli_num_rows($orders_sql);
-while ($row_orders = mysqli_fetch_assoc($orders_sql)) {
+
+$total_amount = 0;
+$orders_sql_success = mysqli_query($conn, "SELECT * FROM olnee_orders WHERE status = 'Successful'");
+while ($row_orders = mysqli_fetch_assoc($orders_sql_success)) {
   $order_amount = $row_orders['total'];
   // Add the value to the total amount
   $total_amount += $order_amount;
 }
-$total_amount = '&#8358;' . number_format($total_amount, 2);
+// $total_amount = '&#8358;' . number_format($total_amount, 2);
 ?>
 <?php include_once "ad_comp/adm-sidebar.php" ?>
 <div class="dashboard__content bg-light-4">
@@ -51,16 +54,11 @@ $total_amount = '&#8358;' . number_format($total_amount, 2);
     <div class="col-6 col-xl-3">
       <div class="d-flex justify-between items-center py-35 px-35 lg:py-20 lg:px-20 rounded-8 bg-white -dark-bg-dark-1 shadow-4">
         <div>
-          <!-- <div class="text-24 lh-1 fw-700 text-dark-1">$10,800</div> -->
-          <div class="text-24 lh-1 fw-700 text-dark-1"><?php echo $total_amount; ?></div>
-          <div class="lh-1 fw-500 mt-10">
-            <!-- Total Sales -->
+          <div class="text-24 lh-1 fw-700 text-dark-1 price"><?php echo $total_amount; ?></div>
+          <div class="lh-1 mt-10 ">
             <span class="lg:d-none">Total </span>Sales
           </div>
-          <!-- <div class="lh-1 mt-25"><span class="text-deep-green-1">$50</span> New Sales</div> -->
         </div>
-        <!-- <i class="text-40 fa fa-box text-deep-green-1"></i> -->
-        <!-- <span class="material-symbols-outlined text-30 text-deep-green-1">account_balance_wallet</span> -->
         <img src="assets/img/icons/wallet.png" alt="" width="20%">
       </div>
     </div>
@@ -68,29 +66,20 @@ $total_amount = '&#8358;' . number_format($total_amount, 2);
       <div class="d-flex justify-between items-center py-35 px-35 lg:py-20 lg:px-20 rounded-8 bg-white -dark-bg-dark-1 shadow-4">
         <div>
           <div class="text-24 lh-1 fw-700 text-dark-1"><?php echo $count_row_product ?></div>
-          <div class="lh-1 fw-500 mt-10">
-            <!-- Total  -->
+          <div class="lh-1 mt-10 ">
             <span class="lg:d-none">Total </span>Products
           </div>
-          <!-- <div class="lh-1 mt-25"><span class="text-deep-green-1">40+</span> New Courses</div> -->
         </div>
-        <!-- <i class="text-40 fa fa-box text-deep-green-1"></i> -->
-        <!-- <span class="material-symbols-outlined text-30 text-deep-green-1">inventory_2</span> -->
-        <!-- <span class=" text-30 text-deep-green-1"> -->
         <img src="assets/img/icons/inventory.png" alt="" width="20%">
-        <!-- </span> -->
-
       </div>
     </div>
     <div class="col-6 col-xl-3">
       <div class="d-flex justify-between items-center py-35 px-35 lg:py-20 lg:px-20 rounded-8 bg-white -dark-bg-dark-1 shadow-4">
         <div>
           <div class="text-24 lh-1 fw-700 text-dark-1"><?php echo $count_row_orders ?></div>
-          <div class="lh-1 fw-500 mt-10">
-            <!-- Total Orders -->
+          <div class="lh-1 mt-10 ">
             <span class="lg:d-none">Total </span>Orders
           </div>
-          <!-- <div class="lh-1 mt-25"><span class="text-deep-green-1">90+</span> New Students</div> -->
         </div>
         <img src="assets/img/icons/orders.png" alt="" width="20%">
       </div>
@@ -100,9 +89,7 @@ $total_amount = '&#8358;' . number_format($total_amount, 2);
       <div class="d-flex justify-between items-center py-35 px-35 lg:py-20 lg:px-20 rounded-8 bg-white -dark-bg-dark-1 shadow-4">
         <div>
           <div class="text-24 lh-1 fw-700 text-dark-1"><?php echo $count_row_categories ?></div>
-          <!-- <div class="lh-1 mt-25"><span class="text-deep-green-1">290+</span> Instructors</div> -->
-          <div class="lh-1 fw-500 mt-10">
-            <!-- Total Categories -->
+          <div class="lh-1 mt-10 ">
             <span class="lg:d-none">Total </span>Categories
           </div>
         </div>
@@ -114,7 +101,7 @@ $total_amount = '&#8358;' . number_format($total_amount, 2);
     <div class="col-xl-12 col-md-12">
       <div class="rounded-8 bg-white -dark-bg-dark-1 shadow-4 h-100">
         <div class="d-flex justify-between items-center py-20 px-30 border-bottom-light">
-          <h2 class="text-17 lh-1 fw-500">Orders</h2>
+          <h2 class="text-24 lh-1 fw-600">Orders</h2>
           <div class="">
             <div class="dropdown js-dropdown js-category-active">
               <div class="dropdown__button d-flex items-center text-14 bg-white -dark-bg-dark-1 border-light rounded-8 px-20 py-10 text-14 lh-12" data-el-toggle=".js-category-toggle" data-el-toggle-active=".js-category-active">
