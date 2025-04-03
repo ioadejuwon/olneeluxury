@@ -85,15 +85,14 @@ include_once "ad_comp/adm-sidebar.php"
                             </label>
                             <textarea placeholder="Write a longer description about the product." rows="7" name="productdescription" value="<?php echo $productdescription ?>" required></textarea>
                         </div>
-                        <div class="row y-gap-20 justify-between pt-15">
-                            <div id="error-message" class="col-12 text-red-1"></div>
+                        <div class="row y-gap-20 justify-between">
                             <div class="col-auto">
-                                <a href="<?php echo PRODUCTS ?>" class="button -md -outline-deep-green-1 text-deep-green-1">
+                                <a href="<?php echo PRODUCTS ?>" class="button -icon -outline-deep-green-1 text-deep-green-1">
                                     <i class="text-20 fa-solid fa-angle-left"></i> &nbsp; Prev
                                 </a>
                             </div>
                             <div class="col-auto">
-                                <button class="button -md -deep-green-1 text-white" type="submit" id="productFormSubmit">
+                                <button class="button -icon -deep-green-1 text-white" type="submit" id="productFormSubmit">
                                     Next &nbsp; <i class="text-20 fa-solid fa-angle-right"></i>
                                 </button>
                             </div>
