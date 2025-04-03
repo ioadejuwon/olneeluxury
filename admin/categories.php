@@ -165,14 +165,14 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories ORDER BY creat
         </button>
       </div>
       <div class="modal-body pt-0">
-        <form class="contact-form row y-gap-30" id="categoryForm" method="POST">
+        <form class="contact-form row y-gap-10" id="categoryForm" method="POST">
           <h4 class="text-16 lh-1 fw-500 text-dark-1">Category Name <span class="text-error-1">*</span> </h4>
           <!-- <div id="error-message"></div> -->
-          <div class="col-12" id="error-message">
+          <div class="col-12" id="">
             <input type="text" name="categoryname" id="category" placeholder="Enter the name of the category" required>
           </div>
 
-          <div class="d-flex w-100  border-top-dark">
+          <div class="d-flex w-100  border-top-dark mt-5">
             <!-- <button type="button" class="button -md -deep-green-1 flex-fill" data-dismiss="modal">Close</button> -->
             <!-- <button type="button" class="button -md -deep-green-1 flex-fill">Save changes</button> -->
             <button class="button -md -deep-green-1 text-white flex-fill" type="submit" id="submit">
@@ -188,7 +188,7 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories ORDER BY creat
 </div>
 
 
-<script src="api/category.js"></script>
+<script src="api/category2.js"></script>
 <?php
 include_once "ad_comp/adm-footer.php";
 include_once "ad_comp/adm-tail.php";

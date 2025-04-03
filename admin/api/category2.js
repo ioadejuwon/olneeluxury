@@ -10,7 +10,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: 'POST',
-            url: '../inc/category.php', // The URL to the PHP script that handles the form submission
+            url: 'inc/category.php', // The URL to the PHP script that handles the form submission
             data: {
                 categoryname: categoryName
             },
@@ -18,7 +18,7 @@ $(document).ready(function () {
             success: function (response) {
                 // $('#error-message').html(response.message);
                 showNotification(response.message);
-                showNotification(response.category_id);
+                // showNotification(response.category_id);
 
                 if (response.status === 'success') {
                     // Append new category to the table only if the category was created successfully
@@ -81,13 +81,6 @@ $(document).ready(function () {
                         document.getElementById("categoryForm").reset(); // Resets the entire form, including the input field
                         $('#modal-categories').modal('hide');
                     }, 3000); // 3000 milliseconds = 3 seconds
-                } else {
-                    // setTimeout(function() {
-                    //     $('#error-message').html('');
-                    // }, 3000); // 3000 milliseconds = 3 seconds
-                    setTimeout(function () {
-                        $('#error-message').html('<input type="text" name="categoryname" id="category" placeholder="Enter the name of the category" required>');
-                    }, 3000); // 3000 milliseconds = 3 seconds
                 }
             },
             error: function (xhr, status, error) {
@@ -106,7 +99,7 @@ $(document).ready(function () {
         const categoryId = $(this).data('categoryid');
         const categoryElement = $('#category-' + categoryId);
         $.ajax({
-            url: '../inc/deletecategory.php',
+            url: 'inc/deletecategory.php',
             type: 'POST',
             data: { category_id: categoryId },
             dataType: 'json',

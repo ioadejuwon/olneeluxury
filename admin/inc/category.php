@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['categoryname'])) {
         $sql = "INSERT INTO olnee_categories (categoryid, categoryName) VALUES ('$category_id', '$category_name')";
 
         if ($conn->query($sql) === TRUE) {
-            echo json_encode(['status' => 'success', 'category_id' => $category_id, 'message' => 'Category created successfully!']);
+            echo json_encode(['status' => 'success', 'message' => 'Category created successfully!']);
         } else {
             echo json_encode(['status' => 'error', 'message' => 'Error: ' . $conn->error]);
         }

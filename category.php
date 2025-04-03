@@ -1,5 +1,22 @@
 <?php
 $pagetitle = "Collection";
+require_once "admin/inc/config.php";
+include_once "admin/inc/drc.php";
+
+$category_id = $_GET['id'];
+
+$categoryquery = "SELECT * FROM olnee_categories WHERE categoryid = ?";
+$stmt = mysqli_prepare($conn, $categoryquery);
+mysqli_stmt_bind_param($stmt, "s", $category_id); // Bind the parameter
+mysqli_stmt_execute($stmt); // Execute the prepared statement
+$result = mysqli_stmt_get_result($stmt); // Get the result
+$count_row_category = $result->num_rows;
+
+if ($count_row_category < 1) {
+    header("location: " . COLLECTION);
+}
+
+
 include_once "comp/head.php";
 include_once "comp/header.php";
 
@@ -17,7 +34,7 @@ include_once "comp/header.php";
             <div class="row justify-cente text-left">
                 <div class="col-auto pt-30 pb-30">
                     <div data-anim="slide-up delay-1">
-                        <h1 class="page-header__title text-white">Our Collection</h1>
+                        <h1 class="page-header__title text-white">Our Catalog</h1>
                     </div>
 
                     <div data-anim="slide-up delay-2">
@@ -33,7 +50,7 @@ include_once "comp/header.php";
 </section>
 
 
-<section class="layout-pt-md layout-pb-lg d-none">
+<section class="layout-pt-md layout-pb-lg">
     <div class="container">
         <div class="row x-gap-60 ">
             <div class="col-lg-3 display-none">
@@ -146,7 +163,7 @@ include_once "comp/header.php";
             </div>
 
             <div class="col-lg-12" data-anim="slide-up delay-3">
-                <div class="row c justify-between items-center">
+                <div class="row c justify-between items-center d-none">
                     <div class="col-auto d-non">
                         <div class="text-14">
                             Showing <span class="fw-500 text-dark-1">250</span> total results
@@ -185,7 +202,7 @@ include_once "comp/header.php";
                     </div>
                 </div>
 
-                <div class="row y-gap-30 pt-30">
+                <div class="row y-gap-30 pt-">
                     <?php
                     $prodsql = mysqli_query($conn, "SELECT * FROM products");
                     while ($row_prod = mysqli_fetch_assoc($prodsql)) {
@@ -199,14 +216,14 @@ include_once "comp/header.php";
                         // Get the thumbnail image
                         $prodsql_img_thumbnail = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '$product_id' AND thumbnail = 1");
                         $row_prod_img_thumbnail = mysqli_fetch_assoc($prodsql_img_thumbnail);
-                        $image_path_thumbnail = $row_prod_img_thumbnail['image_path'];
+                        $image_path_thumbnail = 'admin/'.$row_prod_img_thumbnail['image_path'];
                         $product_img = $image_path_thumbnail;
 
                         // Get the non-thumbnail images
                         $prodsql_img = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '$product_id' AND thumbnail = 0");
                         $other_images = [];
                         while ($row_prod_img = mysqli_fetch_assoc($prodsql_img)) {
-                            $other_images[] = $row_prod_img['image_path'];
+                            $other_images[] = 'admin/'.$row_prod_img['image_path'];
                             // $other_images[] += $row_prod_img['image_path'];
                         }
 
@@ -243,41 +260,6 @@ include_once "comp/header.php";
     </div>
 </section>
 
-
-<section class="layout-pt-md layout-pb-lg border-top-light">
-    <div data-anim-wrap class="container">
-
-        <div class=" js-section-slider" data-gap="30" data-pagination data-slider-cols="xl-3 lg-3 md-2">
-            <div class="swiper-wraper row y-gap-30">
-
-                <?php
-                $categories = mysqli_query($conn, "SELECT * FROM olnee_categories");
-                while ($row_categories = mysqli_fetch_assoc($categories)) {
-                    $categoryname = $row_categories['categoryName'];
-                    $category_id = $row_categories["categoryid"];
-                ?>
-
-                <div class="swiper-slid col-lg-3">
-                    <div class=" bg-light-1 rounded-8 with-image-bg " style="background-image: url('admin/assets/img/landing.jpg');">
-                        <div class="eventCard -type-3 rounded-8">
-                            <div class="eventCard__date">
-                                <h3 class="text-30 lh-12 fw-600 ml-15 text-white capitalise"><?php echo $categoryname ?></h3>
-                            </div>
-                            <div class="eventCard__button">
-                                <a href="<?php echo CATEGORY.$category_id ?>" class="button -icon -white text-deep-green-1">
-                                    View Collection
-                                    <i class="icon-arrow-top-right text-13 ml-10"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <?php } ?>
-                
-            </div>
-        </div>
-    </div>
-</section>
 
 
 <?php
