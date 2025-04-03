@@ -138,7 +138,7 @@ $fname = $row['fname'];
                             <a data-toggle="modal" data-target="<?php echo '#share-' . $product_id ?>" class="productCard__icon">
                               <i class="fa-regular fa-send"></i>
                             </a>
-                            <a data-barba href="<?php echo $image_path_thumbnail; ?>" class="gallery__item js-gallery productCard__icon" data-gallery="<?php echo $product_id ?>">
+                            <a data-barba href="<?php echo $image_path_thumbnail; ?>" class="d-none gallery__item js-gallery productCard__icon" data-gallery="<?php echo $product_id ?>">
                               <i class="fa-regular fa-eye"></i>
                             </a>
                             <a href="<?php echo EDIT_PRODUCT . '?productid=' . $product_id ?>" class=" productCard__icon">

@@ -10,7 +10,8 @@
         <div class="header-left d-flex items-center">
           <div class="header__logo pr-30 xl:pr-20 md:pr-0">
             <a data-barba="" href="<?php echo HOME ?>">
-              <img src="admin/assets/img/logo.png" alt="logo" width="50px">
+              <!-- <img src="admin/assets/img/logo.png" alt="logo" width="50px"> -->
+               <h2>Olnee Luxury</h2>
             </a>
           </div>
         </div>
@@ -49,7 +50,7 @@
 
               <div class="lh-2 mt-10">
                 <div>Ajebamidele,<br> Ibadan Rd, Osun State.</div>
-                <div>hello@buildwithbob.shop</div>
+                <div>hello@olneeluxury.com</div>
               </div>
 
               <div class="mobile-socials mt-10">

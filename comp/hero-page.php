@@ -29,13 +29,17 @@
           <div data-anim-child="slide-up delay-2" class="text-17 lh-15 text-white fw-500 mb-10 subtxt">
             AUTHENTIC || LUXURIOUS || AFFORDABLE
           </div>
-          <h1 data-anim-child="slide-up delay-3" class="mainSlider__title text-white">
+          <h1 data-anim-child="slide-up delay-3" class="d-none mainSlider__title text-white">
             Experience the Perfect Blend of Style and Comfort with our
             <span class="text-white underline">Premium Men’s Fabric</span>
           </h1>
 
+          <h1 data-anim-child="slide-up delay-3" class="masthead__title text-white" style="font-size: 4em;">
+            Style Meets Comfort
+          </h1>
+
           <p data-anim-child="slide-up delay-4" class="mainSlider__text text-white">
-            SENATOR MATERIAL | MEN’S FABRIC STORE IN LAGOS
+          Experience the Perfect Blend of Style and Comfort with our Premium Men’s Fabric
           </p>
           <div data-anim-child="slide-up delay-4" class="row justify-center items-center x-gap-20 y-gap-20 pt-20">
             <div class="col-auto cta">

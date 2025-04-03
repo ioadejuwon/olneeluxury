@@ -149,8 +149,9 @@
                 <div class="col-auto">
                     <div class="footer-header__logo">
 
-                        <img src="admin/assets/img/logo.png" alt="logo" width="70px">
+                        <!-- <img src="admin/assets/img/logo.png" alt="logo" width="70px"> -->
                         <!-- <img src="admin/assets/img/logo.png" alt="logo"> -->
+                        <h2>Olnee Luxury</h2>
                     </div>
                 </div>
                 <div class="col-auto">

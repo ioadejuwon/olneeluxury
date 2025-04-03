@@ -58,7 +58,7 @@ include_once "admin/inc/drc.php";
     <link rel="stylesheet" href="admin/assets/css/vendors.css">
     <link rel="stylesheet" href="admin/assets/css/main.css">
     <link rel="stylesheet" href="admin/assets/css/styles.css">
-    <!-- <link rel="stylesheet" href="admin/assets/css/bootstrap.css"> -->
+    <link rel="stylesheet" href="admin/assets/css/bootstrap.css">
 
     <!-- Page loading scripts-->
     <script src="admin/assets/js/page-loader.js"></script>

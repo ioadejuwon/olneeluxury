@@ -1,11 +1,10 @@
 <?php
 
-// include_once "inc/config.php";
-// include_once "inc/drc.php";
+include_once "admin/inc/config.php";
+include_once "admin/inc/drc.php";
 $product_id = $_GET['item'];
-$pagetitle = $product_name . " - ";
-include_once "comp/head.php";
-include_once "comp/header.php";
+
+
 
 
 $product_details = mysqli_query($conn, "SELECT * FROM products WHERE productid = '$product_id'");
@@ -23,6 +22,11 @@ $short_des = $row_prod['shortdescription'];
 $product_cat_id = $row_prod['productcategory'];
 
 $price = $row_prod['price'];
+
+$pagetitle = $product_name;
+
+include_once "comp/head.php";
+include_once "comp/header.php";
 // $dis_price = $row_prod['discount_price'];
 
 // $original_price = '&#8358;' . number_format($price);
@@ -131,7 +135,7 @@ while ($row_prod_img = mysqli_fetch_assoc($prodsql_img)) {
           <div class="shopSingle-info__action row x-gap-20 y-gap-20 pt-30">
             <div class="col-auto">
               <div class="input-counter js-input-counter">
-                <input class='input-counter__counter' name="quantity" type="number" placeholder="value..." value='1' />
+                <input class='input-counter__counter' name="yards" type="number" placeholder="value..." value='1' />
 
                 <div class="input-counter__controls">
                   <button class='input-counter__up js-down'>
@@ -179,7 +183,7 @@ while ($row_prod_img = mysqli_fetch_assoc($prodsql_img)) {
           <button class="tabs__button js-tabs-button is-active" data-tab-target=".-tab-item-1" type="button">
             Description
           </button>
-          <button class="tabs__button js-tabs-button ml-30" data-tab-target=".-tab-item-2" type="button">
+          <button class="tabs__button js-tabs-button ml-30 d-none" data-tab-target=".-tab-item-2" type="button">
             Reviews (2)
           </button>
         </div>

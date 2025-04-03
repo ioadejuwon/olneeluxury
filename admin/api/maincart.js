@@ -73,7 +73,7 @@ function addToCart(productId) {
     let existingItem = cartItems.find(item => item.product_id === productId);
 
     if (existingItem) {
-        existingItem.yards += 1; // Increase Yards if item exists
+        existingItem.yards += selectedYards; // Increase Yards if item exists
         showNotification('Yards increased.', 'success');
         // Remove product if it is already in the cart
         // cartItems.filter(item => item.product_id !== productId);
