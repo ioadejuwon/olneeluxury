@@ -257,7 +257,7 @@ include_once "comp/header.php";
                     $category_id = $row_categories["categoryid"];
                 ?>
 
-                <div class="swiper-slid col-lg-2">
+                <div class="swiper-slid col-lg-3">
                     <div class=" bg-light-1 rounded-8 with-image-bg " style="background-image: url('admin/assets/img/landing.jpg');">
                         <div class="eventCard -type-3 rounded-8">
                             <div class="eventCard__date">
