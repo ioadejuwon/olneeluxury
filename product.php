@@ -1,12 +1,15 @@
 <?php
-include_once "inc/config.php";
-include_once "inc/drc.php";
+
+// include_once "inc/config.php";
+// include_once "inc/drc.php";
 $product_id = $_GET['item'];
+$pagetitle = $product_name . " - ";
+include_once "comp/head.php";
+include_once "comp/header.php";
 
 
 $product_details = mysqli_query($conn, "SELECT * FROM products WHERE productid = '$product_id'");
 $count_row_product = mysqli_num_rows($product_details);
-
 
 if ($product_id == '' || $count_row_product < 1) {
   // header("location: " . SHOP); // redirect to login page if not signed in
@@ -20,15 +23,13 @@ $short_des = $row_prod['shortdescription'];
 $product_cat_id = $row_prod['productcategory'];
 
 $price = $row_prod['price'];
-$dis_price = $row_prod['discount_price'];
+// $dis_price = $row_prod['discount_price'];
 
-$original_price = '&#8358;' . number_format($price);
-$discounted_price = '&#8358;' . number_format($dis_price);
+// $original_price = '&#8358;' . number_format($price);
+// $discounted_price = '&#8358;' . number_format($dis_price);
 
 
-$pagetitle = $product_name . " - ";
-include_once "comp/head.php";
-include_once "comp/header.php";
+
 
 $product_category = mysqli_query($conn, "SELECT * FROM olnee_categories WHERE categoryid = '$product_cat_id'");
 $row_prod_cat = mysqli_fetch_assoc($product_category);
@@ -41,12 +42,12 @@ $category_name = $row_prod_cat['categoryName'];
 $prodsql_img = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '$product_id' ORDER BY thumbnail DESC");
 $row_prod_img_thumbnail = mysqli_fetch_assoc($prodsql_img);
 $image_path_thumbnail = $row_prod_img_thumbnail['image_path'];
-$product_img = $image_path_thumbnail;
+$product_img = 'admin/'.$image_path_thumbnail;
 
 $prodsql_img = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '$product_id' ORDER BY thumbnail DESC");
 $other_images = [];
 while ($row_prod_img = mysqli_fetch_assoc($prodsql_img)) {
-  $other_images[] = $row_prod_img['image_path'];
+  $other_images[] = 'admin/'.$row_prod_img['image_path'];
 }
 
 ?>
@@ -54,8 +55,7 @@ while ($row_prod_img = mysqli_fetch_assoc($prodsql_img)) {
 <section class="layout-pt-lg layout-pb-md mt-60 ">
   <div class="container">
     <!-- <div class=""> -->
-    <div id="productForm" class="productCard -type-1 text-cener row y-gap-60 justify-between items-centr"
-      data-product-id="<?php echo $product_id; ?>" data-price="<?php echo $price; ?>"
+    <div id="productForm" class="productCard -type-1 text-cener row y-gap-60 justify-between items-centr" data-product-id="<?php echo $product_id; ?>" data-price="<?php echo $price; ?>"
       data-image="<?php echo $product_img; ?>" data-name="<?php echo $product_name; ?>"
       data-discounted-price="<?php echo $dis_price; ?>">
       <div class="col-lg-6">
@@ -65,7 +65,6 @@ while ($row_prod_img = mysqli_fetch_assoc($prodsql_img)) {
             <div class="swiper-wrapper">
 
               <?php foreach ($other_images as $image_path): ?>
-
                 <div class="swiper-slide">
                   <a data-barba href="<?php echo $image_path; ?>" class="gallery__item js-gallery"
                     data-gallery="<?php echo $product_id ?>">
@@ -101,7 +100,7 @@ while ($row_prod_img = mysqli_fetch_assoc($prodsql_img)) {
       <div class="col-lg-5 d-non">
         <div class="pb-90 md:pb-0">
           <h2 class="text-30 fw-700 mt-4 text-line-clamp-1"><?php echo $product_name ?></h2>
-          <div class="text-24 fw-600 text-purple-1 mt-15"><?php echo $original_price ?></div>
+          <div class="text-24 fw-600 text-purple-1 mt-15 price"><?php echo $price ?></div>
 
           <div class="mt-10">
             <p>

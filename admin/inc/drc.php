@@ -70,6 +70,13 @@ define('EDIT_IMAGES', ADMIN_URL.'editimages');
 define('ORDER_DETAILS', ADMIN_URL.'order?id=');
 
 
+define( 'WASHARE', 'https://api.whatsapp.com/send?phone=&text=Check out this product from our store%0D%0A%0D%0A' );
+define( 'XSHARE', 'https://twitter.com/intent/tweet?text=Check out this product from our store%0D%0A%0D%0A' );
+define( 'TELEGRAMSHARE', 'https://telegram.me/share/url?url=Check%20out%20my%store%0D%0A%0D%0A' );
+define( 'FBSHARE', 'https://web.facebook.com/sharer.php?quote=Check out this product from our store%0D%0A%0D%0A' );
+define( 'IGSHARE', 'https://www.instagram.com/direct/new/?text=Check out this product from our store%0D%0A%0D%0A' );
+
+
 define('ADMIN_LOGOUT', ADMIN_URL.'logout'); // Logout Link
 
 // define('LOGOUT', BASE_URL.'logout?id='.$user_id); // Logout Link

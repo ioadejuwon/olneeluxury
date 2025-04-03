@@ -127,7 +127,7 @@ $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No 
                                         <div class="text-16 lh-1  text-dark-1 mb-10">Phone</div>
                                         <div class="text-18 fw-500 lh-1 mt-10"><?php echo $admin_phone; ?> </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 d-none">
                                         <div class="text-16 lh-1  text-dark-1 mb-10">Admin Type</div>
                                         <div class="text-18 fw-500 lh-1 mt-10"><?php echo $admin_type ?> </div>
                                     </div>
@@ -225,11 +225,11 @@ $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No 
                                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Country</label>
                                         <input type="text" name="store_country" value="<?php echo $store_country; ?>" placeholder="Country">
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 d-none">
                                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Delivery Policy</label>
                                         <textarea placeholder="Text..." name="delivery" value="" rows="7"><?php echo $delivery; ?></textarea>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 d-none">
                                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Return Policy</label>
                                         <textarea placeholder="Text..." name="return" value="" rows="7"><?php echo $return; ?></textarea>
                                     </div>
