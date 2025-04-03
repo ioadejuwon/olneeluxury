@@ -84,8 +84,8 @@ include_once "ad_comp/adm-sidebar.php"
 <div class="dashboard__content bg-light-4">
   <div class="row pb- mb-10">
     <div class="col-auto">
-      <h1 class="text-30 lh-12 fw-700">Order ID: <span class="uppercase"> <?php echo "#" . $order_id ?></span> </h1>
-      <div class="mt-10">You can manage this order here.</div>
+      <h2 class="text- lh-12 fw-700">Order ID: <span class="uppercase"> <?php echo "#" . $order_id ?></span> </h2>
+      <div class="mt-5">You can manage this order here.</div>
     </div>
   </div>
 

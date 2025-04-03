@@ -35,7 +35,7 @@ include_once "ad_comp/adm-sidebar.php"
 <div class="dashboard__content bg-light-4">
   <div class="row pb- mb-10">
     <div class="col-auto">
-      <h1 class="text-30 lh-12 fw-700">Orders</h1>
+      <h2 class="text- lh-12 fw-700">Orders</h2>
       <div class="breadcrumbs mt-10 pt-0 pb-0">
         <div class="breadcrumbs__content">
           <div class="breadcrumbs__item">

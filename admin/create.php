@@ -21,7 +21,7 @@ include_once "ad_comp/adm-sidebar.php"
 <div class="dashboard__content bg-light-4">
     <div class="row pb-">
         <div class="col-auto">
-            <h1 class="text-30 lh-12 fw-700">Add New Product</h1>
+            <h2 class="text- lh-12 fw-700">Add New Product</h2>
             <div class="mt-10">You can enter the product information here.</div>
         </div>
     </div>

@@ -32,13 +32,13 @@ $deliveries = mysqli_query($conn, "SELECT * FROM olnee_coupons");
 <div class="dashboard__content bg-light-4">
 	<div class="row pb- justify-between">
 		<div class="col-auto">
-			<h1 class="text-30 lh-12 fw-700">Coupon Codes</h1>
-			<div class="mt-10">
+			<h2 class="text- lh-1 fw-700">Coupon Codes</h2>
+			<div class="mt-5">
 				Manage your coupon codes here
 			</div>
 		</div>
-		<div class="col-auto md:mt-20">
-			<a data-toggle="modal" data-target="#modal-coupon-rate" class="button -md -deep-green-1 text-white">Add New Coupon</a>
+		<div class="col-auto md:mt-10 md:mb-10 mt-5">
+			<a data-toggle="modal" data-target="#modal-coupon-rate" class="button -icon -deep-green-1 text-white">Add New Coupon</a>
 		</div>
 	</div>
 

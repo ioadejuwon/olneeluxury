@@ -36,11 +36,11 @@ $fname = $row['fname'];
 
   <div class="row mb-10 justify-between">
     <div class="col-auto">
-      <h1 class="text-30 lh-12 fw-700">My Products</h1>
-      <div class="mt-10">You can find the products you have added here.</div>
+      <h2 class="text- lh-12 fw-700">My Products</h2>
+      <div class="mt-5">You can find the products you have added here.</div>
     </div>
-    <div class="col-auto">
-      <a href="<?php echo ADD_PRODUCT ?>" class="button -md -deep-green-1 text-white">Add Products</a>
+    <div class="col-auto md:mt-10 md:mb-10 mt-5">
+      <a href="<?php echo ADD_PRODUCT ?>" class="button -icon -deep-green-1 text-white">Add Products</a>
     </div>
   </div>
 

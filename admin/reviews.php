@@ -28,8 +28,8 @@ $email = !empty($row["email"]) ? $row["email"] : "No info entered";
 <div class="dashboard__content bg-light-4">
     <div class="row pb- mb-10">
         <div class="col-auto">
-            <h1 class="text-30 lh-12 fw-700">Profile </h1>
-            <div class="mt-10">Your can check your profile details here.</div>
+            <h2 class="text- lh-12 fw-700">Profile </h2>
+            <div class="mt-5">Your can check your profile details here.</div>
         </div>
     </div>
     <div class="row y-gap-30">

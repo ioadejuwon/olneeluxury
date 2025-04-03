@@ -53,10 +53,8 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories");
 <div class="dashboard__content bg-light-4">
   <div class="row pb- mb-10">
     <div class="col-auto">
-
-      <h1 class="text-30 lh-12 fw-700">Add New Product</h1>
-      <div class="mt-10">You can enter the product information here.</div>
-
+      <h2 class="text- lh-12 fw-700">Add New Product</h2>
+      <div class="mt-5">You can enter the product information here.</div>
     </div>
   </div>
 
