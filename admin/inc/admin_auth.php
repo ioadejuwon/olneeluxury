@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
 
 
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $sql = "SELECT email, fname, pword_hash, user_id FROM olnee_admin WHERE email = ?";
+            $sql = "SELECT admin_email, fname, pword_hash, user_id FROM olnee_admin WHERE admin_email = ?";
             $stmt = mysqli_prepare($conn, $sql);
 
             if ($stmt) {
