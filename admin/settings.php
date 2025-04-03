@@ -17,19 +17,33 @@ $row = mysqli_fetch_assoc($sql);
 $fname = !empty($row["fname"]) ? $row["fname"] : "No info entered";
 $lname = !empty($row["fname"]) ? $row["lname"] : "No info entered";
 $uname = !empty($row["fname"]) ? $row["uname"] : "No info entered";
-$countryCode = $row['countryCode'];
-$phoneNumber = $row['phoneNo'];
-$phone = $countryCode . $phoneNumber;
-$phone = (!empty($countryCode) && !empty($phoneNumber)) ? $countryCode . $phoneNumber : 'No info entered';
-$email = $row['email'];
-$email = !empty($row["email"]) ? $row["email"] : "No info entered";
+// $countryCode = $row['countryCode'];
+$admin_phone = $row['admin_phone'];
+$admin_phone = (!empty($phoneNumber)) ?  $phoneNumber : 'No phone number entered';
+$admin_email = $row['email'];
+$admin_email = !empty($admin_email) ? $admin_email : "No admin email entered";
 
 
 $sql_store = mysqli_query($conn, "SELECT * FROM olnee_storedata");
 $row_store = mysqli_fetch_assoc($sql_store);
 // $unique_id = $row["user_id"];
-$delivery = !empty($row_store["deliveryPolicy"]) ? $row_store["deliveryPolicy"] : "No info entered";
-$return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No info entered";
+
+$contact_phone = $row_store['contact_phone'];
+
+$contact_email = $row_store['email'];
+$contact_email = !empty($contact_email) ? $contact_email : "No contact email entered";
+
+$store_address = $row_store['store_address'];
+$store_address = !empty($store_address) ? $store_address : "No store address entered";
+
+$store_state = $row_store['store_state'];
+$store_state = !empty($store_state) ? $store_state : "No store state entered";
+
+$store_country = $row_store['store_country'];
+$store_country = !empty($store_country) ? $store_country : "No store country entered";
+
+$delivery = !empty($row_store["deliveryPolicy"]) ? $row_store["deliveryPolicy"] : "No Delivery Policy entered";
+$return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No Return Policy entered";
 ?>
 <?php include_once "ad_comp/adm-sidebar.php" ?>
 <div class="dashboard__content bg-light-4">
@@ -123,7 +137,7 @@ $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No 
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="tabs__pane -tab-item-1">
                             <div class="row y-gap-20 x-gap-20 items-center d-none">
                                 <div class="col-auto">
@@ -149,7 +163,7 @@ $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No 
                                 </div>
                             </div>
                             <div class="border-top-light">
-                                <form action="#" class="contact-form row">
+                                <form action="#" class="contact-form row y-gap-10">
                                     <div class="col-md-6">
                                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">First Name</label>
                                         <input type="text" value="<?php echo $fname; ?>" placeholder="First Name">
@@ -160,9 +174,13 @@ $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No 
                                     </div>
                                     <div class="col-md-6">
                                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Phone</label>
-                                        <input type="text" value="<?php echo $phone; ?>" placeholder="Phone">
+                                        <input type="number" value="<?php echo $admin_phone; ?>" placeholder="Phone">
                                     </div>
-                                   
+                                    <div class="col-md-6">
+                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Email Address</label>
+                                        <input type="email" name="admin_email" value="<?php echo $admin_email; ?>" placeholder="Email Address">
+                                    </div>
+
                                     <div class="col-12">
                                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">About Yourself</label>
                                         <textarea placeholder="Text..." value="<?php echo $about; ?>"
@@ -175,24 +193,28 @@ $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No 
                             </div>
                         </div>
                         <div class="tabs__pane -tab-item-2">
-                            
-                            <div >
+
+                            <div>
                                 <form action="" method="POST" id="store-update" class="contact-form row y-gap-10">
                                     <div class="col-md-6">
-                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Contact Phone</label>
-                                        <input type="text"  name="phone" value="<?php echo $phone; ?>" placeholder="Phone">
+                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Phone</label>
+                                        <input type="number" name="contact_phone" value="<?php echo $contact_phone; ?>" placeholder="Contact Phone">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Email</label>
+                                        <input type="email" name="contact_email" value="<?php echo $contact_email; ?>" placeholder="Contact Address">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Address</label>
-                                        <input type="text" value="<?php echo $address; ?>" placeholder="Address">
+                                        <input type="text" name="store_address" value="<?php echo $store_address; ?>" placeholder="Address">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">State</label>
-                                        <input type="text" value="<?php echo $state; ?>" placeholder="State">
+                                        <input type="text" name="store_state" value="<?php echo $store_state; ?>" placeholder="State">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Country</label>
-                                        <input type="text" value="<?php echo $country; ?>" placeholder="Country">
+                                        <input type="text" name="store_country" value="<?php echo $store_country; ?>" placeholder="Country">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Delivery Policy</label>

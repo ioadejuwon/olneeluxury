@@ -14,7 +14,7 @@ header( 'Content-Type: application/json' );
 
 if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 
-	if (empty($_POST['email']) || empty($_POST['phone']) || empty($_POST['delivery']) || empty($_POST['return'])) {
+	if (empty($_POST['delivery']) || empty($_POST['return']) || empty($_POST['contact_phone']) || empty($_POST['contact_email']) || empty($_POST['store_address']) || empty($_POST['store_state']) || empty($_POST['store_country'])) {
         $response = [
             'status' => 'error',
             'message' => 'Please fill all the required inputs with your details' 
@@ -24,10 +24,15 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
     }
 
 	// Retrieve and sanitize POST data
-	$email = htmlspecialchars( $_POST['email'] );
-	$phone = htmlspecialchars( $_POST['phone'] );
 	$delivery = htmlspecialchars( $_POST['delivery'] ); // Sanitize input
 	$return = htmlspecialchars( $_POST['return'] ); // Sanitize input
+
+	$contact_phone = htmlspecialchars( $_POST['contact_phone'] );
+	$contact_email = htmlspecialchars( $_POST['contact_email'] );
+
+	$store_address = htmlspecialchars( $_POST['store_address'] );
+	$store_state = htmlspecialchars( $_POST['store_state'] );
+	$store_country = htmlspecialchars( $_POST['store_country'] );
 	
 	
 	if ( strlen( $delivery ) > 1000 ) {
@@ -54,12 +59,12 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 	}
 	
 	// Prepare the SQL statement with placeholders
-	$updatelink = "UPDATE olnee_storedata SET email = ?, phonenumber = ?, deliveryPolicy=?, returnPolicy=?  WHERE id=1";
+	$updatelink = "UPDATE olnee_storedata SET deliveryPolicy=?, returnPolicy=?, contact_phone = ?, contact_email = ?, store_address = ?, store_state = ?, store_country = ?";
 	$stmt = mysqli_stmt_init( $conn );
 	// Create a prepared statement
 	if ( mysqli_stmt_prepare( $stmt, $updatelink ) ) {
 		// Bind the parameters to the prepared statement
-		mysqli_stmt_bind_param( $stmt, "ssss", $email, $phone, $delivery, $return );
+		mysqli_stmt_bind_param( $stmt, "sssssss", $delivery, $return, $contact_phone, $contact_email, $store_address, $store_state, $store_country );
 		if ( mysqli_stmt_execute( $stmt ) ) {
 			if ( mysqli_stmt_affected_rows( $stmt ) > 0 ) {
 				// $stmt->close();// Close the statement
