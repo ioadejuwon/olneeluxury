@@ -1,7 +1,22 @@
 <?php
 $pagetitle = "Order";
+require_once "admin/inc/config.php";
+include_once "admin/inc/drc.php";
+
+$order_id = $_GET['id'];
+
+$orderquery = "SELECT * FROM olnee_orders WHERE order_id = ?";
+$stmt = mysqli_prepare($conn, $orderquery);
+mysqli_stmt_bind_param($stmt, "s", $order_id); // Bind the parameter
+mysqli_stmt_execute($stmt); // Execute the prepared statement
+$result = mysqli_stmt_get_result($stmt); // Get the result
+$count_row_orders = $result->num_rows;
+
+if ($count_row_orders < 1) {
+    header("location: " . SHOP);
+}
 include_once "comp/head.php";
-include_once "comp/header.php"
+include_once "comp/header.php";
 ?>
 
 
@@ -27,16 +42,23 @@ include_once "comp/header.php"
 <section class="layout-pt-md layout-pb-lg">
     <div class="container">
         <?php
-        $order_id = $_GET['id'];
 
-        $orderquery = "SELECT * FROM olnee_orders WHERE order_id = ?";
-        $stmt = mysqli_prepare($conn, $orderquery);
-        mysqli_stmt_bind_param($stmt, "s", $order_id); // Bind the parameter
-        mysqli_stmt_execute($stmt); // Execute the prepared statement
-        $result = mysqli_stmt_get_result($stmt); // Get the result
-        $count_row_orders = $result->num_rows;
 
         $row = $result->fetch_assoc();
+        $firstname = $row["first_name"];
+        $lastname = $row["last_name"];
+        $customer = $firstname . " " . $lastname;
+        $email = $row["email"];
+        $phone = $row["phone"];
+
+        $street = $row["street"];
+        $city = $row["city"];
+        $state = $row["state"];
+        $notes = $row["notes"];
+        $country = $row["country"];
+
+        $cus_address = $street . ",<br>" . $city . ", " . $state . ", " . $country;
+
         $paymentOption = $row['paymentOption'];
         $total = $row['total'];
         $status = $row['status'];
@@ -46,7 +68,10 @@ include_once "comp/header.php"
         $created_at = $row['created_at'];
         $date = strtotime($created_at);
         // $dateformat = date('D., jS M.', $date);
-        $dateformat = date('j/m/y', $date);
+        // $dateformat = date('j/m/y', $date);
+
+      
+        $dateformat =  date('D, jS F, Y', $date);
 
         if ($paymentOption == '1') {
             $paymentMethod = 'Online Payment';
@@ -70,7 +95,7 @@ include_once "comp/header.php"
 
         ?>
         <div class="row no-gutters justify-content-center">
-            <div class="col-xl-8 col-lg-9 col-md-11">
+            <div class="col-xl-8 col-lg-8 col-md-11">
                 <div class="shopCompleted-header">
                     <div class="icon">
                         <i data-feather="check"></i>
@@ -82,6 +107,7 @@ include_once "comp/header.php"
                         Thank you. Your order has been received.
                     </div>
                 </div>
+
 
                 <div class="shopCompleted-info">
                     <div class="row no-gutters y-gap-32">
@@ -112,7 +138,7 @@ include_once "comp/header.php"
                                 <div class="title text-purple-1 mt-5"><?php echo $paymentMethod ?></div>
                             </div>
                         </div>
-                        
+
                         <div class="col-md-3 col-sm-6">
                             <div class="shopCompleted-info__item">
                                 <div class="subtitle">Status</div>
@@ -120,10 +146,10 @@ include_once "comp/header.php"
                             </div>
                         </div>
 
-                        
+
                     </div>
                 </div>
-                
+
                 <div class="shopCompleted-footer bg-light-4 border-light rounded-8">
                     <div class="shopCompleted-footer__wrap">
                         <h5 class="title">
@@ -155,7 +181,7 @@ include_once "comp/header.php"
 
                         <div class="item -border-none">
                             <span class="fw-500">Discount</span>
-                            <span class="price"><?php echo '-'.$discount ?></span>
+                            <span class="price"><?php echo '-' . $discount ?></span>
                         </div>
 
                         <div class="item  -border-none">
@@ -177,45 +203,27 @@ include_once "comp/header.php"
                         </h5>
 
                         <div class="item">
-                            <span class="fw-500">Product</span>
-                            <span class="fw-500">Price</span>
+                            <span class="text-14">Customer name</span>
+                            <span class="lh-11 fw-600 text-dark-1"><?php echo $customer ?></span>
                         </div>
-                        <?php
-                        while ($row_details = $order_details_result->fetch_assoc()) {
-                            $product_name = $row_details['product_name'];
-                            $product_price = $row_details['price'];
-                            $product_quantity = $row_details['quantity'];
-
-
-                        ?>
-                            <div class="item -border-none">
-                                <span class=""><?php echo $product_name . ' x' . $product_quantity ?></span>
-                                <span class="price"><?php echo $product_price ?></span>
-                            </div>
-                        <?php } ?>
-
-                        <div class="item -border-noe">
-                            <span class="fw-500">Subtotal</span>
-                            <span class="price"><?php echo $subtotal ?></span>
+                        <div class="item -border-none">
+                            <span class="text-14">Phone</span>
+                            <span class="lh-11 fw-600 text-dark-1"><?php echo $phone ?></span>
+                        </div>
+                        <div class="item -border-none">
+                            <span class="text-14">Email Address</span>
+                            <span class="lh-11 fw-600 text-dark-1"><?php echo $email ?></span>
                         </div>
 
                         <div class="item -border-none">
-                            <span class="fw-500">Discount</span>
-                            <span class="price"><?php echo $discount ?></span>
+                            <span class="text-14">Delivery Address</span>
+                            <span class="lh-12 fw-600 text-dark-1"><?php echo $cus_address ?></span>
                         </div>
 
-                        <div class="item  -border-none">
-                            <span class="fw-500">Shipping</span>
-                            <span class="price"><?php echo $shipping ?></span>
-                        </div>
-
-                        <div class="item">
-                            <span class="fw-500">Total</span>
-                            <span class="price"><?php echo $total ?></span>
-                        </div>
                     </div>
                 </div>
-                
+
+
             </div>
         </div>
     </div>
