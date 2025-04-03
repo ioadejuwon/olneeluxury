@@ -16,7 +16,8 @@ if ($count_row_category < 1) {
     header("location: " . COLLECTION);
 }
 
-
+$row_categories = mysqli_fetch_assoc($result);
+$categoryname = $row_categories["categoryname"];
 include_once "comp/head.php";
 include_once "comp/header.php";
 
@@ -34,7 +35,7 @@ include_once "comp/header.php";
             <div class="row justify-cente text-left">
                 <div class="col-auto pt-30 pb-30">
                     <div data-anim="slide-up delay-1">
-                        <h1 class="page-header__title text-white">Our Catalog</h1>
+                        <h1 class="page-header__title text-white"><?php echo $categoryname ?></h1>
                     </div>
 
                     <div data-anim="slide-up delay-2">
