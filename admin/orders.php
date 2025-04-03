@@ -63,7 +63,7 @@ include_once "ad_comp/adm-sidebar.php"
                 <th>Customer Name</th>
                 <!-- <th>Customer Email</th> -->
                 <th>Payment Status</th>
-                <th>Payment Total</th>
+                <th>Total Paid</th>
                 <th>Order Date</th>
               </tr>
             </thead>
