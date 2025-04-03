@@ -50,7 +50,7 @@ $fname = $row['fname'];
       <div class="rounded-16 bg-white -dark-bg-dark-1 shadow-4 h-100">
         <div class="tabs -active-purple-2 js-tabs">
           <div class="tabs__controls d-flex items-center py-20 px-30 border-bottom-light js-tabs-controls">
-            <button class="text-light-1 lh-12 tabs__button js-tabs-button is-active text-deep-green-1 h3 fw-700" data-tab-target=".-tab-item-1" type="button">
+            <button class="text-light-1 lh-12 tabs__button js-tabs-button is-active text-deep-green-1 h3 fw-600" data-tab-target=".-tab-item-1" type="button">
               All Products
             </button>
             <button class="text-light-1 lh-12 tabs__button js-tabs-button ml-30" data-tab-target=".-tab-item-2" type="button">

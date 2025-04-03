@@ -108,7 +108,7 @@ include_once "ad_comp/adm-sidebar.php"
               ?>
                   <tr>
                     
-                    <td class="underline"><a href="<?php echo ORDER_DETAILS . $orders_id ?>"><?php echo $orders_id ?></a></td>
+                    <td class="underline Uppercase"><a href="<?php echo ORDER_DETAILS . $orders_id ?>"><?php echo '#'.$orders_id ?></a></td>
                     <td><?php echo $cus_name ?></td>
                     <!-- <td><?php echo $cus_email ?></td> -->
                     <td><?php echo $pay_status ?></td>
