@@ -92,7 +92,7 @@ while ($row_prod_img = mysqli_fetch_assoc($prodsql_img)) {
             <?php foreach ($other_images as $image_path): ?>
               <div data-cursor class="col-auto gallery__item">
                 <img class="size-90 object-cover rounded-8" src="<?php echo $image_path; ?>"
-                  alt="project image">
+                  alt="<?php echo $product_name?>">
               </div>
             <?php endforeach; ?>
 

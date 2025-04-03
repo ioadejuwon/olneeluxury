@@ -132,7 +132,7 @@ $fname = $row['fname'];
                       <div class="productCard -type-1 text-center">
                         <div class="productCard__image">
                           <div class="ratio ratio-63:57">
-                            <img class="absolute-full-center rounded-8" src="<?php echo $image_path_thumbnail; ?>" alt="product image">
+                            <img class="absolute-full-center rounded-8" src="<?php echo $image_path_thumbnail; ?>" alt="<?php echo $product_name?>">
                           </div>
                           <div class="productCard__controls z-3">
                             <a data-toggle="modal" data-target="<?php echo '#share-' . $product_id ?>" class="productCard__icon">
