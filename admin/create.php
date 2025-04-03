@@ -80,12 +80,12 @@ include_once "ad_comp/adm-sidebar.php"
                             <textarea placeholder="Write a catchy short description about the product." rows="4" name="shortdescription" value="<?php echo $shortdescription ?>" required></textarea>
                         </div>
                         <div class="col-12">
-                            <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">
+                            <label class="text-16 lh-1 fw-500 text-dark-1 mb-5">
                                 Product Description <span class="text-red-1">*</span>
                             </label>
                             <textarea placeholder="Write a longer description about the product." rows="7" name="productdescription" value="<?php echo $productdescription ?>" required></textarea>
                         </div>
-                        <div class="row y-gap-20 justify-between">
+                        <div class="row y-gap-20 justify-between mb-10">
                             <div class="col-auto">
                                 <a href="<?php echo PRODUCTS ?>" class="button -icon -outline-deep-green-1 text-deep-green-1">
                                     <i class="text-20 fa-solid fa-angle-left"></i> &nbsp; Prev
