@@ -20,8 +20,17 @@ $uname = !empty($row["fname"]) ? $row["uname"] : "No info entered";
 // $countryCode = $row['countryCode'];
 $admin_phone = $row['admin_phone'];
 $admin_phone = (!empty($phoneNumber)) ?  $phoneNumber : 'No phone number entered';
-$admin_email = $row['email'];
+$admin_email = $row['admin_email'];
 $admin_email = !empty($admin_email) ? $admin_email : "No admin email entered";
+
+$admin_address = $row['admin_address'];
+$admin_state = $row['admin_state'];
+$admin_country = $row['admin_country'];
+
+$address = $admin_address. ", ". $admin_state. ", ". $admin_country;
+$address = strlen($address > 4) ? $address : "No address entered";
+// $address = !empty($address) ? $address : "No address entered";
+
 
 
 $sql_store = mysqli_query($conn, "SELECT * FROM olnee_storedata");
@@ -30,7 +39,7 @@ $row_store = mysqli_fetch_assoc($sql_store);
 
 $contact_phone = $row_store['contact_phone'];
 
-$contact_email = $row_store['email'];
+$contact_email = $row_store['contact_email'];
 $contact_email = !empty($contact_email) ? $contact_email : "No contact email entered";
 
 $store_address = $row_store['store_address'];
@@ -63,7 +72,7 @@ $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No 
                             data-tab-target=".-tab-item-0" type="button">
                             Profile
                         </button>
-                        <button class="tabs__button text-light-1 js-tabs-button"
+                        <button class="tabs__button text-light-1 js-tabs-button d-none"
                             data-tab-target=".-tab-item-1" type="button">
                             Edit Profile
                         </button>
@@ -73,7 +82,7 @@ $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No 
                         </button>
                         <button class="tabs__button text-light-1 js-tabs-button" data-tab-target=".-tab-item-3"
                             type="button">
-                            Password
+                            Change Password
                         </button>
                         <button class="tabs__button text-light-1 js-tabs-button d-none" data-tab-target=".-tab-item-4"
                             type="button">
@@ -83,7 +92,7 @@ $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No 
                             type="button">
                             Notifications
                         </button>
-                        <button class="tabs__button text-light-1 js-tabs-button" data-tab-target=".-tab-item-6"
+                        <button class="tabs__button text-light-1 js-tabs-button d-none" data-tab-target=".-tab-item-6"
                             type="button">
                             Close Account
                         </button>
@@ -112,27 +121,19 @@ $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No 
                                     </div>
                                     <div class="col-md-6">
                                         <div class="text-16 lh-1  text-dark-1 mb-10">Email</div>
-                                        <div class="text-18 fw-500 lh-1 mt-10"><?php echo $email; ?> </div>
+                                        <div class="text-18 fw-500 lh-1 mt-10"><?php echo $admin_email; ?> </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="text-16 lh-1  text-dark-1 mb-10">Phone</div>
-                                        <div class="text-18 fw-500 lh-1 mt-10"><?php echo $phone; ?> </div>
+                                        <div class="text-18 fw-500 lh-1 mt-10"><?php echo $admin_phone; ?> </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="text-16 lh-1  text-dark-1 mb-10">Admin Type</div>
+                                        <div class="text-18 fw-500 lh-1 mt-10"><?php echo $admin_type ?> </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="text-16 lh-1  text-dark-1 mb-10">Address</div>
-                                        <div class="text-18 fw-500 lh-1 mt-10"><?php echo $phone; ?> </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="text-16 lh-1  text-dark-1 mb-10">State</div>
-                                        <div class="text-18 fw-500 lh-1 mt-10"><?php echo $phone; ?> </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="text-16 lh-1  text-dark-1 mb-10">Country</div>
-                                        <div class="text-18 fw-500 lh-1 mt-10"><?php echo $phone; ?> </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="text-16 lh-1  text-dark-1 mb-10">About Yourself</div>
-                                        <div class="text-18 fw-500 lh-1 mt-10"><?php echo $phone; ?> </div>
+                                        <div class="text-18 fw-500 lh-1 mt-10"><?php echo $address; ?> </div>
                                     </div>
                                 </div>
                             </div>
@@ -180,12 +181,20 @@ $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No 
                                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Email Address</label>
                                         <input type="email" name="admin_email" value="<?php echo $admin_email; ?>" placeholder="Email Address">
                                     </div>
-
-                                    <div class="col-12">
-                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">About Yourself</label>
-                                        <textarea placeholder="Text..." value="<?php echo $about; ?>"
-                                            rows="7"></textarea>
+                                    <div class="col-md-6">
+                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Address</label>
+                                        <input type="email" name="admin_address" value="<?php echo $admin_address; ?>" placeholder=" Address">
                                     </div>
+                                    <div class="col-md-6">
+                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">State</label>
+                                        <input type="email" name="admin_state" value="<?php echo $admin_state; ?>" placeholder="State">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Country</label>
+                                        <input type="email" name="admin_country" value="<?php echo $admin_country; ?>" placeholder="Country">
+                                    </div>
+
+                                    
                                     <div class="col-12">
                                         <button class="button -md -deep-green-1 text-white">Update Profile</button>
                                     </div>
