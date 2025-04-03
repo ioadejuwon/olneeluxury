@@ -205,7 +205,6 @@ include_once "comp/header.php";
 
                 <div class="row y-gap-30 pt-">
                     <?php
-                    // echo $category_id;
                     $prodsql = mysqli_query($conn, "SELECT * FROM products WHERE productcategory = '$category_id'");
                     $count_row_products = mysqli_num_rows($prodsql);
                     if ($count_row_products > 0) {
@@ -235,9 +234,8 @@ include_once "comp/header.php";
                             include 'comp/products.php';
                         }
                     } else {
-                        
                     ?>
-                        <section class="layout-pt-lg layout-pb-lg section-bg mt-30" >
+                        <section class="layout-pt-lg layout-pb-lg section-bg mt-30">
                             <div class="section-bg__item bg-light-6"></div>
                             <div class="container">
                                 <div class="row y-gap-20 justify-center text-center">

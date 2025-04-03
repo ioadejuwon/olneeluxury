@@ -85,7 +85,7 @@
 </section>
 
 
-<section data-anim-wrap class="masthed hero-page -type- d-one">
+<section data-anim-wrap class="masthed hero-page -type- d-none">
   <div class="masthead__bg"></div>
 
   <div class="masthead__container">
