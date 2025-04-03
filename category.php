@@ -264,7 +264,7 @@ include_once "comp/header.php";
                                 <h3 class="text-30 lh-12 fw-600 ml-15 text-white capitalise"><?php echo $categoryname ?></h3>
                             </div>
                             <div class="eventCard__button">
-                                <a href="#" class="button -icon -white text-deep-green-1">
+                                <a href="<?php echo CATEGORY.$category_id ?>" class="button -icon -white text-deep-green-1">
                                     View Collection
                                     <i class="icon-arrow-top-right text-13 ml-10"></i>
                                 </a>

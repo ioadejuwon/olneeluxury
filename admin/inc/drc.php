@@ -32,7 +32,7 @@ define('SHOP', BASE_URL.'catalog');
 define('PRODUCT_DETAIILS', BASE_URL.'product?item=');
 define('CART', BASE_URL.'cart');
 define('WISHLIST', BASE_URL.'wishlist');
-define('COLLECTION', BASE_URL.'collection');
+define('COLLECTION', BASE_URL.'collections');
 define('CATEGORY', BASE_URL.'category?id=');
 define('BLOG', BASE_URL.'blog');
 define('CHECKOUT', BASE_URL.'checkout');
