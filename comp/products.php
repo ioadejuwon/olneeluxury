@@ -30,7 +30,7 @@
     <input type="hidden" name="yards" value="1">
     
     <div class="productCard__content mt-15">
-        <h4 class="text-17 fw-500 mt- text-line-clamp-1  mb-1">
+        <h4 class="text-17 fw-600 mt- text-line-clamp-1  mb-1">
             <?php echo $product_name; ?>
         </h4>
         <div class="text-17 fw-500 text-deep-green-1 mt-5 price">

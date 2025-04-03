@@ -65,7 +65,7 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories");
 <div class="dashboard__content bg-light-4">
   <div class="row pb- mb-10">
     <div class="col-auto">
-      <h2 class="text- lh-12 fw-700">Add New Images </h2>
+      <h2 class="text-30 lh-12 fw-700">Add New Images </h2>
       <div class="mt-5">Add New Images to the product.</div>
     </div>
   </div>

@@ -36,7 +36,7 @@ $fname = $row['fname'];
 
   <div class="row mb-10 justify-between">
     <div class="col-auto">
-      <h2 class="text- lh-12 fw-700">My Products</h2>
+      <h2 class="text-30 lh-12 fw-700">My Products</h2>
       <div class="mt-5">You can find the products you have added here.</div>
     </div>
     <div class="col-auto md:mt-10 md:mb-10 mt-5">
@@ -50,7 +50,7 @@ $fname = $row['fname'];
       <div class="rounded-16 bg-white -dark-bg-dark-1 shadow-4 h-100">
         <div class="tabs -active-purple-2 js-tabs">
           <div class="tabs__controls d-flex items-center py-20 px-30 border-bottom-light js-tabs-controls">
-            <button class="text-light-1 lh-12 tabs__button js-tabs-button is-active text-black h3 fw-700" data-tab-target=".-tab-item-1" type="button">
+            <button class="text-light-1 lh-12 tabs__button js-tabs-button is-active text-deep-green-1 h3 fw-700" data-tab-target=".-tab-item-1" type="button">
               All Products
             </button>
             <button class="text-light-1 lh-12 tabs__button js-tabs-button ml-30" data-tab-target=".-tab-item-2" type="button">
@@ -128,7 +128,7 @@ $fname = $row['fname'];
                 ?>
 
 
-                    <div class="w-1/4 xl:w-1/3 lg:w-1/2 sm:w-1/2" id="product-<?php echo $product_id; ?>">
+                    <div class="w-1/5 xl:w-1/3 lg:w-1/2 sm:w-1/2" id="product-<?php echo $product_id; ?>">
                       <div class="productCard -type-1 text-center">
                         <div class="productCard__image">
                           <div class="ratio ratio-63:57">
@@ -150,7 +150,7 @@ $fname = $row['fname'];
                           </div>
                         </div>
                         <div class="productCard__content mt-15">
-                          <h4 class="text-17 fw-500 mt- text-line-clamp-1 mb-1"><?php echo $product_name; ?></h4>
+                          <h4 class="text-17 fw-600 mt- text-line-clamp-1 mb-1"><?php echo $product_name; ?></h4>
                           <div class="text-17 fw-500 text-deep-green-1 mt- price">
                             <?php echo $price; ?>
                           </div>
@@ -165,30 +165,36 @@ $fname = $row['fname'];
                     <div class="modal fade" id="share-<?php echo $product_id; ?>" tabindex="-1">
                       <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
+                          <div class="modal-header border-bottom-dark">
+                            <h4 class="modal-title">Share Product</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <img src="assets/img/icons/close.png" alt="" width="20%">
+                            </button>
+                          </div>
                           <div class="modal-body p-4">
+                            <p class="text-dark">
+                              Share a link to the product "<span class="fw-600"><?php echo $product_name ?></span>" using any of the links below.
+                            </p>
 
-                            <h2 class="h4">Share Product</h2>
-                            <p class="text-dark">Share a link to the product "<span class="fw-600"><?php echo $product_name ?></span>" using any of the links below.</p>
-
-                            <div class="row mb-10 justify-center items-center">
+                            <div class="row mb-5 pt-15 justify-center items-center border-top-dark">
                               <div class="col-auto icon-outline p-2 mr-30">
-                                <a href="<?php echo WASHARE . PRODUCT_DETAIILS . $product_id ?>" class="text-deep-green-1 text-24">
+                                <a href="<?php echo WASHARE . PRODUCT_DETAIILS . $product_id ?>" target="_blank" class="text-deep-green-1 text-24">
                                   <!-- <i class="icon-instagram"></i> -->
                                   <img src="assets/img/icons/wa.png" alt="">
                                 </a>
                               </div>
-                              <div class="col-auto icon-outline p-2 mr-30 d-non">
-                                <a href="<?php echo IGSHARE . PRODUCT_DETAIILS . $product_id ?>" class="text-deep-green-1 text-24">
+                              <div class="col-auto icon-outline p-2 mr-30 d-none">
+                                <a href="<?php echo IGSHARE . PRODUCT_DETAIILS . $product_id ?>" target="_blank" class="text-deep-green-1 text-24">
                                   <img src="assets/img/icons/ig.png" alt="">
                                 </a>
                               </div>
-                              <div class="col-auto icon-outline p-2 mr-30">
-                                <a href="<?php echo FBSHARE . PRODUCT_DETAIILS . $product_id ?>" class="text-deep-green-1 text-24">
+                              <div class="col-auto icon-outline p-2 mr-30 d-none">
+                                <a href="<?php echo FBSHARE . PRODUCT_DETAIILS . $product_id ?>" target="_blank" class="text-deep-green-1 text-24">
                                   <img src="assets/img/icons/fb.png" alt="">
                                 </a>
                               </div>
                               <div class="col-auto icon-outline p-2 mr-30">
-                                <a href="<?php echo XSHARE . PRODUCT_DETAIILS . $product_id ?>" class="text-deep-green-1 text-24">
+                                <a href="<?php echo XSHARE . PRODUCT_DETAIILS . $product_id ?>" target="_blank" class="text-deep-green-1 text-24">
                                   <img src="assets/img/icons/x.png" alt="">
                                 </a>
                               </div>
@@ -202,9 +208,13 @@ $fname = $row['fname'];
                     <div class="modal fade" id="delete-<?php echo $product_id; ?>" tabindex="-1">
                       <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
+                          <div class="modal-header border-bottom-dark">
+                            <h4 class="modal-title">Delete Product</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <img src="assets/img/icons/close.png" alt="" width="20%">
+                            </button>
+                          </div>
                           <div class="modal-body p-4">
-
-                            <h2 class="h4">Delete Product</h2>
                             <p class="text-dark">Are you sure you want to delete the product "<span class="fw-600"><?php echo $product_name ?></span>". This process is irreversible.</p>
                             <p class="text-dark">Users who have added "<span class="fw-600"><?php echo $product_name ?></span>" to cart will still be able to process the order.</p>
                             <ul class="row gx-4 mt-4">

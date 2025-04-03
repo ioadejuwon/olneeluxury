@@ -23,7 +23,7 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories ORDER BY creat
 <div class="dashboard__content bg-light-4">
   <div class="row pb- justify-between">
     <div class="col-auto">
-      <h2 class="text- lh-12 fw-700">Product Categories</h2>
+      <h2 class="text-30 lh-12 fw-700">Product Categories</h2>
       <div class="mt-5">
         Manage your Categories here
       </div>

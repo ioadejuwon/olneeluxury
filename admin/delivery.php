@@ -32,7 +32,7 @@ $deliveries = mysqli_query($conn, "SELECT * FROM olnee_delivery");
 <div class="dashboard__content bg-light-4">
 	<div class="row pb- justify-between">
 		<div class="col-auto">
-			<h2 class="text- lh-12 fw-700">All Delivery Rates</h2>
+			<h2 class="text-30 lh-12 fw-700">All Delivery Rates</h2>
 			<div class="mt-5">
 				Manage your delivery rates here
 			</div>
@@ -217,10 +217,10 @@ $deliveries = mysqli_query($conn, "SELECT * FROM olnee_delivery");
 <div class="modal fade" id="modal-delivery-rate" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">Add Delivery Rate</h5>
+			<div class="modal-header border-bottom-dark">
+				<h4 class="modal-title">Add Delivery Rate</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
+					<img src="assets/img/icons/close.png" alt="" width="20%">
 				</button>
 			</div>
 			<div class="modal-body pt-0">
