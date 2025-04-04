@@ -257,12 +257,11 @@ function displayCartHeader() {
                 <div class="col">
                     <div class="row x-gap-10 y-gap-10 justify-between">
                         <div class="col-2" style="width: 60px; height: 60px; background-image: url('${item.image}'); background-size: cover; background-position: center; border-radius: 8px;">
-
                         </div>
                         <div class="col-8 pl-5">
                             <div class="text-dark-1 lh-15 h4 fw-500 text-line-clamp-1 mb-0">${item.name} </div>
                             <div class="d-flex items-center mt-">
-                                <div class="text-18 lh-12 fw-500 text-dark-1"><span class="price">₦${item.price}</span> <span class="text-dark-1 h5">x ${item.yards}${statement}</span></div>
+                                <div class="text-18 lh-12 fw-500 text-dark-1"><span class="price">₦${item.price}</span> <span class="text-dark-1 h5">x ${item.yards} ${statement}</span></div>
                             </div>
                         </div>
                    
