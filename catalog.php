@@ -206,9 +206,11 @@ include_once "comp/header.php"
 
                         $image_path_thumbnail = $row_prod_img_thumbnail['image_path'];
                         if (empty($image_path_thumbnail)) {
-                            $image_path_thumbnail = "product-img/product.png";
+                            $image_path_thumbnail2 = "product-img/product.png";
+                        }else{
+                            $image_path_thumbnail2 = $row_prod_img_thumbnail['image_path'];
                         }
-                        $product_img = 'admin/' . $image_path_thumbnail;
+                        $product_img = 'admin/' . $image_path_thumbnail2;
 
 
 
