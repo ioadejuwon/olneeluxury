@@ -248,7 +248,7 @@ function displayCartHeader() {
             if (itemYards > 1) {
                 statement = ' Yards';
             } else {
-                statement = ' Yards';
+                statement = ' Yard';
             }
 
 
