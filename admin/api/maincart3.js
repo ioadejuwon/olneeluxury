@@ -64,9 +64,7 @@ function addToCart(productId) {
     // let productPrice = parseFloat(productElement.data('discounted-price') || productElement.data('price'));
     var productPrice = productElement.data('price');
     let productImage = productElement.data('image');
-
     var discountedPrice = productElement.data('discounted-price') || productPrice;
-    var selectedSize = productElement.find('input[name="size"]').text();
     var selectedYards = parseInt(productElement.find('input[name="yards"]').val()) || 1;
 
     // Check if the item already exists in the cart
@@ -249,9 +247,9 @@ function displayCartHeader() {
             // var totalPrice = (item.price * item.quantity).toFixed(2);
             var itemYards = item.yards;
             if (itemYards > 1) {
-                statement = ' Pcs';
+                statement = ' Yards';
             } else {
-                statement = ' Pc';
+                statement = ' Yards';
             }
 
 
@@ -263,9 +261,9 @@ function displayCartHeader() {
 
                         </div>
                         <div class="col-8 pl-5">
-                            <div class="text-dark-1 lh-15 h4 fw-500 text-line-clamp-1">${item.name} <span class="text-grey  h6">(${item.yards}x)</span></div>
+                            <div class="text-dark-1 lh-15 h4 fw-500 text-line-clamp-1">${item.name} </div>
                             <div class="d-flex items-center mt-">
-                                <div class="text-18 lh-12 fw-500 text-dark-1 price">₦${item.price}</div>
+                                <div class="text-18 lh-12 fw-500 text-dark-1"><span class="price">₦${item.price}</span> <span class="text-dark-1 h5">x ${item.yards}${statement}</span></div>
                             </div>
                         </div>
                    

@@ -1212,8 +1212,8 @@ body {
   width: 100%;
   max-width: 100%;
   background-color: white;
-  /* color: var(--color-deep-green-1); */
-  color: var(--color-dark);
+  color: var(--color-deep-green-1);
+  /* color: var(--color-dark); */
   font-size: 15px;
   line-height: 1.7;
 }

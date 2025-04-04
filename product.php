@@ -22,12 +22,13 @@ $short_des = $row_prod['shortdescription'];
 $product_cat_id = $row_prod['productcategory'];
 
 $price = $row_prod['price'];
+$dis_price = $row_prod['discount_price'];
 
 $pagetitle = $product_name;
 
 include_once "comp/head.php";
 include_once "comp/header.php";
-// $dis_price = $row_prod['discount_price'];
+
 
 // $original_price = '&#8358;' . number_format($price);
 // $discounted_price = '&#8358;' . number_format($dis_price);
@@ -46,12 +47,12 @@ $category_name = $row_prod_cat['categoryName'];
 $prodsql_img = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '$product_id' ORDER BY thumbnail DESC");
 $row_prod_img_thumbnail = mysqli_fetch_assoc($prodsql_img);
 $image_path_thumbnail = $row_prod_img_thumbnail['image_path'];
-$product_img = 'admin/'.$image_path_thumbnail;
+$product_img = 'admin/' . $image_path_thumbnail;
 
 $prodsql_img = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '$product_id' ORDER BY thumbnail DESC");
 $other_images = [];
 while ($row_prod_img = mysqli_fetch_assoc($prodsql_img)) {
-  $other_images[] = 'admin/'.$row_prod_img['image_path'];
+  $other_images[] = 'admin/' . $row_prod_img['image_path'];
 }
 
 ?>
@@ -92,7 +93,7 @@ while ($row_prod_img = mysqli_fetch_assoc($prodsql_img)) {
             <?php foreach ($other_images as $image_path): ?>
               <div data-cursor class="col-auto gallery__item">
                 <img class="size-90 object-cover rounded-8" src="<?php echo $image_path; ?>"
-                  alt="<?php echo $product_name?>">
+                  alt="<?php echo $product_name ?>">
               </div>
             <?php endforeach; ?>
 
@@ -104,33 +105,24 @@ while ($row_prod_img = mysqli_fetch_assoc($prodsql_img)) {
       <div class="col-lg-5 d-non">
         <div class="pb-90 md:pb-0">
           <h2 class="text-30 fw-700 mt-4 text-line-clamp-1"><?php echo $product_name ?></h2>
-          <div class="text-24 fw-600 text-purple-1 mt-15 price"><?php echo $price ?></div>
+          <div class="text-20 text-purple-1 mt-15 ">
+            <span class="price  fw-500"><?php echo $price ?></span>
+            <?php
+            if ($dis_price != 0.00) {
+            ?>
+              <span class="price line-through text-light-1"><?php echo $dis_price; ?></span>
+            <?php
+            }
+            ?>
+
+          </div>
 
           <div class="mt-10">
             <p>
               <?php echo $short_des ?>
             </p>
           </div>
-          <div class="mt-30">
-            <p>Colours</p>
-            <ul class="color-select w-50 d-none">
-              <li class="form-check">
-                <input class="form-check-input almond" type="radio" name="color" id="color-one">
-              </li>
-              <li class="form-check">
-                <input class="form-check-input steel-blue" type="radio" name="color" id="color-two">
-              </li>
-              <li class="form-check">
-                <input class="form-check-input electric-blue" type="radio" name="color" id="color-three">
-              </li>
-              <li class="form-check">
-                <input class="form-check-input dark-olive" type="radio" name="color" id="color-four">
-              </li>
-            </ul>
-          </div>
-          <div class="mt-30">
-            <p>Size</p>
-          </div>
+
 
           <div class="shopSingle-info__action row x-gap-20 y-gap-20 pt-30">
             <div class="col-auto">

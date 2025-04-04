@@ -132,15 +132,58 @@ $fname = $row['fname'];
                       <div class="productCard -type-1 text-center">
                         <div class="productCard__image">
                           <div class="ratio ratio-63:57">
-                            <img class="absolute-full-center rounded-8" src="<?php echo $image_path_thumbnail; ?>" alt="<?php echo $product_name?>">
+                            <img class="absolute-full-center rounded-8" src="<?php echo $image_path_thumbnail; ?>" alt="<?php echo $product_name ?>">
+
                           </div>
-                          <div class="productCard__controls z-3">
+
+                          <button class=" toggle_button toggle-btn-<?php echo $product_id ?>">
+
+                            <span class="d-flex items-center justify-center size-35 bg-white shadow-1 rounded-8">
+                              <i class="icon-menu-vertical"></i>
+                            </span>
+                          </button>
+
+                          <!-- <div class="toggle-element -dshb-more js-more-1-toggle-<?php echo $product_id ?>"> -->
+                          <div class="dropdown-main-content " id="dropdown-<?php echo $product_id ?>">
+                            <div class="px-25 py-25 bg-white -dark-bg-dark-2 shadow-1 border-light rounded-8">
+                              <a data-toggle="modal" data-target="<?php echo '#share-' . $product_id ?>" class="d-flex items-center">
+                                <div class="icon-share"></div>
+                                <div class="text-17 lh-1 fw-500 ml-12">Share</div>
+                              </a>
+
+                              <a href="<?php echo EDIT_PRODUCT . '?productid=' . $product_id ?>" class="d-flex items-center mt-20">
+                                <div class="fa-regular fa-edit"></div>
+                                <div class="text-17 lh-1 fw-500 ml-12">Edit</div>
+                              </a>
+
+                              <a href="<?php echo $image_path_thumbnail; ?>" class="d-none gallery__item js-gallery  d-flex items-center mt-20" data-gallery="<?php echo $product_id ?>">
+                                <div class="fa-regular fa-eye"></div>
+                                <div class="text-17 lh-1 fw-500 ml-12">Images</div>
+                              </a>
+
+
+                              <a href="<?php echo $image_path_thumbnail; ?>" class="d-flex items-center mt-20">
+                                <div class="fa-regular fa-eye"></div>
+                                <div class="text-17 lh-1 fw-500 ml-12">Available</div>
+                              </a>
+
+                              <a data-toggle="modal" data-target="<?php echo '#delete-' . $product_id ?>" class="d-flex items-center mt-20 text-red-1">
+                                <div class="fa-solid fa-trash-can"></div>
+                                <div class="text-17 lh-1 fw-500 ml-12">Delete Product</div>
+                              </a>
+                            </div>
+                          </div>
+                          <?php foreach ($other_images as $image_path): ?>
+                            <a data-barba href="<?php echo $image_path; ?>" class="gallery__item js-gallery " data-gallery="<?php echo $product_id ?>"></a>
+                          <?php endforeach; ?>
+
+                          <div class="productCard__controls z-3 d-none">
                             <a data-toggle="modal" data-target="<?php echo '#share-' . $product_id ?>" class="productCard__icon">
                               <i class="fa-regular fa-send"></i>
                             </a>
-                            <a data-barba href="<?php echo $image_path_thumbnail; ?>" class="d-none gallery__item js-gallery productCard__icon" data-gallery="<?php echo $product_id ?>">
+                            <!-- <a data-barba href="<?php echo $image_path_thumbnail; ?>" class="d-none gallery__item js-gallery productCard__icon" data-gallery="<?php echo $product_id ?>">
                               <i class="fa-regular fa-eye"></i>
-                            </a>
+                            </a> -->
                             <a href="<?php echo EDIT_PRODUCT . '?productid=' . $product_id ?>" class=" productCard__icon">
                               <i class="fa-regular fa-edit"></i>
                             </a>
@@ -157,9 +200,7 @@ $fname = $row['fname'];
                         </div>
                       </div>
 
-                      <?php foreach ($other_images as $image_path): ?>
-                        <a data-barba href="<?php echo $image_path; ?>" class="gallery__item js-gallery " data-gallery="<?php echo $product_id ?>"></a>
-                      <?php endforeach; ?>
+
                     </div>
 
                     <div class="modal fade" id="share-<?php echo $product_id; ?>" tabindex="-1">

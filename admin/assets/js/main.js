@@ -683,33 +683,43 @@
   }
   
   function clickElToggle() {
-    const target = document.querySelectorAll('[data-el-toggle]')
-    if (!target) return
+    const target = document.querySelectorAll('[data-el-toggle]');
+    if (!target) return;
   
     target.forEach(el => {
-      const attr = el.getAttribute('data-el-toggle')
-      const openElement = document.querySelector(attr)
+      const attr = el.getAttribute('data-el-toggle');
+      const openElement = document.querySelector(attr);
   
-      const attrActive = el.getAttribute('data-el-toggle-active')
-      const activeElement = document.querySelector(attrActive)
-      
-      el.addEventListener('click', () => {
-        const allDD = document.querySelectorAll('.js-click-dropdown.-is-el-visible')
-        if (allDD) {
-          allDD.forEach((el) => el.classList.remove('-is-el-visible'))
-        }
+      const attrActive = el.getAttribute('data-el-toggle-active');
+      const activeElement = document.querySelector(attrActive);
+  
+      el.addEventListener('click', (event) => {
+        event.stopPropagation(); // Prevent click from bubbling to `document`
         
-        const allActiveDD = document.querySelectorAll('.-is-dd-active')
-        if (allActiveDD) {
-          allActiveDD.forEach((el) => el.classList.remove('-is-dd-active'))
-        }
+        // Close all other dropdowns before opening the new one
+        document.querySelectorAll('.js-click-dropdown.-is-el-visible').forEach(el => {
+          el.classList.remove('-is-el-visible');
+        });
+        document.querySelectorAll('.-is-dd-active').forEach(el => {
+          el.classList.remove('-is-dd-active');
+        });
   
-        openElement.classList.toggle('-is-el-visible')
-        if (activeElement) 
-          activeElement.classList.toggle('-is-dd-active')
-      })
+        // Toggle the current dropdown
+        openElement.classList.toggle('-is-el-visible');
+        if (activeElement) activeElement.classList.toggle('-is-dd-active');
+      });
+    });
+  
+    // Click outside to close dropdown
+    document.addEventListener('click', (event) => {
+      document.querySelectorAll('.js-click-dropdown.-is-el-visible').forEach(el => {
+        if (!el.contains(event.target)) {
+          el.classList.remove('-is-el-visible');
+        }
+      });
     });
   }
+  
   
   function dropDown() {
     const target = document.querySelectorAll('.js-dropdown')

@@ -99,23 +99,52 @@ document.addEventListener('DOMContentLoaded', function() {
 
 $(document).on('click', function (event) {
     // Check if the click is outside the dropdown and button
-    if (!$(event.target).closest('.cart-dropdown, .cart-toggle-btn').length) {
-        $('.cart-dropdown').hide();
+    if (!$(event.target).closest('#cart-dropdown, .cart-toggle-btn').length) {
+        $('#cart-dropdown').hide();
     }
 });
 
 // Toggle the cart dropdown when clicking the button
 $('.cart-toggle-btn').on('click', function (event) {
     event.stopPropagation(); // Prevents click from reaching the document
-    $('.cart-dropdown').toggle();
+    $('#cart-dropdown').toggle();
 });
 
 // Prevent clicks inside the dropdown from closing it
-$('.cart-dropdown').on('click', function (event) {
+$('#cart-dropdown').on('click', function (event) {
     event.stopPropagation(); // Stops event from bubbling up to document
 });
 
 
+$(document).on("click", ".toggle_button", function (event) {
+    event.stopPropagation(); // Prevents the click from bubbling up and closing immediately
 
+    let classes = $(this).attr("class"); // Get button classes
+    let match = classes.match(/toggle-btn-([A-Za-z0-9-]+)/); // Match product IDs with letters, numbers, and dashes
 
+    if (!match) {
+        console.error("Product ID not found in class:", classes);
+        return;
+    }
 
+    let productId = match[1]; // Extract product ID
+    let dropdown = $("#dropdown-" + productId);
+
+    if (dropdown.length === 0) {
+        console.error("Dropdown not found for product ID:", productId);
+        return;
+    }
+
+    // Hide all other dropdowns first
+    $(".dropdown-main-content").not(dropdown).hide();
+
+    // Toggle the clicked dropdown
+    dropdown.toggle();
+});
+
+// **Fix: Use `mousedown` instead of `click` to prevent early closing**
+$(document).on("mousedown", function (event) {
+    if (!$(event.target).closest(".dropdown-main-content, .toggle_button").length) {
+        $(".dropdown-main-content").hide();
+    }
+});
