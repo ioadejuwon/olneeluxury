@@ -41,17 +41,6 @@ $row_prod_cat = mysqli_fetch_assoc($product_category);
 $category_name = $row_prod_cat['categoryName'];
 
 
-
-
-// Get the non-thumbnail images
-$prodsql_img = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '$product_id' ORDER BY thumbnail DESC");
-$row_prod_img_thumbnail = mysqli_fetch_assoc($prodsql_img);
-$image_path_thumbnail = $row_prod_img_thumbnail['image_path'];
-if(empty($image_path_thumbnail)){
-  $image_path_thumbnail = "product-img/product.png";
-}
-$product_img = 'admin/' . $image_path_thumbnail;
-
 $prodsql_img = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '$product_id' ORDER BY thumbnail DESC");
 $other_images = [];
 while ($row_prod_img = mysqli_fetch_assoc($prodsql_img)) {

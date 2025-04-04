@@ -89,7 +89,6 @@ function addToCart(productId) {
             discountedPrice: discountedPrice,
             image: productImage,
             yards: selectedYards,
-            size: selectedSize
         });
         // showNotification(productName + ' added to cart', 'success');
         showNotification('Added to cart.', 'success');
@@ -312,7 +311,6 @@ function displayCheckoutItems() {
                     <div class="content">
                         <div class="info">
                             <p class="name text-line-clamp-">${item.name}</p>
-                            <span class="variant">${item.size}</span>
                         </div>
                         <span class="price">₦${totalPrice}</span>
                     </div>
