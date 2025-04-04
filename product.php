@@ -55,7 +55,11 @@ $product_img = 'admin/' . $image_path_thumbnail;
 $prodsql_img = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '$product_id' ORDER BY thumbnail DESC");
 $other_images = [];
 while ($row_prod_img = mysqli_fetch_assoc($prodsql_img)) {
-  $other_images[] = 'admin/' . $row_prod_img['image_path'];
+  $image_path = $row_prod_img['image_path'];
+  if(empty($image_path)){
+    $image_path = "product-img/product.png";
+  }
+  $other_images[] = 'admin/' . $image_path;
 }
 
 ?>
