@@ -430,6 +430,7 @@ function updateYards(productId, change) {
     saveCartItems(cartItems);
     updateCartTotal();
     displayCartItems();
+    displayCartHeader();
 }
 
 
