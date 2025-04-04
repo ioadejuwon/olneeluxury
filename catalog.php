@@ -210,7 +210,7 @@ include_once "comp/header.php"
                         }else{
                             $image_path_thumbnail2 = $row_prod_img_thumbnail['image_path'];
                         }
-                        $product_img = 'admin/' . $image_path_thumbnail2;
+                        $image_path_thumbnail = 'admin/' . $image_path_thumbnail2;
 
 
 
