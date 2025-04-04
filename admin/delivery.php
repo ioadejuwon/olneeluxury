@@ -220,7 +220,7 @@ $deliveries = mysqli_query($conn, "SELECT * FROM olnee_delivery");
 			<div class="modal-header border-bottom-dark">
 				<h4 class="modal-title">Add Delivery Rate</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<img src="assets/img/icons/close.png" alt="" width="20%">
+					<img src="admin/assets/img/icons/close.png" alt="" width="20%">
 				</button>
 			</div>
 			<div class="modal-body pt-0">
