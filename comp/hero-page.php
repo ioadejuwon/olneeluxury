@@ -50,33 +50,6 @@
       </div>
     </div>
 
-    <div data-anim-child="slide-up delay-6" class="row y-gap-20 justify-center mainSlider__items d-none">
-
-      <div class="col-xl-3 col-md-4 col-sm-6">
-        <div class="mainSlider-item text-center">
-          <img src="img/home-2/mainSlider/icons/1.svg" alt="icon">
-          <h4 class="text-20 fw-500 lh-18 text-white mt-8">100,000 online courses</h4>
-          <p class="text-15 text-white">Explore a variety of fresh topics</p>
-        </div>
-      </div>
-
-      <div class="col-xl-3 col-md-4 col-sm-6">
-        <div class="mainSlider-item text-center">
-          <img src="img/home-2/mainSlider/icons/2.svg" alt="icon">
-          <h4 class="text-20 fw-500 lh-18 text-white mt-8">Expert instruction</h4>
-          <p class="text-15 text-white">Find the right instructor for you</p>
-        </div>
-      </div>
-
-      <div class="col-xl-3 col-md-4 col-sm-6">
-        <div class="mainSlider-item text-center">
-          <img src="img/home-2/mainSlider/icons/3.svg" alt="icon">
-          <h4 class="text-20 fw-500 lh-18 text-white mt-8">Lifetime access</h4>
-          <p class="text-15 text-white">Learn on your schedule</p>
-        </div>
-      </div>
-
-    </div>
   </div>
 
   <button class="swiper-prev button -white-20 text-white size-60 rounded-full d-flex justify-center items-center js-prev">
