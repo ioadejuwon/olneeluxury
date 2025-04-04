@@ -148,3 +148,87 @@ $(document).on("mousedown", function (event) {
         $(".dropdown-main-content").hide();
     }
 });
+
+
+
+
+
+
+
+function togglefilterDropdown() { // Dashboard filter
+    const dropdown = document.getElementById('filterDropdown');
+    dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+}
+
+function fetchFiltered(timeframe) {
+    // Hide the dropdown after a selection
+    $('#filterDropdown').hide();
+    
+    // Update the dropdown button text with the selected timeframe
+    $('#dropdownFilter').text(timeframe.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())); // Formats timeframe text
+    
+    // Retrieve the unique_id from the data attribute
+    const userId = $('[data-user-id]').data('user-id');
+    
+    // Send an AJAX request using jQuery
+    $.ajax({
+        url: 'inc/filterdashboard.php',
+        type: 'GET',
+        data: {
+            filter: timeframe,
+            userid: userId
+        },
+        dataType: 'json',
+        success: function(response) {
+            // Update the store visits
+            $('#storeVisits').text(response.storeclickstotal);
+            
+            // Update the total amount
+            $('#totalAmount').text(formatCurrency(response.totalAmount));
+            $('#numorders').text(response.numorders);
+            
+            // Clear existing product table rows
+            $('#productstable tbody').empty();
+            
+            // Check if there are no products
+            // if (response.products.length === 0) {
+            //     $('#noProductsMessage').remove();
+            //     $('#productstable').append(
+            //         `<tr class="col-md-12 text-center">
+            //             <td colspan="4">
+            //                 <div class="py-30 bg-light-4 rounded-8 border-light col-md-12 mt-50 mb-50 move-center">
+            //                     <img src="assets/img/edit/store.png" style="width:20%">
+            //                     <h3 class="px-30 text- fw-500 mt-20 mb-20">
+            //                         No products found for the specified period.
+            //                     </h3>
+
+            //                     <div class="col-md-6 col-8 move-center">
+            //                         <a href="create" class="button -md -deep-green-1 text-white p-0">Add Products</a>
+            //                     </div>
+            //                 </div>
+            //             </td>
+            //         </tr>`
+            //     );
+            // } else {
+            //     $('#noProductsMessage').remove();
+            //     response.products.forEach(function(product) {
+            //         $('#productstable tbody').append(
+            //             `<tr>
+            //                 <td class="sm:d-none">
+            //                     <div class="size-50 rounded-8 brand-pic-display" style="background-image: url('${product.image_path_thumbnail}');"></div>
+            //                 </td>
+            //                 <td>${product.ptitle}</td>
+            //                 <td>${product.pprice}</td>
+            //                 <td>${product.orders_count}</td>
+            //             </tr>`
+            //         );
+            //     });
+            // }
+            
+       
+        },
+        error: function() {
+            console.error('Failed to fetch filtered data');
+        }
+    });
+}

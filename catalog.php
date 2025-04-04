@@ -188,6 +188,7 @@ include_once "comp/header.php"
 
                 <div class="row y-gap-30 pt-">
                     <?php
+                    // $prodsql = mysqli_query($conn, "SELECT * FROM products WHERE availability = 1");
                     $prodsql = mysqli_query($conn, "SELECT * FROM products");
                     while ($row_prod = mysqli_fetch_assoc($prodsql)) {
                         $product_name = $row_prod['producttitle']; // Assuming the column name for the product name is 'product_name'
@@ -196,6 +197,8 @@ include_once "comp/header.php"
                         $original_price = '&#8358;' . number_format($price);
                         $discounted_price = '&#8358;' . number_format($dis_price);
                         $product_id = $row_prod['productid'];
+
+                        $availability = $row_prod['availability'];
 
                         // Get the thumbnail image
                         $prodsql_img_thumbnail = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '$product_id' AND thumbnail = 1");

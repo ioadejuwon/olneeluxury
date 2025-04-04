@@ -243,7 +243,6 @@ function displayCartHeader() {
         emptyHeaderMessage.hide();
         emptyCartWrap.show();
         cartItems.forEach(item => {
-            // var totalPrice = (item.price * item.quantity).toFixed(2);
             var itemYards = item.yards;
             if (itemYards > 1) {
                 statement = ' Yards';
@@ -251,28 +250,27 @@ function displayCartHeader() {
                 statement = ' Yard';
             }
 
-
             headerContainer.append(`
-             <div class="row justify-between x-gap-40 pb-20">
-                <div class="col">
-                    <div class="row x-gap-10 y-gap-10 justify-between">
-                        <div class="col-2" style="width: 60px; height: 60px; background-image: url('${item.image}'); background-size: cover; background-position: center; border-radius: 8px;">
-                        </div>
-                        <div class="col-8 pl-5">
-                            <div class="text-dark-1 lh-15 h4 fw-500 text-line-clamp-1 mb-0">${item.name} </div>
-                            <div class="d-flex items-center mt-">
-                                <div class="text-18 lh-12 fw-500 text-dark-1"><span class="price">₦${item.price}</span> <span class="text-dark-1 h5">x ${item.yards} ${statement}</span></div>
+                <div class="row justify-between x-gap-40 pb-20">
+                    <div class="col">
+                        <div class="row x-gap-10 y-gap-10 justify-between">
+                            <div class="col-2" style="width: 60px; height: 60px; background-image: url('${item.image}'); background-size: cover; background-position: center; border-radius: 8px;">
                             </div>
-                        </div>
-                   
-                        <div class="col-1 text-right">
-                            <button class='remove-cart link remove' onclick="removeCartItem('${item.product_id}')"><img src="admin/assets/img/icons/close.png" alt="close" width="50%"></button>
+                            <div class="col-8 pl-5">
+                                <div class="text-dark-1 lh-15 h4 fw-500 text-line-clamp-1 mb-0">${item.name} </div>
+                                <div class="d-flex items-center mt-">
+                                    <div class="text-18 lh-12 fw-500 text-dark-1"><span class="price">₦${item.price}</span> <span class="text-dark-1 h5">x ${item.yards} ${statement}</span></div>
+                                </div>
+                            </div>
+                    
+                            <div class="col-1 text-right">
+                                <button class='remove-cart link remove' onclick="removeCartItem('${item.product_id}')"><img src="admin/assets/img/icons/close.png" alt="close" width="50%"></button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-       `);
+                
+            `);
         });
 
     }
@@ -346,7 +344,7 @@ function removeCartItem(productId) {
     showNotification('Product removed from cart.', 'error');
 }
 
-
+// Function to calculate total with discount
 function updateCartTotal() {
     let cartItems = getCartItems();
     let subtotal = cartItems.reduce((sum, item) => sum + (parseFloat(item.price) * item.yards), 0);
@@ -382,40 +380,6 @@ function updateCartTotal() {
 }
 
 
-// Function to calculate total with discount
-// function updateCartTotal() {
-//     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-//     let discount = JSON.parse(localStorage.getItem("cartDiscount")) || { couponType: "none", couponValue: 0 };
-
-//     let total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
-//     if (discount.couponType === "percentage") {
-//         total -= (discount.couponValue / 100) * total;
-//     } else if (discount.couponType === "fixed") {
-//         total -= discount.couponValue;
-//     }
-
-//     document.getElementById("totalPrice").innerText = `$${total.toFixed(2)}`;
-// }
-
-// Call on page load
-// updateCartTotal();
-
-
-
-
-// Update cart total
-// function updateCartTotal() {
-//     let cartItems = getCartItems();
-//     let subtotal = cartItems.reduce((sum, item) => sum + (parseFloat(item.price) * item.quantity), 0);
-
-//     let formattedSubtotal = formatCurrency(subtotal);
-//     $("#subtotal, #total-price2, #headerTotal").text(formattedSubtotal);
-//     formatAllPrices(); // Ensure all prices are formatted
-// }
-
-
-
 // Update Yards
 function updateYards(productId, change) {
     let cartItems = getCartItems();
@@ -432,17 +396,13 @@ function updateYards(productId, change) {
     displayCartHeader();
 }
 
-
+// Apply Coupon
 function applyCoupon() {
     let code = document.getElementById("couponCode").value.trim();
-
     if (code === "") {
-        // alert("");
         showNotification('Please enter a coupon code.', 'error');
         return;
     }
-
-    // Send AJAX request to check coupon validity
     $.ajax({
         url: "admin/inc/check_coupon.php",
         method: "POST",
@@ -473,7 +433,6 @@ function applyCoupon() {
 function updateCheckoutTotal() {
     let cartItems = getCartItems();
     let subtotal = cartItems.reduce((sum, item) => sum + (parseFloat(item.price) * item.yards), 0);
-
     let selectedOption = $('select[name="deliverycost"]').find(':selected');
     let shippingCost = parseFloat(selectedOption.attr('data-cost')) || 0;
     let shippingId = selectedOption.val();
@@ -490,17 +449,12 @@ function updateCheckoutTotal() {
     } else if (discountData.couponType === 2) {
         discountAmount = discountData.couponValue;
     }
-
     // showNotification (discountData.couponType);
     discountAmount = Math.min(discountAmount, subtotal);
-    // let total = subtotal + shippingCost;
 
     let total = subtotal - discountAmount + shippingCost; // Apply discount
-
-    // Ensure total is not negative
-    total = total < 0 ? 0 : total;
-
-
+    
+    total = total < 0 ? 0 : total; // Ensure total is not negative
     // Update UI
     $('#subtotal').text(formatCurrency(subtotal));
     $('#shipping').text(formatCurrency(shippingCost));
@@ -516,7 +470,6 @@ function restoreShippingSelection() {
     }
 }
 
-
 // Clear the cart after submission for order is successful  
 function clearCartAfterPayment() {
     localStorage.removeItem("olnee_cart"); // Remove cart items
@@ -526,7 +479,6 @@ function clearCartAfterPayment() {
     // Optional: Redirect user or show a success message
     // alert("Payment successful! Your cart has been cleared.");
 }
-
 
 // Function to save customer details to local storage
 function saveCustomerDetailsToLocalStorage() {
@@ -561,12 +513,7 @@ function getCustomerDetails() {
         $('input[name="city"]').val(customerDetails.city || '');
         $('input[name="state"]').val(customerDetails.state || '');
         $('select[name="country"]').val(customerDetails.country || '');
-        // $('select[name="deliverycost"]').val(customerDetails.delivery || '');
         $('textarea[name="notes"]').val(customerDetails.notes || '');
-
-        // var deliveryPrice = customerDetails.delivery;
-        // var formattedDeliveryPrice = formatCurrency(deliveryPrice);
-        // $('.delivery-price').text(formattedDeliveryPrice);
     }
 }
 
@@ -577,7 +524,6 @@ function restoreCustomerDetails() {
         getCustomerDetails();
     }
 }
-
 
 // Submit form for paymentBegin
 $('#checkoutForm').on('submit', function (event) {
@@ -654,7 +600,6 @@ $('#checkoutForm').on('submit', function (event) {
     });
 });
 // Submit form for payment end
-
 
 // ======================== Event Listeners ========================
 

@@ -23,6 +23,8 @@
           $discounted_price = '&#8358;' . number_format($dis_price);
           $product_id = $row_prod['productid'];
 
+          $availability = $row_prod['availability'];
+
           // Get the thumbnail image
           $prodsql_img_thumbnail = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '$product_id' AND thumbnail = 1");
           $row_prod_img_thumbnail = mysqli_fetch_assoc($prodsql_img_thumbnail);

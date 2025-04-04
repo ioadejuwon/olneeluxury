@@ -124,8 +124,8 @@ $deliveries = mysqli_query($conn, "SELECT * FROM olnee_delivery");
             <div class="col-sm-6">
               <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Country <span class="text-red-1"></span></label>
               <select class="selectize wide js-selectize" class="form-select" name="country">
-                <option value="NG">Nigeria</option>
-                <option value="GH">Ghana</option>
+                <option value="Nigeria">Nigeria</option>
+                <option value="Ghana">Ghana</option>
               </select>
             </div>
 

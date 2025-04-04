@@ -7,7 +7,7 @@
         <div class="productCard__image">
             <div class="ratio ratio-63:57">
                 <img class="absolute-full-center rounded-8"
-                    src="<?php echo $image_path_thumbnail; ?>" alt="<?php echo $product_name?>">
+                    src="<?php echo $image_path_thumbnail; ?>" alt="<?php echo $product_name ?>">
             </div>
             <div class="productCard__controls z-3">
                 <a data-toggle="modal" data-target="<?php echo '#share-' . $product_id ?>" class="productCard__icon">
@@ -38,12 +38,33 @@
             <div class="text-17 fw-500 text-deep-green-1 mt-5 price">
                 <?php echo $price; ?>
             </div>
-            <div class="productCard__button d-inline-block add_to_cart_btn" style="width: 100% !important">
-                <button type="button" class="button fs-16 w-100 text-white -deep-green-1  mt-5 add-to-cart-btn" data-product-id="<?php echo $product_id; ?>"
-                    style="width:100%; font-size: 16px; line-height: 18px; font-weight: 500; height: 60px;">
-                    Add To Cart
-                </button>
-            </div>
+            <?php
+
+            if ($availability == 1) {
+            ?>
+                <div class="productCard__button d-inline-block add_to_cart_bt" style="width: 100% !important">
+                    <button type="button" class="button fs-16 w-100 text-white -deep-green-1  mt-5 add-to-cart-btn" data-product-id="<?php echo $product_id; ?>"
+                        style="width:100%; font-size: 16px; line-height: 18px; font-weight: 500; height: 60px;">
+                        Add To Cart
+                    </button>
+                </div>
+
+            <?php
+
+            } elseif ($availability == 0) {
+            ?>
+                <div class="productCard__button d-inline-block" style="width: 100% !important">
+                    <button disabled type="button" class="button fs-16 w-100 text-white -red-3  mt-5"
+                        style="width:100%; font-size: 16px; line-height: 18px; font-weight: 500; height: 60px;">
+                        Sold Out
+                    </button>
+                </div>
+
+            <?php
+            }
+
+            ?>
+
         </div>
     </div>
 

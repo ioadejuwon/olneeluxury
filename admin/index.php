@@ -16,26 +16,27 @@ include_once "ad_comp/adm-header.php";
 
 $sql = mysqli_query($conn, "SELECT * FROM olnee_admin WHERE user_id = '{$_SESSION['user_id']}'");
 $row = mysqli_fetch_assoc($sql);
+
 $products_sql = mysqli_query($conn, "SELECT * FROM products ");
 $count_row_product = mysqli_num_rows($products_sql);
+
 $categories_sql = mysqli_query($conn, "SELECT * FROM olnee_categories");
 $count_row_categories = mysqli_num_rows($categories_sql);
 
-$orders_sql = mysqli_query($conn, "SELECT * FROM olnee_orders");
+$orders_sql = mysqli_query($conn, "SELECT * FROM olnee_orders WHERE DATE(created_at) = CURDATE()");
 $count_row_orders = mysqli_num_rows($orders_sql);
 
-$total_amount = 0;
-$orders_sql_success = mysqli_query($conn, "SELECT * FROM olnee_orders WHERE status = 'Successful'");
-while ($row_orders = mysqli_fetch_assoc($orders_sql_success)) {
-  $order_amount = $row_orders['total'];
-  // Add the value to the total amount
-  $total_amount += $order_amount;
-}
-// $total_amount = '&#8358;' . number_format($total_amount, 2);
+// $total_amount = 0;
+$orders_sql_success = mysqli_query($conn, "SELECT SUM(total) as totalprice FROM olnee_orders WHERE status = 'Successful' AND DATE(created_at) = CURDATE()");
+$row_orders = mysqli_fetch_assoc($orders_sql_success);
+$order_amount = $row_orders['totalprice'];
+$total_amount = $order_amount;
+
+include_once "ad_comp/adm-sidebar.php" 
 ?>
-<?php include_once "ad_comp/adm-sidebar.php" ?>
+
 <div class="dashboard__content bg-light-4">
-  <div class="row pb-30 mb-10">
+  <div class="row pb-30 mb-10 justify-between">
     <div class="col-auto">
       <h2 class="text-30 lh-12 fw-700">Dashboard</h2>
       <div class="breadcrumbs mt-10 pt-0 pb-0">
@@ -49,12 +50,37 @@ while ($row_orders = mysqli_fetch_assoc($orders_sql_success)) {
         </div>
       </div>
     </div>
+    <div class="col-auto">
+			<div class="dropdown">
+				<button class="dropdown__button d-flex items-center text-14 bg-white -dark-bg-dark-2 border-light rounded-8 px-20 py-10 text-14 lh-12" onclick="togglefilterDropdown()" data-user-id="<?php echo $user_id; ?>">
+					<span id="dropdownFilter">Filter</span>
+					<i class="icon text-9 ml-40 icon-chevron-down"></i>
+				</button>
+				<div id="filterDropdown" class="dropdown__content -dark-bg-dark-2 -dark-border-white-10" style="display: none;">
+					<div>
+						<a href="javascript:void(0);" onclick="fetchFiltered('today')" class="d-block active">Today</a>
+					</div>
+					<div>
+						<a href="javascript:void(0);" onclick="fetchFiltered('this_week')" class="d-block">This Week</a>
+					</div>
+					<div>
+						<a href="javascript:void(0);" onclick="fetchFiltered('this_month')" class="d-block">This Month</a>
+					</div>
+					<div>
+						<a href="javascript:void(0);" onclick="fetchFiltered('this_year')" class="d-block">This Year</a>
+					</div>
+					<div>
+						<a href="javascript:void(0);" onclick="fetchFiltered('lifetime')" class="d-block">Lifetime</a>
+					</div>
+				</div>
+			</div>
+		</div>
   </div>
   <div class="row y-gap-5" style="--bs-gutter-x:5px !important;">
     <div class="col-6 col-xl-3">
       <div class="d-flex justify-between items-center py-35 px-35 lg:py-20 lg:px-20 rounded-8 bg-white -dark-bg-dark-1 shadow-4">
         <div>
-          <div class="text-24 lh-1 fw-700 text-dark-1 price"><?php echo $total_amount; ?></div>
+          <div class="text-24 lh-1 fw-700 text-dark-1 price" id="totalAmount"><?php echo $total_amount; ?></div>
           <div class="lh-1 mt-10 ">
             <span class="lg:d-none">Total </span>Sales
           </div>
@@ -76,7 +102,7 @@ while ($row_orders = mysqli_fetch_assoc($orders_sql_success)) {
     <div class="col-6 col-xl-3">
       <div class="d-flex justify-between items-center py-35 px-35 lg:py-20 lg:px-20 rounded-8 bg-white -dark-bg-dark-1 shadow-4">
         <div>
-          <div class="text-24 lh-1 fw-700 text-dark-1"><?php echo $count_row_orders ?></div>
+          <div class="text-24 lh-1 fw-700 text-dark-1" id="numorders"><?php echo $count_row_orders ?></div>
           <div class="lh-1 mt-10 ">
             <span class="lg:d-none">Total </span>Orders
           </div>
@@ -101,8 +127,8 @@ while ($row_orders = mysqli_fetch_assoc($orders_sql_success)) {
     <div class="col-xl-12 col-md-12">
       <div class="rounded-8 bg-white -dark-bg-dark-1 shadow-4 h-100">
         <div class="d-flex justify-between items-center py-20 px-30 border-bottom-light">
-          <h2 class="text-24 lh-1 fw-600">Orders</h2>
-          <div class="">
+          <h2 class="text-20 lh-1 fw-600">Most Recent Orders</h2>
+          <div class="d-none">
             <div class="dropdown js-dropdown js-category-active">
               <div class="dropdown__button d-flex items-center text-14 bg-white -dark-bg-dark-1 border-light rounded-8 px-20 py-10 text-14 lh-12" data-el-toggle=".js-category-toggle" data-el-toggle-active=".js-category-active">
                 <span class="js-dropdown-title">This Week</span>
@@ -133,9 +159,9 @@ while ($row_orders = mysqli_fetch_assoc($orders_sql_success)) {
             </thead>
             <tbody id="">
               <?php
-              $orders = mysqli_query($conn, "SELECT * FROM olnee_orders");
+              $orders = mysqli_query($conn, "SELECT * FROM olnee_orders LIMIT 5");
               $count_row_orders = mysqli_num_rows($orders);
-              if ($count_row_coupon != 0) {
+              if ($count_row_orders != 0) {
 
 
 
