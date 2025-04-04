@@ -116,6 +116,46 @@ $(document).ready(function () {
     });
     // Edit product in the database end
 
+    $(document).on("click", ".toggle-availability", function (event) {
+        event.preventDefault(); // Prevent default link behavior
+
+        let link = $(this);
+        let productId = link.data("product-id");
+        let newStatus = link.data("status") == 1 ? 0 : 1; // Toggle between 1 and 0
+
+        $.ajax({
+            url: "inc/update_availability.php",
+            type: "POST",
+            data: { product_id: productId, status: newStatus },
+            dataType: "json",
+            success: function (response) {
+                if (response.success) {
+                    // Update the UI
+                    link.data("status", newStatus);
+                    link.find("#availability-text").text(newStatus ? "Available" : "Unavailable");
+
+                    // Optional: Change icon color based on status
+                    let icon = link.find(".fa-eye");
+                    if (newStatus === 1) {
+                        icon.css("color", "green");
+                    } else {
+                        icon.css("color", "red");
+                    }
+
+                    showNotification(response.message, "success");
+                } else {
+                    console.error("Error updating availability:", response.message);
+                    showNotification(response.message, "error");
+                }
+            },
+            error: function () {
+                console.error("AJAX request failed");
+                showNotification("Request failed, try again.", "error");
+            }
+        });
+    });
+
+
 });
 
 

@@ -113,6 +113,7 @@ $fname = $row['fname'];
                     $original_price = '&#8358;' . number_format($price);
                     $discounted_price = '&#8358;' . number_format($dis_price);
                     $product_id = $row_prod['productid'];
+                    $availability = $row_prod['availability'];
 
                     // Get the thumbnail image
                     $prodsql_img_thumbnail = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '$product_id' AND thumbnail = 1");
@@ -147,7 +148,7 @@ $fname = $row['fname'];
                           <div class="dropdown-main-content " id="dropdown-<?php echo $product_id ?>">
                             <div class="px-25 py-25 bg-white -dark-bg-dark-2 shadow-1 border-light rounded-8">
                               <a data-toggle="modal" data-target="<?php echo '#share-' . $product_id ?>" class="d-flex items-center">
-                                <div class="icon-share"></div>
+                                <div class="fa-regular fa-send"></div>
                                 <div class="text-17 lh-1 fw-500 ml-12">Share</div>
                               </a>
 
@@ -161,15 +162,17 @@ $fname = $row['fname'];
                                 <div class="text-17 lh-1 fw-500 ml-12">Images</div>
                               </a>
 
-
-                              <a href="<?php echo $image_path_thumbnail; ?>" class="d-flex items-center mt-20">
+                              <a href="#" class="toggle-availability d-flex items-center mt-20" data-product-id="<?php echo $product_id; ?>" data-status="<?php echo $availability; ?>">
                                 <div class="fa-regular fa-eye"></div>
-                                <div class="text-17 lh-1 fw-500 ml-12">Available</div>
+                                <div class="text-17 lh-1 fw-500 ml-12 " id="availability-text">
+                                  <?php echo $availability ? "Available" : "Unavailable"; ?>
+                                </div>
                               </a>
+
 
                               <a data-toggle="modal" data-target="<?php echo '#delete-' . $product_id ?>" class="d-flex items-center mt-20 text-red-1">
                                 <div class="fa-solid fa-trash-can"></div>
-                                <div class="text-17 lh-1 fw-500 ml-12">Delete Product</div>
+                                <div class="text-17 lh-1 fw-500 ml-12">Delete</div>
                               </a>
                             </div>
                           </div>

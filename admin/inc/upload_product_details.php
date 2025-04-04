@@ -19,7 +19,7 @@ if (empty($_POST['producttitle']) || empty($_POST['productdescription']) || empt
     $product_id = $productID;
 
     // Insert form data into the products table
-    $insertFormDataQuery = "INSERT INTO products (productid, producttitle, user_id, yards, productcategory, price, discount_price, productdescription, shortdescription) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $insertFormDataQuery = "INSERT INTO products (productid, producttitle, user_id, yards, productcategory, price, discount_price, productdescription, shortdescription, availability) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1)";
     $stmt = mysqli_prepare($conn, $insertFormDataQuery);
     mysqli_stmt_bind_param($stmt, "sssisssss", $product_id, $producttitle, $user_id, $yards, $productcategory, $price, $discount_price, $productdescription, $shortdescription);
 
