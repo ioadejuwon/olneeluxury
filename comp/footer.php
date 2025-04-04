@@ -36,7 +36,7 @@
         <div class="row y-gap-30 pb-60">
             <div class="col-xl-3 col-lg-5 col-md-6">
                 <div class="footer-header__logo">
-                    <img src="admin/assets/img/general/logo-dark.svg" alt="logo">
+                    <!-- <img src="admin/assets/img/general/logo-dark.svg" alt="logo"> -->
                 </div>
 
                 <div class="mt-30">
