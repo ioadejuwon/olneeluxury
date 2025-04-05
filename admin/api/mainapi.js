@@ -33,33 +33,9 @@ function formatAllPrices() {
     });
 }
 
-// function formatCompactCurrency(amount) {
-//     amount = parseFloat(amount);
-//     if (isNaN(amount)) return ''; // Prevent display of 'NaN' or '₦NaN'
-
-//     let formattedAmount;
-//     if (amount >= 1000000000) {
-//         formattedAmount = (amount / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B';
-//     } else if (amount >= 1000000) {
-//         formattedAmount = (amount / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
-//     } else if (amount >= 1000) {
-//         formattedAmount = (amount / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
-//     }else if (amount < 1000) {
-//         formattedAmount = (amount/1).toFixed(1).replace(/\.0$/, '');
-//     } else {
-//         formattedAmount = amount;
-//     }
-
-//     return '₦' + formattedAmount;
-// }
-
 function formatCompactCurrency(amount) {
     amount = parseFloat(amount);
-    if (isNaN(amount)) return '';
-
-    if (amount === 0) {
-        return 'Free';
-    }
+    if (isNaN(amount)) return ''; // Prevent display of 'NaN' or '₦NaN'
 
     let formattedAmount;
     if (amount >= 1000000000) {
@@ -68,13 +44,14 @@ function formatCompactCurrency(amount) {
         formattedAmount = (amount / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
     } else if (amount >= 1000) {
         formattedAmount = (amount / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+    }else if (amount < 1000) {
+        formattedAmount = (amount).toFixed(2).replace(/\.0$/, '');
     } else {
-        formattedAmount = amount.toFixed(0);
+        formattedAmount = amount;
     }
 
     return '₦' + formattedAmount;
 }
-
 
 function formatPrices() {
     $('.priceAll').each(function () {
@@ -113,6 +90,7 @@ function copyButton() {
 
 $(document).ready(function () {
     formatAllPrices(); // Ensure all prices are formatted
+    formatPrices(); // Ensure all prices are formatted
     // setTimeout(formatAllPrices, 500); // Slight delay in case prices are dynamically loaded
     copyButton();
 
