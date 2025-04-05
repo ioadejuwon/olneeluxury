@@ -9,11 +9,11 @@
                         </button>
                     </div>
 
-                    <div class="header__logo ml-30 md:ml-20">
+                    <div class="header__logo ml-30 md:ml-20 mt-10">
                         <a data-barba href="<?php echo BASE_URL ?>">
                             <!-- <img class="no-big-screen" src="assets/img/icon.png" alt="logo" width="50px"> -->
                             <!-- <img class="lg:d-none" src="assets/img/icon.png" alt="logo" width="50px"> -->
-                            <h2 class="mt-3">Olnee Luxury</h2>
+                            <h2>Olnee Luxury</h2>
 
                         </a>
                     </div>
