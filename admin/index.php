@@ -59,7 +59,7 @@ include_once "ad_comp/adm-sidebar.php"
     <div class="col-auto">
 			<div class="dropdown">
 				<button class="dropdown__button d-flex items-center text-14 bg-white -dark-bg-dark-2 border-light rounded-8 px-20 py-10 text-14 lh-12" onclick="togglefilterDropdown()" data-user-id="<?php echo $user_id; ?>">
-					<span id="dropdownFilter">Filter</span>
+					<span id="dropdownFilter" style="color:#000 !important;">Filter</span>
 					<i class="icon text-9 ml-40 icon-chevron-down"></i>
 				</button>
 				<div id="filterDropdown" class="dropdown__content -dark-bg-dark-2 -dark-border-white-10" style="display: none;">
@@ -86,7 +86,7 @@ include_once "ad_comp/adm-sidebar.php"
     <div class="col-6 col-xl-3">
       <div class="d-flex justify-between items-center py-35 px-35 lg:py-20 lg:px-20 rounded-8 bg-white -dark-bg-dark-1 shadow-4">
         <div>
-          <div class="text-24 lh-1 fw-700 text-dark-1 priceAll" id="totalAmount"><?php echo $total_amount; ?></div>
+          <div class="text-24 lh-1 fw-700 text-dark-1 priceAl" id="totalAmount"><?php echo $total_amount; ?></div>
           <div class="lh-1 mt-10 ">
             <span class="lg:d-none">Total </span>Sales
           </div>
