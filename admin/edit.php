@@ -173,10 +173,20 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories");
                           Are you sure you want to delete this image?
                           <br>
                           This process is not reversible.
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="button -sm -deep-green-1 text-white" data-dismiss="modal">Close</button>
-                          <a type="button" href="api/delete_img.php?productid=<?php echo $product_id . '&img_id=' . $image_id ?>" class="button -sm -red-1 text-white">Delete Image</a>
+                        <!-- </div> -->
+                        <!-- <div class="modal-footer"> -->
+                        <ul class="row gx-4 mt-4">
+															<li class="col-6 d-noe">
+																<button class="button -outline-dark-3 -md w-100" data-bs-dismiss="modal">Close</button>
+																<!-- <button class="button -md -deep-green-1 text-white" type="submit" id="submit">nn</button> -->
+															</li>
+
+															<li class="col-6 ml-1">
+                              <a type="button" href="api/delete_img.php?productid=<?php echo $product_id . '&img_id=' . $image_id ?>" class="button -md -red-1 text-white">Delete Image</a>
+															</li>
+														</ul>
+                          <!-- <button type="button" class="button -sm -deep-green-1 text-white" data-dismiss="modal">Close</button> -->
+                          <!-- <a type="button" href="api/delete_img.php?productid=<?php echo $product_id . '&img_id=' . $image_id ?>" class="button -sm -red-1 text-white">Delete Image</a> -->
                         </div>
                       </div>
                     </div>

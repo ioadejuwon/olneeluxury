@@ -9,6 +9,6 @@
     <script src="assets/js/vendors.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="api/mainapi.js"></script>
-    <script src="assets/js/script.js"></script>
+    <script src="assets/js/scripts.js"></script>
 </body>
 </html>

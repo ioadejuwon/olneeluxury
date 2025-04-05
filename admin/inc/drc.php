@@ -35,6 +35,7 @@ define('WISHLIST', BASE_URL.'wishlist');
 define('COLLECTION', BASE_URL.'collections');
 define('CATEGORY', BASE_URL.'category?id=');
 define('BLOG', BASE_URL.'blog');
+define('SEARCH', BASE_URL.'search');
 define('CHECKOUT', BASE_URL.'checkout');
 define('ORDER', BASE_URL.'order?id=');
 define('CONFIRM_PAY', BASE_URL.'inc/conxfirm');

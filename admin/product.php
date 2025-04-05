@@ -264,6 +264,7 @@ $fname = $row['fname'];
                           <div class="modal-body p-4">
                             <p class="text-dark">Are you sure you want to delete the product "<span class="fw-600"><?php echo $product_name ?></span>". This process is irreversible.</p>
                             <p class="text-dark">Users who have added "<span class="fw-600"><?php echo $product_name ?></span>" to cart will still be able to process the order.</p>
+                           
                             <ul class="row gx-4 mt-4">
                               <li class="col-6 d-none">
                                 <button class="button -outline-dark-3 -md w-100" data-bs-dismiss="modal">Close</button>

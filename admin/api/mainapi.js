@@ -72,7 +72,6 @@ function formatPrices() {
 }
 
 
-
 function copyButton() {
     $('.copyButton').click(function () {
         // $(document).on('click', '.copyButton', function() {

@@ -3,26 +3,20 @@ $pagetitle = "Collection";
 require_once "admin/inc/config.php";
 include_once "admin/inc/drc.php";
 
-$search = $_GET['s'];
+$searchValue = $_GET['s'];
+$search = "%" . $searchValue . "%";
 
-$categoryquery = "SELECT * FROM products WHERE categoryid = ?";
-$stmt = mysqli_prepare($conn, $categoryquery);
-mysqli_stmt_bind_param($stmt, "s", $category_id); // Bind the parameter
-mysqli_stmt_execute($stmt); // Execute the prepared statement
-$result = mysqli_stmt_get_result($stmt); // Get the result
-$count_row_category = $result->num_rows;
 
-if ($count_row_category < 1) {
-    header("location: " . COLLECTION);
-}
 
-$row_categories = mysqli_fetch_assoc($result);
-$categoryname = $row_categories["categoryName"];
+// if ($count_row < 1) {
+//     header("location: " . COLLECTION);
+// }
+
+
+// $categoryname = $row_categories["categoryName"];
+
 include_once "comp/head.php";
 include_once "comp/header.php";
-
-
-
 
 ?>
 
@@ -35,7 +29,7 @@ include_once "comp/header.php";
             <div class="row justify-cente text-left">
                 <div class="col-auto pt-30 pb-30">
                     <div data-anim="slide-up delay-1">
-                        <h1 class="page-header__title text-white"><?php echo $categoryname ?></h1>
+                        <h1 class="page-header__title text-white">Products that match "<?php echo $searchValue ?>"</h1>
                     </div>
 
                     <div data-anim="slide-up delay-2">
@@ -205,10 +199,17 @@ include_once "comp/header.php";
 
                 <div class="row y-gap-30 pt-">
                     <?php
-                    $prodsql = mysqli_query($conn, "SELECT * FROM products WHERE productcategory = '$category_id'");
-                    $count_row_products = mysqli_num_rows($prodsql);
-                    if ($count_row_products > 0) {
-                        while ($row_prod = mysqli_fetch_assoc($prodsql)) {
+                    $query = "SELECT * FROM products WHERE producttitle LIKE ? OR shortdescription LIKE ? OR productdescription LIKE ? ORDER BY created_at DESC";
+
+                    $stmt = mysqli_prepare($conn, $query);
+                    mysqli_stmt_bind_param($stmt, "sss", $search, $search, $search); // Bind the parameter
+                    mysqli_stmt_execute($stmt); // Execute the prepared statement
+                    $result = mysqli_stmt_get_result($stmt); // Get the result
+                    $count_row = $result->num_rows;
+                    // $row_categories = mysqli_fetch_assoc($result);
+
+                    if ($count_row > 0) {
+                        while ($row_prod = mysqli_fetch_assoc($result)) {
                             $product_name = $row_prod['producttitle']; // Assuming the column name for the product name is 'product_name'
                             $price = $row_prod['price']; // Assuming the column name for the original price is 'original_price'
                             $dis_price = $row_prod['discount_price']; // Assuming the column name for the discounted price is 'discounted_price'
@@ -216,12 +217,23 @@ include_once "comp/header.php";
                             $discounted_price = '&#8358;' . number_format($dis_price);
                             $product_id = $row_prod['productid'];
 
+                            $availability = $row_prod['availability'];
+
                             // Get the thumbnail image
                             $prodsql_img_thumbnail = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '$product_id' AND thumbnail = 1");
                             $row_prod_img_thumbnail = mysqli_fetch_assoc($prodsql_img_thumbnail);
-                            $image_path_thumbnail = 'admin/' . $row_prod_img_thumbnail['image_path'];
-                            $product_img = $image_path_thumbnail;
+                        
 
+                            $image_path_thumbnail = $row_prod_img_thumbnail['image_path'];
+                            if (empty($image_path_thumbnail)) {
+                                $image_path_thumbnail2 = "product-img/product.png";
+                            }else{
+                                $image_path_thumbnail2 = $row_prod_img_thumbnail['image_path'];
+                            }
+                            $image_path_thumbnail = 'admin/' . $image_path_thumbnail2;
+    
+    
+    
                             // Get the non-thumbnail images
                             $prodsql_img = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '$product_id' AND thumbnail = 0");
                             $other_images = [];
