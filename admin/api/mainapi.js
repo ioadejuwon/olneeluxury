@@ -25,17 +25,41 @@ function formatCurrency(amount) {
 }
 
 
-// // Apply formatting to all elements with class "price"
-// function formatAllPrices() {
-//     $('.price').each(function () {
-//         var priceText = $(this).text().replace(/[₦,]/g, ''); // Remove existing commas and ₦
-//         $(this).text(formatCurrency(priceText));
-//     });
+// Apply formatting to all elements with class "price"
+function formatAllPrices() {
+    $('.price').each(function () {
+        var priceText = $(this).text().replace(/[₦,]/g, ''); // Remove existing commas and ₦
+        $(this).text(formatCurrency(priceText));
+    });
+}
+
+// function formatCompactCurrency(amount) {
+//     amount = parseFloat(amount);
+//     if (isNaN(amount)) return ''; // Prevent display of 'NaN' or '₦NaN'
+
+//     let formattedAmount;
+//     if (amount >= 1000000000) {
+//         formattedAmount = (amount / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B';
+//     } else if (amount >= 1000000) {
+//         formattedAmount = (amount / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+//     } else if (amount >= 1000) {
+//         formattedAmount = (amount / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+//     }else if (amount < 1000) {
+//         formattedAmount = (amount/1).toFixed(1).replace(/\.0$/, '');
+//     } else {
+//         formattedAmount = amount;
+//     }
+
+//     return '₦' + formattedAmount;
 // }
 
 function formatCompactCurrency(amount) {
     amount = parseFloat(amount);
-    if (isNaN(amount)) return ''; // Prevent display of 'NaN' or '₦NaN'
+    if (isNaN(amount)) return '';
+
+    if (amount === 0) {
+        return 'Free';
+    }
 
     let formattedAmount;
     if (amount >= 1000000000) {
@@ -45,14 +69,15 @@ function formatCompactCurrency(amount) {
     } else if (amount >= 1000) {
         formattedAmount = (amount / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
     } else {
-        formattedAmount = amount;
+        formattedAmount = amount.toFixed(0);
     }
 
     return '₦' + formattedAmount;
 }
 
-function formatAllPrices() {
-    $('.price').each(function () {
+
+function formatPrices() {
+    $('.priceAll').each(function () {
         var priceText = $(this).text().replace(/[₦,]/g, '').trim(); // Clean ₦, commas, spaces
         var formatted = formatCompactCurrency(priceText);
 

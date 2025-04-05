@@ -27,10 +27,16 @@ $orders_sql = mysqli_query($conn, "SELECT * FROM olnee_orders WHERE DATE(created
 $count_row_orders = mysqli_num_rows($orders_sql);
 
 // $total_amount = 0;
+// $orders_sql_success = mysqli_query($conn, "SELECT SUM(total) as totalprice FROM olnee_orders WHERE status = 'Successful' AND DATE(created_at) = CURDATE()");
+// $row_orders = mysqli_fetch_assoc($orders_sql_success);
+// $order_amount = $row_orders['totalprice'];
+// $total_amount = $order_amount;
+
 $orders_sql_success = mysqli_query($conn, "SELECT SUM(total) as totalprice FROM olnee_orders WHERE status = 'Successful' AND DATE(created_at) = CURDATE()");
 $row_orders = mysqli_fetch_assoc($orders_sql_success);
 $order_amount = $row_orders['totalprice'];
 $total_amount = $order_amount;
+
 
 include_once "ad_comp/adm-sidebar.php" 
 ?>
@@ -80,7 +86,7 @@ include_once "ad_comp/adm-sidebar.php"
     <div class="col-6 col-xl-3">
       <div class="d-flex justify-between items-center py-35 px-35 lg:py-20 lg:px-20 rounded-8 bg-white -dark-bg-dark-1 shadow-4">
         <div>
-          <div class="text-24 lh-1 fw-700 text-dark-1 price" id="totalAmount"><?php echo $total_amount; ?></div>
+          <div class="text-24 lh-1 fw-700 text-dark-1 priceAll" id="totalAmount"><?php echo $total_amount; ?></div>
           <div class="lh-1 mt-10 ">
             <span class="lg:d-none">Total </span>Sales
           </div>
