@@ -4,7 +4,7 @@
             <div class="col-auto">
                 <div class="d-flex items-center">
                     <div class="header__explore text-dark-1">
-                        <button class="d-flex items-center js-dashboard-home-9-sidebar-toggle">
+                        <button class="d-flex items-center js-dashboard-home-9-sidebar-toggle text-dark-1">
                             <i class="icon -dark-text-white icon-explore"></i>
                         </button>
                     </div>
@@ -13,7 +13,7 @@
                         <a data-barba href="<?php echo BASE_URL ?>">
                             <!-- <img class="no-big-screen" src="assets/img/icon.png" alt="logo" width="50px"> -->
                             <!-- <img class="lg:d-none" src="assets/img/icon.png" alt="logo" width="50px"> -->
-                            <h2>Olnee Luxury</h2>
+                            <h2 class="mt-4">Olnee Luxury</h2>
 
                         </a>
                     </div>
