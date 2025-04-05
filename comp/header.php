@@ -115,19 +115,13 @@
                     <div class="header-search__content mt-30">
                       <div class="text-17 text-dark-1 fw-500">Popular Products Now</div>
                       <?php
-                      $prodsql = mysqli_query($conn, "SELECT * FROM products LIMIT 4");
-                      while ($row_prod = mysqli_fetch_assoc($prodsql)) {
-                        $product_name = $row_prod['producttitle']; // Assuming the column name for the product name is 'product_name'
-                        $price = $row_prod['price']; // Assuming the column name for the original price is 'original_price'
-                        $dis_price = $row_prod['discount_price']; // Assuming the column name for the discounted price is 'discounted_price'
-                        $original_price = '&#8358;' . number_format($price);
-                        $discounted_price = '&#8358;' . number_format($dis_price);
-                        $product_id = $row_prod['productid'];
-
+                      $prodheader = mysqli_query($conn, "SELECT * FROM products LIMIT 4");
+                      while ($row_prod_header = mysqli_fetch_assoc($prodheader)) {
+                        $product_nameheader = $row_prod_header['producttitle']; // Assuming the column name for the product name is 'product_name'
+                        $product_idheader = $row_prod_header['productid'];
                       ?>
-
                         <div class="d-flex y-gap-5 flex-column mt-20">
-                          <a href="<?php echo PRODUCT_DETAIILS . $product_id?>" class="text-dark-1"><?php echo $product_name ?></php></a>
+                          <a href="<?php echo PRODUCT_DETAIILS . $product_idheader ?>" class="text-dark-1"><?php echo $product_nameheader ?></php></a>
                         </div>
                       <?php
                       }

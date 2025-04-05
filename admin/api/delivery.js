@@ -29,7 +29,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: 'POST',
-            url: '../inc/adddelivery.php', // The URL to the PHP script that handles the form submission
+            url: 'inc/adddelivery.php', // The URL to the PHP script that handles the form submission
             data: formData, // Send the serialized form data
             dataType: 'json', // Expect JSON response
             success: function (response) {
@@ -117,7 +117,7 @@ $(document).ready(function () {
         const deliveryid = $(this).data('deliveryid');
         const deliveryElement = $('#delivery-' + deliveryid);
         $.ajax({
-            url: '../inc/deletedelivery.php',
+            url: 'inc/deletedelivery.php',
             type: 'POST',
             data: { delivery_id: deliveryid },
             dataType: 'json',

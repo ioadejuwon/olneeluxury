@@ -28,7 +28,7 @@ $(document).ready(function () {
         var formData = $(this).serialize(); // Serialize the form data
         $.ajax({
             type: 'POST',
-            url: '../inc/couponcode.php', // The URL to the PHP script that handles the form submission
+            url: 'inc/couponcode.php', // The URL to the PHP script that handles the form submission
             data: formData, // Send the serialized form data
             dataType: 'json', // Expect JSON response
             success: function (response) {

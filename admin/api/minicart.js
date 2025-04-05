@@ -185,13 +185,13 @@ function displayCartItems() {
                     <td>
                         <div style="width: 100px; height: 100px; background-image: url('${item.image}'); background-size: cover; background-position: center; border-radius: 8px;"></div>
                     </td>
-                    <td class="pt-60  md:pt-50">
+                    <td class="pt0  md:pt-30">
                         <div class="fw-500 text-dark-1">${item.name}</div>
                     </td>
-                    <td  class="pt-60  md:pt-50">
+                    <td  class="pt-40  md:pt-30">
                         <p class="cart-price price">${item.price}</p>
                     </td>
-                    <td class="pt-50 md:pt-20">
+                    <td class="pt0 md:pt-10">
                         <div class="input-counter md:mt-20 js-input-counter">
                             <input class="input-counter__counter" type="number"  name="yards" placeholder="" value="${item.yards}">
                             <div class="input-counter__controls">
@@ -210,10 +210,10 @@ function displayCartItems() {
                             </div>
                         </div>
                     </td>
-                    <td  class="pt-60 md:pt-50">
+                    <td  class="pt-40 md:pt-30">
                         <p class="cart-total price">${totalPrice}</p>
                     </td>
-                    <td  class="pt-60 md:pt-50">
+                    <td  class="pt-30 md:pt-30">
                         <button class='remove-cart link remove' onclick="removeCartItem('${item.product_id}')"><img src="admin/assets/img/icons/close.png" alt="close" width="30%"></button>
                     </td>
                 </tr>
@@ -264,7 +264,7 @@ function displayCartHeader() {
                             </div>
                     
                             <div class="col-1 text-right">
-                                <button class='remove-cart link remove' onclick="removeCartItem('${item.product_id}')"><img src="admin/assets/img/icons/close.png" alt="close" width="50%"></button>
+                                <button class='remove-cart link remove' onclick="removeCartItem('${item.product_id}')"><img src="admin/assets/img/icons/close.png" alt="close" width="70%"></button>
                             </div>
                         </div>
                     </div>

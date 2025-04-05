@@ -85,7 +85,7 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories ORDER BY creat
                           <!-- <h5 class="modal-title"></h5> -->
                           <h2 class="modal-title h4">Add Coupon Code</h2>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                            <img src="assets/img/icons/close.png" alt="close" width="30%">
                           </button>
                         </div>
                         <div class="modal-body p-4">
@@ -108,11 +108,6 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories ORDER BY creat
                     </div>
                   </div>
                 </div>
-
-
-
-
-
               <?php
               }
             } else {
@@ -161,7 +156,7 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories ORDER BY creat
       <div class="modal-header">
         <h5 class="modal-title">Add Category</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          <img src="assets/img/icons/close.png" alt="close" width="30%">
         </button>
       </div>
       <div class="modal-body pt-0">

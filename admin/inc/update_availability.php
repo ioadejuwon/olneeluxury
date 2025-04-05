@@ -23,7 +23,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
         if ($stmt->execute()) {
             $response['success'] = true;
-            $response['message'] = 'Availability updated successfully.';
+            if($status == 1) {
+                $response['message'] = 'Product is now available.';
+            } else {
+                $response['message'] = 'Product is now unavailable.';
+            }
+            // $response['message'] = 'Availability updated successfully.';
         } else {
             $response['message'] = 'Error: ' . $stmt->error;
         }

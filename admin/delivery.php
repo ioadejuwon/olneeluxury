@@ -82,13 +82,13 @@ $deliveries = mysqli_query($conn, "SELECT * FROM olnee_delivery");
 		<div class="col-xl-12 col-md-12">
 			<div class="rounded-16 text-white shadow-4 h-100">
 
-				<div class="table-responsive">
+				<!-- <div class="table-responsive"> -->
 					<table class="table w-100">
 						<thead>
 							<tr>
 								<!-- <th>S/N</th> -->
-								<th>Delivery Label</th>
-								<th>Delivery Rate</th>
+								<th><span class="lg:d-none">Delivery&nbsp;</span>Label</th>
+								<th><span class="lg:d-none">Delivery&nbsp;</span>Rate</th>
 								<th>Action</th>
 								<!-- <th>Date Created</th> -->
 							</tr>
@@ -118,11 +118,9 @@ $deliveries = mysqli_query($conn, "SELECT * FROM olnee_delivery");
 
 							?>
 									<tr id="delivery-<?php echo $deliveryid; ?>">
-
 										<td class="underline">
 											<?php echo $deliveryName ?>
 										</td>
-
 										<td>
 											<?php echo $deliveryCost ?>
 										</td>
@@ -133,12 +131,7 @@ $deliveries = mysqli_query($conn, "SELECT * FROM olnee_delivery");
 												<a data-toggle="modal" data-target="#delete-<?php echo $deliveryid; ?>">Delete</a>
 											</div>
 										</td>
-										<!-- <td>
-											<?php echo $dateformat ?>
-										</td> -->
-
 									</tr>
-
 
 									<div id="modalTableBody">
 										<div class="modal fade" id="delete-<?php echo $deliveryid; ?>" tabindex="-1">
@@ -148,7 +141,7 @@ $deliveries = mysqli_query($conn, "SELECT * FROM olnee_delivery");
 														<!-- <h5 class="modal-title"></h5> -->
 														<h2 class="modal-title h4">Delete Delivery Rate</h2>
 														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-															<span aria-hidden="true">&times;</span>
+															<img src="assets/img/icons/close.png" alt="close" width="30%">
 														</button>
 													</div>
 													<div class="modal-body p-4 pt-0">
@@ -171,8 +164,6 @@ $deliveries = mysqli_query($conn, "SELECT * FROM olnee_delivery");
 											</div>
 										</div>
 									</div>
-
-
 								<?php
 								}
 							} else {
@@ -207,7 +198,7 @@ $deliveries = mysqli_query($conn, "SELECT * FROM olnee_delivery");
 
 						</tbody>
 					</table>
-				</div>
+				<!-- </div> -->
 
 			</div>
 		</div>
@@ -220,7 +211,7 @@ $deliveries = mysqli_query($conn, "SELECT * FROM olnee_delivery");
 			<div class="modal-header border-bottom-dark">
 				<h4 class="modal-title">Add Delivery Rate</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<img src="admin/assets/img/icons/close.png" alt="" width="20%">
+					<img src="assets/img/icons/close.png" alt="" width="20%">
 				</button>
 			</div>
 			<div class="modal-body pt-0">

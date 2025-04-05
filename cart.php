@@ -52,7 +52,7 @@ include_once "comp/header.php";
 <section class="layout-pt-md layout-pb-lg tf-page-cart-wrap">
   <div class="">
     <div class="container">
-      <div class="table-responsive">
+      <div class="table-wrapper">
         <table class="table w-1/1 d-non align-middle" id="cart-items-container" data-anim="slide-up delay-3">
           <thead>
             <tr>
@@ -76,7 +76,7 @@ include_once "comp/header.php";
 
       <div class="shopCart-footer px-16 mt-30" data-anim="slide-up delay-3">
         <div class="row justify-end y-gap-30">
-          <div class="col-xl-7">
+          <div class="col-xl-12">
             <div class="d-flex justify-end border-dark">
               <input style="border: solid 1px grey !important; width: 300px;" class="mr-4 rounded-8 px-25 py-10 form-control" id="couponCode" type="text" name="code" value="<?php echo $couponcode ?>" placeholder="Enter Coupon Code">
               <button class="button text-white -md fw-500 -deep-green-1 ml-10" type="submit" onclick="applyCoupon()">Apply<span class="lg:d-none">&nbsp;Coupon</span></button>

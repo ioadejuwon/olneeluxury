@@ -149,7 +149,7 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories");
                           <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel"><?php echo $image_id; ?></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
+                              <img src="assets/img/icons/close.png" alt="close" width="30%">
                             </button>
                           </div>
                           <div class="modal-body">

@@ -73,6 +73,17 @@
 }
 
 
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table-wrapper table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* or however wide the full table should be */
+}
+
 .img-outline {
   border: 1px solid #000000;
   border-radius: 50%;

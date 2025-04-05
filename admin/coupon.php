@@ -46,104 +46,104 @@ $deliveries = mysqli_query($conn, "SELECT * FROM olnee_coupons");
 		<div class="col-xl-12 col-md-12">
 			<div class="rounded-16 text-white shadow-4 h-100">
 
-				<div class="table-responsive">
-					<table class="table w-100">
-						<thead>
-							<tr>
-								<!-- <th>S/N</th> -->
-								<th>Coupon Name</th>
-								<th>Coupon Code</th>
-								<th>Coupon Type</th>
-								<th>Coupon Value</th>
-								<th>Date Created</th>
-							</tr>
-						</thead>
-						<tbody id="couponTableBody">
-							<?php
+				<!-- <div class="table-responsive"> -->
+				<table class="table w-100">
+					<thead>
+						<tr>
+							<!-- <th>S/N</th> -->
+							<th><span class="lg:d-none">Coupon&nbsp;</span>Name</th>
+							<th><span class="lg:d-none">Coupon&nbsp;</span>Code</th>
+							<th><span class="lg:d-none">Coupon&nbsp;</span>Type</th>
+							<th><span class="lg:d-none">Coupon&nbsp;</span>Value</th>
+							<th>Date Created</th>
+						</tr>
+					</thead>
+					<tbody id="couponTableBody">
+						<?php
 
-							$couponquery = "SELECT * FROM olnee_coupons  ORDER BY created_at DESC ";
-							$couponresult = mysqli_query($conn, $couponquery);
-							$count_row_coupon = mysqli_num_rows($couponresult);
+						$couponquery = "SELECT * FROM olnee_coupons  ORDER BY created_at DESC ";
+						$couponresult = mysqli_query($conn, $couponquery);
+						$count_row_coupon = mysqli_num_rows($couponresult);
 
-							if ($count_row_coupon != 0) {
-
-
-								while ($row = mysqli_fetch_assoc($couponresult)) {
-
-									$couponName = $row['couponName'];
-									$couponCode = $row['couponCode'];
-									$couponType = $row['couponType'];
-									$couponValue = $row['couponValue'];
-									if ($couponType == 1) {
-										$couponType = 'Percentage Off';
-										$couponValue = $couponValue . '% off';
-										// $couponPercent = $row['couponPercent'];
-									} elseif ($couponType == 2) {
-										$couponType = 'Fixed amount';
-										// $couponPercent = $row['couponValue'];
-										$couponValue = NAIRA . number_format($couponValue, 2);
-									} else {
-										$couponType = 'Free Delivery';
-										$couponValue = 'Free Delivery';
-									}
-
-									$created_at = $row['created_at'];
-									$date = strtotime($created_at);
-									$dateformat = date('D., jS M.', $date);
-									$deliveryCost = '&#8358;' . number_format($deliveryCost, 2);
-									// $biz_id = $row['$biz_id'];  
+						if ($count_row_coupon != 0) {
 
 
-							?>
-									<tr>
+							while ($row = mysqli_fetch_assoc($couponresult)) {
 
-										<td class="underline">
-											<?php echo $couponName ?>
-										</td>
-
-										<td>
-											<?php echo $couponCode ?>
-										</td>
-										<td>
-											<?php echo $couponType ?>
-										</td>
-										<td>
-											<?php echo $couponValue ?>
-										</td>
-										<td>
-											<?php echo $dateformat ?>
-										</td>
-
-									</tr>
-
-								<?php
+								$couponName = $row['couponName'];
+								$couponCode = $row['couponCode'];
+								$couponType = $row['couponType'];
+								$couponValue = $row['couponValue'];
+								if ($couponType == 1) {
+									$couponType = 'Percentage Off';
+									$couponValue = $couponValue . '% off';
+									// $couponPercent = $row['couponPercent'];
+								} elseif ($couponType == 2) {
+									$couponType = 'Fixed amount';
+									// $couponPercent = $row['couponValue'];
+									$couponValue = NAIRA . number_format($couponValue, 2);
+								} else {
+									$couponType = 'Free Delivery';
+									$couponValue = 'Free Delivery';
 								}
-							} else {
-								// echo "No Coupon codes";
-								?>
-								<tr class="col-md-12 text-center">
-									<td colspan="5" class="p-0">
-										<div class="py-30 px-30 bg-light-4 rounded-8 border-light col-md-12 move-center">
-											<img src="assets/img/store.png" style="width:20%">
-											<h3 class=" text- fw-500 mt-20">
-												No Coupon Codes yet!
-											</h3>
-											<p class="pt-10 mb-20">
-												Add coupon codes for tem to appear here
-											</p>
-											<div class="col-md-6 move-center">
-												<a href="" class="button -md -deep-green-1 text-white p-0">Add coupon</a>
-											</div>
-										</div>
+
+								$created_at = $row['created_at'];
+								$date = strtotime($created_at);
+								$dateformat = date('D., jS M.', $date);
+								$deliveryCost = '&#8358;' . number_format($deliveryCost, 2);
+								// $biz_id = $row['$biz_id'];  
+
+
+						?>
+								<tr>
+
+									<td class="underline">
+										<?php echo $couponName ?>
 									</td>
+
+									<td>
+										<?php echo $couponCode ?>
+									</td>
+									<td>
+										<?php echo $couponType ?>
+									</td>
+									<td>
+										<?php echo $couponValue ?>
+									</td>
+									<td>
+										<?php echo $dateformat ?>
+									</td>
+
 								</tr>
+
 							<?php
 							}
+						} else {
+							// echo "No Coupon codes";
 							?>
+							<tr class="col-md-12 text-center">
+								<td colspan="5" class="p-0">
+									<div class="py-30 px-30 bg-light-4 rounded-8 border-light col-md-12 move-center">
+										<img src="assets/img/store.png" style="width:20%">
+										<h3 class=" text- fw-500 mt-20">
+											No Coupon Codes yet!
+										</h3>
+										<p class="pt-10 mb-20">
+											Add coupon codes for tem to appear here
+										</p>
+										<div class="col-md-6 move-center">
+											<a href="" class="button -md -deep-green-1 text-white p-0">Add coupon</a>
+										</div>
+									</div>
+								</td>
+							</tr>
+						<?php
+						}
+						?>
 
-						</tbody>
-					</table>
-				</div>
+					</tbody>
+				</table>
+				<!-- </div> -->
 
 			</div>
 		</div>
@@ -157,7 +157,7 @@ $deliveries = mysqli_query($conn, "SELECT * FROM olnee_coupons");
 			<div class="modal-header border-bottom-dark">
 				<h5 class="modal-title">Add Coupon Code</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
+					<img src="assets/img/icons/close.png" alt="close" width="30%">
 				</button>
 			</div>
 			<div class="modal-body pt-0">
@@ -187,7 +187,7 @@ $deliveries = mysqli_query($conn, "SELECT * FROM olnee_coupons");
 
 					<input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
 
-					
+
 					<div class="d-flex w-100  border-top-dark">
 						<!-- <button type="button" class="button -md -deep-green-1 flex-fill" data-dismiss="modal">Close</button> -->
 						<!-- <button type="button" class="button -md -deep-green-1 flex-fill">Save changes</button> -->

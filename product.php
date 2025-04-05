@@ -4,9 +4,6 @@ include_once "admin/inc/config.php";
 include_once "admin/inc/drc.php";
 $product_id = $_GET['item'];
 
-
-
-
 $product_details = mysqli_query($conn, "SELECT * FROM products WHERE productid = '$product_id'");
 $count_row_product = mysqli_num_rows($product_details);
 
@@ -33,23 +30,25 @@ include_once "comp/header.php";
 // $original_price = '&#8358;' . number_format($price);
 // $discounted_price = '&#8358;' . number_format($dis_price);
 
-
-
-
 $product_category = mysqli_query($conn, "SELECT * FROM olnee_categories WHERE categoryid = '$product_cat_id'");
 $row_prod_cat = mysqli_fetch_assoc($product_category);
 $category_name = $row_prod_cat['categoryName'];
 
 
+
 $prodsql_img = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '$product_id' ORDER BY thumbnail DESC");
-$other_images = [];
-while ($row_prod_img = mysqli_fetch_assoc($prodsql_img)) {
-  $image_path = $row_prod_img['image_path'];
-  if(empty($image_path)){
-    $image_path = "product-img/product.png";
+$count_images = mysqli_num_rows($prodsql_img);
+if ($count_images > 0) {
+  $other_images = [];
+  while ($row_prod_img = mysqli_fetch_assoc($prodsql_img)) {
+    $image_path = $row_prod_img['image_path'];
+    $other_images[] = 'admin/' . $image_path;
   }
+}else{
+  $image_path = "product-img/product.png";
   $other_images[] = 'admin/' . $image_path;
 }
+
 
 ?>
 
