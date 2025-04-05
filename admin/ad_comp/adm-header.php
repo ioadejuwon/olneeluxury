@@ -9,7 +9,7 @@
                         </button>
                     </div>
 
-                    <div class="header__logo ml-30 md:ml-20 mt-10">
+                    <div class="header__logo ml-30 md:ml-20 mt-15">
                         <a data-barba href="<?php echo BASE_URL ?>">
                             <!-- <img class="no-big-screen" src="assets/img/icon.png" alt="logo" width="50px"> -->
                             <!-- <img class="lg:d-none" src="assets/img/icon.png" alt="logo" width="50px"> -->
