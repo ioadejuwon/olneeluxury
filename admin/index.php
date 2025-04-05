@@ -58,7 +58,7 @@ include_once "ad_comp/adm-sidebar.php"
     </div>
     <div class="col-auto">
 			<div class="dropdown">
-				<button class="dropdown__button d-flex items-center text-14 bg-white -dark-bg-dark-2 border-light rounded-8 px-20 py-10 text-14 lh-12" onclick="togglefilterDropdown()" data-user-id="<?php echo $user_id; ?>">
+				<button class="dropdown__button d-flex items-center text-14 bg-white border-light rounded-8 px-20 py-10 text-14 lh-12 text-dark-1" onclick="togglefilterDropdown()" data-user-id="<?php echo $user_id; ?>">
 					<span id="dropdownFilter" style="color:#000 !important;">Filter</span>
 					<i class="icon text-9 ml-40 icon-chevron-down"></i>
 				</button>
