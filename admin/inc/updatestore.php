@@ -24,8 +24,10 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
     }
 
 	// Retrieve and sanitize POST data
-	$delivery = htmlspecialchars( $_POST['delivery'] ); // Sanitize input
-	$return = htmlspecialchars( $_POST['return'] ); // Sanitize input
+	$delivery = htmlspecialchars( $_POST['delivery'], ENT_QUOTES, 'UTF-8' ); // Sanitize input
+	$return = htmlspecialchars( $_POST['return'], ENT_QUOTES, 'UTF-8' ); // Sanitize input
+
+	// $safe_input = htmlspecialchars($user_input, ENT_QUOTES, 'UTF-8');
 
 	$contact_phone = htmlspecialchars( $_POST['contact_phone'] );
 	$contact_email = htmlspecialchars( $_POST['contact_email'] );
@@ -33,17 +35,19 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 	$store_address = htmlspecialchars( $_POST['store_address'] );
 	$store_state = htmlspecialchars( $_POST['store_state'] );
 	$store_country = htmlspecialchars( $_POST['store_country'] );
+
+
 	
 	
-	if ( strlen( $delivery ) > 1000 ) {
+	if ( strlen( $delivery ) > 7000 ) {
 		// Handle the error
-		$response = [ 'status' => 'error', 'message' => 'Delivery Info cannot exceed 1000 characters.' ];
+		$response = [ 'status' => 'error', 'message' => 'Delivery Info cannot exceed 7000 characters.' ];
 		echo json_encode($response);
 		exit;
 	}
-	if ( strlen( $return ) > 1000 ) {
+	if ( strlen( $return ) > 7000 ) {
 		// Handle the error
-		$response = [ 'status' => 'error', 'message' => 'Return Info cannot exceed 1000 characters.' ];
+		$response = [ 'status' => 'error', 'message' => 'Return Info cannot exceed 7000 characters.' ];
 		echo json_encode($response);
 		exit;
 	}

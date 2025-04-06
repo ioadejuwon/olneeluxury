@@ -225,11 +225,11 @@ $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No 
                                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Country</label>
                                         <input type="text" name="store_country" value="<?php echo $store_country; ?>" placeholder="Country">
                                     </div>
-                                    <div class="col-md-6 d-none">
+                                    <div class="col-md-6 d-noe">
                                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Delivery Policy</label>
                                         <textarea placeholder="Text..." name="delivery" value="" rows="7"><?php echo $delivery; ?></textarea>
                                     </div>
-                                    <div class="col-md-6 d-none">
+                                    <div class="col-md-6 d-noe">
                                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Return Policy</label>
                                         <textarea placeholder="Text..." name="return" value="" rows="7"><?php echo $return; ?></textarea>
                                     </div>

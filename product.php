@@ -52,8 +52,8 @@ if ($count_images > 0) {
 $store_policy = mysqli_query($conn, "SELECT * FROM olnee_storedata");
 $row_store = mysqli_fetch_assoc($store_policy);
 
-$delivery = $row_store['deliveryPolicy'];
-$return = $row_store['returnPolicy'];
+$delivery = nl2br($row_store['deliveryPolicy']);
+$return = nl2br($row_store['returnPolicy']);
 
 
 ?>
