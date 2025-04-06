@@ -49,6 +49,12 @@ if ($count_images > 0) {
   $other_images[] = 'admin/' . $image_path;
 }
 
+$store_policy = mysqli_query($conn, "SELECT * FROM olnee_storedata");
+$row_store = mysqli_fetch_assoc($store_policy);
+
+$delivery = $row_store['deliveryPolicy'];
+$return = $row_store['returnPolicy'];
+
 
 ?>
 
@@ -172,6 +178,12 @@ if ($count_images > 0) {
           </button>
           <button class="tabs__button js-tabs-button ml-30 d-none" data-tab-target=".-tab-item-2" type="button">
             Reviews (2)
+          </button>
+          <button class="tabs__button js-tabs-button ml-30 d-non" data-tab-target=".-tab-item-3" type="button">
+            Shipping
+          </button>
+          <button class="tabs__button js-tabs-button ml-30 d-non" data-tab-target=".-tab-item-4" type="button">
+            Return Policy
           </button>
         </div>
       </div>
@@ -311,6 +323,18 @@ if ($count_images > 0) {
                     </div>
                   </form>
                 </div>
+              </div>
+
+              <div class="tabs__pane -tab-item-3 is-">
+                <h4 class="text-18 fw-500">Delivery Policy</h4>
+                <p class="mt-30"><?php echo $delivery ?></p>
+               
+              </div>
+
+              <div class="tabs__pane -tab-item-4 is-">
+                <h4 class="text-18 fw-500">Return Policy</h4>
+                <p class="mt-30"><?php echo $return ?></p>
+                
               </div>
             </div>
           </div>

@@ -64,6 +64,7 @@ include_once "admin/inc/drc.php";
     <script src="admin/assets/js/page-loader.js"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
     <script type="text/javascript" src="admin/assets/js/jquery.min.js"></script>
+    <script src="admin/assets/js/vendors.js"></script>
     <title><?php echo $pagetitle; ?> - Olnee Luxury</title>
 </head>
 <body class="preloader-visible" data-barba="wrapper">

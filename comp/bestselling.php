@@ -2,7 +2,7 @@
 
   <section class="layout-pt-md layout-pb-lg">
     <div data-anim-wrap class="container" style="width:95%; margin:0% auto;">
-      <div class="row justify-center text-center">
+      <div class="row justify-center text-center" data-anim-child="slide-up delay-2">
         <div class="col-auto">
           <div class="sectionTitle ">
             <h2 class="sectionTitle__title ">Best Selling Products</h2>
@@ -11,7 +11,7 @@
         </div>
       </div>
 
-      <div class="row y-gap-30 justify-center pt-10 lg:pt-20" style="margin:0% auto;">
+      <div class="row y-gap-30 justify-center pt-10 lg:pt-20" style="margin:0% auto;" data-anim-child="slide-up delay-2">
 
         <?php
         $prodsql = mysqli_query($conn, "SELECT * FROM products LIMIT 4");

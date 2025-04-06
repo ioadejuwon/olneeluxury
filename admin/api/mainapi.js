@@ -45,7 +45,7 @@ function formatCompactCurrency(amount) {
     } else if (amount >= 1000) {
         formattedAmount = (amount / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
     }else if (amount < 1000) {
-        formattedAmount = (amount).toFixed(2).replace(/\.0$/, '');
+        formattedAmount = (amount).toFixed().replace(/\.0$/, '');
     } else {
         formattedAmount = amount;
     }
@@ -70,6 +70,7 @@ function formatPrices() {
         
     });
 }
+
 
 
 function copyButton() {
