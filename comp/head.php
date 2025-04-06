@@ -1,6 +1,5 @@
 <?php 
-// include_once "inc/config.php";
-require_once "admin/inc/config.php";
+include_once "admin/inc/config.php";
 include_once "admin/inc/drc.php";
 ?>
 <!DOCTYPE html>

@@ -168,7 +168,7 @@ $return = nl2br($row_store['returnPolicy']);
               <?php
               } elseif ($availability == 0) {
               ?>
-                <button class="button h-50 px-45 -red-1 text-white" disabled>Sold Out</button>
+                <button class="button h-50 px-45 -yellow-3 text-white" disabled>Out of Stock</button>
               <?php
               }
               ?>
@@ -223,7 +223,7 @@ $return = nl2br($row_store['returnPolicy']);
             <div class="tabs__content js-tabs-content">
               <div class="tabs__pane -tab-item-1 is-active">
                 <h4 class="text-18 fw-500">Description</h4>
-                <p class="mt-30 text-light-1"><?php echo $product_des ?></p>
+                <p class="mt-10 text-light-1"><?php echo $product_des ?></p>
 
               </div>
 
@@ -350,14 +350,42 @@ $return = nl2br($row_store['returnPolicy']);
               </div>
 
               <div class="tabs__pane -tab-item-3 is-">
-                <h4 class="text-18 fw-500">Delivery Policy</h4>
-                <p class="mt-30"><?php echo $delivery ?></p>
+                <!-- <h4 class="text-18 fw-500">Delivery Policy</h4>
+                <p class="mt-10 text-light-1"><?php echo $delivery ?></p> -->
+
+                <h4 class="text-18 fw-500">Order Processing</h4>
+                <p class="mt-10 text-light-1">
+                  All orders are processed within 1–2 business days (excluding weekends and holidays) after receiving your order confirmation email. You will receive another notification when your order has shipped.
+                </p>
+                <h4 class="text-18 fw-500">
+                  Shipping Rates & Delivery Estimates
+                </h4>
+                <p class="mt-10 text-light-1">
+                  Shipping charges for your order will be calculated and displayed at checkout. We offer both local and nationwide shipping through trusted courier services.
+                </p>
+                Location Estimated Delivery Time
+                Lagos 1–3 business days
+                Other Nigerian Cities 3–7 business days
+                International 7–15 business days (if applicable)
+                <h4 class="text-18 fw-500">
+                Shipping Confirmation & Order Tracking
+                </h4>
+                <p class="mt-10 text-light-1">
+                Once your order has shipped, you will receive a tracking number via email or SMS to monitor your delivery status.
+                </p>
+
+                <h4 class="text-18 fw-500">
+                Shipping Delays
+                </h4>
+                <p class="mt-10 text-light-1">
+                Please note that delivery delays can occasionally occur due to unforeseen circumstances. If your order is significantly delayed, we will contact you via email or phone.
+                </p>
 
               </div>
 
               <div class="tabs__pane -tab-item-4 is-">
                 <h4 class="text-18 fw-500">Return Policy</h4>
-                <p class="mt-30"><?php echo $return ?></p>
+                <p class="mt-10 text-light-1"><?php echo $return ?></p>
 
               </div>
             </div>

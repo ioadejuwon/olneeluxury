@@ -54,9 +54,9 @@
             } elseif ($availability == 0) {
             ?>
                 <div class="productCard__button d-inline-block" style="width: 100% !important">
-                    <button disabled type="button" class="button fs-16 w-100 text-white -red-3  mt-5"
+                    <button disabled type="button" class="button fs-16 w-100 text-white -yellow-3  mt-5"
                         style="width:100%; font-size: 16px; line-height: 18px; font-weight: 500; height: 60px;">
-                        Sold Out
+                        Out of Stock
                     </button>
                 </div>
 
