@@ -13,13 +13,16 @@ if ($product_id == '' || $count_row_product < 1) {
 
 $row_prod = mysqli_fetch_assoc($product_details);
 $product_name = $row_prod['producttitle'];
-$product_des = $row_prod['productdescription'];
-$short_des = $row_prod['shortdescription'];
+// $product_des = $row_prod['productdescription'];
+// $short_des = $row_prod['shortdescription'];
+$short_des = nl2br($row_prod['shortdescription']);
+$product_des = nl2br($row_prod['productdescription']);
 
 $product_cat_id = $row_prod['productcategory'];
 
 $price = $row_prod['price'];
 $dis_price = $row_prod['discount_price'];
+$availability = $row_prod['availability'];
 
 $pagetitle = $product_name;
 
@@ -34,6 +37,21 @@ $product_category = mysqli_query($conn, "SELECT * FROM olnee_categories WHERE ca
 $row_prod_cat = mysqli_fetch_assoc($product_category);
 $category_name = $row_prod_cat['categoryName'];
 
+// Get the thumbnail image
+$prodsql_img_thumbnail = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '$product_id' AND thumbnail = 1");
+$row_prod_img_thumbnail = mysqli_fetch_assoc($prodsql_img_thumbnail);
+
+// $image_path_thumbnail = 'admin/' . $row_prod_img_thumbnail['image_path'];
+// $product_img = $image_path_thumbnail;
+
+$image_path_thumbnail = $row_prod_img_thumbnail['image_path'];
+if (empty($image_path_thumbnail)) {
+  $image_path_thumbnail2 = "product-img/product.png";
+} else {
+  $image_path_thumbnail2 = $row_prod_img_thumbnail['image_path'];
+}
+$image_path_thumbnail = 'admin/' . $image_path_thumbnail2;
+$product_img = $image_path_thumbnail;
 
 
 $prodsql_img = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '$product_id' ORDER BY thumbnail DESC");
@@ -44,7 +62,7 @@ if ($count_images > 0) {
     $image_path = $row_prod_img['image_path'];
     $other_images[] = 'admin/' . $image_path;
   }
-}else{
+} else {
   $image_path = "product-img/product.png";
   $other_images[] = 'admin/' . $image_path;
 }
@@ -106,7 +124,7 @@ $return = nl2br($row_store['returnPolicy']);
       <div class="col-lg-5 d-non">
         <div class="pb-90 md:pb-0">
           <h2 class="text-30 fw-700 mt-4 text-line-clamp-1"><?php echo $product_name ?></h2>
-          <div class="text-20 text-purple-1 mt-15 ">
+          <div class="text-20 text-dark-1 mt-15 ">
             <span class="price  fw-500"><?php echo $price ?></span>
             <?php
             if ($dis_price != 0.00) {
@@ -119,13 +137,13 @@ $return = nl2br($row_store['returnPolicy']);
           </div>
 
           <div class="mt-10">
-            <p>
+            <p class="text-light-1">
               <?php echo $short_des ?>
             </p>
           </div>
 
 
-          <div class="shopSingle-info__action row x-gap-20 y-gap-20 pt-30">
+          <div class="shopSingle-info__action row x-gap-20 y-gap-20 pt0">
             <div class="col-auto">
               <div class="input-counter js-input-counter">
                 <input class='input-counter__counter' name="yards" type="number" placeholder="value..." value='1' />
@@ -142,7 +160,18 @@ $return = nl2br($row_store['returnPolicy']);
               </div>
             </div>
             <div class="col-auto">
-              <button class="button h-50 px-45 -deep-green-1 text-white add-to-cart-btn" data-product-id="<?php echo $product_id; ?>">Add to cart</button>
+              <?php
+
+              if ($availability == 1) {
+              ?>
+                <button class="button h-50 px-45 -deep-green-1 text-white add-to-cart-btn" data-product-id="<?php echo $product_id; ?>">Add to cart</button>
+              <?php
+              } elseif ($availability == 0) {
+              ?>
+                <button class="button h-50 px-45 -red-1 text-white" disabled>Sold Out</button>
+              <?php
+              }
+              ?>
             </div>
           </div>
 
@@ -190,17 +219,12 @@ $return = nl2br($row_store['returnPolicy']);
 
       <div class="container pt-60">
         <div class="row justify-center">
-          <div class="col-xl-8 col-lg-10 justify-center">
+          <div class="py-20 px-20 col-xl-8 col-lg-10 justify-center">
             <div class="tabs__content js-tabs-content">
               <div class="tabs__pane -tab-item-1 is-active">
                 <h4 class="text-18 fw-500">Description</h4>
-                <p class="mt-30"><?php echo $product_des ?></p>
-                <div class="row">
-                  <div class="col-6">
-                    <h4 class="text-18 fw-500">Item Details</h4>
+                <p class="mt-30 text-light-1"><?php echo $product_des ?></p>
 
-                  </div>
-                </div>
               </div>
 
               <div class="tabs__pane -tab-item-2">
@@ -328,13 +352,13 @@ $return = nl2br($row_store['returnPolicy']);
               <div class="tabs__pane -tab-item-3 is-">
                 <h4 class="text-18 fw-500">Delivery Policy</h4>
                 <p class="mt-30"><?php echo $delivery ?></p>
-               
+
               </div>
 
               <div class="tabs__pane -tab-item-4 is-">
                 <h4 class="text-18 fw-500">Return Policy</h4>
                 <p class="mt-30"><?php echo $return ?></p>
-                
+
               </div>
             </div>
           </div>

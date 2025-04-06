@@ -2,7 +2,6 @@
 $(document).ready(function () {
     // console.log('jQuery is loaded');
 
-
     // Add product to the database Begin
     $('#productFormSubmit').click(function (e) {
         e.preventDefault();
@@ -32,25 +31,28 @@ $(document).ready(function () {
             url: 'inc/upload_product_details.php',
             type: 'POST',
             data: $('#product-details-form').serialize(),
+            dataType: 'json',
             success: function (response) {
-                const result = JSON.parse(response);
-                if (result.success) {
-                    window.location.href = 'image?productid=' + result.product_id;
+                if (response.status === 'success') {
+                    // console.log(response);
+                    // showNotification(response.message, 'info'); // Show notification
+                    // showNotification(response.message2, 'info'); // Show notification
+                    window.location.href = 'image?productid=' + response.product_id; // Redirect on success
+                } else if (response.status == 'info') {
+                    showNotification(response.message, 'info'); // Yellow notification
+                } else if (response.status == 'error') {
+                    showNotification('kkk ' + response.message, 'error'); // Red notification
                 } else {
-                    // $('#error-message').html('An error occurred: ' + result.message);
-                    showNotification('An error occurred: ' + result.message, 'error');
-
+                    showNotification('kkddsk ' + response.message, 'error');
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 // $('#error-message').html('An error occurred: ' + textStatus + ' - ' + errorThrown);
-                showNotification('An error occurred: ' + textStatus + ' - ' + errorThrown);
+                showNotification('An error occurredj: ' + textStatus + ' - ' + errorThrown);
             }
         });
     });
     // Add product to the database end
-
-
 
     //Code for the delete product button on the products page begin
     $(document).on('click', '.delete-product-btn', function (e) {
@@ -79,33 +81,33 @@ $(document).ready(function () {
     });
     //Code for the delete product button on the products page end
 
-
-
     // Edit product in the database Begin
     $('#productFormUpdate').click(function (event) {
         event.preventDefault();
-
         var formData = $('#product-details-update').serialize();
 
         $.ajax({
             type: 'POST',
             url: 'inc/update_product.php',
             data: formData,
+            dataType: 'json',
             success: function (response) {
-                var jsonResponse = JSON.parse(response);
-                if (jsonResponse.success) {
-                    // alert('Product updated successfully!');
-                    // $('#success-message').text(jsonResponse.message);
-                    showNotification(jsonResponse.message);
-                    // window.location.href('image')
+                if (response.status === 'success') {
+                    // console.log(response);
+                    // showNotification(response.message, 'info'); // Show notification
+                    // showNotification(response.message2, 'info'); // Show notification
+                    // window.location.href = 'image?productid=' + response.product_id; // Redirect on success
+                    showNotification(response.message, 'success'); // Yellow notification
 
-                    // Hide and remove notification after 3 seconds
                     setTimeout(() => {
                         window.location.href = 'product';
                     }, 2000);
+                } else if (response.status == 'info') {
+                    showNotification(response.message, 'info'); // Yellow notification
+                } else if (response.status == 'error') {
+                    showNotification(response.message, 'error'); // Red notification
                 } else {
-                    // $('#error-message').text(jsonResponse.message);
-                    showNotification('An error occurred: ' + jsonResponse.message, 'error');
+                    showNotification(response.message, 'error');
                 }
             },
             error: function (xhr, status, error) {

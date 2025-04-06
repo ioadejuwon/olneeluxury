@@ -3,10 +3,13 @@ include_once '../inc/config.php';
 include_once "../inc/drc.php";
 include_once '../inc/randno.php';
 
-$response = [];
+// $response = [];
+$response = array('status' => 'error', 'message' => '');
 
 if (empty($_POST['producttitle']) || empty($_POST['productdescription']) || empty($_POST['price'])) {
-    $response = ['success' => false, 'message' => 'Please, fill all required fields.'];
+    // $response = ['success' => false, 'message' => 'Please, fill all required fields.'];
+    $response['status'] = 'error';
+    $response['message'] = 'Please, fill all required fields.';
 } else {
     $producttitle = htmlspecialchars($_POST['producttitle']);
     $user_id = $_POST['user_id'];
@@ -25,11 +28,15 @@ if (empty($_POST['producttitle']) || empty($_POST['productdescription']) || empt
 
     if (mysqli_stmt_execute($stmt)) {
         mysqli_stmt_close($stmt);
-        $response = ['success' => true, 'product_id' => $product_id];
+        // $response = ['success' => true, 'product_id' => $product_id];
+        $response['status'] = 'success';
+        $response['product_id'] = $product_id;
+        $response['message'] = 'Update store details.';
     } else {
-        $response = ['success' => false, 'message' => 'Database error: ' . mysqli_stmt_error($stmt)];
+        // $response = ['success' => false, 'message' => 'Database error: ' . mysqli_stmt_error($stmt)];
+        $response['status'] = 'error';
+        $response['message'] = 'Database error: ' . mysqli_stmt_error($stmt);
     }
 }
 
 echo json_encode($response);
-?>

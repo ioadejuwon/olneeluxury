@@ -3,7 +3,7 @@ include_once '../inc/config.php';
 include_once "../inc/drc.php";
 include_once '../inc/randno.php';
 
-$response = array('success' => false, 'message' => '');
+$response = array('status' => 'error', 'message' => '');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $producttitle = $_POST['producttitle'];
@@ -13,17 +13,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $productcategory = $_POST['productcategory'];
     $price = $_POST['price'];
     $discount_price = $_POST['discount_price'];
-    $shortdescription = $_POST['shortdescription'];
-    $productdescription = $_POST['productdescription'];
+    // $shortdescription = $_POST['shortdescription'];
+    // $productdescription = $_POST['productdescription'];
+    $shortdescription = htmlspecialchars( $_POST['shortdescription'], ENT_QUOTES, 'UTF-8' ); // Sanitize input
+    $productdescription = htmlspecialchars( $_POST['productdescription'], ENT_QUOTES, 'UTF-8' ); // Sanitize input
 
     // Validate input data
     if (empty($producttitle) || empty($yards) || empty($productcategory) || empty($price) || empty($shortdescription) || empty($productdescription)) {
-        // $response['success'] = false;
+        $response['status'] = 'info';
         $response['message'] = 'All required fields must be filled out.';
         echo json_encode($response);
         exit();
-    }elseif(strlen($producttitle) > 25) {
+    } elseif (strlen($producttitle) > 25) {
         $response['message'] = 'Product Name is too long. Maximum of 25 characters allowed.';
+        echo json_encode($response);
+        exit();
+    }elseif (strlen($shortdescription) > 255) {
+        $response['message'] = 'Short Description is too long. Maximum of 255 characters allowed.';
+        echo json_encode($response);
+        exit();
+    }elseif (strlen($productdescription) > 1000) {
+        $response['message'] = 'Product Description is too long. Maximum of 1000 characters allowed.';
         echo json_encode($response);
         exit();
     }
@@ -43,18 +53,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bind_param('sissdsss', $producttitle, $yards, $productcategory, $price, $discount_price, $shortdescription, $productdescription, $product_id);
 
         if ($stmt->execute()) {
-            $response['success'] = true;
+            // $response['success'] = true;
+            // $response['message'] = 'Product updated successfully.';
+            $response['status'] = 'success';
+            // $response['product_id'] = $product_id;
             $response['message'] = 'Product updated successfully.';
         } else {
+            $response['status'] = 'error';
             $response['message'] = 'Error: ' . $stmt->error;
         }
         $stmt->close();
     } else {
+        $response['status'] = 'error';
         $response['message'] = 'Error: ' . $conn->error;
     }
 
     $conn->close();
 } else {
+    $response['status'] = 'error';
     $response['message'] = 'Invalid request method.';
 }
 
