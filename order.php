@@ -70,21 +70,21 @@ include_once "comp/header.php";
         // $dateformat = date('D., jS M.', $date);
         // $dateformat = date('j/m/y', $date);
 
-        if ( $status == 0 ) {
-            $status = "Payment Failed";
-        }elseif ( $status == 1 ) {
-            $status = "Payment Pending";
-        } elseif ( $status == 2 ) {
-            $status = "Payment Confirmed";
-        } elseif ( $status == 3 ) {
-            $status = "Processed";
-        } elseif ( $status == 4 ) {
-            $status = "Delivered";
+        if ($status == 0) {
+            $pay_status = "Payment Failed";
+        } elseif ($status == 1) {
+            $pay_status = "Payment Pending";
+        } elseif ($status == 2) {
+            $pay_status = "Payment Confirmed";
+        } elseif ($status == 3) {
+            $pay_status = "Processed";
+        } elseif ($status == 4) {
+            $pay_status = "Delivered";
         } else {
-            $status = "Could not retrieve status";
+            $pay_status = "Could not retrieve status";
         }
 
-      
+
         $dateformat =  date('D, jS F, Y', $date);
 
         if ($paymentOption == '1') {

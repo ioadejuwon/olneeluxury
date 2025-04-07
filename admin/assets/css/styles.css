@@ -90,7 +90,7 @@
 }
 
 .icon-outline {
-  border: 0.5px solid #21565e;
+  border: 0.1px solid #21565ea9 !important;
   border-radius: 20%;
 }
 
@@ -2424,7 +2424,7 @@ body.offline:before {
 }
 
 .dropdown__content a:hover {
-  background-color: #FDF2EB;
+  background-color: #f4feff;
   /* Hover effect */
   border-radius: 5px;
 }

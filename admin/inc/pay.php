@@ -1,16 +1,14 @@
 <?php
-include_once 'config.php'; // Include your database configuration
+include_once 'config.php';
 include_once 'randno.php';
 include_once 'drc.php';
 include_once 'env.php';
 
-header('Content-Type: application/json'); // Ensure the content type is JSON
+header('Content-Type: application/json');
 
-// $response = []; // Initialize response array
 $response = array();
 
 // Enable error reporting for debugging
-
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
@@ -43,6 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // error_log("Decoded items array: " . print_r($items, true));
 
         // Check if items is an array
+
         if (!is_array($items) || empty($items)) {
             // throw new Exception("Invalid or empty items data.");
             // $response = ['status' => 'success', 'message' => 'Invalid or empty items data.'];
@@ -105,8 +104,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $itemCount++;
             $price = ($product_yards > 1) ? $totalProductPrice : $product_price;
+            $statement = ($product_yards > 1) ? 'yards' : 'yard';
 
-            $itemMessage = '📦 ' . $product_name . ' - (' . $product_yards . 'yards) - ₦' . number_format($product_price, 2);
+            $itemMessage = '📦 ' . $product_name . ' - (' . $product_yards . $statement . ') - ₦' . number_format($product_price, 2);
             $sendMessage .= $itemMessage . "\r\n";
 
 
@@ -140,7 +140,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($paymentOption == '1') {
             // Flutterwave
-
             // Prepare Flutterwave payment request
 
             $request = [
@@ -168,7 +167,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     "logo" => ADMIN_URL . "assets/img/icon.png",
                 ],
             ];
-
             // Send payment to Flutterwave for processing
             $curl = curl_init();
             curl_setopt_array($curl, [
@@ -288,5 +286,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     ]);
     exit;
 }
-
 $conn->close();

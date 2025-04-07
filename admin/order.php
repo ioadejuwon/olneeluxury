@@ -52,18 +52,19 @@ if ($count_row_orders < 1) {
 
 
   if ($status == 0) {
-    $status = "Payment Failed";
+    $pay_status = "Payment Failed";
   } elseif ($status == 1) {
-    $status = "Payment Pending";
+    $pay_status = "Payment Pending";
   } elseif ($status == 2) {
-    $status = "Payment Confirmed";
+    $pay_status = "Payment Confirmed";
   } elseif ($status == 3) {
-    $status = "Processed";
+    $pay_status = "Processed";
   } elseif ($status == 4) {
-    $status = "Delivered";
+    $pay_status = "Delivered";
   } else {
-    $status = "Could not retrieve status";
+    $pay_status = "Could not retrieve status";
   }
+
 
 
   if ($paymentOption == '1') {
@@ -107,7 +108,7 @@ include_once "ad_comp/adm-sidebar.php"
 
   <div class="row y-gap-30">
     <div class="col-xl-7">
-      <div class="rounded-16 bg-white -dark-bg-dark-1 shadow-4 h-100 arent">
+      <div class="rounded-16 bg-white -dark-bg-dark-1 shadow-4 h-100 parent">
         <div class="py-20 px-30 border-bottom-light child">
           <div class="row y-gap-20 justify-between">
             <div class="col-auto">
@@ -161,24 +162,13 @@ include_once "ad_comp/adm-sidebar.php"
                 <span id="dropdownTitle">Update<span class="lg:d-none">&nbsp;status</span></span>
                 <i class="icon text-9 ml-40 icon-chevron-down"></i>
               </button>
-              <div id="orderDropdown" class="dropdown__content -dark-bg-dark-2 -dark-border-white-10" style="display: none;">
-                <div>
-                  <a href="javascript:void(0);" onclick="updateOrderStatus('processing')" class="d-block active">Processing</a>
-                </div>
-                <div>
-                  <a href="javascript:void(0);" onclick="updateOrderStatus('paid')" class="d-block">Paid</a>
-                </div>
-                <div>
-                  <a href="javascript:void(0);" onclick="updateOrderStatus('sent')" class="d-block">Sent</a>
-                </div>
-                <div>
-                  <a href="javascript:void(0);" onclick="updateOrderStatus('delivered')" class="d-block">Delivered</a>
-                </div>
+              <div id="orderDropdown" class="dropdown__content py-10 px-10" style="display: none; min-width: 200px !important;">
+                <a href="javascript:void(0);" onclick="updateOrderStatus('pending')" class="d-block">Payment Pending</a>
+                <a href="javascript:void(0);" onclick="updateOrderStatus('paid')" class="d-block">Payment Confirmed</a>
+                <a href="javascript:void(0);" onclick="updateOrderStatus('processed')" class="d-block">Order Processed</a>
+                <a href="javascript:void(0);" onclick="updateOrderStatus('delivered')" class="d-block">Order Delivered</a>
+                <a href="javascript:void(0);" onclick="updateOrderStatus('failed')" class="d-block">Payment Failed</a>
 
-                <div>
-                  <!-- <a href="javascript:void(0);" onclick="fetchFilteredProducts('<?php echo $category_id; ?>')" class="d-block"><?php echo $category_name; ?></a> -->
-                  <a href="?c=<?php echo $order_id; ?>"><?php echo $order_id; ?></a>
-                </div>
               </div>
             </div>
 
@@ -291,133 +281,7 @@ include_once "ad_comp/adm-sidebar.php"
     </div>
 
     <div class="col-xl-5">
-      <div class="rounded-16 bg-white -dark-bg-dark-1 shadow-4 h-">
-        <div class="py-20 px-30 border-bottom-light">
-          <div class="row y-gap-20 justify-between">
-            <div class="col-auto">
-              <div class="lh-11 text-17 fw-700 text-dark-1">Order Status</div>
-              <div class="text-11 lh-11 mt-5 uppercase">#<?php echo $order_id ?></div>
-            </div>
-            <div class="col-auto d-none">
-              <div class="text-16 fw-500 text-dark-1 img-outline" data-toggle="modal" data-target="#editorder">
-                <i class="fa-solid fa-marker" style="padding:7px"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="py-30 px-30">
-          <div class="y-gap-20">
-            <div class="d-flex justify-between">
-              <div class="d-flex items-center">
-                <div class="ml-">
-                  <div class="text-14 lh-11 mb-5">Customer Name</div>
-                  <div class="lh-11 fw-500 text-dark-1">
-                    <?php echo $customer ?>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="d-flex justify-between">
-              <div class="d-flex items-center">
-                <div class="ml-">
-                  <div class="text-14 lh-11 mb-5">Phone</div>
-                  <div class="lh-11 fw-500 text-dark-1">
-                    <?php echo $phone ?>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="d-flex justify-between">
-              <div class="d-flex items-center">
-                <div class="ml-">
-                  <div class="text-14 lh-11 mb-5">Email Address</div>
-                  <div class="lh-11 fw-500 text-dark-1">
-                    <?php echo $email ?>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="d-flex justify-between">
-              <div class="d-flex items-center">
-                <div class="ml-">
-                  <div class="text-14 lh-11 mb-5">Delivery Address</div>
-                  <div class="lh-11 fw-500 text-dark-1">
-                    <?php echo $cus_address ?>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            <div class="d-flex justify-between">
-              <div class="d-flex items-center">
-                <div class="ml-">
-                  <div class="text-14 lh-11 mb-5">Payment Mode</div>
-                  <div class="lh-11 fw-500 text-dark-1">
-                    <?php echo $payment_mode ?>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            <div class="d-flex justify-between">
-              <div class="d-flex items-center">
-                <div class="ml-">
-                  <div class="text-14 lh-11 mb-5">Payment Status</div>
-                  <div class="lh-11 fw-500 text-dark-1">
-                    <?php echo $status ?>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            <div class="d-flex justify-between">
-              <div class="d-flex items-center">
-                <div class="ml-">
-                  <div class="text-14 lh-11 mb-5">Order Date</div>
-                  <div class="lh-11 fw-500 text-dark-1">
-                    <?php echo $order_date ?>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            <div class="d-none">
-              <div class="d-flex justify-between border-top-dark mt-15">
-                <div class="d-flex items-center">
-                  <div class="ml-10">
-                    <div class="text-16 fw-700 lh-11 mb-5 text-dark-1">Order Summary</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="d-flex justify-between border-top-dark px-10">
-                <div class="py-1 fw-500">Subtotal</div>
-                <div class="py-1 fw-600 text-dark-1 price"><?php echo $subtotal ?></div>
-              </div>
-              <div class="d-flex justify-between border-top-dark px-10">
-                <div class="py-1 fw-500">Discount</div>
-                <div class="py-1 fw-600 text-dark-1 price"><?php echo $discount ?></div>
-              </div>
-              <div class="d-flex justify-between border-top-dark px-10">
-                <div class="py-1 fw-500 text-dark-1">Shipping</div>
-                <div class="py-1 fw-600 text-dark-1 price"><?php echo $shipping ?></div>
-              </div>
-              <div class="d-flex justify-between border-top-dark px-10">
-                <div class="py-1 fw-500 text-dark-1">Total</div>
-                <div class="py-1 fw-600 text-dark-1 price"><?php echo $total ?></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="rounded-16 bg-white -dark-bg-dark-1 shadow-4 h-">
+      <div class="rounded-16 bg-white shadow-4 h- ">
         <div class="py-20 px-30 border-bottom-light">
           <div class="row y-gap-20 justify-between">
             <div class="col-auto">
@@ -494,8 +358,8 @@ include_once "ad_comp/adm-sidebar.php"
               <div class="d-flex items-center">
                 <div class="ml-">
                   <div class="text-14 lh-11 mb-5">Payment Status</div>
-                  <div class="lh-11 fw-500 text-dark-1">
-                    <?php echo $status ?>
+                  <div class="lh-11 fw-500 text-dark-1" id="orderStatusText">
+                    <?php echo $pay_status ?>
                   </div>
 
                 </div>
@@ -543,108 +407,172 @@ include_once "ad_comp/adm-sidebar.php"
           </div>
         </div>
       </div>
-    </div>
 
-
-    <div class="modal fade" id="editorder" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal_title" id="exampleModalLabel">
-              Edit Order
-            </h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <i class="fa-regular fa-circle-xmark text-20"></i>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="d-flex x-gap-20 y-gap-20 items-center flex-wrap">
-              <div>
-                <div class=" bg-deep-green-1 cart-btn">
-                  <i class="fa-solid fa-location-dot"></i>
-                </div>
-              </div>
-              <div class="">
-                <p class="mt-5">Business Location</p>
-                <h5 class="text-17 lh-14 fw-500"><?php echo $location . ", <br>" . $country ?></h5>
+      <div class="rounded-16 bg-white -dark-bg-dark-1 shadow-4 h- mt-20">
+        <div class="py-20 px-30 border-bottom-light">
+          <div class="row y-gap-20 justify-between">
+            <div class="col-auto">
+              <div class="lh-11 text-17 fw-700 text-dark-1">Order Status</div>
+              <div class="text-11 lh-11 mt-5 uppercase">#<?php echo $order_id ?></div>
+            </div>
+            <div class="col-auto d-none">
+              <div class="text-16 fw-500 text-dark-1 img-outline" data-toggle="modal" data-target="#editorder">
+                <i class="fa-solid fa-marker" style="padding:7px"></i>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="modal fade" id="editocrder" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal_title" id="exampleModalLabel">
-              Order Timeline
-            </h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <i class="fa-regular fa-circle-xmark text-20"></i>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="row x-gap-100 justfiy-between">
-              <div class="col-md-12">
-                <div class="y-gap-20">
-                  <div class="d-flex items-center">
-                    <div class="d-flex justify-center items-center border-light rounded-full size-20 mr-10">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check size-12">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                      </svg>
-                    </div>
-                    <p>Create quick wireframes.</p>
-                  </div>
-                  <div class="d-flex items-center">
-                    <div class="d-flex justify-center items-center border-light rounded-full size-20 mr-10">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check size-12">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                      </svg>
-                    </div>
-                    <p>Downloadable exercise files</p>
-                  </div>
-                  <div class="d-flex items-center">
-                    <div class="d-flex justify-center items-center border-light rounded-full size-20 mr-10">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check size-12">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                      </svg>
-                    </div>
-                    <p>Build a UX project from beginning to end.</p>
-                  </div>
-                  <div class="d-flex items-center">
-                    <div class="d-flex justify-center items-center border-light rounded-full size-20 mr-10">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check size-12">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                      </svg>
-                    </div>
-                    <p>Learn to design websites &amp; mobile phone apps.</p>
-                  </div>
-                  <div class="d-flex items-center">
-                    <div class="d-flex justify-center items-center border-light rounded-full size-20 mr-10">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check size-12">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                      </svg>
-                    </div>
-                    <p>All the techniques used by UX professionals</p>
-                  </div>
-                  <div class="d-flex items-center">
-                    <div class="d-flex justify-center items-center border-light rounded-full size-20 mr-10">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check size-12">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                      </svg>
-                    </div>
-                    <p>You will be able to talk correctly with other UX design.</p>
-                  </div>
-                </div>
-              </div>
+        <div class="py-30 px-30">
+
+          <div id="paymentFailedStep" class="d-fle items-center" style="display: none;">
+            <div class="d-flex justify-center items-center border-dark bg-red-1 rounded-full mr-10 px-2 py-2">
+              <i class="size-12 text-white" data-feather="x"></i>
             </div>
+            <p class="pt-15">Payment Failed</p>
           </div>
+
+
+          <div class="d-flex items-center">
+            <div id="step1" class="<?php if ($status > 0 && $status != 0) {
+                                      echo "bg-deep-green-1 text-white ";
+                                    } ?>d-flex justify-center items-center icon-outline rounded-full mr-10 px-2 py-2">
+              <i class="size-12" data-feather="check"></i>
+            </div>
+            <p class="pt-15">Payment Pending</p>
+          </div>
+
+          <div class="d-flex items-center">
+            <div id="step2" class="<?php if ($status > 1 && $status != 0) {
+                                      echo "bg-deep-green-1 text-white ";
+                                    } ?>d-flex justify-center items-center icon-outline rounded-full mr-10 px-2 py-2">
+              <i class="size-12" data-feather="check"></i>
+            </div>
+            <p class="pt-15">Payment Confirmed</p>
+          </div>
+
+          <div class="d-flex items-center">
+            <div id="step3" class="<?php if ($status > 2 && $status != 0) {
+                                      echo "bg-deep-green-1 text-white ";
+                                    } ?>d-flex justify-center items-center icon-outline rounded-full mr-10 px-2 py-2">
+              <i class="size-12" data-feather="check"></i>
+            </div>
+            <p class="pt-15">Order Processed</p>
+          </div>
+
+          <div class="d-flex items-center">
+            <div id="step4" class="<?php if ($status > 3 && $status != 0) {
+                                      echo "bg-deep-green-1 text-white ";
+                                    } ?>d-flex justify-center items-center icon-outline rounded-full mr-10 px-2 py-2">
+              <i class="size-12" data-feather="check"></i>
+            </div>
+            <p class="pt-15">Order Delivered</p>
+          </div>
+
         </div>
       </div>
     </div>
-
   </div>
+
+
+  <div class="modal fade" id="editorder" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal_title" id="exampleModalLabel">
+            Edit Order
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <i class="fa-regular fa-circle-xmark text-20"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex x-gap-20 y-gap-20 items-center flex-wrap">
+            <div>
+              <div class=" bg-deep-green-1 cart-btn">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+            </div>
+            <div class="">
+              <p class="mt-5">Business Location</p>
+              <h5 class="text-17 lh-14 fw-500"><?php echo $location . ", <br>" . $country ?></h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="editocrder" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal_title" id="exampleModalLabel">
+            Order Timeline
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <i class="fa-regular fa-circle-xmark text-20"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row x-gap-100 justfiy-between">
+            <div class="col-md-12">
+              <div class="y-gap-20">
+                <div class="d-flex items-center">
+                  <div class="d-flex justify-center items-center border-light rounded-full size-20 mr-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check size-12">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                  <p>Create quick wireframes.</p>
+                </div>
+                <div class="d-flex items-center">
+                  <div class="d-flex justify-center items-center border-light rounded-full size-20 mr-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check size-12">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                  <p>Downloadable exercise files</p>
+                </div>
+                <div class="d-flex items-center">
+                  <div class="d-flex justify-center items-center border-light rounded-full size-20 mr-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check size-12">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                  <p>Build a UX project from beginning to end.</p>
+                </div>
+                <div class="d-flex items-center">
+                  <div class="d-flex justify-center items-center border-light rounded-full size-20 mr-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check size-12">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                  <p>Learn to design websites &amp; mobile phone apps.</p>
+                </div>
+                <div class="d-flex items-center">
+                  <div class="d-flex justify-center items-center border-light rounded-full size-20 mr-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check size-12">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                  <p>All the techniques used by UX professionals</p>
+                </div>
+                <div class="d-flex items-center">
+                  <div class="d-flex justify-center items-center border-light rounded-full size-20 mr-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check size-12">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                  <p>You will be able to talk correctly with other UX design.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 
 
 

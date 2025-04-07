@@ -45,13 +45,13 @@ function togglePasswordVisibility(inputId, iconId) {
 
 // document.addEventListener('DOMContentLoaded', function() {
 //     // console.log('Script loaded.');
-  
+
 //     var currentUrl = window.location.href;
 //     // console.log('Current URL:', currentUrl);
-  
+
 //     var sidebarLinks = document.querySelectorAll('.sidebar__item a');
 //     // console.log('Sidebar links:', sidebarLinks);
-  
+
 //     sidebarLinks.forEach(function(link) {
 //         // console.log('Link HREF:', link.href);
 //         if (link.href === currentUrl) {
@@ -61,7 +61,7 @@ function togglePasswordVisibility(inputId, iconId) {
 //     });
 //   });
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     var currentUrl = window.location.href;
     var currentPathname = new URL(currentUrl).pathname;
 
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var sidebarLinks = document.querySelectorAll('.sidebar__item a');
     // console.log('Sidebar links:', sidebarLinks);
 
-    sidebarLinks.forEach(function(link) {
+    sidebarLinks.forEach(function (link) {
         var linkHref = new URL(link.href).pathname;
         // console.log('Link Href:', linkHref);
 
@@ -85,8 +85,8 @@ document.addEventListener('DOMContentLoaded', function() {
         var relativeCurrentPathname = currentPathname.replace(basePath, '');
 
         // Check if the current path is within the section or matches the link
-        if (relativeCurrentPathname === relativeLinkHref || 
-            (relativeLinkHref === 'orders' && relativeCurrentPathname.startsWith('order')) || 
+        if (relativeCurrentPathname === relativeLinkHref ||
+            (relativeLinkHref === 'orders' && relativeCurrentPathname.startsWith('order')) ||
             (relativeLinkHref === 'product' && (relativeCurrentPathname.startsWith('image') || relativeCurrentPathname.startsWith('thumbnail'))) ||
             (relativeLinkHref === 'product' && (relativeCurrentPathname.startsWith('edit') || relativeCurrentPathname.startsWith('create')))
         ) {
@@ -205,7 +205,7 @@ function toggleDropdown() {
 function updateOrderStatus(status) {
     // Hide the dropdown after a selection
     $('#orderDropdown').hide();
-    
+
     // Update the dropdown button text with the selected timeframe
     $('#dropdownTitle').text(status.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())); // Formats timeframe text
 
@@ -213,7 +213,7 @@ function updateOrderStatus(status) {
     // const userId = $('[data-user-id]').data('user-id');
 
     const orderID = $('[data-order-id]').data('order-id');
-    
+
     // Send an AJAX request using jQuery
     $.ajax({
         url: 'inc/updateorderstatus.php',
@@ -223,18 +223,45 @@ function updateOrderStatus(status) {
             orderid: orderID
         },
         dataType: 'json',
-        success: function(response) {
+        success: function (response) {
             // Update the store visits
-           
-            $('#storeVisits').text(response.storeclickstotal);
-            
-            // Update the total amount
-            
 
-            // console.log(response.totalAmount);
-  
+
+            if (response.status === 'success') {
+                showNotification(response.message, 'success');
+                $('#orderStatusText').text(response.order_status);
+            
+                console.log('Status level '+response.order_status_level);
+                // Force flex display for "Payment Failed"
+                if (Number(response.order_status_level) === 0) {
+                    $('#paymentFailedStep').css('display', 'flex');
+                } else {
+                    $('#paymentFailedStep').hide();
+                }
+            
+                // Clear all steps first
+                for (let i = 1; i <= 4; i++) {
+                    $('#step' + i).removeClass('bg-deep-green-1 text-white');
+                }
+            
+                // Add classes to completed steps
+                for (let i = 1; i <= Number(response.order_status_level); i++) {
+                    $('#step' + i).addClass('bg-deep-green-1 text-white');
+                }
+            
+                // Optional: re-render feather icons
+                // feather.replace();
+            }
+            else if (response.status == 'info') {
+                showNotification(response.message, 'info'); // Yellow notification
+            } else if (response.status == 'error') {
+                showNotification('kkk ' + response.message, 'error'); // Red notification
+            } else {
+                showNotification('kkddsk ' + response.message, 'error');
+            }
+
         },
-        error: function() {
+        error: function () {
             console.error('Failed to fetch filtered data');
         }
     });
@@ -291,13 +318,13 @@ function togglefilterDropdown() { // Dashboard filter
 function fetchFiltered(timeframe) {
     // Hide the dropdown after a selection
     $('#filterDropdown').hide();
-    
+
     // Update the dropdown button text with the selected timeframe
     $('#dropdownFilter').text(timeframe.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())); // Formats timeframe text
-    
+
     // Retrieve the unique_id from the data attribute
     const userId = $('[data-user-id]').data('user-id');
-    
+
     // Send an AJAX request using jQuery
     $.ajax({
         url: 'inc/filterdashboard.php',
@@ -307,25 +334,25 @@ function fetchFiltered(timeframe) {
             userid: userId
         },
         dataType: 'json',
-        success: function(response) {
+        success: function (response) {
             // Update the store visits
-           
+
             $('#storeVisits').text(response.storeclickstotal);
-            
+
             if (response.totalAmount === null) {
                 $('#totalAmount').text(formatCompactCurrency(0));
-            }else{
+            } else {
                 $('#totalAmount').text(formatCompactCurrency(response.totalAmount));
             }
             // Update the total amount
-            
+
             $('#numorders').text(response.numorders);
 
             // console.log(response.totalAmount);
-            
+
             // Clear existing product table rows
             $('#productstable tbody').empty();
-            
+
             // Check if there are no products
             // if (response.products.length === 0) {
             //     $('#noProductsMessage').remove();
@@ -360,9 +387,9 @@ function fetchFiltered(timeframe) {
             //         );
             //     });
             // }
-            
+
         },
-        error: function() {
+        error: function () {
             console.error('Failed to fetch filtered data');
         }
     });

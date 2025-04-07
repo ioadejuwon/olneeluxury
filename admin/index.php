@@ -179,7 +179,7 @@ include_once "ad_comp/adm-sidebar.php"
                   $cus_name = $firstname . " " . $lastname;
                   $cus_email = $row_orders['email'];
                   $cus_phone = $row_orders['phone'];
-                  $pay_status = $row_orders['status'];
+                  $status = $row_orders['status'];
                   $pay_total = $row_orders['total'];
                   $pay_total = '&#8358;' . number_format($pay_total, 2);
                   $pay_shipping = $row_orders['shipping'];
@@ -202,15 +202,15 @@ include_once "ad_comp/adm-sidebar.php"
                   }
 
 
-                  if ($pay_status == 0) {
+                  if ($status == 0) {
                     $pay_status = "Payment Failed";
-                  } elseif ($pay_status == 1) {
+                  } elseif ($status == 1) {
                     $pay_status = "Payment Pending";
-                  } elseif ($pay_status == 2) {
+                  } elseif ($status == 2) {
                     $pay_status = "Payment Confirmed";
-                  } elseif ($pay_status == 3) {
+                  } elseif ($status == 3) {
                     $pay_status = "Processed";
-                  } elseif ($pay_status == 4) {
+                  } elseif ($status == 4) {
                     $pay_status = "Delivered";
                   } else {
                     $pay_status = "Could not retrieve status";
