@@ -32,14 +32,14 @@ $count_row_orders = mysqli_num_rows($orders_sql);
 // $order_amount = $row_orders['totalprice'];
 // $total_amount = $order_amount;
 
-$orders_sql_success = mysqli_query($conn, "SELECT SUM(total) as totalprice FROM olnee_orders WHERE status = 'Successful' AND DATE(created_at) = CURDATE()");
+$orders_sql_success = mysqli_query($conn, "SELECT SUM(total) as totalprice FROM olnee_orders WHERE status = 2 AND DATE(created_at) = CURDATE()");
 $row_orders = mysqli_fetch_assoc($orders_sql_success);
 $order_amount = $row_orders['totalprice'];
 $total_amount = $order_amount;
 $total_amount = !empty($order_amount) ? $order_amount : 0;
 
 
-include_once "ad_comp/adm-sidebar.php" 
+include_once "ad_comp/adm-sidebar.php"
 ?>
 
 <div class="dashboard__content bg-light-4">
@@ -58,30 +58,30 @@ include_once "ad_comp/adm-sidebar.php"
       </div>
     </div>
     <div class="col-auto">
-			<div class="dropdown">
-				<button class="dropdown__button d-flex items-center text-14 bg-white border-light rounded-8 px-20 py-10 text-14 lh-12 text-dark-1" onclick="togglefilterDropdown()" data-user-id="<?php echo $user_id; ?>">
-					<span id="dropdownFilter" >Filter</span>
-					<i class="icon text-9 ml-40 icon-chevron-down"></i>
-				</button>
-				<div id="filterDropdown" class="dropdown__content -dark-bg-dark-2 -dark-border-white-10" style="display: none;">
-					<div>
-						<a href="javascript:void(0);" onclick="fetchFiltered('today')" class="d-block active">Today</a>
-					</div>
-					<div>
-						<a href="javascript:void(0);" onclick="fetchFiltered('this_week')" class="d-block">This Week</a>
-					</div>
-					<div>
-						<a href="javascript:void(0);" onclick="fetchFiltered('this_month')" class="d-block">This Month</a>
-					</div>
-					<div>
-						<a href="javascript:void(0);" onclick="fetchFiltered('this_year')" class="d-block">This Year</a>
-					</div>
-					<div>
-						<a href="javascript:void(0);" onclick="fetchFiltered('lifetime')" class="d-block">Lifetime</a>
-					</div>
-				</div>
-			</div>
-		</div>
+      <div class="dropdown">
+        <button class="dropdown__button d-flex items-center text-14 bg-white border-light rounded-8 px-20 py-10 text-14 lh-12 text-dark-1" onclick="togglefilterDropdown()" data-user-id="<?php echo $user_id; ?>">
+          <span id="dropdownFilter">Filter</span>
+          <i class="icon text-9 ml-40 icon-chevron-down"></i>
+        </button>
+        <div id="filterDropdown" class="dropdown__content -dark-bg-dark-2 -dark-border-white-10" style="display: none;">
+          <div>
+            <a href="javascript:void(0);" onclick="fetchFiltered('today')" class="d-block active">Today</a>
+          </div>
+          <div>
+            <a href="javascript:void(0);" onclick="fetchFiltered('this_week')" class="d-block">This Week</a>
+          </div>
+          <div>
+            <a href="javascript:void(0);" onclick="fetchFiltered('this_month')" class="d-block">This Month</a>
+          </div>
+          <div>
+            <a href="javascript:void(0);" onclick="fetchFiltered('this_year')" class="d-block">This Year</a>
+          </div>
+          <div>
+            <a href="javascript:void(0);" onclick="fetchFiltered('lifetime')" class="d-block">Lifetime</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="row y-gap-5" style="--bs-gutter-x:5px !important;">
     <div class="col-6 col-xl-3">
@@ -199,6 +199,21 @@ include_once "ad_comp/adm-sidebar.php"
                     $cus_notes = "No notes added!";
                   } else {
                     $cus_notes;
+                  }
+
+
+                  if ($pay_status == 0) {
+                    $pay_status = "Payment Failed";
+                  } elseif ($pay_status == 1) {
+                    $pay_status = "Payment Pending";
+                  } elseif ($pay_status == 2) {
+                    $pay_status = "Payment Confirmed";
+                  } elseif ($pay_status == 3) {
+                    $pay_status = "Processed";
+                  } elseif ($pay_status == 4) {
+                    $pay_status = "Delivered";
+                  } else {
+                    $pay_status = "Could not retrieve status";
                   }
 
 

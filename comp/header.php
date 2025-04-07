@@ -3,12 +3,12 @@
 
 
 <header data-anim="fade" data-add-bg="bg-whte" class="header -type-4 -shadow bg-white border-bottom-light js-header is-in-view d-non justify-center">
-  <div class="container py-10">
+  <div class="container py-0">
     <div class="row justify-between items-center">
 
       <div class="col-auto">
         <div class="header-left d-flex items-center">
-          <div class="header__logo pr-30 xl:pr-20 md:pr-0">
+          <div class="header__logo pr-0 xl:pr-0 md:pr-0">
             <a data-barba="" href="<?php echo HOME ?>">
               <!-- <img src="admin/assets/img/logo.png" alt="logo" width="50px"> -->
               <h2>Olnee Luxury</h2>
@@ -23,7 +23,7 @@
           <div class="header-menu__content">
             <div class="mobile-bg js-mobile-bg"></div>
             <div class="menu js-navList">
-              <ul class="menu__nav text-dark-1 -is-active">
+              <ul class="menu__nav text-dark-1 -is-active pt-15">
                 <li class="fw-600">
                   <a data-barba="" href="<?php echo HOME ?>">Home</a>
                 </li>

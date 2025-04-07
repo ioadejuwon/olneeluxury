@@ -70,6 +70,20 @@ include_once "comp/header.php";
         // $dateformat = date('D., jS M.', $date);
         // $dateformat = date('j/m/y', $date);
 
+        if ( $status == 0 ) {
+            $status = "Payment Failed";
+        }elseif ( $status == 1 ) {
+            $status = "Payment Pending";
+        } elseif ( $status == 2 ) {
+            $status = "Payment Confirmed";
+        } elseif ( $status == 3 ) {
+            $status = "Processed";
+        } elseif ( $status == 4 ) {
+            $status = "Delivered";
+        } else {
+            $status = "Could not retrieve status";
+        }
+
       
         $dateformat =  date('D, jS F, Y', $date);
 

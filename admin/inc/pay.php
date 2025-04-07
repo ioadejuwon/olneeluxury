@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
         // Insert order details
-        $insert_order = "INSERT INTO olnee_orders (order_id, first_name, last_name, email, phone, country, state, city, street, notes, subtotal, discount, shipping, total, paymentOption, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'Pending')";
+        $insert_order = "INSERT INTO olnee_orders (order_id, first_name, last_name, email, phone, country, state, city, street, notes, subtotal, discount, shipping, total, paymentOption, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)";
         $stmt = $conn->prepare($insert_order);
         if (!$stmt) {
             // throw new Exception("Order preparation failed: " . $conn->error);

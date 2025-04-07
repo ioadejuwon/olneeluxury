@@ -4,7 +4,7 @@ session_start();
 
 include_once "inc/config.php";
 $order_id = $_GET['id'];
-$pagetitle = "Order Details #".$order_id;
+$pagetitle = "Order Details #" . $order_id;
 include_once "inc/drc.php";
 
 
@@ -51,16 +51,30 @@ if ($count_row_orders < 1) {
   $order_date =  date('D, jS F, Y', $date);
 
 
-  if ($paymentOption == '1') {
-    $payment_mode = 'Flutterwave';
-  }else if ($paymentOption == '2') {
-    $payment_mode = 'Direct Transfer';
-  }else if ($paymentOption == '3') {
-    $payment_mode = 'Cash on Delivery';
-  }else if ($paymentOption == '4') {
-    $payment_mode = 'WhatsApp Order';
+  if ($status == 0) {
+    $status = "Payment Failed";
+  } elseif ($status == 1) {
+    $status = "Payment Pending";
+  } elseif ($status == 2) {
+    $status = "Payment Confirmed";
+  } elseif ($status == 3) {
+    $status = "Processed";
+  } elseif ($status == 4) {
+    $status = "Delivered";
+  } else {
+    $status = "Could not retrieve status";
   }
 
+
+  if ($paymentOption == '1') {
+    $payment_mode = 'Flutterwave';
+  } else if ($paymentOption == '2') {
+    $payment_mode = 'Direct Transfer';
+  } else if ($paymentOption == '3') {
+    $payment_mode = 'Cash on Delivery';
+  } else if ($paymentOption == '4') {
+    $payment_mode = 'WhatsApp Order';
+  }
 }
 
 
@@ -93,18 +107,81 @@ include_once "ad_comp/adm-sidebar.php"
 
   <div class="row y-gap-30">
     <div class="col-xl-7">
-      <div class="rounded-16 bg-white -dark-bg-dark-1 shadow-4 h-100 parent">
+      <div class="rounded-16 bg-white -dark-bg-dark-1 shadow-4 h-100 arent">
         <div class="py-20 px-30 border-bottom-light child">
           <div class="row y-gap-20 justify-between">
             <div class="col-auto">
               <div class="text-17 lh-1 fw-700 text-dark-1">Order Items</div>
               <div class="text-11 lh-1 mt-5 uppercase text-dark-1">#<?php echo $order_id ?></div>
             </div>
-            <div class="col-auto d-none">
-              <div class="text-16 fw-500 text-dark-1 img-outline" data-toggle="modal" data-target="#editorder">
-                <i class="fa-solid fa-marker" style="padding:7px"></i>
+            <div class="col-auto d-none" style="position: relative;">
+              <div class="text-16 fw-500 text-dark-1 icon-outline py-10 d-non  order_update toggle-btn-<?php echo $order_id ?>">
+                <!-- <i class="fa-solid fa-marker" style="padding:7px"></i> -->
+                <i class="icon-menu-vertical" style="padding:20px;"></i>
+              </div>
+
+
+              <!-- <div class="toggle-element -dshb-more js-more-1-toggle-<?php echo $product_id ?>"> -->
+              <div class="dropdown-main-content " id="dropdown-<?php echo $order_id ?>">
+                <div class="px-25 py-25 bg-white -dark-bg-dark-2 shadow-1 border-light rounded-8">
+                  <a data-toggle="modal" data-target="<?php echo '#share-' . $product_id ?>" class="d-flex items-center">
+                    <div class="fa-regular fa-send"></div>
+                    <div class="text-17 lh-1 fw-500 ml-12">Share</div>
+                  </a>
+
+                  <a href="<?php echo EDIT_PRODUCT . '?productid=' . $product_id ?>" class="d-flex items-center mt-20">
+                    <div class="fa-regular fa-edit"></div>
+                    <div class="text-17 lh-1 fw-500 ml-12">Edit</div>
+                  </a>
+
+                  <a href="<?php echo $image_path_thumbnail; ?>" class="d-none gallery__item js-gallery  d-flex items-center mt-20" data-gallery="<?php echo $product_id ?>">
+                    <div class="fa-regular fa-eye"></div>
+                    <div class="text-17 lh-1 fw-500 ml-12">Images</div>
+                  </a>
+
+                  <a href="#" class="toggle-availability d-flex items-center mt-20" data-product-id="<?php echo $product_id; ?>" data-status="<?php echo $availability; ?>">
+                    <div class="fa-regular fa-eye"></div>
+                    <div class="text-17 lh-1 fw-500 ml-12 " id="availability-text">
+                      <?php echo $availability ? "Available" : "Unavailable"; ?>
+                    </div>
+                  </a>
+
+
+                  <a data-toggle="modal" data-target="<?php echo '#delete-' . $product_id ?>" class="d-flex items-center mt-20 text-red-1">
+                    <div class="fa-solid fa-trash-can"></div>
+                    <div class="text-17 lh-1 fw-500 ml-12">Delete</div>
+                  </a>
+                </div>
               </div>
             </div>
+
+            <div class="col-auto  dropdown">
+
+              <button class="dropdown__button d-fle border-dark items-cente text-14 bg-white rounded-8 px-20 py- text-14" onclick="toggleDropdown()" data-order-id="<?php echo $order_id; ?>">
+                <span id="dropdownTitle">Update<span class="lg:d-none">&nbsp;status</span></span>
+                <i class="icon text-9 ml-40 icon-chevron-down"></i>
+              </button>
+              <div id="orderDropdown" class="dropdown__content -dark-bg-dark-2 -dark-border-white-10" style="display: none;">
+                <div>
+                  <a href="javascript:void(0);" onclick="updateOrderStatus('processing')" class="d-block active">Processing</a>
+                </div>
+                <div>
+                  <a href="javascript:void(0);" onclick="updateOrderStatus('paid')" class="d-block">Paid</a>
+                </div>
+                <div>
+                  <a href="javascript:void(0);" onclick="updateOrderStatus('sent')" class="d-block">Sent</a>
+                </div>
+                <div>
+                  <a href="javascript:void(0);" onclick="updateOrderStatus('delivered')" class="d-block">Delivered</a>
+                </div>
+
+                <div>
+                  <!-- <a href="javascript:void(0);" onclick="fetchFilteredProducts('<?php echo $category_id; ?>')" class="d-block"><?php echo $category_name; ?></a> -->
+                  <a href="?c=<?php echo $order_id; ?>"><?php echo $order_id; ?></a>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -115,6 +192,7 @@ include_once "ad_comp/adm-sidebar.php"
         while ($row_orders = mysqli_fetch_assoc($products_orders)) {
           // Get the thumbnail image
           $product_id = $row_orders['product_id'];
+          $price = $row_orders['price'];
           $yards = $row_orders['yards'];
           if ($yards > 1) {
             $numYards = ' yards';
@@ -131,7 +209,7 @@ include_once "ad_comp/adm-sidebar.php"
           $row = $result->fetch_assoc();
           $producttitle = $row['producttitle'];
 
-          $price = $row['price'];
+          // $price = $row['price'];
 
           $prodsql_img_thumbnail = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '$product_id' AND thumbnail = 1");
           $row_prod_img_thumbnail = mysqli_fetch_assoc($prodsql_img_thumbnail);
@@ -147,14 +225,19 @@ include_once "ad_comp/adm-sidebar.php"
                     <?php
                     // echo $product_name; 
                     if (strlen($producttitle) > 30) {
-                      echo substr($producttitle, 0, 30) . '...' . ' (' . $yards . $numYards . ')';
+                      echo substr($producttitle, 0, 30) . '...';
                     } else {
-                      echo $producttitle . ' (' . $yards . $numYards . ')';
+                      echo $producttitle;
                     }
                     ?>
                   </div>
-                  <div class="text-14 lh-11 mt-5 price">
-                    <?php echo $price; ?>
+                  <div class="text-14 lh-11 mt-5">
+                    <span class="price">
+                      <?php echo $price; ?>
+                    </span>
+                    <span>
+                      <?php echo ' (' . $yards . $numYards . ')'; ?>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -208,7 +291,133 @@ include_once "ad_comp/adm-sidebar.php"
     </div>
 
     <div class="col-xl-5">
-      <div class="rounded-16 bg-white -dark-bg-dark-1 shadow-4 h-100">
+      <div class="rounded-16 bg-white -dark-bg-dark-1 shadow-4 h-">
+        <div class="py-20 px-30 border-bottom-light">
+          <div class="row y-gap-20 justify-between">
+            <div class="col-auto">
+              <div class="lh-11 text-17 fw-700 text-dark-1">Order Status</div>
+              <div class="text-11 lh-11 mt-5 uppercase">#<?php echo $order_id ?></div>
+            </div>
+            <div class="col-auto d-none">
+              <div class="text-16 fw-500 text-dark-1 img-outline" data-toggle="modal" data-target="#editorder">
+                <i class="fa-solid fa-marker" style="padding:7px"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="py-30 px-30">
+          <div class="y-gap-20">
+            <div class="d-flex justify-between">
+              <div class="d-flex items-center">
+                <div class="ml-">
+                  <div class="text-14 lh-11 mb-5">Customer Name</div>
+                  <div class="lh-11 fw-500 text-dark-1">
+                    <?php echo $customer ?>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-between">
+              <div class="d-flex items-center">
+                <div class="ml-">
+                  <div class="text-14 lh-11 mb-5">Phone</div>
+                  <div class="lh-11 fw-500 text-dark-1">
+                    <?php echo $phone ?>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-between">
+              <div class="d-flex items-center">
+                <div class="ml-">
+                  <div class="text-14 lh-11 mb-5">Email Address</div>
+                  <div class="lh-11 fw-500 text-dark-1">
+                    <?php echo $email ?>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-between">
+              <div class="d-flex items-center">
+                <div class="ml-">
+                  <div class="text-14 lh-11 mb-5">Delivery Address</div>
+                  <div class="lh-11 fw-500 text-dark-1">
+                    <?php echo $cus_address ?>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-between">
+              <div class="d-flex items-center">
+                <div class="ml-">
+                  <div class="text-14 lh-11 mb-5">Payment Mode</div>
+                  <div class="lh-11 fw-500 text-dark-1">
+                    <?php echo $payment_mode ?>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-between">
+              <div class="d-flex items-center">
+                <div class="ml-">
+                  <div class="text-14 lh-11 mb-5">Payment Status</div>
+                  <div class="lh-11 fw-500 text-dark-1">
+                    <?php echo $status ?>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-between">
+              <div class="d-flex items-center">
+                <div class="ml-">
+                  <div class="text-14 lh-11 mb-5">Order Date</div>
+                  <div class="lh-11 fw-500 text-dark-1">
+                    <?php echo $order_date ?>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="d-none">
+              <div class="d-flex justify-between border-top-dark mt-15">
+                <div class="d-flex items-center">
+                  <div class="ml-10">
+                    <div class="text-16 fw-700 lh-11 mb-5 text-dark-1">Order Summary</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex justify-between border-top-dark px-10">
+                <div class="py-1 fw-500">Subtotal</div>
+                <div class="py-1 fw-600 text-dark-1 price"><?php echo $subtotal ?></div>
+              </div>
+              <div class="d-flex justify-between border-top-dark px-10">
+                <div class="py-1 fw-500">Discount</div>
+                <div class="py-1 fw-600 text-dark-1 price"><?php echo $discount ?></div>
+              </div>
+              <div class="d-flex justify-between border-top-dark px-10">
+                <div class="py-1 fw-500 text-dark-1">Shipping</div>
+                <div class="py-1 fw-600 text-dark-1 price"><?php echo $shipping ?></div>
+              </div>
+              <div class="d-flex justify-between border-top-dark px-10">
+                <div class="py-1 fw-500 text-dark-1">Total</div>
+                <div class="py-1 fw-600 text-dark-1 price"><?php echo $total ?></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="rounded-16 bg-white -dark-bg-dark-1 shadow-4 h-">
         <div class="py-20 px-30 border-bottom-light">
           <div class="row y-gap-20 justify-between">
             <div class="col-auto">
@@ -335,6 +544,7 @@ include_once "ad_comp/adm-sidebar.php"
         </div>
       </div>
     </div>
+
 
     <div class="modal fade" id="editorder" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">

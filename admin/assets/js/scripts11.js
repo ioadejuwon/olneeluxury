@@ -191,6 +191,93 @@ $(document).on("mousedown", function (event) {
 });
 
 
+// Function to toggle dropdown visibility
+function toggleDropdown() {
+    var dropdownContent = document.getElementById("orderDropdown");
+    if (dropdownContent.style.display === "none" || dropdownContent.style.display === "") {
+        dropdownContent.style.display = "block";
+    } else {
+        dropdownContent.style.display = "none";
+    }
+}
+
+
+function updateOrderStatus(status) {
+    // Hide the dropdown after a selection
+    $('#orderDropdown').hide();
+    
+    // Update the dropdown button text with the selected timeframe
+    $('#dropdownTitle').text(status.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())); // Formats timeframe text
+
+    // Retrieve the unique_id from the data attribute
+    // const userId = $('[data-user-id]').data('user-id');
+
+    const orderID = $('[data-order-id]').data('order-id');
+    
+    // Send an AJAX request using jQuery
+    $.ajax({
+        url: 'inc/updateorderstatus.php',
+        type: 'GET',
+        data: {
+            status: status,
+            orderid: orderID
+        },
+        dataType: 'json',
+        success: function(response) {
+            // Update the store visits
+           
+            $('#storeVisits').text(response.storeclickstotal);
+            
+            // Update the total amount
+            
+
+            // console.log(response.totalAmount);
+  
+        },
+        error: function() {
+            console.error('Failed to fetch filtered data');
+        }
+    });
+}
+
+
+
+
+
+$(document).on("click", ".order_update", function (event) {
+    event.stopPropagation(); // Prevents the click from bubbling up and closing immediately
+
+    let classes = $(this).attr("class"); // Get button classes
+    let match = classes.match(/toggle-btn-([A-Za-z0-9-]+)/); // Match product IDs with letters, numbers, and dashes
+
+    if (!match) {
+        console.error("Product ID not found in class:", classes);
+        return;
+    }
+
+    let productId = match[1]; // Extract product ID
+    let dropdown = $("#dropdown-" + productId);
+
+    if (dropdown.length === 0) {
+        console.error("Dropdown not found for product ID:", productId);
+        return;
+    }
+
+    // Hide all other dropdowns first
+    $(".dropdown-main-content").not(dropdown).hide();
+
+    // Toggle the clicked dropdown
+    dropdown.toggle();
+});
+
+// **Fix: Use `mousedown` instead of `click` to prevent early closing**
+$(document).on("mousedown", function (event) {
+    if (!$(event.target).closest(".dropdown-main-content, .order_update").length) {
+        $(".dropdown-main-content").hide();
+    }
+});
+
+
 
 
 

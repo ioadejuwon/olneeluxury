@@ -69,7 +69,7 @@ include_once "ad_comp/adm-sidebar.php"
             </thead>
             <tbody id="">
               <?php
-              $orders = mysqli_query($conn, "SELECT * FROM olnee_orders");
+              $orders = mysqli_query($conn, "SELECT * FROM olnee_orders ORDER BY created_at DESC");
               $count_row_orders = mysqli_num_rows($orders);
               if ($count_row_orders != 0) {
 
@@ -103,6 +103,24 @@ include_once "ad_comp/adm-sidebar.php"
                   } else {
                     $cus_notes;
                   }
+
+                  
+
+                  if ($pay_status == 0) {
+                    $pay_status = "Payment Failed";
+                  } elseif ($pay_status == 1) {
+                    $pay_status = "Payment Pending";
+                  } elseif ($pay_status == 2) {
+                    $pay_status = "Payment Confirmed";
+                  } elseif ($pay_status == 3) {
+                    $pay_status = "Processed";
+                  } elseif ($pay_status == 4) {
+                    $pay_status = "Delivered";
+                  } else {
+                    $pay_status = "Could not retrieve status";
+                  }
+
+
 
 
               ?>

@@ -141,7 +141,6 @@ $fname = $row['fname'];
                           </div>
 
                           <button class=" toggle_button toggle-btn-<?php echo $product_id ?>">
-
                             <span class="d-flex items-center justify-center size-35 bg-white shadow-1 rounded-8">
                               <i class="icon-menu-vertical"></i>
                             </span>
@@ -179,6 +178,7 @@ $fname = $row['fname'];
                               </a>
                             </div>
                           </div>
+
                           <?php foreach ($other_images as $image_path): ?>
                             <a data-barba href="<?php echo $image_path; ?>" class="gallery__item js-gallery " data-gallery="<?php echo $product_id ?>"></a>
                           <?php endforeach; ?>

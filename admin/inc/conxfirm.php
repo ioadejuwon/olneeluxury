@@ -16,7 +16,7 @@ if (isset($_GET['status'])) {
     // Redirect to homepage if transaction is cancelled
     if ($_GET['status'] === 'cancelled') {
         $status = $_GET['status'];
-        $update_order_status_failed = "UPDATE olnee_orders SET status = 'Failed' WHERE order_id = ?";
+        $update_order_status_failed = "UPDATE olnee_orders SET status = 0 WHERE order_id = ?";
         $stmt = mysqli_stmt_init($conn);
         mysqli_stmt_prepare($stmt, $update_order_status_failed);
         mysqli_stmt_bind_param($stmt, "s", $order_id);
@@ -74,7 +74,7 @@ if (isset($_GET['status'])) {
                 echo "First Name: " . $fname . "<br>";
                 echo "Full Name: " . $fullname . "<br>";
 
-                $update_payment_status = "UPDATE olnee_orders SET status = 'Successful' WHERE order_id = ?";
+                $update_payment_status = "UPDATE olnee_orders SET status = 2 WHERE order_id = ?";
                 $stmt = mysqli_stmt_init($conn);
                 mysqli_stmt_prepare($stmt, $update_payment_status);
                 mysqli_stmt_bind_param($stmt, "s", $order_id);
