@@ -7,7 +7,7 @@
   
   <script src="admin/assets/js/main.js"></script>
   <script src="admin/assets/js/scripts13.js"></script>
-  <script src="admin/api/miniapi7.js"></script>
+  <script src="admin/api/miniapi.js"></script>
   <script src="admin/api/minicart.js"></script>
 </body>
 </html>
