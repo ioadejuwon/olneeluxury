@@ -72,7 +72,7 @@ $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No 
                             data-tab-target=".-tab-item-0" type="button">
                             Profile
                         </button>
-                        <button class="tabs__button text-light-1 js-tabs-button d-none"
+                        <button class="tabs__button text-light-1 js-tabs-button d-non"
                             data-tab-target=".-tab-item-1" type="button">
                             Edit Profile
                         </button>
@@ -139,7 +139,7 @@ $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No 
                             </div>
                         </div>
 
-                        <div class="tabs__pane -tab-item-1">
+                        <div class="tabs__pane -tab-item-1 is-active">
                             <div class="row y-gap-20 x-gap-20 items-center d-none">
                                 <div class="col-auto">
                                     <img class="size-100" src="assets/img/dashboard/edit/1.png" alt="image">
@@ -240,7 +240,7 @@ $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No 
                                 </form>
                             </div>
                         </div>
-                        <div class="tabs__pane -tab-item-3 is-active">
+                        <div class="tabs__pane -tab-item-3">
                             <form id="edit_password" method="POST" class="input-form row y-gap-30">
                             <div class="col-md-7">
 									<label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Current password</label>

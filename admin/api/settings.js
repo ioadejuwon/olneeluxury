@@ -72,10 +72,9 @@ $(document).ready(function () {
             success: function (response) {
                 // Clear any previous notifications
                 if (response.status == 'success') {
-                    // console.log(response);
                     showNotification(response.message, 'success'); // Show notification
                     setTimeout(() => {
-                        // window.location.href = response.redirect_url; // Redirect on success
+                        document.getElementById("edit_password").reset(); // Resets the entire form, including the input field
                     }, 2000);
                 } else if (response.status == 'info') {
                     showNotification(response.message, 'info'); // Yellow notification
@@ -86,8 +85,6 @@ $(document).ready(function () {
                 }
             },
             error: function (xhr, status, error) {
-                // Handle errors (e.g., network issues)
-                // $('#errorMessage').html(`<p class="fw-300 text-error-1">An error occurred: ${error}</p>`);
                 showNotification(`An error occurred while processing your request. ${error}`, `error`);
                 showNotification(`An error occurred while processing your request. ${xhr}`, `error`);
             },
