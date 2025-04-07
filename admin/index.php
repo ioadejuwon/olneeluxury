@@ -166,7 +166,7 @@ include_once "ad_comp/adm-sidebar.php"
             </thead>
             <tbody id="">
               <?php
-              $orders = mysqli_query($conn, "SELECT * FROM olnee_orders LIMIT 5");
+              $orders = mysqli_query($conn, "SELECT * FROM olnee_orders ORDER BY created_at DESC LIMIT 5");
               $count_row_orders = mysqli_num_rows($orders);
               if ($count_row_orders != 0) {
 
