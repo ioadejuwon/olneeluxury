@@ -50,7 +50,7 @@ function formatCompactCurrency(amount) {
         formattedAmount = amount;
     }
 
-    console.log('Original:', $(this).text(), '| Cleaned:', priceText, '| Formatted:', formatted);
+    console.log('Original: ',amount, '| Cleaned:', '| Formatted:', formattedAmount);
     return '₦' + formattedAmount;
 }
 
