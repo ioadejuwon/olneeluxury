@@ -15,10 +15,6 @@ include_once "comp/header.php";
   ?>
 
 
-
-
-
-
   <section class="layout-pt-md layout-pb-md">
     <div class="container">
 
@@ -85,7 +81,7 @@ include_once "comp/header.php";
       </div>
     </div>
   </section>
-  
+
   <?php
   include_once "comp/cart.php";
   include_once "comp/footer.php";
