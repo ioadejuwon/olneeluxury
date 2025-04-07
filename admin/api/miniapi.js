@@ -39,11 +39,11 @@ function formatCompactCurrency(amount) {
 
     let formattedAmount;
     if (amount >= 1000000000) {
-        formattedAmount = (amount / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B';
+        formattedAmount = (amount / 1000000000).toFixed(2).replace(/\.0$/, '') + 'B';
     } else if (amount >= 1000000) {
-        formattedAmount = (amount / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+        formattedAmount = (amount / 1000000).toFixed(2).replace(/\.0$/, '') + 'M';
     } else if (amount >= 1000) {
-        formattedAmount = (amount / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+        formattedAmount = (amount / 1000).toFixed(2).replace(/\.0$/, '') + 'K';
     }else if (amount < 1000) {
         formattedAmount = (amount).toFixed(2).replace(/\.0$/, '');
     } else {
