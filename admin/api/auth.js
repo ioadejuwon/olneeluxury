@@ -31,7 +31,7 @@ $(document).ready(function () {
             },
             complete: function () {
                 // Re-enable the submit button after the request is complete
-                $submitButton.prop('disabled', false).text('You are logged in');
+                $submitButton.prop('disabled', false).text('Log in');
                 // $submitButton.text('You are logged in!');
             }
         });

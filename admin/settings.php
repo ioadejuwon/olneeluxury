@@ -58,7 +58,7 @@ $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No 
 <div class="dashboard__content bg-light-4">
     <div class="row pb- mb-10">
         <div class="col-auto">
-            <h2 class="text-30 lh-12 fw-700">Settings </h2>
+            <h2 class="text-30 lh-12 fw-700">Settingss </h2>
             <div class="mt-5">Your can check your store settings.</div>
         </div>
     </div>
