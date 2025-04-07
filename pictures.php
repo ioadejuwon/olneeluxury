@@ -3,7 +3,8 @@ $pagetitle = "Customers' Cam";
 include_once "comp/head.php";
 include_once "comp/header.php"
 ?>
-<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<!-- <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script> -->
+<script src="admin/assets/js/masonry.js"></script>
 
 <section class="page-header -type-1 mt-60 text-white">
     <div class="overlay"></div>
@@ -32,7 +33,14 @@ include_once "comp/header.php"
     <div data-anim-wrap class="container">
         <div class="grid">
             <div class="grid-sizer"></div>
-            <div class="grid-item"><img src="admin/assets/img/landing4.jpg" alt=""></div>
+            <div class="grid-item"><img src="admin/assets/img/images/img1.jpg" alt=""></div>
+            <div class="grid-item"><img src="admin/assets/img/images/img2.jpg" alt=""></div>
+            <div class="grid-item"><img src="admin/assets/img/images/img3.jpg" alt=""></div>
+            <div class="grid-item"><img src="admin/assets/img/images/img4.jpg" alt=""></div>
+            <div class="grid-item"><img src="admin/assets/img/images/img5.jpg" alt=""></div>
+            <div class="grid-item"><img src="admin/assets/img/images/img3.jpg" alt=""></div>
+            <div class="grid-item"><img src="admin/assets/img/images/img4.jpg" alt=""></div>
+            <div class="grid-item"><img src="admin/assets/img/images/img5.jpg" alt=""></div>
         </div>
     </div>
 </section>
