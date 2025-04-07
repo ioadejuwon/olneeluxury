@@ -203,11 +203,19 @@ function fetchFiltered(timeframe) {
         dataType: 'json',
         success: function(response) {
             // Update the store visits
+           
             $('#storeVisits').text(response.storeclickstotal);
             
+            if (response.totalAmount === null) {
+                $('#totalAmount').text(formatCompactCurrency(0));
+            }else{
+                $('#totalAmount').text(formatCompactCurrency(response.totalAmount));
+            }
             // Update the total amount
-            $('#totalAmount').text(formatCompactCurrency(response.totalAmount));
+            
             $('#numorders').text(response.numorders);
+
+            console.log(response.totalAmount);
             
             // Clear existing product table rows
             $('#productstable tbody').empty();
