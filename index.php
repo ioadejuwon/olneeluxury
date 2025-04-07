@@ -9,6 +9,7 @@ include_once "comp/header.php";
 
   <?php
   include_once "comp/hero-page.php";
+  require_once "admin/inc/storevisits.php";
   include_once "comp/bestselling.php";
   ?>
 
