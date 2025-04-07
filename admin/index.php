@@ -32,7 +32,7 @@ $count_row_orders = mysqli_num_rows($orders_sql);
 // $order_amount = $row_orders['totalprice'];
 // $total_amount = $order_amount;
 
-$orders_sql_success = mysqli_query($conn, "SELECT SUM(total) as totalprice FROM olnee_orders WHERE status = 2 AND DATE(created_at) = CURDATE()");
+$orders_sql_success = mysqli_query($conn, "SELECT SUM(total) as totalprice FROM olnee_orders WHERE status > 1 AND DATE(created_at) = CURDATE()");
 $row_orders = mysqli_fetch_assoc($orders_sql_success);
 $order_amount = $row_orders['totalprice'];
 $total_amount = $order_amount;
