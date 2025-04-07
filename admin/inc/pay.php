@@ -259,7 +259,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 'status' => 'success',
                 'message' => 'WhatsApp Payment Option',
                 // 'link' => WHATSAPP_ORDER . $order_id
-                'link' => 'https://api.whatsapp.com/send?phone=' . WHATSAPP_NUMBER . '&text=' . rawurlencode($mainMSG)
+                'link' => 'https://api.whatsapp.com/send?phone=' . PHONE . '&text=' . rawurlencode($mainMSG)
             ];
             echo json_encode($response);
             // exit;

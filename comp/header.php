@@ -2,8 +2,8 @@
 
 
 
-<header data-anim="fade" data-add-bg="bg-whte" class="header -type-4 -shadow bg-white border-bottom-light js-header is-in-view d-non">
-  <div class="header__container py-10">
+<header data-anim="fade" data-add-bg="bg-whte" class="header -type-4 -shadow bg-white border-bottom-light js-header is-in-view d-non justify-center">
+  <div class="container py-10">
     <div class="row justify-between items-center">
 
       <div class="col-auto">

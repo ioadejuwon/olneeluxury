@@ -9,6 +9,9 @@ define('NAIRA', '₦');
 define('DOLLAR', '$');
 define('EURO', '€');
 
+define('PHONE', '2348108806808');
+define('MAIL', 'hello@olneeluxury.com');
+
 // Check if the site is running locally or on a hosting site
 if ($_SERVER['HTTP_HOST'] == 'localhost:8888') {
     // Local environment
@@ -44,7 +47,7 @@ define('LOGIN', BASE_URL.'login');
 define('LOGOUT', BASE_URL.'logout');
 define('REGISTER', BASE_URL.'register');
 define('CONTACT', BASE_URL.'contact');
-define('WHATSAPP_NUMBER', '2348108806808');
+
 // define('WHATSAPP_ORDER', 'https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(data.mainMSG)}');
 
 

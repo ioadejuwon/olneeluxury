@@ -368,24 +368,89 @@ $return = nl2br($row_store['returnPolicy']);
                 Other Nigerian Cities 3–7 business days
                 International 7–15 business days (if applicable)
                 <h4 class="text-18 fw-500">
-                Shipping Confirmation & Order Tracking
+                  Shipping Confirmation & Order Tracking
                 </h4>
                 <p class="mt-10 text-light-1">
-                Once your order has shipped, you will receive a tracking number via email or SMS to monitor your delivery status.
+                  Once your order has shipped, you will receive a tracking number via email or SMS to monitor your delivery status.
                 </p>
 
                 <h4 class="text-18 fw-500">
-                Shipping Delays
+                  Shipping Delays
                 </h4>
                 <p class="mt-10 text-light-1">
-                Please note that delivery delays can occasionally occur due to unforeseen circumstances. If your order is significantly delayed, we will contact you via email or phone.
+                  Please note that delivery delays can occasionally occur due to unforeseen circumstances. If your order is significantly delayed, we will contact you via email or phone.
                 </p>
 
               </div>
 
               <div class="tabs__pane -tab-item-4 is-">
-                <h4 class="text-18 fw-500">Return Policy</h4>
-                <p class="mt-10 text-light-1"><?php echo $return ?></p>
+                <!-- <h4 class="text-18 fw-500">Return Policy</h4>
+                <p class="mt-10 text-light-1"><?php echo $return ?></p> -->
+
+                <h4 class="text-18 fw-500">
+                  Eligibility for Returns
+                </h4>
+                <p class="mt-10 text-light-1">
+                  We accept returns within 7 days of delivery for items that are unused, in original packaging, and in the same condition that you received them.
+                </p>
+
+                <h4 class="text-18 fw-500">
+                  Items Not Eligible for Return
+                </h4>
+                <div class="row x-gap-100 justfiy-between">
+                  <div class="col-md-6">
+                    <div class="y-gap-20">
+
+                      <div class="d-flex items-center">
+                        <div class="d-flex justify-center items-center border-light rounded-full size-20 mr-10">
+                          <i class="icon-check text-6"></i>
+                        </div>
+                        <p>
+                          Custom-made or personalized items
+                        </p>
+                      </div>
+                      <div class="d-flex items-center">
+                        <div class="d-flex justify-center items-center border-light rounded-full size-20 mr-10">
+                          <i class="icon-check text-6"></i>
+                        </div>
+                        <p>
+                          Final sale/clearance items
+                        </p>
+                      </div>
+
+
+                    </div>
+                  </div>
+
+
+                </div>
+                <h4 class="text-18 fw-500">
+                  How to Initiate a Return
+                </h4>
+                <p class="mt-10 text-light-1">
+                  To start a return, please contact our support team at <a href="mailto:<?php echo MAIL ?>">hello@olneeluxury.com</a> or call us at <a href="tel:<?php echo PHONE ?>"></a> with your order number and reason for return. If your return is accepted, we’ll send you return instructions and a return shipping address.
+                </p>
+
+                <h4 class="text-18 fw-500">
+                  Return Shipping Fees
+                </h4>
+                <p class="mt-10 text-light-1">
+                  Customers are responsible for return shipping costs unless the return is due to a defective or incorrect item.
+                </p>
+
+                <h4 class="text-18 fw-500">
+                  Refunds
+                </h4>
+                <p class="mt-10 text-light-1">
+                  Once we receive and inspect your return, we will notify you of the approval or rejection of your refund. Approved refunds will be processed to your original payment method within 5–10 business days.
+                </p>
+
+                <h4 class="text-18 fw-500">
+                  Exchanges
+                </h4>
+                <p class="mt-10 text-light-1">
+                  We only replace items if they are defective or damaged. If you need to exchange an item, contact us with your order details.
+                </p>
 
               </div>
             </div>
