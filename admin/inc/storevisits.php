@@ -17,7 +17,7 @@ include_once "drc.php";
 // Get the store identifier (e.g., product or page reference)
 $backhalf = $_GET['ref'] ?? null;
 
-// if ($backhalf && !isset($_SESSION['visited_' . $backhalf])) {
+if ($backhalf) {
     // Insert visit into the database
     $sql = "INSERT INTO olnee_storevisits (backhalf, clicks, scans) VALUES (?, 1, 0)";
     $stmt = mysqli_prepare($conn, $sql);
@@ -25,9 +25,6 @@ $backhalf = $_GET['ref'] ?? null;
     if ($stmt) {
         mysqli_stmt_bind_param($stmt, "s", $backhalf);
         mysqli_stmt_execute($stmt);
-        mysqli_stmt_close($stmt);
+        // mysqli_stmt_close($stmt);
     }
-
-    // Mark this store as visited in the current session
-    $_SESSION['visited_' . $backhalf] = true;
-// }
+}

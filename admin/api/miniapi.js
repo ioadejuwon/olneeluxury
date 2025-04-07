@@ -44,13 +44,13 @@ function formatCompactCurrency(amount) {
         formattedAmount = (amount / 1000000).toFixed(2).replace(/\.0$/, '') + 'M';
     } else if (amount >= 1000) {
         formattedAmount = (amount / 1000).toFixed(2).replace(/\.0$/, '') + 'K';
-    }else if (amount < 1000) {
+    } else if (amount < 1000) {
         formattedAmount = (amount).toFixed(2).replace(/\.0$/, '');
     } else {
         formattedAmount = amount;
     }
 
-    console.log('Original: ',amount, '| Cleaned:', '| Formatted:', formattedAmount);
+    console.log('Original: ', amount, '| Cleaned:', '| Formatted:', formattedAmount);
     return '₦' + formattedAmount;
 }
 
@@ -68,7 +68,7 @@ function formatPrices() {
         // }
         $(this).text(formatted);
 
-        
+
     });
 }
 
@@ -89,7 +89,57 @@ function copyButton() {
     });
 }
 
+
+
+function getLastPathSegment() {
+    const pathSegments = window.location.pathname.split('/').filter(Boolean);
+    return pathSegments.length > 0 ? pathSegments[pathSegments.length - 1] : 'home';
+}
+
+function hasVisitedRecently(key, expirationTime = 120000) {
+    const visitData = localStorage.getItem(key);
+    const now = Date.now();
+
+    if (visitData) {
+        const parsed = JSON.parse(visitData);
+        return (now - parsed.timestamp) < expirationTime;
+    }
+    return false;
+}
+
+function markVisit(key) {
+    localStorage.setItem(key, JSON.stringify({ timestamp: Date.now() }));
+}
+
+function trackVisit() {
+    const backhalf = getLastPathSegment();
+    const visitKey = 'visited_' + backhalf;
+
+    if (!hasVisitedRecently(visitKey)) {
+        fetch('admin/inc/storevisits.php?ref=' + encodeURIComponent(backhalf))
+            .then(response => {
+                if (response.ok) {
+                    console.log('Tracked visit:', backhalf);
+                    markVisit(visitKey);
+                } else {
+                    console.error('Failed to track visit.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    } else {
+        console.log('Visit already tracked recently:', backhalf);
+    }
+}
+
+// Run it on page load
+// document.addEventListener("DOMContentLoaded", trackVisit);
+
+
+
 $(document).ready(function () {
+    trackVisit(); // Track the visit
     formatAllPrices(); // Ensure all prices are formatted
     formatPrices(); // Ensure all prices are formatted
     // setTimeout(formatAllPrices, 500); // Slight delay in case prices are dynamically loaded
