@@ -230,25 +230,25 @@ function updateOrderStatus(status) {
             if (response.status === 'success') {
                 showNotification(response.message, 'success');
                 $('#orderStatusText').text(response.order_status);
-            
-                console.log('Status level '+response.order_status_level);
+
+                console.log('Status level ' + response.order_status_level);
                 // Force flex display for "Payment Failed"
                 if (Number(response.order_status_level) === 0) {
                     $('#paymentFailedStep').css('display', 'flex');
                 } else {
                     $('#paymentFailedStep').hide();
                 }
-            
+
                 // Clear all steps first
                 for (let i = 1; i <= 4; i++) {
                     $('#step' + i).removeClass('bg-deep-green-1 text-white');
                 }
-            
+
                 // Add classes to completed steps
                 for (let i = 1; i <= Number(response.order_status_level); i++) {
                     $('#step' + i).addClass('bg-deep-green-1 text-white');
                 }
-            
+
                 // Optional: re-render feather icons
                 // feather.replace();
             }
@@ -396,3 +396,14 @@ function fetchFiltered(timeframe) {
         }
     });
 }
+
+
+
+// Initialize Masonry
+const grid = document.querySelector('.grid');
+new Masonry(grid, {
+    itemSelector: '.grid-item',
+    columnWidth: '.grid-sizer',
+    gutter: 20,
+    percentPosition: false
+});

@@ -69,7 +69,7 @@ $email = !empty($row["email"]) ? $row["email"] : "No info entered";
                         <div class="tabs__pane -tab-item-0 is-active">
                             <div class="row y-gap-20 x-gap-20 items-center">
                                 <div class="col-auto">
-                                    <img class="size-100" src="assets/img/dashboard/edit/1.png" alt="image">
+                                    <!-- <img class="size-100" src="assets/img/dashboard/edit/1.png" alt="image"> -->
                                 </div>
                                 <div class="col-auto">
                                     <div class="text-20 fw-500 text-dark-1"><?php echo $fname . " " . $lname ?></div>
@@ -117,7 +117,7 @@ $email = !empty($row["email"]) ? $row["email"] : "No info entered";
                         <div class="tabs__pane -tab-item-1">
                             <div class="row y-gap-20 x-gap-20 items-center d-none">
                                 <div class="col-auto">
-                                    <img class="size-100" src="assets/img/dashboard/edit/1.png" alt="image">
+                                    <!-- <img class="size-100" src="assets/img/dashboard/edit/1.png" alt="image"> -->
                                 </div>
                                 <div class="col-auto">
                                     <div class="text-16 fw-500 text-dark-1">Your avatar</div>

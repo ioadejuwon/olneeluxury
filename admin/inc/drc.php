@@ -39,6 +39,7 @@ define('PRODUCT_DETAIILS', BASE_URL.'product?item=');
 define('CART', BASE_URL.'cart');
 define('WISHLIST', BASE_URL.'wishlist');
 define('COLLECTION', BASE_URL.'collections');
+define('PICTURES', BASE_URL.'pictures');
 define('CATEGORY', BASE_URL.'category?id=');
 define('BLOG', BASE_URL.'blog');
 define('SEARCH', BASE_URL.'search');

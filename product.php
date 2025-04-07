@@ -238,8 +238,7 @@ $return = nl2br($row_store['returnPolicy']);
                       <li class="comments__item">
                         <div class="comments__item-inner md:direction-column">
                           <div class="comments__img mr-20">
-                            <div class="bg-image rounded-full js-lazy"
-                              data-bg="assets/img/avatars/1.png"></div>
+                            <!-- <div class="bg-image rounded-full js-lazy" data-bg="assets/img/avatars/1.png"></div> -->
                           </div>
 
                           <div class="comments__body md:mt-15">
@@ -276,8 +275,7 @@ $return = nl2br($row_store['returnPolicy']);
                       <li class="comments__item">
                         <div class="comments__item-inner md:direction-column">
                           <div class="comments__img mr-20">
-                            <div class="bg-image rounded-full js-lazy"
-                              data-bg="assets/img/avatars/1.png"></div>
+                            <!-- <div class="bg-image rounded-full js-lazy"data-bg="assets/img/avatars/1.png"></div> -->
                           </div>
 
                           <div class="comments__body md:mt-15">

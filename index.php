@@ -11,6 +11,7 @@ include_once "comp/header.php";
   include_once "comp/hero-page.php";
   require_once "admin/inc/storevisits.php";
   include_once "comp/bestselling.php";
+  include_once "comp/hero-page2.php";
   ?>
 
 
@@ -84,8 +85,7 @@ include_once "comp/header.php";
       </div>
     </div>
   </section>
-
-
+  
   <?php
   include_once "comp/cart.php";
   include_once "comp/footer.php";

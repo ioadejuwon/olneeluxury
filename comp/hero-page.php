@@ -1,4 +1,3 @@
-
 <section data-anim-wrap class="mainSlider -type-1 js-mainSlider">
   <div class="swiper-wrapper">
 
@@ -39,7 +38,7 @@
           </h1>
 
           <p data-anim-child="slide-up delay-4" class="mainSlider__text text-white">
-          Experience the Perfect Blend of Style and Comfort with our Premium Men’s Fabric
+            Experience the Perfect Blend of Style and Comfort with our Premium Men’s Fabric
           </p>
           <div data-anim-child="slide-up delay-4" class="row justify-center items-center x-gap-20 y-gap-20 pt-20">
             <div class="col-auto cta">
@@ -59,40 +58,4 @@
   <button class="swiper-next button -white-20 text-white size-60 rounded-full d-flex justify-center items-center js-next">
     <i class="icon icon-arrow-right text-24"></i>
   </button>
-</section>
-
-
-<section data-anim-wrap class="masthed hero-page -type- d-non">
-  <div class="masthead__bg"></div>
-
-  <div class="masthead__container">
-    <div class="row y-gap0 items-center">
-      <div class="col-lg-6">
-        <div class="masthead__content left">
-          <div data-anim-child="slide-up delay-2" class="text-17 lh-15 text-deep-green-1 fw-500 mb-10 subtxt">
-            AUTHENTIC || LUXURIOUS || AFFORDABLE
-          </div>
-          <h1 data-anim-child="slide-up delay-2" class="masthead__title">
-            Style Meets Comfort
-          </h1>
-          <p data-anim-child="slide-up delay-3" class="mt-20">
-          Experience the Perfect Blend of Style and Comfort with our<br class="lg:d-none">Premium Men’s Fabric
-          </p>
-          <div data-anim-child="slide-up delay-4" class="row items-center x-gap-20 y-gap-20 pt-20">
-            <div class="col-auto cta">
-              <a href="<?php echo SHOP ?>" class="button -md  bg-white  text-dark">Check Catalog</a>
-            </div>
-          </div>
-
-
-        </div>
-      </div>
-
-      <div class="col-lg-6">
-        <div data-anim-child="slide-up delay-6" class="masthead__image">
-          <img src="admin/assets/img/landing4.jpg" alt="image">
-        </div>
-      </div>
-    </div>
-  </div>
 </section>
