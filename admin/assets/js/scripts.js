@@ -215,7 +215,7 @@ function fetchFiltered(timeframe) {
             
             $('#numorders').text(response.numorders);
 
-            console.log(response.totalAmount);
+            // console.log(response.totalAmount);
             
             // Clear existing product table rows
             $('#productstable tbody').empty();
@@ -255,7 +255,6 @@ function fetchFiltered(timeframe) {
             //     });
             // }
             
-       
         },
         error: function() {
             console.error('Failed to fetch filtered data');
