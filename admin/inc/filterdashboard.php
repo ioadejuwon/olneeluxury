@@ -69,6 +69,12 @@ $order_amount = $orderrow['totalprice'];
 $total_amount =  $order_amount;
 
 
+$storevisits_sql = mysqli_query($conn, "SELECT * FROM olnee_storevisits");
+$storevisits_sql = mysqli_query($conn, "SELECT * FROM olnee_storevisits $orderClause");
+// $orderrow = mysqli_fetch_assoc($orders_sql);
+$count_row_visits = mysqli_num_rows($storevisits_sql);
+$totalvisits =  $count_row_visits;
+
 // $prodsql = mysqli_query($conn, "SELECT * FROM products WHERE productcategory = '$category_id'");
 // $count_row_products = mysqli_num_rows($prodsql);
 
@@ -138,6 +144,7 @@ $response = [
 	// 'storeclickstotal' => $storeclickstotal,
 	'totalAmount' => $total_amount,
 	'numorders' => $totalorders,
+	'numvisits' => $totalvisits,
 	// 'links' => $links
 ];
 

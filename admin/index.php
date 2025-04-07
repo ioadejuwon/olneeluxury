@@ -23,6 +23,10 @@ $count_row_product = mysqli_num_rows($products_sql);
 $categories_sql = mysqli_query($conn, "SELECT * FROM olnee_categories");
 $count_row_categories = mysqli_num_rows($categories_sql);
 
+$storevisits_sql = mysqli_query($conn, "SELECT * FROM olnee_storevisits");
+$count_row_store_visits = mysqli_num_rows($storevisits_sql);
+
+
 $orders_sql = mysqli_query($conn, "SELECT * FROM olnee_orders WHERE DATE(created_at) = CURDATE()");
 $count_row_orders = mysqli_num_rows($orders_sql);
 
@@ -119,6 +123,17 @@ include_once "ad_comp/adm-sidebar.php"
     </div>
     <!-- <div class="col-xl-3 col-md-6"> -->
     <div class="col-6 col-xl-3">
+      <div class="d-flex justify-between items-center py-35 px-35 lg:py-20 lg:px-20 rounded-8 bg-white -dark-bg-dark-1 shadow-4">
+        <div>
+          <div class="text-24 lh-1 fw-700 text-dark-1" id="numvisits"><?php echo $count_row_store_visits ?></div>
+          <div class="lh-1 mt-10 ">
+            <span class="lg:d-none">Total </span>Store Visits
+          </div>
+        </div>
+        <img src="assets/img/icons/category.png" alt="" width="20%">
+      </div>
+    </div>
+    <div class="col-6 col-xl-3 d-none">
       <div class="d-flex justify-between items-center py-35 px-35 lg:py-20 lg:px-20 rounded-8 bg-white -dark-bg-dark-1 shadow-4">
         <div>
           <div class="text-24 lh-1 fw-700 text-dark-1"><?php echo $count_row_categories ?></div>

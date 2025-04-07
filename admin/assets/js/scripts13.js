@@ -348,6 +348,8 @@ function fetchFiltered(timeframe) {
 
             $('#numorders').text(response.numorders);
 
+            $('#numvisits').text(response.numvisits);
+
             // console.log(response.totalAmount);
 
             // Clear existing product table rows
