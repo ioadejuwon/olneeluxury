@@ -424,7 +424,7 @@ include_once "ad_comp/adm-sidebar.php"
         </div>
         <div class="py-30 px-30">
 
-          <div id="paymentFailedStep" class="d-fle items-center" style="display: none;">
+          <div id="paymentFailedStep" class="items-center" style="display: none;">
             <div class="d-flex justify-center items-center border-dark bg-red-1 rounded-full mr-10 px-2 py-2">
               <i class="size-12 text-white" data-feather="x"></i>
             </div>
