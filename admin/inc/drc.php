@@ -1,5 +1,8 @@
 <?php
+// ini_set('session.gc_maxlifetime', 7200); // 2 hours
+// session_set_cookie_params(7200);
 // session_start();
+
 // $user_id = $_SESSION['user_id'];
 
 $footeryear = date("Y");

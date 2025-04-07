@@ -62,7 +62,7 @@
 </section>
 
 
-<section data-anim-wrap class="masthed hero-page -type- d-none">
+<section data-anim-wrap class="masthed hero-page -type- d-non">
   <div class="masthead__bg"></div>
 
   <div class="masthead__container">

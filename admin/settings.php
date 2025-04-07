@@ -1,5 +1,7 @@
 <?php
+
 session_start();
+
 include_once "inc/config.php";
 $pagetitle = "Settings";
 include_once "inc/drc.php";

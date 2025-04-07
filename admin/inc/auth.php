@@ -3,7 +3,9 @@ include_once 'config.php';
 include_once "drc.php";
 
 include_once 'randno.php';
+
 session_start();
+
 
 $error = null;
 

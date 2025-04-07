@@ -5,7 +5,9 @@ include_once 'config.php';
 include_once "drc.php";
 
 include_once 'randno.php';
+
 session_start();
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['categoryname'])) {
     $category_name = mysqli_real_escape_string($conn, $_POST['categoryname']); // Get the category name from the form

@@ -2,7 +2,9 @@
 include_once 'config.php';
 include_once "drc.php";
 include_once 'randno.php';
+
 session_start();
+
 
 // Enable error reporting for debugging
 ini_set('display_errors', 1);

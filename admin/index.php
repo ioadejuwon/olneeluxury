@@ -1,5 +1,7 @@
 <?php
+
 session_start();
+
 include_once "inc/config.php";
 $pagetitle = "Dashboard";
 include_once "inc/drc.php";
