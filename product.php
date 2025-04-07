@@ -46,7 +46,7 @@ $row_prod_img_thumbnail = mysqli_fetch_assoc($prodsql_img_thumbnail);
 
 $image_path_thumbnail = $row_prod_img_thumbnail['image_path'];
 if (empty($image_path_thumbnail)) {
-  $image_path_thumbnail2 = "product-img/product.png";
+  $image_path_thumbnail2 = DEFAULT_IMG;
 } else {
   $image_path_thumbnail2 = $row_prod_img_thumbnail['image_path'];
 }
@@ -63,7 +63,7 @@ if ($count_images > 0) {
     $other_images[] = 'admin/' . $image_path;
   }
 } else {
-  $image_path = "product-img/product.png";
+  $image_path = DEFAULT_IMG;
   $other_images[] = 'admin/' . $image_path;
 }
 

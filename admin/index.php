@@ -25,7 +25,7 @@ $count_row_product = mysqli_num_rows($products_sql);
 $categories_sql = mysqli_query($conn, "SELECT * FROM olnee_categories");
 $count_row_categories = mysqli_num_rows($categories_sql);
 
-$storevisits_sql = mysqli_query($conn, "SELECT * FROM olnee_storevisits WHERE backhalf = 'olnee' ");
+$storevisits_sql = mysqli_query($conn, "SELECT * FROM olnee_storevisits WHERE backhalf = 'home' ");
 $count_row_store_visits = mysqli_num_rows($storevisits_sql);
 
 

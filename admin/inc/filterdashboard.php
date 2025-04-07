@@ -70,7 +70,7 @@ $total_amount =  $order_amount;
 
 
 // $storevisits_sql = mysqli_query($conn, "SELECT * FROM olnee_storevisits");
-$storevisits_sql = mysqli_query($conn, "SELECT * FROM olnee_storevisits WHERE backhalf = 'olnee' ");
+$storevisits_sql = mysqli_query($conn, "SELECT * FROM olnee_storevisits WHERE backhalf = 'home' ");
 // $orderrow = mysqli_fetch_assoc($orders_sql);
 $count_row_visits = mysqli_num_rows($storevisits_sql);
 $totalvisits =  $count_row_visits;
