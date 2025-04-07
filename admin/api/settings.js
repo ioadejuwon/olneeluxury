@@ -48,6 +48,9 @@ $(document).ready(function () {
     $('#edit_password').on('submit', function (event) {
         event.preventDefault(); // Prevent the default form submission
         // Get the password and confirmation password values
+        var $submitButton = $(this).find('button[type="submit"]');
+        $submitButton.prop('disabled', true).text('Updating your password'); // Change button text to indicate it's processing
+
         var newPassword = $('#newPassword').val();
         var confirmPassword = $('#confirmnewPassword').val();
         // Password validation regex: at least one uppercase letter, one number, one special character, and at least 7 characters long
@@ -87,6 +90,11 @@ $(document).ready(function () {
                 // $('#errorMessage').html(`<p class="fw-300 text-error-1">An error occurred: ${error}</p>`);
                 showNotification(`An error occurred while processing your request. ${error}`, `error`);
                 showNotification(`An error occurred while processing your request. ${xhr}`, `error`);
+            },
+            complete: function () {
+                // Re-enable the submit button after the request is complete
+                $submitButton.prop('disabled', false).text('Save Password');
+                // $submitButton.text('You are logged in!');
             }
         });
     });
