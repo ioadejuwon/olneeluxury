@@ -63,7 +63,7 @@ switch ($filter) {
 // $storeclickstotal = $storeclicks + $storescans;
 
 // Fetch total order amount
-$orders_sql_success = mysqli_query($conn, "SELECT SUM(total) AS totalprice FROM olnee_orders  WHERE status = 2 $whereClause");
+$orders_sql_success = mysqli_query($conn, "SELECT SUM(total) AS totalprice FROM olnee_orders  WHERE status > 2 $whereClause");
 $orderrow = mysqli_fetch_assoc($orders_sql_success);
 $order_amount = $orderrow['totalprice'];
 $total_amount =  $order_amount;
