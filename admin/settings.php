@@ -98,7 +98,7 @@ $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No 
                         </button>
                     </div>
                     <div class="tabs__content py-30 px-30 js-tabs-content">
-                        <div class="tabs__pane -tab-item-0 is-active">
+                        <div class="tabs__pane -tab-item-0 is-activ">
                             <div class="row y-gap-20 x-gap-20 items-center">
                                 <div class="col-auto">
                                     <img class="size-100" src="assets/img/fav.png" alt="image">
@@ -240,22 +240,38 @@ $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No 
                                 </form>
                             </div>
                         </div>
-                        <div class="tabs__pane -tab-item-3">
-                            <form action="#" class="contact-form row y-gap-30">
-                                <div class="col-md-7">
-                                    <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Current password</label>
-                                    <input type="text" placeholder="Current password">
-                                </div>
-                                <div class="col-md-7">
-                                    <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">New password</label>
-                                    <input type="text" placeholder="New password">
-                                </div>
-                                <div class="col-md-7">
-                                    <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Confirm New Password</label>
-                                    <input type="text" placeholder="Confirm New Password">
-                                </div>
+                        <div class="tabs__pane -tab-item-3 is-active">
+                            <form id="edit_password" method="POST" class="input-form row y-gap-30">
+                            <div class="col-md-7">
+									<label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Current password</label>
+									<div class="input-group">
+										<input type="password" name="pword" placeholder="Enter Password" class="form-control" id="currentPass" style="height:50px;" required>
+										<span class="input-group-text" onclick="togglePasswordVisibility('currentPass', 'currentPassicon')">
+											<i class='fa-regular fa-eye-slash' id="currentPassicon"></i>
+										</span>
+									</div>
+								</div>
+								<input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+								<div class="col-md-7">
+									<label class="text-16 lh-1 fw-500 text-dark-1 mb-10">New password</label>
+									<div class="input-group">
+										<input type="password" name="newpword" placeholder="Enter Password" class="form-control" id="newPassword" style="height:50px;" required>
+										<span class="input-group-text" onclick="togglePasswordVisibility('newPassword', 'newPasswordicon')">
+											<i class='fa-regular fa-eye-slash' id="newPasswordicon"></i>
+										</span>
+									</div>
+								</div>
+								<div class="col-md-7">
+									<label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Confirm New Password</label>
+									<div class="input-group">
+										<input type="password" name="cpass" placeholder="Confirm New Password" class="form-control" id="confirmnewPassword" style="height:50px;" required>
+										<span class="input-group-text" onclick="togglePasswordVisibility('confirmnewPassword', 'confirmnewPasswordicon')">
+											<i class='fa-regular fa-eye-slash' id="confirmnewPasswordicon"></i>
+										</span>
+									</div>
+								</div>
                                 <div class="col-12">
-                                    <button class="button -md -deep-green-1 text-white">Save Password</button>
+                                    <button  name="edit_password" class="button -md -deep-green-1 text-white">Save Password</button>
                                 </div>
                             </form>
                         </div>

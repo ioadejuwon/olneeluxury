@@ -12,45 +12,6 @@ $response = array();
 
 $url = $_GET['url'];
 
-// if (isset($_POST['login'])) {
-//     $email = mysqli_real_escape_string($conn, $_POST['email']);
-//     $pword = mysqli_real_escape_string($conn, $_POST['pword']);
-//     if (!empty($email) && !empty($pword)) {
-//         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-//             $sql = "SELECT email, fname, pword_hash, user_id FROM olnee_admin WHERE email = ?";
-//             $stmt = mysqli_prepare($conn, $sql);
-//             mysqli_stmt_bind_param($stmt, "s", $email); // Bind the parameter to the placeholder
-//             mysqli_stmt_execute($stmt); // Execute the query
-//             mysqli_stmt_bind_result($stmt, $resultEmail, $fname, $resultPasswordHash, $user_id); // Bind the result variable
-//             mysqli_stmt_fetch($stmt); // Fetch the result
-//             if ($resultEmail && password_verify($pword, $resultPasswordHash)) {
-//                 $_SESSION['user_id'] = $user_id;
-//                 //Send Login email to Vendor
-//                 if (!empty($url)) {
-//                     header("Location: $url");
-//                 } else {
-//                     header("Location: " . DASHBOARD);
-//                 }
-//             } else {
-//                 // $error = "Looks like you entered the wrong email address or password!";
-//                 $error = "<p class='fw-300 text-error-1'>Looks like you entered the wrong email address or password!</p>";
-//             }
-//         } else {
-//             // $error = "Invalid Email address";
-//             $error = "<p class='fw-300 text-error-1'>Invalid Email address.</p>";
-//         }
-//     } else {
-//         // $error = "Please enter your details";
-//         $error = "<p class='fw-300 text-error-1'>Please enter your details.</p>";
-//     }
-// } elseif (isset($_SESSION['user_id'])) {
-//     if (!empty($url)) {
-//         header("Location: $url");
-//     } else {
-//         header("Location: " . DASHBOARD);
-//     }
-// }
-
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
@@ -235,11 +196,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_password'])) {
     // $fullname = $fname . ' ' . $lname;
     // Check if any field is empty
     if (empty($pword) || empty($cpass) || empty($newpword)) {
-        $response['message'] = 'Please fill all the fields.';
+        $response['message'] = 'Please fill all the fieldd2s.';
     } elseif ($cpass != $newpword) {
         $response['message'] = 'New Password do not match';
     } else {
-        $sql = "SELECT * FROM olnee_admin WHERE user_id = ?";
+        $sql = "SELECT * FROM olnee_users WHERE user_id = ?";
         $stmt = mysqli_stmt_init($conn);
 
         if (mysqli_stmt_prepare($stmt, $sql)) {
@@ -248,12 +209,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_password'])) {
             $result = mysqli_stmt_get_result($stmt);
             if ($row = mysqli_fetch_assoc($result)) {
                 if ($newpass == $confirmpass) {
-                    $enc_pass = $row['pword_hash'];
+                    $enc_pass = $row['pwordhash'];
                     // $2y$10$TP3kRfWlDs25pZxpFLr.1eQN/j2u9ipMBBD2mzwM0EwW33VksMI7W
                     if (password_verify($pword, $enc_pass)) {
                         $newpasshash = password_hash($newpword, PASSWORD_BCRYPT);
                         // Prepare the SQL statement with placeholders
-                        $updateuser = "UPDATE olnee_admin SET pword_hash = ? WHERE user_id=?";
+                        $updateuser = "UPDATE olnee_users SET pwordhash = ? WHERE user_id=?";
                         $stmt = mysqli_stmt_init($conn);
                         // Create a prepared statement
                         if (mysqli_stmt_prepare($stmt, $updateuser)) {
@@ -265,7 +226,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_password'])) {
                                     // $stmt->close();// Close the statement
                                     // Success response
                                     $response['status'] = 'success';
-                                    $response['message'] = 'Password updated successfully.';
+                                    $response['message'] = 'User details updated successfully.';
                                     // $response['brandName'] = $brand_name;
                                     // $response['brandInfo'] = $brand_info;
                                     // $response['brandCategory'] = $brand_category;
