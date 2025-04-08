@@ -91,7 +91,7 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories");
 
               <div class=" pt-30 ">
                 <form action="inc/customers_cam.php" class="dropzone" id="customers-cam-dropzone">
-                  <input type="hidden" name="productid" id="product_id" value="<?php echo $_GET['productid']; ?>">
+                  <!-- <input type="hidden" name="productid" id="product_id" value="<?php echo $_GET['productid']; ?>"> -->
                 </form>
                 <!-- <button type="button" id="upload-button">Upload Images</button> -->
 
