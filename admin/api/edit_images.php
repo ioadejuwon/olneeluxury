@@ -9,7 +9,13 @@ $response = []; // Initialize response array
 if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
     $product_id = $_POST['product_id'];
     $img_id = $imgID;
-    $uploadDir = 'products/'; // Make sure this directory exists and is writable
+    // $uploadDir = 'products/'; // Make sure this directory exists and is writable
+    $uploadDir = '../product-img/'; // Make sure this directory exists and is writable
+    $uploadLocation = 'product-img/'; // Make sure this directory exists and is writable
+
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0777, true); // Creates the folder with full permissions (adjust as needed)
+    }
 
     // Extract file details
     $fileName = $_FILES['file']['name'];
@@ -24,14 +30,15 @@ if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
     $uniqueName = $product_id . '-' . $imgID; // Generate a unique ID
     $newFileName = $uniqueName . '.' . $fileType; // Append file extension
     $targetFile = $uploadDir . $newFileName;
+    $FileLocation = $uploadLocation . $newFileName;
 
     // Validate file type and size
     if (in_array($fileType, ['jpg', 'jpeg', 'png', 'gif']) && $fileSize <= 3145728) { // 3MB
-        if (move_uploaded_file($fileTmpName, "../".$targetFile)) {
+        if (move_uploaded_file($fileTmpName, $targetFile)) {
             // Insert file path into the database
             $sql = "INSERT INTO product_images (product_id, img_id, image_path, thumbnail) VALUES (?, ?, ?, 0)";
             $stmt = mysqli_prepare($conn, $sql);
-            mysqli_stmt_bind_param($stmt, "sss", $product_id, $img_id, $targetFile);
+            mysqli_stmt_bind_param($stmt, "sss", $product_id, $img_id, $FileLocation);
 
             if (mysqli_stmt_execute($stmt)) {
                 $response = ['status' => 'success', 'message' => 'File uploaded successfully.', 'product_id' => $product_id];
