@@ -100,7 +100,7 @@ $(document).ready(function () {
 
 Dropzone.autoDiscover = false;
 const myDropzone = new Dropzone("#customers-cam-dropzone", {
-    url: "upload.php", // Set to your actual upload handler
+    url: "inc/customers_cam.php", // Set to your actual upload handler
     paramName: 'file',
     autoProcessQueue: false,
     parallelUploads: 10,
