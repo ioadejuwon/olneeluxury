@@ -67,6 +67,7 @@ define('ADD_PRODUCT', ADMIN_URL.'create');
 define('CATEGORIES', ADMIN_URL.'categories');
 define('PRODUCTS', ADMIN_URL.'product');
 define('REVIEWS', ADMIN_URL.'reviews');
+define('ADM_PICTURES', ADMIN_URL.'pictures');
 define('ORDERS', ADMIN_URL.'orders');
 define('DELIVERY', ADMIN_URL.'delivery');
 define('COUPON', ADMIN_URL.'coupon');
