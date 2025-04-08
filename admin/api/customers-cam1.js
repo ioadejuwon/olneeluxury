@@ -60,7 +60,7 @@ Dropzone.options.customersCamDropzone = {
     maxFilesize: 3, // MB
     acceptedFiles: '.png,.jpg,.jpeg,.gif',
     addRemoveLinks: true,
-    success: function (file, response) {
+    success:function (file, responseText) {
         let response;
         try {
             response = typeof responseText === 'string' ? JSON.parse(responseText) : responseText;
