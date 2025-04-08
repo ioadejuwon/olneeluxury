@@ -3,8 +3,8 @@ $pagetitle = "Customers' Cam";
 include_once "comp/head.php";
 include_once "comp/header.php"
 ?>
-<!-- <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script> -->
-<script src="admin/assets/js/masonry.js"></script>
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<!-- <script src="admin/assets/js/masonry.js"></script> -->
 
 <section class="page-header -type-1 mt-60 text-white">
     <div class="overlay"></div>
