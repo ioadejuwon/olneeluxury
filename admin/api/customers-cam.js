@@ -312,9 +312,9 @@ Dropzone.options.customersCamDropzone = {
             myDropzone.processQueue();
         });
 
-        this.on("sending", function (file, xhr, formData) {
-            formData.append("product_id", document.getElementById('product_id').value);
-        });
+        // this.on("sending", function (file, xhr, formData) {
+        //     formData.append("product_id", document.getElementById('product_id').value);
+        // });
     }
 };
 // Dropzone for image upload end
