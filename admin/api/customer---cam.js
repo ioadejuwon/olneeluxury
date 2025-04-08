@@ -109,11 +109,121 @@ $(document).ready(function () {
 //     }
 // };
 
+// Dropzone.autoDiscover = false;
+// const myDropzone = new Dropzone("#customers-cam-dropzone", {
+//     url: "inc/customers_cam.php", // Set to your actual upload handler
+//     paramName: 'file',
+//     autoProcessQueue: false,
+//     parallelUploads: 10,
+//     maxFilesize: 3, // MB
+//     acceptedFiles: '.png,.jpg,.jpeg,.gif',
+//     addRemoveLinks: true,
+
+//     init: function () {
+//         const dz = this;
+//         const submitButton = document.querySelector("#upload-button");
+
+//         submitButton.addEventListener("click", function () {
+//             console.log("Upload button clicked");
+//             console.log("Files queued:", dz.getQueuedFiles());
+//             dz.processQueue();
+//         });
+
+//         dz.on("success", function (file, responseText) {
+//             console.log("Dropzone success callback fired");
+
+//             let response;
+//             try {
+//                 response = typeof responseText === 'string' ? JSON.parse(responseText) : responseText;
+//                 console.log("Parsed response:", response);
+//             } catch (e) {
+//                 console.error("Error parsing response:", e, responseText);
+//                 return;
+//             }
+
+//             if (response.status === 'success') {
+//                 showNotification(response.message, 'success');
+//                 this.removeAllFiles(true);
+
+//                 // console.log("Parsed response:", response);
+
+//                 // Create new image box HTML
+//                 const imageBox = `
+//                 <div id="image-box-${response.img_id}" class="col-md-2 col-4">
+//                     <div class="relative shrink-0">
+//                         <div class="bg-image ratio ratio-30:35 js-lazy -outline-deep-green-1 rounded-8" 
+//                              style="background-image: url('${response.img_path ?? 'path/to/placeholder.jpg'}');"></div>
+        
+//                         <div class="absolute-full-center justify-between d-flex justify-end py-10 px-10">
+//                             <div>
+//                                 <div class="d-flex justify-center items-center size-30 rounded-8 bg-light-3">
+//                                     <div class="icon-bin text-16" data-toggle="modal" data-target="#myModal-${response.img_id}"></div>
+//                                 </div>
+//                             </div>
+//                         </div>
+//                     </div>
+//                 </div>
+        
+//                 <!-- Modal -->
+//                 <div class="modal fade" id="myModal-${response.img_id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+//                     <div class="modal-dialog modal-dialog-centered">
+//                       <div class="modal-content">
+//                         <div class="modal-header">
+//                           <h2 class="modal-title h4">Delete Image</h2>
+//                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+//                             <img src="assets/img/icons/close.png" alt="close" width="30%">
+//                           </button>
+//                         </div>
+//                         <div class="modal-body p-4 pt-0">
+//                           <p class="text-dark">
+//                             Are you sure you want to delete this image?
+//                             <br>This process is not reversible.
+//                           </p>
+        
+//                           <ul class="row gx-4 mt-4">
+//                             <li class="col-12">
+//                               <button type="button" class="button -md -red-1 w-100 text-white delete-customer-image-btn"
+//                                   data-imgid="${response.img_id}"
+//                                   data-targetid="image-box-${response.img_id}"
+//                                   data-dismiss="modal">
+//                                   Delete Image
+//                               </button>
+//                             </li>
+//                           </ul>
+//                         </div>
+//                       </div>
+//                     </div>
+//                 </div>`;
+
+//                 // Append to gallery
+//                 document.getElementById("image-gallery").insertAdjacentHTML("beforeend", imageBox);
+
+//             } else {
+//                 showNotification(response.message, 'error');
+//             }
+//         });
+
+//         dz.on("error", function (file, responseText) {
+//             console.log("Dropzone error callback fired");
+
+//             let response;
+//             try {
+//                 response = typeof responseText === 'string' ? JSON.parse(responseText) : responseText;
+//                 showNotification(response.message, 'error');
+//             } catch (e) {
+//                 console.error("Failed to parse error response:", responseText);
+//                 showNotification("Upload failed unexpectedly.", 'error');
+//             }
+//         });
+//     }
+// });
+
 Dropzone.autoDiscover = false;
+
 const myDropzone = new Dropzone("#customers-cam-dropzone", {
     url: "inc/customers_cam.php", // Set to your actual upload handler
     paramName: 'file',
-    autoProcessQueue: false,
+    autoProcessQueue: false,  // Prevent automatic upload
     parallelUploads: 10,
     maxFilesize: 3, // MB
     acceptedFiles: '.png,.jpg,.jpeg,.gif',
@@ -123,12 +233,19 @@ const myDropzone = new Dropzone("#customers-cam-dropzone", {
         const dz = this;
         const submitButton = document.querySelector("#upload-button");
 
+        // When the upload button is clicked
         submitButton.addEventListener("click", function () {
             console.log("Upload button clicked");
             console.log("Files queued:", dz.getQueuedFiles());
-            dz.processQueue();
+
+            if (dz.getQueuedFiles().length > 0) {
+                dz.processQueue();  // Process all queued files
+            } else {
+                showNotification("No files selected for upload.", 'error');
+            }
         });
 
+        // Handle success callback for each file upload
         dz.on("success", function (file, responseText) {
             console.log("Dropzone success callback fired");
 
@@ -143,9 +260,6 @@ const myDropzone = new Dropzone("#customers-cam-dropzone", {
 
             if (response.status === 'success') {
                 showNotification(response.message, 'success');
-                this.removeAllFiles(true);
-
-                // console.log("Parsed response:", response);
 
                 // Create new image box HTML
                 const imageBox = `
@@ -195,14 +309,17 @@ const myDropzone = new Dropzone("#customers-cam-dropzone", {
                     </div>
                 </div>`;
 
-                // Append to gallery
+                // Append the new image box HTML to the gallery
                 document.getElementById("image-gallery").insertAdjacentHTML("beforeend", imageBox);
 
+                // After successful upload, remove the file preview from Dropzone
+                dz.removeFile(file); // Remove the individual file from the queue
             } else {
                 showNotification(response.message, 'error');
             }
         });
 
+        // Handle error callback for failed uploads
         dz.on("error", function (file, responseText) {
             console.log("Dropzone error callback fired");
 
@@ -217,6 +334,7 @@ const myDropzone = new Dropzone("#customers-cam-dropzone", {
         });
     }
 });
+
 
 // Dropzone for image upload end
 
