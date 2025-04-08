@@ -29,8 +29,8 @@ include_once "comp/header.php"
     </div>
 </section>
 
-<!-- <section class="layout-pt-md layout-pb-lg border-top-light"> -->
-    <!-- <div data-anim-wrap class="container"> -->
+<section class="layout-pt-md layout-pb-lg border-top-light">
+    <div data-anim-wrap class="container">
         <div class="grid">
             <div class="grid-sizer"></div>
             <div class="grid-item"><img src="admin/assets/img/images/img1.jpg" alt=""></div>
@@ -38,12 +38,12 @@ include_once "comp/header.php"
             <div class="grid-item"><img src="admin/assets/img/images/img3.jpg" alt=""></div>
             <div class="grid-item"><img src="admin/assets/img/images/img4.jpg" alt=""></div>
             <div class="grid-item"><img src="admin/assets/img/images/img5.jpg" alt=""></div>
-            <div class="grid-item"><img src="admin/assets/img/images/img3.jpg" alt=""></div>
             <div class="grid-item"><img src="admin/assets/img/images/img4.jpg" alt=""></div>
-            <div class="grid-item"><img src="admin/assets/img/images/img5.jpg" alt=""></div>
-        <!-- </div> -->
+            <div class="grid-item"><img src="admin/assets/img/images/img3.jpg" alt=""></div>
+            <div class="grid-item"><img src="admin/assets/img/images/img2.jpg" alt=""></div>
+        </div>
     </div>
-<!-- </section> -->
+</section>
 
 <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 <?php
