@@ -15,7 +15,7 @@ session_start();
 
 
 include_once "inc/config.php";
-$pagetitle = "Add New Product";
+$pagetitle = "Add Images";
 include_once "inc/drc.php";
 
 
@@ -33,13 +33,10 @@ $count_row_images = mysqli_num_rows($products_img);
 if (!isset($_SESSION['user_id'])) {
   header("location: " . ADMIN_LOGIN . "?url=" . $current_url . "&t=" . $pagetitle); // redirect to login page if not signed in
   exit; // Make sure to exit after sending the redirection header
-} elseif ($product_id == '' || $count_row_product < 1) {
-  header("location: " . PRODUCTS); // redirect to login page if not signed in
-} elseif ($count_row_images < 1) {
-  header("location: " . ADD_IMAGE . "?productid=" . $product_id); // redirect to login page if not signed in
 } else {
   $user_id = $_SESSION['user_id'];
 }
+
 
 
 include_once "ad_comp/adm-head.php";
@@ -67,7 +64,7 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories");
   <div class="row pb- mb-10">
     <div class="col-auto">
       <h2 class="text-30 lh-12 fw-700">Add New Images </h2>
-      <div class="mt-5">Add New Images to the product.</div>
+      <div class="mt-5">Add New Images to the customer's cam.</div>
     </div>
   </div>
 
@@ -95,7 +92,7 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories");
 
 
               <div class=" pt-30 ">
-                <form action="api/edit_images.php" class="dropzone" id="edit-images-dropzone">
+                <form action="api/customers_cam.php" class="dropzone" id="customers-cam-dropzone">
                   <input type="hidden" name="productid" id="product_id" value="<?php echo $_GET['productid']; ?>">
                 </form>
                 <!-- <button type="button" id="upload-button">Upload Images</button> -->

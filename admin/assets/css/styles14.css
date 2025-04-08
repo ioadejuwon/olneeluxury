@@ -2479,16 +2479,17 @@ body.offline:before {
 
 
 
+
 .gallery {
-  column-count: 3;
-  column-gap: 1.5em;
+  column-count: 4;
+  column-gap: 1em;
   max-width: 1200px;
   margin: auto;
 }
 
 .gallery img {
   width: 100%;
-  margin-bottom: 1.5em;
+  margin-bottom: 1em;
   border-radius: 10px;
   break-inside: avoid;
   display: block;
@@ -2496,12 +2497,20 @@ body.offline:before {
 
 @media (max-width: 768px) {
   .gallery {
-    column-count: 2;
+    column-count: 3;
+    column-gap: 0.5em;
+  }
+  .gallery img {
+    margin-bottom: 0.5em;
   }
 }
 
 @media (max-width: 480px) {
   .gallery {
-    column-count: 1;
+    column-count: 2;
+    column-gap: 0.5em;
+  }
+  .gallery img {
+    margin-bottom: 0.5em;
   }
 }

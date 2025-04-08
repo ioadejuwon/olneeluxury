@@ -39,7 +39,7 @@ include_once "comp/header.php"
             <img src="admin/assets/img/images/img3.jpg" alt="">
             <img src="admin/assets/img/images/img4.jpg" alt="">
             <img src="admin/assets/img/images/img5.jpg" alt="">
-            <img src="admin/assets/img/images/img5.jpg" alt="">
+            <img src="admin/assets/img/images/img2.jpg" alt="">
         </div>
     </div>
 </section>
