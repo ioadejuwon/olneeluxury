@@ -299,6 +299,7 @@ Dropzone.options.customersCamDropzone = {
         }
     },
     error: function (file, response) {
+        showNotification(response.message, 'error'); // Show notification
         console.log('Error uploading file:', response);
     },
     init: function () {
