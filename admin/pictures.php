@@ -120,6 +120,7 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories");
 
 
 <script src="api/customers-camss.js"></script>
+
 <?php
 include_once "ad_comp/adm-footer.php";
 include_once "ad_comp/adm-tail.php";
