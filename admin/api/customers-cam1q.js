@@ -53,50 +53,105 @@ $(document).ready(function () {
 
 
 // Dropzone for image upload begin
-Dropzone.options.customersCamDropzone = {
-    paramName: 'file', // The name that will be used to transfer the file
-    autoProcessQueue: false, // Disable automatic upload
+// Dropzone.options.customersCamDropzone = {
+//     paramName: 'file', // The name that will be used to transfer the file
+//     autoProcessQueue: false, // Disable automatic upload
+//     parallelUploads: 10,
+//     maxFilesize: 3, // MB
+//     acceptedFiles: '.png,.jpg,.jpeg,.gif',
+//     addRemoveLinks: true,
+//     success:function (file, responseText) {
+//         let response;
+//         try {
+//             response = typeof responseText === 'string' ? JSON.parse(responseText) : responseText;
+//         } catch (e) {
+//             console.log('JSON parse error:', e);
+//             return;
+//         }
+
+//         // Check if the response status is success before redirecting
+//         if (response.status === 'success') {
+//             // console.log('File uploaded successfully:', response);
+//             showNotification(response.message, 'success'); // Show notification
+//         } else {
+//             console.log('Upload error:', response.message);
+//             showNotification(response.message, 'error'); // Show notification
+//         }
+//     },
+//     error: function (file, response) {
+//         showNotification(response.message, 'error'); // Show notification
+//         console.log('Error uploading file:', response);
+//     },
+//     init: function () {
+//         // Adding an event listener to the custom button
+//         const submitButton = document.querySelector("#upload-button");
+//         const myDropzone = this;
+
+//         submitButton.addEventListener("click", function () {
+//             // Process all files in the Dropzone queue
+//             myDropzone.processQueue();
+//         });
+
+//         // this.on("sending", function (file, xhr, formData) {
+//         //     formData.append("product_id", document.getElementById('product_id').value);
+//         // });
+//     }
+// };
+
+Dropzone.autoDiscover = false;
+const myDropzone = new Dropzone("#customers-cam-dropzone", {
+    url: "upload.php", // Set to your actual upload handler
+    paramName: 'file',
+    autoProcessQueue: false,
     parallelUploads: 10,
     maxFilesize: 3, // MB
     acceptedFiles: '.png,.jpg,.jpeg,.gif',
     addRemoveLinks: true,
-    success:function (file, responseText) {
-        let response;
-        try {
-            response = typeof responseText === 'string' ? JSON.parse(responseText) : responseText;
-        } catch (e) {
-            console.log('JSON parse error:', e);
-            return;
-        }
 
-        // Check if the response status is success before redirecting
-        if (response.status === 'success') {
-            // console.log('File uploaded successfully:', response);
-            showNotification(response.message, 'success'); // Show notification
-        } else {
-            console.log('Upload error:', response.message);
-            showNotification(response.message, 'error'); // Show notification
-        }
-    },
-    error: function (file, response) {
-        showNotification(response.message, 'error'); // Show notification
-        console.log('Error uploading file:', response);
-    },
     init: function () {
-        // Adding an event listener to the custom button
+        const dz = this;
         const submitButton = document.querySelector("#upload-button");
-        const myDropzone = this;
 
         submitButton.addEventListener("click", function () {
-            // Process all files in the Dropzone queue
-            myDropzone.processQueue();
+            console.log("Upload button clicked");
+            console.log("Files queued:", dz.getQueuedFiles());
+            dz.processQueue();
         });
 
-        // this.on("sending", function (file, xhr, formData) {
-        //     formData.append("product_id", document.getElementById('product_id').value);
-        // });
+        dz.on("success", function (file, responseText) {
+            console.log("Dropzone success callback fired");
+
+            let response;
+            try {
+                response = typeof responseText === 'string' ? JSON.parse(responseText) : responseText;
+                console.log("Parsed response:", response);
+            } catch (e) {
+                console.error("Error parsing response:", e, responseText);
+                return;
+            }
+
+            if (response.status === 'success') {
+                showNotification(response.message, 'success');
+            } else {
+                showNotification(response.message, 'error');
+            }
+        });
+
+        dz.on("error", function (file, responseText) {
+            console.log("Dropzone error callback fired");
+
+            let response;
+            try {
+                response = typeof responseText === 'string' ? JSON.parse(responseText) : responseText;
+                showNotification(response.message, 'error');
+            } catch (e) {
+                console.error("Failed to parse error response:", responseText);
+                showNotification("Upload failed unexpectedly.", 'error');
+            }
+        });
     }
-};
+});
+
 // Dropzone for image upload end
 
 // Dropzone for edit image begin
