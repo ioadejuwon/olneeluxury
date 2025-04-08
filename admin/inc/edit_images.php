@@ -57,7 +57,8 @@ if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
     $response = ['status' => 'error', 'message' => 'No file uploaded or file upload error.'];
 }
 
-mysqli_close($conn);
+
 
 echo json_encode($response); // Send JSON response
+mysqli_close($conn);
 ?>
