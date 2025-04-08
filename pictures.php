@@ -3,7 +3,7 @@ $pagetitle = "Customers' Cam";
 include_once "comp/head.php";
 include_once "comp/header.php"
 ?>
-<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+
 <!-- <script src="admin/assets/js/masonry.js"></script> -->
 
 <section class="page-header -type-1 mt-60 text-white">
@@ -45,7 +45,7 @@ include_once "comp/header.php"
     </div>
 </section>
 
-
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 <?php
 include_once "comp/footer.php";
 include_once "comp/tail.php";
