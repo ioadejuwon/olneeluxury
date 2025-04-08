@@ -119,7 +119,7 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories");
 
 
 
-<script src="api/customers-cam1q.js"></script>
+<script src="api/customers-cam1qq.js"></script>
 
 <?php
 include_once "ad_comp/adm-footer.php";
