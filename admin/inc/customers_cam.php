@@ -41,7 +41,14 @@ if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
             mysqli_stmt_bind_param($stmt, "ss", $cam_id, $FileLocation);
 
             if (mysqli_stmt_execute($stmt)) {
-                $response = ['status' => 'success', 'message' => 'Image uploaded successfully.', 'img_id' => $cam_id];
+                $response = [
+                    'status' => 'success',
+                    'message' => 'Image uploaded successfully.',
+                    'img_id' => $cam_id,
+                    'img_path' => $FileLocation  // Add this so JS can use it
+                ];
+                
+                // $response = ['status' => 'success', 'message' => 'Image uploaded successfully.', 'img_id' => $cam_id];
             } else {
                 $response = ['status' => 'error', 'message' => 'Database error: ' . mysqli_stmt_error($stmt)];
             }

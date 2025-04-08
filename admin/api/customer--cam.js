@@ -1,21 +1,32 @@
 
 $(document).ready(function () {
     // console.log('jQuery is loaded');
-    $(document).on('click', '.delete-image-btn', function (e) {
+    // Assuming jQuery is available
+    // $(document).on('click', '.delete-image-btn', function () {
+    //     const imgID = $(this).data('imgid');
+    //     const targetID = $(this).data('targetid');
+
+    //     // Optional: AJAX call to delete image on backend
+
+    //     // Remove the image box from the DOM
+    //     $('#' + targetID).remove();
+
+    //     showNotification('Image deleted successfully.', 'success');
+    // });
+
+    $(document).on('click', '.delete-customer-image-btn', function (e) {
         e.preventDefault();
 
         const $btn = $(this);
-        const productId = $btn.data('productid');
         const imgId = $btn.data('imgid');
         const targetId = $btn.data('targetid');
         const modalId = $btn.closest('.modal').attr('id');
 
         $.ajax({
-            url: 'inc/delete_img.php',
+            url: 'inc/delete_customer_img.php',
             type: 'GET',
             dataType: 'json', // Important to parse JSON response automatically
             data: {
-                productid: productId,
                 img_id: imgId
             },
             success: function (response) {
@@ -132,6 +143,61 @@ const myDropzone = new Dropzone("#customers-cam-dropzone", {
 
             if (response.status === 'success') {
                 showNotification(response.message, 'success');
+                this.removeAllFiles(true);
+
+                // console.log("Parsed response:", response);
+
+                // Create new image box HTML
+                const imageBox = `
+                <div id="image-box-${response.img_id}" class="col-md-2 col-4">
+                    <div class="relative shrink-0">
+                        <div class="bg-image ratio ratio-30:35 js-lazy -outline-deep-green-1 rounded-8" 
+                             style="background-image: url('${response.img_path ?? 'path/to/placeholder.jpg'}');"></div>
+        
+                        <div class="absolute-full-center justify-between d-flex justify-end py-10 px-10">
+                            <div>
+                                <div class="d-flex justify-center items-center size-30 rounded-8 bg-light-3">
+                                    <div class="icon-bin text-16" data-toggle="modal" data-target="#myModal-${response.img_id}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Modal -->
+                <div class="modal fade" id="myModal-${response.img_id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h2 class="modal-title h4">Delete Image</h2>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <img src="assets/img/icons/close.png" alt="close" width="30%">
+                          </button>
+                        </div>
+                        <div class="modal-body p-4 pt-0">
+                          <p class="text-dark">
+                            Are you sure you want to delete this image?
+                            <br>This process is not reversible.
+                          </p>
+        
+                          <ul class="row gx-4 mt-4">
+                            <li class="col-12">
+                              <button type="button" class="button -md -red-1 w-100 text-white delete-customer-image-btn"
+                                  data-imgid="${response.img_id}"
+                                  data-targetid="image-box-${response.img_id}"
+                                  data-dismiss="modal">
+                                  Delete Image
+                              </button>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                </div>`;
+
+                // Append to gallery
+                document.getElementById("image-gallery").insertAdjacentHTML("beforeend", imageBox);
+
             } else {
                 showNotification(response.message, 'error');
             }
