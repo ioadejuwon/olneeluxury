@@ -209,7 +209,7 @@ include_once "comp/header.php"
 
                         $image_path_thumbnail = $row_prod_img_thumbnail['image_path'];
                         if (empty($image_path_thumbnail)) {
-                            // $image_path_thumbnail2 = DEFAULT_IMG;
+                            $image_path_thumbnail2 = DEFAULT_IMG;
                         }else{
                             $image_path_thumbnail2 = $row_prod_img_thumbnail['image_path'];
                         }
