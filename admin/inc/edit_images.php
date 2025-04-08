@@ -9,9 +9,9 @@ $response = []; // Initialize response array
 if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
     $product_id = $_POST['product_id'];
     $img_id = $imgID;
-    // $uploadDir = 'products/'; // Make sure this directory exists and is writable
-    $uploadDir = '../product-img/'; // Make sure this directory exists and is writable
-    $uploadLocation = 'product-img/'; // Make sure this directory exists and is writable
+    $uploadLocation = PRODUCTS_IMG_DIR; // Make sure this directory exists and is writable
+    $uploadDir = '../'. $uploadLocation; // Make sure this directory exists and is writable
+    
 
     if (!is_dir($uploadDir)) {
         mkdir($uploadDir, 0777, true); // Creates the folder with full permissions (adjust as needed)

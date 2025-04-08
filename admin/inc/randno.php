@@ -29,6 +29,7 @@ $user_id = getName($k);
 $categoryID = "cat-".getName($j).'-'.getName($j);
 $productID = "prod-".getName($l).'-'.getName($l);
 $imgID = "img-".getName($l)."-".getName($j);
+$camID = "cam-".getName($l)."-".getName($j);
 $orderID = "order-".getName($p).'-'.getName($q);
 $delivery_id = 'del-'.getName($r).'-'.getName($n);
 $coupon_id = 'coupon-'.getName($r);

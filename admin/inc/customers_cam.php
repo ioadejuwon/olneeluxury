@@ -7,9 +7,14 @@ header('Content-Type: application/json'); // Ensure the content type is JSON
 $response = []; // Initialize response array
 
 if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
-    $product_id = $_POST['product_id'];
-    $img_id = $imgID;
-    $uploadDir = 'products/'; // Make sure this directory exists and is writable
+    $cam_id = $camID;
+    
+    $uploadLocation = CUSTOMERS_IMG_DIR; // Make sure this directory exists and is writable
+    $uploadDir = '../'.$uploadLocation; // Make sure this directory exists and is writable
+
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0777, true); // Creates the folder with full permissions (adjust as needed)
+    }
 
     // Extract file details
     $fileName = $_FILES['file']['name'];
@@ -21,20 +26,21 @@ if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
     // $uniqueName = uniqid('', true); // Generate a unique ID
     // $newFileName = $uniqueName . '.' . $fileType; // Append file extension
     // $targetFile = $uploadDir . $newFileName;
-    $uniqueName = $product_id . '-' . $imgID; // Generate a unique ID
+    $uniqueName =   'customer-' . $imgID; // Generate a unique ID
     $newFileName = $uniqueName . '.' . $fileType; // Append file extension
     $targetFile = $uploadDir . $newFileName;
+    $FileLocation = $uploadLocation . $newFileName;
 
     // Validate file type and size
     if (in_array($fileType, ['jpg', 'jpeg', 'png', 'gif']) && $fileSize <= 3145728) { // 3MB
-        if (move_uploaded_file($fileTmpName, "../" . $targetFile)) {
+        if (move_uploaded_file($fileTmpName, $targetFile)) {
             // Insert file path into the database
-            $sql = "INSERT INTO product_images (product_id, img_id, image_path, thumbnail) VALUES (?, ?, ?, 0)";
+            $sql = "INSERT INTO olnee_customer_cam (img_id, image_path) VALUES (?, ?)";
             $stmt = mysqli_prepare($conn, $sql);
-            mysqli_stmt_bind_param($stmt, "sss", $product_id, $img_id, $targetFile);
+            mysqli_stmt_bind_param($stmt, "ss", $cam_id, $FileLocation);
 
             if (mysqli_stmt_execute($stmt)) {
-                $response = ['status' => 'success', 'message' => 'File uploaded successfully.', 'product_id' => $product_id];
+                $response = ['status' => 'success', 'message' => 'Image uploaded successfully.', 'img_id' => $img_id];
             } else {
                 $response = ['status' => 'error', 'message' => 'Database error: ' . mysqli_stmt_error($stmt)];
             }

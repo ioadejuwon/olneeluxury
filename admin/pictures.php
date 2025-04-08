@@ -75,14 +75,12 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories");
 
         <div class="tabs -active-deep-green-2 js-tabs pt-0">
           <div class="tabs__controls d-flex x-gap-30 items-center pt-20 px-30 border-bottom-light js-tabs-controls">
-            <a class="tabs__button text-light-1 js-tabs-button" href="<?php echo EDIT_PRODUCT . '?productid=' . $product_id ?>" type="button">
-              Edit Product
-            </a>
+           
             <a class="tabs__button text-light-1 js-tabs-button is-active" href="<?php echo EDIT_IMAGES . '?productid=' . $product_id ?>" type="button">
               Edit Images
             </a>
-            <a class="tabs__button text-light-1 js-tabs-button d-none" href="<?php echo EDIT_THUMBNAIL . '?productid=' . $product_id ?>" type="button">
-              Edit Thumbnail
+            <a class="tabs__button text-light-1 js-tabs-button" href="<?php echo EDIT_PRODUCT . '?productid=' . $product_id ?>" type="button">
+              Add Product
             </a>
           </div>
 
@@ -92,7 +90,7 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories");
 
 
               <div class=" pt-30 ">
-                <form action="api/customers_cam.php" class="dropzone" id="customers-cam-dropzone">
+                <form action="inc/customers_cam.php" class="dropzone" id="customers-cam-dropzone">
                   <input type="hidden" name="productid" id="product_id" value="<?php echo $_GET['productid']; ?>">
                 </form>
                 <!-- <button type="button" id="upload-button">Upload Images</button> -->
@@ -103,7 +101,7 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories");
                   <div id="success-message" class="col-12 text-deep-green-1"></div>
                   <div class="col-auto">
                     <button class="button -md -deep-green-1 text-white" type="submit" id="upload-button">
-                      Upload Product
+                      Upload Image
                     </button>
                   </div>
                 </div>
@@ -121,7 +119,7 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories");
 
 
 
-<script src="api/product.js"></script>
+<script src="api/customers-cam.js"></script>
 <?php
 include_once "ad_comp/adm-footer.php";
 include_once "ad_comp/adm-tail.php";

@@ -15,6 +15,8 @@ define('EURO', '€');
 define('PHONE', '2348108806808');
 define('MAIL', 'hello@olneeluxury.com');
 define('DEFAULT_IMG', 'product-img/product.png');
+define('CUSTOMERS_IMG_DIR', 'customers-cam/');
+define('PRODUCTS_IMG_DIR', 'product-img/');
 
 // Check if the site is running locally or on a hosting site
 if ($_SERVER['HTTP_HOST'] == 'localhost:8888') {

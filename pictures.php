@@ -34,12 +34,21 @@ include_once "comp/header.php"
 <section class="layout-pt-md layout-pb-lg border-top-light">
     <div data-anim-wrap class="container">
         <div class="gallery">
-            <img src="admin/assets/img/images/img1.jpg" alt="">
-            <img src="admin/assets/img/images/img2.jpg" alt="">
-            <img src="admin/assets/img/images/img3.jpg" alt="">
-            <img src="admin/assets/img/images/img4.jpg" alt="">
-            <img src="admin/assets/img/images/img5.jpg" alt="">
-            <img src="admin/assets/img/images/img2.jpg" alt="">
+            <?php
+            $customer_sql = "SELECT * FROM olnee_customer_cam";
+            $customer_result = mysqli_query($conn, $customer_sql);
+            while ($row = mysqli_fetch_array($customer_result)) {
+                $img_id = $row['img_id'];
+                $image_path = $row['image_path'];
+                $image_path = 'admin/' . $image_path;
+            ?>
+                <img src="<?php echo $image_path ?>" alt="ss">
+
+            <?php
+
+            }
+   
+            ?>
         </div>
     </div>
 </section>

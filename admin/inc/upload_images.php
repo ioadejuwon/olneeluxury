@@ -9,8 +9,8 @@ $response = []; // Initialize response array
 if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
     $product_id = $_POST['product_id'];
     $img_id = $imgID;
-    $uploadDir = '../product-img/'; // Make sure this directory exists and is writable
-    $uploadLocation = 'product-img/'; // Make sure this directory exists and is writable
+    $uploadLocation = PRODUCTS_IMG_DIR; // Make sure this directory exists and is writable
+    $uploadDir = '../'. $uploadLocation; // Make sure this directory exists and is writable
 
     // $uploadDir = "../uploads"; // Change this to your target directory
     // $targetFile = $uploadDir . "/" . basename($_FILES["file"]["name"]);
