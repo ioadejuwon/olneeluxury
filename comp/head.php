@@ -60,7 +60,7 @@ include_once "admin/inc/drc.php";
     <link rel="stylesheet" href="admin/assets/css/bootstrap.css">
 
     <!-- Page loading scripts-->
-    <script src="admin/assets/js/page-loader.js"></script>
+    <script src="admin/assets/js/pageloader.js"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
     <script type="text/javascript" src="admin/assets/js/jquery.min.js"></script>
     <script src="admin/assets/js/vendors.js"></script>

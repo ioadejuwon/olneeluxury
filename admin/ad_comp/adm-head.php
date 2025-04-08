@@ -58,7 +58,7 @@
     <!-- <link rel="stylesheet" href="assets/css/component.css"> -->
 
     <!-- Page loading scripts-->
-    <script src="assets/js/page-loader.js"></script>
+    <script src="assets/js/pageloader.js"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
     <script type="text/javascript" src="assets/js/jquery.min.js"></script>
     <title><?php echo $pagetitle; ?> - Olnee Luxury</title>
