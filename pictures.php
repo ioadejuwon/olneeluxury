@@ -29,7 +29,7 @@ include_once "comp/header.php"
     </div>
 </section>
 
-<section class="layout-pt-md layout-pb-lg border-top-light">
+<!-- <section class="layout-pt-md layout-pb-lg border-top-light"> -->
     <!-- <div data-anim-wrap class="container"> -->
         <div class="grid">
             <div class="grid-sizer"></div>
@@ -43,7 +43,7 @@ include_once "comp/header.php"
             <div class="grid-item"><img src="admin/assets/img/images/img5.jpg" alt=""></div>
         <!-- </div> -->
     </div>
-</section>
+<!-- </section> -->
 
 <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 <?php
