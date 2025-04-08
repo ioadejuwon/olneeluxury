@@ -285,13 +285,14 @@ Dropzone.options.customersCamDropzone = {
     acceptedFiles: '.png,.jpg,.jpeg,.gif',
     addRemoveLinks: true,
     success: function (file, response) {
-        console.log('File uploaded successfully:', response);
+        
 
         // Check if the response status is success before redirecting
         if (response.status === 'success') {
             // console.log('Redirecting to:', 'thumbnail?productid=' + response.product_id);
             // Redirect to another page after successful upload
             // window.location.href = 'thumbnail?productid=' + response.product_id;
+            console.log('File uploaded successfully:', response);
             showNotification(response.message, 'success'); // Show notification
         } else {
             console.log('Upload error:', response.message);
