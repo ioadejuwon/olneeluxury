@@ -33,20 +33,18 @@ include_once "comp/header.php"
 
 <section class="layout-pt-md layout-pb-lg border-top-light">
     <div data-anim-wrap class="container">
-<div class="gallery">
-  <img src="admin/assets/img/images/img1.jpg" alt="">
-  <img src="admin/assets/img/images/img2.jpg" alt="">
-  <img src="admin/assets/img/images/img3.jpg" alt="">
-  <img src="admin/assets/img/images/img4.jpg" alt="">
-  <img src="admin/assets/img/images/img5.jpg" alt="">
-  <img src="https://source.unsplash.com/random/400x480" alt="">
-</div>
-</div>
+        <div class="gallery">
+            <img src="admin/assets/img/images/img1.jpg" alt="">
+            <img src="admin/assets/img/images/img2.jpg" alt="">
+            <img src="admin/assets/img/images/img3.jpg" alt="">
+            <img src="admin/assets/img/images/img4.jpg" alt="">
+            <img src="admin/assets/img/images/img5.jpg" alt="">
+            <img src="admin/assets/img/images/img5.jpg" alt="">
+        </div>
+    </div>
 </section>
 
 
-<!-- <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script> -->
-<!-- <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script> -->
 <?php
 include_once "comp/footer.php";
 include_once "comp/tail.php";
