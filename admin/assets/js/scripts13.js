@@ -399,11 +399,24 @@ function fetchFiltered(timeframe) {
 
 
 
-// Initialize Masonry
+
 const grid = document.querySelector('.grid');
-new Masonry(grid, {
+
+imagesLoaded(grid, function () {
+  new Masonry(grid, {
     itemSelector: '.grid-item',
     columnWidth: '.grid-sizer',
     gutter: 20,
-    percentPosition: false
+    percentPosition: true
+  });
 });
+
+
+// // Initialize Masonry
+// const grid = document.querySelector('.grid');
+// new Masonry(grid, {
+//     itemSelector: '.grid-item',
+//     columnWidth: '.grid-sizer',
+//     gutter: 20,
+//     percentPosition: false
+// });
