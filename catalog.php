@@ -211,7 +211,7 @@ include_once "comp/header.php"
                         if (!empty($image_path_thumbnail)) {
                             $image_path_thumbnail2 = $row_prod_img_thumbnail['image_path'];
                         }else{
-                            // $image_path_thumbnail2 = DEFAULT_IMG;
+                            $image_path_thumbnail2 = DEFAULT_IMG;
                         }
                         $image_path_thumbnail = 'admin/' . $image_path_thumbnail2;
 

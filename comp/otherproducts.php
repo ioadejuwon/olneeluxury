@@ -28,14 +28,14 @@
           // Get the thumbnail image
           $prodsql_img_thumbnail = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '$product_id' AND thumbnail = 1");
           $row_prod_img_thumbnail = mysqli_fetch_assoc($prodsql_img_thumbnail);
-          
+
 
 
           $image_path_thumbnail = $row_prod_img_thumbnail['image_path'];
-          if (empty($image_path_thumbnail)) {
-              $image_path_thumbnail2 = DEFAULT_IMG;
-          }else{
-              $image_path_thumbnail2 = $row_prod_img_thumbnail['image_path'];
+          if (!empty($image_path_thumbnail)) {
+            $image_path_thumbnail2 = $row_prod_img_thumbnail['image_path'];
+          } else {
+            $image_path_thumbnail2 = DEFAULT_IMG;
           }
           $image_path_thumbnail = 'admin/' . $image_path_thumbnail2;
 
@@ -45,8 +45,8 @@
           $prodsql_img = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '$product_id' AND thumbnail = 0");
           $other_images = [];
           while ($row_prod_img = mysqli_fetch_assoc($prodsql_img)) {
-              $other_images[] = 'admin/' . $row_prod_img['image_path'];
-              // $other_images[] += $row_prod_img['image_path'];
+            $other_images[] = 'admin/' . $row_prod_img['image_path'];
+            // $other_images[] += $row_prod_img['image_path'];
           }
 
 
