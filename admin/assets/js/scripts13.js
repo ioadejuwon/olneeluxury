@@ -400,16 +400,16 @@ function fetchFiltered(timeframe) {
 
 
 
-const grid = document.querySelector('.grid');
+// const grid = document.querySelector('.grid');
 
-imagesLoaded(grid, function () {
-  new Masonry(grid, {
-    itemSelector: '.grid-item',
-    columnWidth: '.grid-sizer',
-    gutter: 20,
-    percentPosition: true
-  });
-});
+// imagesLoaded(grid, function () {
+//   new Masonry(grid, {
+//     itemSelector: '.grid-item',
+//     columnWidth: '.grid-sizer',
+//     gutter: 20,
+//     percentPosition: true
+//   });
+// });
 
 
 // // Initialize Masonry
