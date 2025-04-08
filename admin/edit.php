@@ -126,7 +126,7 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories");
                   $image_id = $row_prod['img_id'];
                   $is_thumbnail = $row_prod['thumbnail'] == 1 ? 'thumbnail-selected' : '';
                 ?>
-                  <div class="col-md-2 col-4">
+                  <div id="image-box-<?php echo $image_id; ?>" class="col-md-2 col-4">
                     <div class="relative shrink-0">
                       <div class="bg-image ratio ratio-30:35 js-lazy -outline-deep-green-1 rounded-8" data-bg="<?php echo $image_path ?>"></div>
 
@@ -135,7 +135,6 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories");
                           <div class="d-flex justify-center items-center size-30 rounded-8 bg-light-3">
                             <div class="icon-bin text-16" data-toggle="modal" data-target="#myModal-<?php echo $image_id; ?>"></div>
                           </div>
-
                         </div>
                         <div>
                           <div class="d-flex justify-center items-center z-3">
@@ -160,35 +159,43 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories");
                   </div>
 
                   <!-- Modal -->
+                  
+
+
+
                   <div class="modal fade" id="myModal-<?php echo $image_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">
+                          <!-- <h5 class="modal-title"></h5> -->
+                          <h2 class="modal-title h4">
                             Delete Image
-                          </h5>
+                          </h2>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <img src="assets/img/icons/close.png" alt="close" width="30%">
                           </button>
                         </div>
-                        <div class="modal-body">
-                          Are you sure you want to delete this image?
-                          <br>
-                          This process is not reversible.
-                          <!-- </div> -->
-                          <!-- <div class="modal-footer"> -->
+                        <div class="modal-body p-4 pt-0">
+                          <p class="text-dark">
+                            Are you sure you want to delete this image?
+                            <br>
+                            This process is not reversible.
+                          </p>
+
                           <ul class="row gx-4 mt-4">
-                            <li class="col-6 d-noe">
+                            <li class="col-6 d-none">
                               <button class="button -outline-dark-3 -md w-100" data-bs-dismiss="modal">Close</button>
                               <!-- <button class="button -md -deep-green-1 text-white" type="submit" id="submit">nn</button> -->
                             </li>
 
-                            <li class="col-6 ml-1">
-                              <a type="button" href="api/delete_img.php?productid=<?php echo $product_id . '&img_id=' . $image_id ?>" class="button -md -red-1 text-white">Delete Image</a>
+                            <li class="col-12">
+                              <!-- <a href="#" class="button -red-1 w-100 button -md -deep-green-1 text-white delete-delivery-btn" data-deliveryid="<?php echo $deliveryid; ?>">Delete Rate</a> -->
+                              <button type="button" class="button -md -red-1 w-100 text-white delete-image-btn" data-productid="<?php echo $product_id ?>" data-imgid="<?php echo $image_id ?>"
+                                data-targetid="image-box-<?php echo $image_id ?>" data-dismiss="modal">
+                                Delete Image
+                              </button>
                             </li>
                           </ul>
-                          <!-- <button type="button" class="button -sm -deep-green-1 text-white" data-dismiss="modal">Close</button> -->
-                          <!-- <a type="button" href="api/delete_img.php?productid=<?php echo $product_id . '&img_id=' . $image_id ?>" class="button -sm -red-1 text-white">Delete Image</a> -->
                         </div>
                       </div>
                     </div>

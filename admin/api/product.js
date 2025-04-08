@@ -158,6 +158,84 @@ $(document).ready(function () {
     });
 
 
+
+    $(document).on('click', '.delete-image-btn', function (e) {
+        e.preventDefault();
+    
+        const $btn = $(this);
+        const productId = $btn.data('productid');
+        const imgId = $btn.data('imgid');
+        const targetId = $btn.data('targetid');
+        const modalId = $btn.closest('.modal').attr('id');
+    
+        $.ajax({
+            url: 'inc/delete_img.php',
+            type: 'GET',
+            dataType: 'json', // Important to parse JSON response automatically
+            data: {
+                productid: productId,
+                img_id: imgId
+            },
+            success: function (response) {
+                if (response.status === 'success') {
+                    // Remove the image block
+                    $('#' + targetId).fadeOut(300, function () {
+                        $(this).remove();
+                    });
+                    // Close the modal
+                    $('#' + modalId).modal('hide');
+                    // window.location.href = 'image?productid=' + response.product_id; // Redirect on success
+                    showNotification(response.message, 'success'); // Yellow notification
+
+                } else if (response.status == 'info') {
+                    showNotification(response.message, 'info'); // Yellow notification
+                } else if (response.status == 'error') {
+                    showNotification(response.message, 'error'); // Red notification
+                } else {
+                    showNotification(response.message, 'error');
+                }
+
+            },
+            error: function (xhr, status, error) {
+                alert("An error occurred while deleting the image.");
+                console.error("AJAX Error:", error);
+            }
+        });
+    });
+    
+
+
+        // $(document).on('click', '.delete-image-btn', function (e) {
+        //     e.preventDefault(); // prevent link from navigating
+
+        //     const $btn = $(this);
+        //     const productId = $btn.data('productid');
+        //     const imgId = $btn.data('imgid');
+
+        //     // Optional: Confirm deletion
+        //     if (!confirm("Are you sure you want to delete this image?")) return;
+
+        //     $.ajax({
+        //         url: 'inc/delete_img.php',
+        //         type: 'GET',
+        //         data: {
+        //             productid: productId,
+        //             img_id: imgId
+        //         },
+        //         success: function (response) {
+        //             // You can handle the response here
+        //             // e.g. remove the image container or show a notification
+        //             $btn.closest('.image-container').remove(); // if wrapped in a container
+        //             console.log("Image deleted:", response);
+        //         },
+        //         error: function (xhr, status, error) {
+        //             console.error("Error deleting image:", error);
+        //             alert("An error occurred while deleting the image.");
+        //         }
+        //     });
+        // });
+
+
 });
 
 
