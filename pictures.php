@@ -30,7 +30,7 @@ include_once "comp/header.php"
 </section>
 
 <section class="layout-pt-md layout-pb-lg border-top-light">
-    <div data-anim-wrap class="container">
+    <!-- <div data-anim-wrap class="container"> -->
         <div class="grid">
             <div class="grid-sizer"></div>
             <div class="grid-item"><img src="admin/assets/img/images/img1.jpg" alt=""></div>
@@ -41,7 +41,7 @@ include_once "comp/header.php"
             <div class="grid-item"><img src="admin/assets/img/images/img3.jpg" alt=""></div>
             <div class="grid-item"><img src="admin/assets/img/images/img4.jpg" alt=""></div>
             <div class="grid-item"><img src="admin/assets/img/images/img5.jpg" alt=""></div>
-        </div>
+        <!-- </div> -->
     </div>
 </section>
 
