@@ -2,7 +2,7 @@
 
 
 
-<header data-anim="fade" data-add-bg="bg-white" class="header -type-4 -shadow bg-white border-bottom-light js-header is-in-view d-non justify-center">
+<header data-anim="fade" data-add-bg="bg-whte" class="header -type-4 -shadow bg-white border-bottom-light js-header is-in-view d-non justify-center">
   <div class="container md:py-10">
     <div class="row justify-between items-center">
 
