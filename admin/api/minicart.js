@@ -264,7 +264,7 @@ function displayCartHeader() {
                             </div>
                     
                             <div class="col-1 text-right">
-                                <button class='remove-cart link remove' onclick="removeCartItem('${item.product_id}')"><img src="admin/assets/img/icons/close.png" alt="close" width="70%"></button>
+                                <button class='remove-cart link remove' onclick="removeCartItem('${item.product_id}')"><img src="admin/assets/img/icons/close.png" alt="close" width="70%" style="min-width: 14px;"></button>
                             </div>
                         </div>
                     </div>
