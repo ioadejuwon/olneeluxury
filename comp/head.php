@@ -90,7 +90,7 @@ include_once "admin/inc/drc.php";
             </button>
         </div> -->
 
-        <div class="scrolling-message" id="scrollingMessage">
+        <div class="scrolling-message d-none" id="scrollingMessage">
             <div class="message-wrapper">
                 <span class="message-text">🔥 Don't miss our flash sale! 50% off all items for the next 24 hours! 🔥</span>
                 <span class="message-text">🔥 Don't miss our flash sale! 50% off all items for the next 24 hours! 🔥</span>
