@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once "admin/inc/config.php";
 include_once "admin/inc/drc.php";
 ?>
@@ -14,7 +14,7 @@ include_once "admin/inc/drc.php";
     <meta name="author" content="MartVille Technologies">
 
     <meta name="description" content="Experience the Perfect Blend of Style and Comfort with our Premium Men’s Fabric." />
-    <meta property="og:title" content="<?php echo $pagetitle.' - Olnee Luxury' ?>" />
+    <meta property="og:title" content="<?php echo $pagetitle . ' - Olnee Luxury' ?>" />
     <meta property="og:url" content="https://olneeluxury.com" />
     <meta name="og:description" content="Experience the Perfect Blend of Style and Comfort with our Premium Men’s Fabric." />
 
@@ -66,6 +66,7 @@ include_once "admin/inc/drc.php";
     <script src="admin/assets/js/vendors.js"></script>
     <title><?php echo $pagetitle; ?> - Olnee Luxury</title>
 </head>
+
 <body class="preloader-visible" data-barba="wrapper">
     <!-- preloader start -->
     <div class="progress-container js-preloader">
@@ -74,4 +75,34 @@ include_once "admin/inc/drc.php";
     <!-- preloader end -->
     <main class="main-content">
 
-    
+        <!-- <div class="scrolling-message">
+            <div class="message-wrapper">
+                <span class="message-text">This is a scrolling message at the top of the website. You can close it!</span>
+                <span class="message-text">This is a scrolling message at the top of the website. You can close it!</span>
+                <span class="message-text">This is a scrolling message at the top of the website. You can close it!</span>
+                <span class="message-text">This is a scrolling message at the top of the website. You can close it!</span>
+                <span class="message-text">This is a scrolling message at the top of the website. You can close it!</span>
+                <span class="message-text">This is a scrolling message at the top of the website. You can close it!</span>
+                <span class="message-text">This is a scrolling message at the top of the website. You can close it!</span>
+            </div>
+            <button class="close-btn-notification">
+                <img src="admin/assets/img/icons/close-wh.png" alt="close" width="50%">
+            </button>
+        </div> -->
+
+        <div class="scrolling-message" id="scrollingMessage">
+            <div class="message-wrapper">
+                <span class="message-text">🔥 Don't miss our flash sale! 50% off all items for the next 24 hours! 🔥</span>
+                <span class="message-text">🔥 Don't miss our flash sale! 50% off all items for the next 24 hours! 🔥</span>
+                <span class="message-text">🔥 Don't miss our flash sale! 50% off all items for the next 24 hours! 🔥</span>
+                <span class="message-text">🔥 Don't miss our flash sale! 50% off all items for the next 24 hours! 🔥</span>
+                <span class="message-text">🔥 Don't miss our flash sale! 50% off all items for the next 24 hours! 🔥</span>
+                <span class="message-text">🔥 Don't miss our flash sale! 50% off all items for the next 24 hours! 🔥</span>
+                <span class="message-text">🔥 Don't miss our flash sale! 50% off all items for the next 24 hours! 🔥</span>
+                <span class="message-text">🔥 Don't miss our flash sale! 50% off all items for the next 24 hours! 🔥</span>
+                <span class="message-text">🔥 Don't miss our flash sale! 50% off all items for the next 24 hours! 🔥</span>
+            </div>
+            <button class="close-btn-notification" id="closeBanner">
+                <img src="admin/assets/img/icons/close-wh.png" alt="close" width="50%">
+            </button>
+        </div>

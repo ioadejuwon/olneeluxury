@@ -133,23 +133,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-$(document).on('click', function (event) {
-    // Check if the click is outside the dropdown and button
-    if (!$(event.target).closest('.cart-dropdown, .cart-toggle-btn').length) {
-        $('.cart-dropdown').hide();
-    }
-});
+// $(document).on('click', function (event) {
+//     // Check if the click is outside the dropdown and button
+//     if (!$(event.target).closest('.cart-dropdown, .cart-toggle-btn').length) {
+//         $('.cart-dropdown').hide();
+//     }
+// });
 
-// Toggle the cart dropdown when clicking the button
-$('.cart-toggle-btn').on('click', function (event) {
-    event.stopPropagation(); // Prevents click from reaching the document
-    $('.cart-dropdown').toggle();
-});
+// // Toggle the cart dropdown when clicking the button
+// $('.cart-toggle-btn').on('click', function (event) {
+//     event.stopPropagation(); // Prevents click from reaching the document
+//     $('.cart-dropdown').toggle();
+// });
 
-// Prevent clicks inside the dropdown from closing it
-$('.cart-dropdown').on('click', function (event) {
-    event.stopPropagation(); // Stops event from bubbling up to document
-});
+// // Prevent clicks inside the dropdown from closing it
+// $('.cart-dropdown').on('click', function (event) {
+//     event.stopPropagation(); // Stops event from bubbling up to document
+// });
 
 
 
@@ -303,9 +303,6 @@ $(document).on("mousedown", function (event) {
         $(".dropdown-main-content").hide();
     }
 });
-
-
-
 
 
 
