@@ -31,7 +31,7 @@ switch ($filter) {
 $ordersql = mysqli_query($conn, "SELECT email, first_name, last_name FROM olnee_orders WHERE order_id = '$orderid'");
 $count_row_orders = mysqli_num_rows($ordersql);
 if ($count_row_orders > 0) {
-	$row_order = mysqli_fetch_assoc( $ordersql);
+	$row_order = mysqli_fetch_assoc($ordersql);
 	$customeremail = $row_order['email'];
 	$fname = $row_order['first_name'];
 	$lname = $row_order['last_name'];
@@ -61,14 +61,16 @@ if ($count_row_orders > 0) {
 				$response['message'] = 'Order updated to Order Delivered';
 			} elseif ($status == 0) {
 				$orderStatus = 'Payment Failed';
+				
 				$response['message'] = 'Order updated to Payment Failed';
 			} else {
 				$response['message'] = 'Order not updated.';
 			}
+			$response['order_status'] = $orderStatus;
 
-			
 
-			
+
+
 			$templatePath = '../email/orderupdate.html';
 
 			if (!file_exists($templatePath)) {
@@ -105,7 +107,7 @@ if ($count_row_orders > 0) {
 					$response['status'] = 'error';
 					$response['message'] = "Email failed: " . ($response['email_error'] ?? 'Unknown error');
 				}
-				$response['order_status'] = $orderStatus;
+				
 			}
 		}
 	}
