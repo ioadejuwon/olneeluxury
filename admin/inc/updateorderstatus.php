@@ -78,8 +78,8 @@ if ($count_row_orders > 0) {
 				[
 					'COMPANY' => COMPANY,
 					'BASE_URL' => BASE_URL,
-					'ORDER_LINK' => ORDER . $order_id,
-					'ORDER_ID' => $order_id,
+					'ORDER_LINK' => ORDER . $orderid,
+					'ORDER_ID' => $orderid,
 					'ORDER_STATUS' => $order_status,
 					'CUSTOMER_NAME' => $fullName,
 					'BRAND_EMAIL' => MAIL,
