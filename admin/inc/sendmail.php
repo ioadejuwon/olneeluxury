@@ -8,9 +8,14 @@ require '../vendor/autoload.php'; // Load PHPMailer
 require 'env.php'; // Load DRC
 
 
-function sendEmail($to, $toName, $subject, $htmlFile, &$response, $placeholders = [], $from = 'admin@olneeluxury.com', $fromName = COMPANY, $replyTo = null, $cc = [], $bcc = [], $attachments = [])
+function sendEmail($to, $toName, $subject, $htmlFile, &$response, $placeholders = [], $from = MAIL, $fromName = COMPANY, $replyTo = null, $cc = [], $bcc = [], $attachments = [])
 {
     $mail = new PHPMailer(true);
+    $mail->SMTPDebug = 2; // Shows connection and authentication steps
+    $mail->Debugoutput = function ($str, $level) {
+        error_log("SMTP Debug (level $level): $str");
+    };
+
 
     try {
         // SMTP Configuration
@@ -18,8 +23,8 @@ function sendEmail($to, $toName, $subject, $htmlFile, &$response, $placeholders 
         $mail->isSMTP();
         $mail->Host       = 'smtp.hostinger.com'; // Replace with your SMTP server
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'admin@olneeluxury.com'; // Must match `setFrom`
-        $mail->Password   = 'S9[1Q$,ZYcwD!,/'; // SMTP password
+        $mail->Username   = MAIL; // Must match `setFrom`
+        $mail->Password   = EMAIL_PASSWORD; // SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = 587; // 465 for SSL, 587 for TLS
 
