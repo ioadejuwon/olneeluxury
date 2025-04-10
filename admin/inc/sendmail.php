@@ -66,7 +66,7 @@ function sendEmail($to, $toName, $subject, $htmlFile, &$response, $placeholders 
         foreach ($placeholders as $key => $value) {
             $message = str_replace("{{{$key}}}", $value ?? '', $message);
         }
-        
+
 
         // Email Content
         $mail->isHTML(true);
@@ -79,6 +79,10 @@ function sendEmail($to, $toName, $subject, $htmlFile, &$response, $placeholders 
         error_log("SMTP Port: " . $mail->Port);
         error_log("SMTP Secure: " . $mail->SMTPSecure);
 
+        $mail->SMTPDebug = 2; // or 3 for even more
+        $mail->Debugoutput = function ($str, $level) {
+            error_log("SMTP Debug (level $level): $str\n", 3);
+        };
         $mail->send();
         return true;
     } catch (Exception $e) {
