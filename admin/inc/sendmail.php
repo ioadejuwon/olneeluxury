@@ -59,9 +59,14 @@ function sendEmail($to, $toName, $subject, $htmlFile, &$response, $placeholders 
         $message = file_get_contents($htmlFile);
 
         // Replace placeholders in the HTML content
+        // foreach ($placeholders as $key => $value) {
+        //     $message = str_replace("{{{$key}}}", $value, $message);
+        // }
+
         foreach ($placeholders as $key => $value) {
-            $message = str_replace("{{{$key}}}", $value, $message);
+            $message = str_replace("{{{$key}}}", $value ?? '', $message);
         }
+        
 
         // Email Content
         $mail->isHTML(true);
