@@ -115,24 +115,26 @@ function trackVisit() {
 
 // Run it on page load
 // document.addEventListener("DOMContentLoaded", trackVisit);
-document.addEventListener("DOMContentLoaded", function () {
-    const banner = document.getElementById("scrollingMessage");
-    const closeBtn = document.getElementById("closeBanner");
 
-    // Check if banner was closed within the past hour
-    const hideUntil = localStorage.getItem("olnee_hideBannerUntil");
-    const now = new Date().getTime();
 
-    if (hideUntil && now < parseInt(hideUntil)) {
-      banner.style.display = "none";
-    }
+// document.addEventListener("DOMContentLoaded", function () {
+//     const banner = document.getElementById("scrollingMessage");
+//     const closeBtn = document.getElementById("closeBanner");
 
-    closeBtn.addEventListener("click", function () {
-      banner.style.display = "none";
-      const oneHourLater = now + 3600000; // 1 hour in ms
-      localStorage.setItem("olnee_hideBannerUntil", oneHourLater);
-    });
-  });
+//     // Check if banner was closed within the past hour
+//     const hideUntil = localStorage.getItem("olnee_hideBannerUntil");
+//     const now = new Date().getTime();
+
+//     if (hideUntil && now < parseInt(hideUntil)) {
+//       banner.style.display = "none";
+//     }
+
+//     closeBtn.addEventListener("click", function () {
+//       banner.style.display = "none";
+//       const oneHourLater = now + 3600000; // 1 hour in ms
+//       localStorage.setItem("olnee_hideBannerUntil", oneHourLater);
+//     });
+//   });
 
 
 $(document).ready(function () {
