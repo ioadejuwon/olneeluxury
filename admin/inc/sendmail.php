@@ -1,4 +1,5 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -7,7 +8,8 @@ require '../vendor/autoload.php'; // Load PHPMailer
 require 'env.php'; // Load DRC
 
 
-function sendEmail($to, $toName, $subject, $htmlFile, &$response, $placeholders = [], $from = MAIL, $fromName = COMPANY, $replyTo = null, $cc = [], $bcc = [], $attachments = []) {
+function sendEmail($to, $toName, $subject, $htmlFile, &$response, $placeholders = [], $from = MAIL, $fromName = COMPANY, $replyTo = null, $cc = [], $bcc = [], $attachments = [])
+{
     $mail = new PHPMailer(true);
 
     try {
@@ -18,7 +20,7 @@ function sendEmail($to, $toName, $subject, $htmlFile, &$response, $placeholders 
         $mail->SMTPAuth   = true;
         $mail->Username   = MAIL; // Must match `setFrom`
         $mail->Password   = EMAIL_PASSWORD; // SMTP password
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; 
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = 587; // 465 for SSL, 587 for TLS
 
         // Sender & Recipient
@@ -29,7 +31,7 @@ function sendEmail($to, $toName, $subject, $htmlFile, &$response, $placeholders 
         if ($replyTo) {
             $mail->addReplyTo($replyTo, COMPANY);
         }
-      
+
 
         // Optional CC & BCC
         foreach ($cc as $email) {
@@ -65,8 +67,11 @@ function sendEmail($to, $toName, $subject, $htmlFile, &$response, $placeholders 
         $mail->send();
         return true;
     } catch (Exception $e) {
-        $response['message'] = "Mail error: " . $mail->ErrorInfo;
+        // $response['message'] = "Mail error: " . $mail->ErrorInfo;
+        $response['message'] = "Mail error: " . ($mail->ErrorInfo ?: $e->getMessage());
+        $response['email_error'] = $e->getMessage(); // Optional: store raw exception
+        error_log("PHPMailer Exception: " . $e->getMessage()); // Optional: Log it for debugging
+
         return false;
     }
 }
-?>
