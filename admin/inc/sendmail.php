@@ -11,7 +11,7 @@ include_once 'env.php'; // Load DRC
 function sendEmail($to, $toName, $subject, $htmlFile, &$response, $placeholders = [], $from = MAIL, $fromName = COMPANY, $replyTo = null, $cc = [], $bcc = [], $attachments = [])
 {
     $mail = new PHPMailer(true);
-    $mail->SMTPDebug = 2; // Shows connection and authentication steps
+    $mail->SMTPDebug = 3; // Shows connection and authentication steps
     $mail->Debugoutput = function ($str, $level) {
         error_log("SMTP Debug (level $level): $str");
     };
@@ -78,11 +78,7 @@ function sendEmail($to, $toName, $subject, $htmlFile, &$response, $placeholders 
         error_log("SMTP Username: " . $mail->Username);
         error_log("SMTP Port: " . $mail->Port);
         error_log("SMTP Secure: " . $mail->SMTPSecure);
-
-        $mail->SMTPDebug = 2; // or 3 for even more
-        $mail->Debugoutput = function ($str, $level) {
-            error_log("SMTP Debug (level $level): $str\n", 3, 'error_log.txt');
-        };
+        
         $mail->send();
         return true;
     } catch (Exception $e) {
