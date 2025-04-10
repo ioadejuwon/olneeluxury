@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 $(document).ready(function () {
-    trackVisit(); // Track the visit
+    // trackVisit(); // Track the visit
     formatAllPrices(); // Ensure all prices are formatted
     formatPrices(); // Ensure all prices are formatted
     // setTimeout(formatAllPrices, 500); // Slight delay in case prices are dynamically loaded
