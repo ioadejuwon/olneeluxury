@@ -2,6 +2,7 @@
 include_once 'config.php'; // Include your database connection
 include_once "randno.php";
 include_once "drc.php";
+require 'sendmail.php';
 
 $orderid = $_GET['orderid'];  // Retrieve this based on your setup
 $filter = $_GET['status'];  // Get the filter parameter from the AJAX request
@@ -27,63 +28,79 @@ switch ($filter) {
 		break;
 }
 
-$prodsql = mysqli_query($conn, "SELECT email, first_name, last_name, total FROM olnee_orders WHERE order_id = '$orderid'");
-$row_prod = mysqli_fetch_assoc(result: $prodsql) ;
-$customeremail = $row_prod['email']; // Assuming the column name for the product name is 'product_name'
+$ordersql = mysqli_query($conn, "SELECT email, first_name, last_name FROM olnee_orders WHERE order_id = '$orderid'");
+$count_row_orders = mysqli_num_rows($ordersql);
+if ($count_row_orders > 0) {
+	$row_order = mysqli_fetch_assoc(result: $ordersql);
+	$customeremail = $row_order['email'];
+	$fname = $row_order['first_name'];
+	$lname = $row_order['last_name'];
+	$fullName = $fname . ' ' . $lname;
 
-// Update the availability in the database
-$query = "UPDATE olnee_orders SET status = ? WHERE order_id = ?";
+	// Update the availability in the database
+	$query = "UPDATE olnee_orders SET status = ? WHERE order_id = ?";
 
-if ($stmt = $conn->prepare($query)) {
-	$stmt->bind_param("is", $status, $orderid);
+	if ($stmt = $conn->prepare($query)) {
+		$stmt->bind_param("is", $status, $orderid);
 
-	if ($stmt->execute()) {
-		$response['success'] = true;
-		$response['status'] = 'success';
-		$response['order_status_level'] = $status;
-		if ($status == 1) {
-			$response['order_status'] = 'Payment Pending';
-			$response['message'] = 'Order updated to Payment Pending';
-		} elseif ($status == 2) {
-			$response['order_status'] = 'Payment Confirmed';
-			$response['message'] = 'Order updated to Payment Confirmed';
-		} elseif ($status == 3) {
-			$response['order_status'] = 'Processed';
-			$response['message'] = 'Order updated to Order Processed';
-		} elseif ($status == 4) {
-			$response['order_status'] = 'Delivered';
-			$response['message'] = 'Order updated to Order Delivered';
-		} elseif ($status == 0) {
-			$response['order_status'] = 'Payment Failed';
-			$response['message'] = 'Order updated to Payment Failed';
-		} else {
-			$response['message'] = 'Product is now unavailable.';
+		if ($stmt->execute()) {
+			$response['success'] = true;
+			$response['status'] = 'success';
+			$response['order_status_level'] = $status;
+			if ($status == 1) {
+				$response['order_status'] = 'Payment Pending';
+				$response['message'] = 'Order updated to Payment Pending';
+			} elseif ($status == 2) {
+				$response['order_status'] = 'Payment Confirmed';
+				$response['message'] = 'Order updated to Payment Confirmed';
+			} elseif ($status == 3) {
+				$response['order_status'] = 'Processed';
+				$response['message'] = 'Order updated to Order Processed';
+			} elseif ($status == 4) {
+				$response['order_status'] = 'Delivered';
+				$response['message'] = 'Order updated to Order Delivered';
+			} elseif ($status == 0) {
+				$response['order_status'] = 'Payment Failed';
+				$response['message'] = 'Order updated to Payment Failed';
+			} else {
+				$response['message'] = 'Order not updated.';
+			}
+
+			$order_status = $response['order_status'];
+
+			$subject = "Status Update on your Order #" . $orderid . " 📦📦";
+			$emailSent = sendEmail(
+				$to = $customeremail,
+				$toName = $fname,
+				$subject,
+				'../email/orderupdate.html', // Path to the email template
+				$response,
+				[
+					'COMPANY' => COMPANY,
+					'BASE_URL' => BASE_URL,
+					'ORDER_LINK' => ORDER . $order_id,
+					'ORDER_ID' => $order_id,
+					'ORDER_STATUS' => $order_status,
+					'CUSTOMER_NAME' => $fullName,
+					'BRAND_EMAIL' => MAIL,
+					'YEAR' => FOOTERYEAR
+				],
+				$from = MAIL,
+				$fromName = COMPANY,
+				$replyTo = REPLY_TO,
+			);
+			if ($emailSent) {
+				$response['status'] = 'success';
+				$response['message'] = 'Order status updated successfully and email sent.';
+				// $response['message'] = 'Email sent successfully.';
+			} else {
+				$response['message'] = "Email failed: " . ($response['email_error'] ?? 'Unknown error');
+			}
 		}
-
-		$order_status = $response['order_status'];
-
-		$subject = "Status Update on your Order #". $orderid. " 📦📦";
-		$emailSent = sendEmail(
-			$to = $email,
-			$toName = $fname,
-			$subject,
-			'../email/orderupdate.html', // Path to the email template
-			$response,
-			[
-				'COMPANY' => COMPANY,
-				'BASE_URL' => BASE_URL,
-				'ORDER_LINK' => ORDER . $order_id,
-				'ORDER_ID' => $order_id,
-				'ORDER_STATUS' => $order_status,
-				'CUSTOMER_NAME' => $fullName,
-				'BRAND_EMAIL' => MAIL,
-				'YEAR' => FOOTERYEAR
-			],
-			$from = MAIL,
-			$fromName = COMPANY,
-			$replyTo = REPLY_TO,
-		);
 	}
+} else {
+	$response['status'] = 'error';
+	$response['message'] = 'Order not found.';
 }
 
 
