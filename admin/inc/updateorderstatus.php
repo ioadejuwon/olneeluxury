@@ -66,7 +66,7 @@ if ($count_row_orders > 0) {
 				$response['message'] = 'Order not updated.';
 			}
 
-			$order_status = $response['order_status'];
+			
 
 			
 			$templatePath = '../email/orderupdate.html';
@@ -75,6 +75,7 @@ if ($count_row_orders > 0) {
 				$response['status'] = 'error';
 				$response['message'] = 'Email template not found: ' . $templatePath;
 			} else {
+				$order_status = $response['order_status'];
 				$subject = "Status Update on your Order #" . $orderid . " 📦📦";
 				$emailSent = sendEmail(
 					$to = $customeremail,
@@ -101,6 +102,7 @@ if ($count_row_orders > 0) {
 					$response['message'] = 'Order status updated successfully and email sent.';
 					// $response['message'] = 'Email sent successfully.';
 				} else {
+					$response['status'] = 'error';
 					$response['message'] = "Email failed: " . ($response['email_error'] ?? 'Unknown error');
 				}
 			}
