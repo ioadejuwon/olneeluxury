@@ -36,7 +36,7 @@ if ($_SERVER['HTTP_HOST'] == 'localhost:8888') {
     // define('BASE_URL', 'https://bobthebuilder.shop/');
     // define('ADMIN_URL', 'https://admin.buildwithbob.shop/');
     define('BASE_URL', 'https://olneeluxury.com/');
-    define('ADMIN_URL', 'https://admin.olneeluxury.com/');
+    define('ADMIN_URL', 'https://olneeluxury.com/admin/');
 }
 
 // Pages
