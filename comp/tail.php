@@ -6,7 +6,7 @@
   <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
   
   <script src="admin/assets/js/main.js"></script>
-  <script src="admin/assets/js/scripts14.js"></script>
+  <script src="admin/assets/js/scripts0.js"></script>
   <script src="admin/api/miniapi324.js"></script>
   <script src="admin/api/minicart.js"></script>
 </body>
