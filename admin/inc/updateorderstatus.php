@@ -71,44 +71,44 @@ if ($count_row_orders > 0) {
 
 
 
-			// $templatePath = '../email/orderupdate.html';
+			$templatePath = '../email/orderupdate.html';
 
-			// if (!file_exists($templatePath)) {
-			// 	$response['status'] = 'error';
-			// 	$response['message'] = 'Email template not found: ' . $templatePath;
-			// } else {
-			// 	$order_status = $orderStatus;
-			// 	$subject = "Status Update on your Order #" . $orderid . " 📦📦";
-			// 	$emailSent = sendEmail(
-			// 		$to = $customeremail,
-			// 		$toName = $fname,
-			// 		$subject,
-			// 		$templatePath, // Path to the email template
-			// 		$response,
-			// 		[
-			// 			'COMPANY' => COMPANY,
-			// 			'BASE_URL' => BASE_URL,
-			// 			'ORDER_LINK' => ORDER . $orderid,
-			// 			'ORDER_ID' => $orderid,
-			// 			'ORDER_STATUS' => $order_status,
-			// 			'CUSTOMER_NAME' => $fullName,
-			// 			'BRAND_EMAIL' => MAIL,
-			// 			'YEAR' => FOOTERYEAR
-			// 		],
-			// 		$from = MAIL,
-			// 		$fromName = COMPANY,
-			// 		$replyTo = REPLY_TO,
-			// 	);
-			// 	if ($emailSent) {
-			// 		$response['status'] = 'success';
-			// 		$response['message'] = 'Order status updated successfully and email sent.';
-			// 		// $response['message'] = 'Email sent successfully.';
-			// 	} else {
-			// 		$response['status'] = 'error';
-			// 		$response['message'] = "Email failed: " . ($response['email_error'] ?? 'Unknown error');
-			// 	}
+			if (!file_exists($templatePath)) {
+				$response['status'] = 'error';
+				$response['message'] = 'Email template not found: ' . $templatePath;
+			} else {
+				$order_status = $orderStatus;
+				$subject = "Status Update on your Order #" . $orderid . " 📦📦";
+				$emailSent = sendEmail(
+					$to = $customeremail,
+					$toName = $fname,
+					$subject,
+					$templatePath, // Path to the email template
+					$response,
+					[
+						'COMPANY' => COMPANY,
+						'BASE_URL' => BASE_URL,
+						'ORDER_LINK' => ORDER . $orderid,
+						'ORDER_ID' => $orderid,
+						'ORDER_STATUS' => $order_status,
+						'CUSTOMER_NAME' => $fullName,
+						'BRAND_EMAIL' => MAIL,
+						'YEAR' => FOOTERYEAR
+					],
+					$from = MAIL,
+					$fromName = COMPANY,
+					$replyTo = REPLY_TO,
+				);
+				if ($emailSent) {
+					$response['status'] = 'success';
+					$response['message'] = 'Order status updated successfully and email sent.';
+					// $response['message'] = 'Email sent successfully.';
+				} else {
+					$response['status'] = 'error';
+					$response['message'] = "Email failed: " . ($response['email_error'] ?? 'Unknown error');
+				}
 				
-			// }
+			}
 		}
 	}
 } else {
