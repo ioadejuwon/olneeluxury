@@ -69,6 +69,11 @@ function sendEmail($to, $toName, $subject, $htmlFile, &$response, $placeholders 
         $mail->Body    = $message;
 
         // Send email
+        error_log("SMTP Host: " . $mail->Host);
+        error_log("SMTP Username: " . $mail->Username);
+        error_log("SMTP Port: " . $mail->Port);
+        error_log("SMTP Secure: " . $mail->SMTPSecure);
+
         $mail->send();
         return true;
     } catch (Exception $e) {
