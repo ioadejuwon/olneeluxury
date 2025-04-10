@@ -3,7 +3,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require '../../vendor/autoload.php'; // Load PHPMailer
-require 'drc.php'; // Load DRC
+// require 'drc.php'; // Load DRC
 require 'env.php'; // Load DRC
 
 
