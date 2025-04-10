@@ -13,11 +13,11 @@ define('DOLLAR', '$');
 define('EURO', '€');
 
 // define('BRAND_EMAIL', 'hello@olneeluxury.com');
-define('REPLY_TO', 'admin@olneeluxury.com');
+define('REPLY_TO', 'admin@bioeconomyconf.com');
 define('COMPANY', 'Olnee Luxury');
 
 define('PHONE', '2348108806808');
-define('MAIL', 'admin@olneeluxury.com');
+define('MAIL', 'admin@bioeconomyconf.com');
 define('DEFAULT_IMG', 'product-img/product.png');
 define('CUSTOMERS_IMG_DIR', 'customers-cam/');
 define('PRODUCTS_IMG_DIR', 'product-img/');
