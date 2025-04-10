@@ -81,7 +81,7 @@ function sendEmail($to, $toName, $subject, $htmlFile, &$response, $placeholders 
 
         $mail->SMTPDebug = 2; // or 3 for even more
         $mail->Debugoutput = function ($str, $level) {
-            error_log("SMTP Debug (level $level): $str\n", 3);
+            error_log("SMTP Debug (level $level): $str\n", 3, 'error_log.txt');
         };
         $mail->send();
         return true;
