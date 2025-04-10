@@ -109,6 +109,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $itemMessage = '📦 ' . $product_name . ' - (' . $product_yards . $statement . ') - ₦' . number_format($product_price, 2);
             $sendMessage .= $itemMessage . "\r\n";
 
+            $sendmail .= $itemMessage . "<br>";
+
 
             $insert_item = "INSERT INTO olnee_order_items (order_id, product_id, product_name, yards, price) VALUES (?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($insert_item);
@@ -270,6 +272,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo json_encode($response);
             exit;
         }
+
+        $subject = "You have a New Order on ". COMPANY. " 📦📦";
+        $emailSent = sendEmail(
+            $to = $email,
+            $toName = $fname,
+            $subject,
+            '../email/neworder.html', // Path to the email template
+            $response,
+            [
+                'COMPANY' => COMPANY,
+                'BASE_URL' => BASE_URL,
+                'ORDER_ITEMS' => $sendmail,
+                'ORDER_LINK' => ORDER_DETAILS . $order_id,
+                'CUSTOMER_NAME' => $fullName,
+                'CUSTOMER_PHONE' => $phone,
+                'YEAR' => FOOTERYEAR
+            ],
+            $from = MAIL,
+            $fromName = COMPANY,
+            $replyTo = REPLY_TO,
+        );
     } catch (Exception $e) {
         // Rollback the transaction if there's an error
         $conn->rollback();

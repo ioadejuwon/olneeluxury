@@ -213,6 +213,7 @@ function updateOrderStatus(status) {
     // const userId = $('[data-user-id]').data('user-id');
 
     const orderID = $('[data-order-id]').data('order-id');
+    // const orderID = $('[data-order-id]').data('order-id');
 
     // Send an AJAX request using jQuery
     $.ajax({

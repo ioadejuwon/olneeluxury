@@ -60,7 +60,7 @@ $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No 
 <div class="dashboard__content bg-light-4">
     <div class="row pb- mb-10">
         <div class="col-auto">
-            <h2 class="text-30 lh-12 fw-700">Settingss </h2>
+            <h2 class="text-30 lh-12 fw-700">Settings </h2>
             <div class="mt-5">Your can check your store settings.</div>
         </div>
     </div>
@@ -68,8 +68,7 @@ $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No 
         <div class="col-12">
             <div class="rounded-16 bg-white -dark-bg-dark-1 shadow-4 h-100">
                 <div class="tabs -active-deep-green-2 js-tabs pt-0">
-                    <div
-                        class="tabs__controls d-flex x-gap-30 items-center pt-20 px-30 border-bottom-light js-tabs-controls pb-8">
+                    <div class="tabs__controls d-flex x-gap-30 items-center pt-20 px-30 border-bottom-light js-tabs-controls pb-8">
                         <button class="tabs__button text-light-1 js-tabs-button is-active"
                             data-tab-target=".-tab-item-0" type="button">
                             Profile

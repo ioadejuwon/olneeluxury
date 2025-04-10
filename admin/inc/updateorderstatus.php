@@ -5,6 +5,7 @@ include_once "drc.php";
 
 $orderid = $_GET['orderid'];  // Retrieve this based on your setup
 $filter = $_GET['status'];  // Get the filter parameter from the AJAX request
+// $email = $_GET['email'];  // Get the filter parameter from the AJAX request
 
 $whereClause = "";
 
@@ -26,6 +27,9 @@ switch ($filter) {
 		break;
 }
 
+$prodsql = mysqli_query($conn, "SELECT email, first_name, last_name, total FROM olnee_orders WHERE order_id = '$orderid'");
+$row_prod = mysqli_fetch_assoc(result: $prodsql) ;
+$customeremail = $row_prod['email']; // Assuming the column name for the product name is 'product_name'
 
 // Update the availability in the database
 $query = "UPDATE olnee_orders SET status = ? WHERE order_id = ?";
@@ -55,6 +59,30 @@ if ($stmt = $conn->prepare($query)) {
 		} else {
 			$response['message'] = 'Product is now unavailable.';
 		}
+
+		$order_status = $response['order_status'];
+
+		$subject = "Status Update on your Order #". $orderid. " 📦📦";
+		$emailSent = sendEmail(
+			$to = $email,
+			$toName = $fname,
+			$subject,
+			'../email/orderupdate.html', // Path to the email template
+			$response,
+			[
+				'COMPANY' => COMPANY,
+				'BASE_URL' => BASE_URL,
+				'ORDER_LINK' => ORDER . $order_id,
+				'ORDER_ID' => $order_id,
+				'ORDER_STATUS' => $order_status,
+				'CUSTOMER_NAME' => $fullName,
+				'BRAND_EMAIL' => MAIL,
+				'YEAR' => FOOTERYEAR
+			],
+			$from = MAIL,
+			$fromName = COMPANY,
+			$replyTo = REPLY_TO,
+		);
 	}
 }
 
