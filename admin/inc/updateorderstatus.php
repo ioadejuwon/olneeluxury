@@ -69,7 +69,7 @@ if ($count_row_orders > 0) {
 			
 
 			
-			$templatePath = '../email/orderupdate.html';
+			$templatePath = '../email/orderupdated.html';
 
 			if (!file_exists($templatePath)) {
 				$response['status'] = 'error';
