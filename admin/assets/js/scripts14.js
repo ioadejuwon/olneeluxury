@@ -256,9 +256,9 @@ function updateOrderStatus(status) {
             else if (response.status == 'info') {
                 showNotification(response.message, 'info'); // Yellow notification
             } else if (response.status == 'error') {
-                showNotification('kkk ' + response.message, 'error'); // Red notification
+                showNotification(response.message, 'error'); // Red notification
             } else {
-                showNotification('kkddsk ' + response.message, 'error');
+                showNotification(response.message, 'error');
             }
 
         },
