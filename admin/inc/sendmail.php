@@ -25,8 +25,11 @@ function sendEmail($to, $toName, $subject, $htmlFile, &$response, $placeholders 
         $mail->SMTPAuth   = true;
         $mail->Username   = MAIL; // Must match `setFrom`
         $mail->Password   = EMAIL_PASSWORD; // SMTP password
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587; // 465 for SSL, 587 for TLS
+        // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        // $mail->Port       = 587; // 465 for SSL, 587 for TLS
+        $mail->Port       = 465;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+
 
         // Sender & Recipient
         $mail->setFrom($from, $fromName);
