@@ -11,10 +11,10 @@ include_once 'admin/inc/env.php'; // Load DRC
 function sendEmail($to, $toName, $subject, $htmlFile, &$response, $placeholders = [], $from = MAIL, $fromName = COMPANY, $replyTo = null, $cc = [], $bcc = [], $attachments = [])
 {
     $mail = new PHPMailer(true);
-    $mail->SMTPDebug = 3; // Shows connection and authentication steps
-    $mail->Debugoutput = function ($str, $level) {
-        error_log("SMTP Debug (level $level): $str");
-    };
+    // $mail->SMTPDebug = 3; // Shows connection and authentication steps
+    // $mail->Debugoutput = function ($str, $level) {
+    //     error_log("SMTP Debug (level $level): $str");
+    // };
 
 
     try {
@@ -74,11 +74,11 @@ function sendEmail($to, $toName, $subject, $htmlFile, &$response, $placeholders 
         $mail->Body    = $message;
 
         // Send email
-        error_log("Password: " . EMAIL_PASSWORD ." ". $mail->ErrorInfo);
-        error_log("SMTP Host: " . $mail->Host);
-        error_log("SMTP Username: " . $mail->Username);
-        error_log("SMTP Port: " . $mail->Port);
-        error_log("SMTP Secure: " . $mail->SMTPSecure);
+        // error_log("Password: " . EMAIL_PASSWORD ." ". $mail->ErrorInfo);
+        // error_log("SMTP Host: " . $mail->Host);
+        // error_log("SMTP Username: " . $mail->Username);
+        // error_log("SMTP Port: " . $mail->Port);
+        // error_log("SMTP Secure: " . $mail->SMTPSecure);
         
         $mail->send();
         return true;
