@@ -74,6 +74,7 @@ function sendEmail($to, $toName, $subject, $htmlFile, &$response, $placeholders 
         $mail->Body    = $message;
 
         // Send email
+        error_log("Password: " . EMAIL_PASSWORD ." ". $mail->ErrorInfo);
         error_log("SMTP Host: " . $mail->Host);
         error_log("SMTP Username: " . $mail->Username);
         error_log("SMTP Port: " . $mail->Port);
