@@ -2,7 +2,7 @@
 include_once 'config.php'; // Include your database connection
 include_once "randno.php";
 include_once "drc.php";
-require 'sendmail.php';
+require '../../sendmail.php';
 
 $orderid = $_GET['orderid'];  // Retrieve this based on your setup
 $filter = $_GET['status'];  // Get the filter parameter from the AJAX request
