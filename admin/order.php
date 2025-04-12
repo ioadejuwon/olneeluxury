@@ -101,7 +101,7 @@ include_once "ad_comp/adm-sidebar.php"
 <div class="dashboard__content bg-light-4">
   <div class="row pb- mb-10">
     <div class="col-auto">
-      <h2 class="text-30 lh-12 fw-700">kOrder ID: <span class="uppercase"> <?php echo "#" . $order_id ?></span> </h2>
+      <h2 class="text-30 lh-12 fw-700">mkOrder ID: <span class="uppercase"> <?php echo "#" . $order_id ?></span> </h2>
       <div class="mt-5">You can manage this order here.</div>
     </div>
   </div>
