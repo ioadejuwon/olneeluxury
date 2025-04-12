@@ -3,7 +3,14 @@ $pagetitle = "Login";
 include_once "inc/config.php";
 include_once "inc/drc.php";
 include_once "ad_comp/adm-head.php";
-
+$error = '';
+$email = '';
+$pword = '';
+if (isset($_GET['url'])) {
+    $url = $_GET['url'];
+} else {
+    $url = '';
+}
 // include_once "header.php"; 
 
 ?>
@@ -31,8 +38,9 @@ include_once "ad_comp/adm-head.php";
 
               <form id="loginForm" class="input-form respondForm__form row y-gap-20 " method="POST" action="#">
                 <div class="col-12">
-                  <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Username Or Email</label>
+                  <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Email</label>
                   <input type="text" class="form-control" name="email" value="<?php echo $email; ?>" placeholder="Username or Email" required>
+                  <input type="hidden" class="form-control" name="url" value="<?php echo $url; ?>" placeholder="" required>
                 </div>
 
 

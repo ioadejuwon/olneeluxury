@@ -22,7 +22,8 @@ $product_cat_id = $row_prod['productcategory'];
 
 $price = $row_prod['price'];
 $dis_price = $row_prod['discount_price'];
-$availability = $row_prod['availability'];
+$availableYards = (int)$row_prod['yards'];
+$availability = (int)$row_prod['availability'];
 
 $pagetitle = $product_name;
 
@@ -44,10 +45,10 @@ $row_prod_img_thumbnail = mysqli_fetch_assoc($prodsql_img_thumbnail);
 // $image_path_thumbnail = 'admin/' . $row_prod_img_thumbnail['image_path'];
 // $product_img = $image_path_thumbnail;
 
-$image_path_thumbnail = $row_prod_img_thumbnail['image_path'];
-if (!empty($image_path_thumbnail)) {
+// $image_path_thumbnail = $row_prod_img_thumbnail['image_path'];
+if (!empty($row_prod_img_thumbnail['image_path'])) {
   $image_path_thumbnail2 = $row_prod_img_thumbnail['image_path'];
-}else{
+} else {
   $image_path_thumbnail2 = DEFAULT_IMG;
 }
 $image_path_thumbnail = 'admin/' . $image_path_thumbnail2;
@@ -162,11 +163,11 @@ $return = nl2br($row_store['returnPolicy']);
             <div class="col-auto">
               <?php
 
-              if ($availability == 1) {
+              if ($availability == 1 && $availableYards > 0) {
               ?>
                 <button class="button h-50 px-45 -deep-green-1 text-white add-to-cart-btn" data-product-id="<?php echo $product_id; ?>">Add to cart</button>
               <?php
-              } elseif ($availability == 0) {
+              } elseif ($availability == 0 || $availableYards < 1) {
               ?>
                 <button class="button h-50 px-45 -yellow-3 text-white" disabled>Out of Stock</button>
               <?php

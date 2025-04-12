@@ -5,17 +5,14 @@ include_once 'drc.php';
 include_once 'env.php';
 
 header('Content-Type: application/json');
-
-$response = array();
-
-// Enable error reporting for debugging
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+$response = [];
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     try {
         $order_id = $orderID;
-        // Retrieve the posted data
         $firstName = $_POST['firstName'];
         $lastName = $_POST['lastName'];
         $fullName = $firstName . ' ' . $lastName;
@@ -32,75 +29,61 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $shipping = $_POST['shipping'];
         $total = $_POST['checkout-total'];
         $paymentOption = (int) $_POST['paymentOption'];
-        $location = $street . ", " . $city . ", " . $state . ", " . $country;
+        $location = "$street, $city, $state, $country";
 
-        // Decode the items JSON and add debugging
-        $items_json = $_POST['items'];
-        // error_log("Raw items data: " . $items_json);
-        $items = json_decode($items_json, true);
-        // error_log("Decoded items array: " . print_r($items, true));
-
-        // Check if items is an array
-
+        $items = json_decode($_POST['items'], true);
         if (!is_array($items) || empty($items)) {
-            // throw new Exception("Invalid or empty items data.");
-            // $response = ['status' => 'success', 'message' => 'Invalid or empty items data.'];
-            $response = [
-                'status' => 'info',
-                'message' => 'Please add items to your cart!'
-            ];
-            echo json_encode($response);
-            exit;
+            throw new Exception("Please add items to your cart!");
         }
 
-        // Start a transaction
         $conn->begin_transaction();
 
+        // Insert order
+        $stmt = $conn->prepare("INSERT INTO olnee_orders (order_id, first_name, last_name, email, phone, country, state, city, street, notes, subtotal, discount, shipping, total, paymentOption, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)");
+        if (!$stmt) throw new Exception("Order insert preparation failed: " . $conn->error);
 
-        // Insert order details
-        $insert_order = "INSERT INTO olnee_orders (order_id, first_name, last_name, email, phone, country, state, city, street, notes, subtotal, discount, shipping, total, paymentOption, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)";
-        $stmt = $conn->prepare($insert_order);
-        if (!$stmt) {
-            // throw new Exception("Order preparation failed: " . $conn->error);
-            $response = [
-                'status' => 'error',
-                'message' => 'Order preparation failed: ' . $conn->error
-            ];
-            echo json_encode($response);
-            exit;
-        }
         $stmt->bind_param("ssssssssssddddi", $order_id, $firstName, $lastName, $email, $phone, $country, $state, $city, $street, $notes, $subtotal, $discount, $shipping, $total, $paymentOption);
         $stmt->execute();
-        if ($stmt->error) {
-            // throw new Exception("Order execution failed: " . $stmt->error);
-            $response = [
-                'status' => 'error',
-                'message' => 'Order execution failed: ' . $stmt->error
-            ];
-            echo json_encode($response);
-            exit;
-        }
+        if ($stmt->error) throw new Exception("Order insert failed: " . $stmt->error);
         $stmt->close();
 
         $itemCount = 0;
-        $sendMessage = ''; // Initialize the $sendMessage variable
-        // Insert order items
+        $sendMessage = '';
+        $sendMail = '';
+
         foreach ($items as $item) {
-            if (!isset($item['product_id']) || !isset($item['name']) || !isset($item['yards']) || !isset($item['price'])) {
-                // throw new Exception("Invalid item data: " . print_r($item, true));
-                $response = [
-                    'status' => 'error',
-                    'message' => 'Invalid item data: ' . print_r($item, true)
-                ];
-                echo json_encode($response);
-                exit;
+            if (!isset($item['product_id'], $item['name'], $item['yards'], $item['price'])) {
+                throw new Exception("Invalid item data.");
             }
 
             $product_id = $item['product_id'];
             $product_name = $item['name'];
-            $product_price = (int) $item['price'];
-            $product_yards = (int) $item['yards'];
+            $product_price = (int)$item['price'];
+            $product_yards = (int)$item['yards'];
             $totalProductPrice = $product_price * $product_yards;
+
+
+            // Get current stock
+            $stmt = $conn->prepare("SELECT yards FROM products WHERE productid = ?");
+            $stmt->bind_param("s", $product_id);
+            $stmt->execute();
+            $stmt->bind_result($current_yards);
+            if (!$stmt->fetch()) {
+                throw new Exception("Product not found.");
+            }
+            $stmt->close();
+
+            // Check if there's enough stock
+            if ($current_yards < $product_yards) {
+                throw new Exception("Only {$current_yards} yards left in stock for '{$product_name}'. Please reduce the quantity.", 1001);
+            }
+
+
+            // Update product stock
+            $stmtSubtract = $conn->prepare("UPDATE products SET yards = yards - ? WHERE productid = ?");
+            $stmtSubtract->bind_param("is", $product_yards, $product_id);
+            $stmtSubtract->execute();
+            $stmtSubtract->close();
 
             $itemCount++;
             $price = ($product_yards > 1) ? $totalProductPrice : $product_price;
@@ -108,60 +91,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $itemMessage = '📦 ' . $product_name . ' - (' . $product_yards . $statement . ') - ₦' . number_format($product_price, 2);
             $sendMessage .= $itemMessage . "\r\n";
+            $sendMail .= $itemMessage . "<br>";
 
-            $sendmail .= $itemMessage . "<br>";
+            $stmt = $conn->prepare("INSERT INTO olnee_order_items (order_id, product_id, product_name, yards, price) VALUES (?, ?, ?, ?, ?)");
+            if (!$stmt) throw new Exception("Item insert preparation failed: " . $conn->error);
 
-
-            $insert_item = "INSERT INTO olnee_order_items (order_id, product_id, product_name, yards, price) VALUES (?, ?, ?, ?, ?)";
-            $stmt = $conn->prepare($insert_item);
-            if (!$stmt) {
-                // throw new Exception("Item preparation failed: " . $conn->error);
-                $response = [
-                    'status' => 'error',
-                    'message' => 'Item preparation failed: ' . $conn->error
-                ];
-                echo json_encode($response);
-                exit;
-            }
             $stmt->bind_param("sssid", $order_id, $product_id, $product_name, $product_yards, $product_price);
             $stmt->execute();
-            if ($stmt->error) {
-                // throw new Exception("Item execution failed: " . $stmt->error);
-                $response = [
-                    'status' => 'error',
-                    'message' => 'Item execution failed: ' . $stmt->error
-                ];
-                echo json_encode($response);
-                exit;
-            }
+            if ($stmt->error) throw new Exception("Item insert failed: " . $stmt->error);
             $stmt->close();
         }
 
-        // If everything is successful, commit the transaction
         $conn->commit();
 
-        if ($paymentOption == '1') {
+        // PAYMENT OPTIONS
+        if ($paymentOption === 1) {
             // Flutterwave
-            // Prepare Flutterwave payment request
-
             $request = [
-                "tx_ref" => $order_id, // Unique transaction reference
+                "tx_ref" => $order_id,
                 "amount" => $total,
                 "currency" => "NGN",
-                // "redirect_url" => "http://localhost:8888/bob/inc/confirm_payment.php",
                 "redirect_url" => CONFIRM_PAY,
                 "payment_options" => "card, banktransfer, ussd",
                 "meta" => [
                     "order_id" => $order_id,
-                    "consumer_mac" => "92a3-912ba-1192a",
                     "price" => $total,
-                    "name" => $firstName . ' ' . $lastName,
-                    "firstname" => $firstName
+                    "name" => $fullName
                 ],
                 "customer" => [
                     "email" => $email,
                     "phone_number" => $phone,
-                    "name" => $firstName . ' ' . $lastName,
+                    "name" => $fullName,
                 ],
                 "customizations" => [
                     "title" => "Olnee Luxury",
@@ -169,144 +129,82 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     "logo" => ADMIN_URL . "assets/img/icon.png",
                 ],
             ];
-            // Send payment to Flutterwave for processing
+
             $curl = curl_init();
             curl_setopt_array($curl, [
                 CURLOPT_URL => 'https://api.flutterwave.com/v3/payments',
                 CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POST => true,
                 CURLOPT_POSTFIELDS => json_encode($request),
                 CURLOPT_HTTPHEADER => [
-                    'Authorization: Bearer ' . SECRET_KEY, // Replace with your Flutterwave secret key
+                    'Authorization: Bearer ' . SECRET_KEY,
                     'Content-Type: application/json'
                 ],
             ]);
 
-            $response = curl_exec($curl);
-            if (curl_errno($curl)) {
-                // throw new Exception('Curl error: ' . curl_error($curl));
-                $response = [
-                    'status' => 'error',
-                    'message' => 'Curl error: ' . curl_error($curl)
-                ];
-                echo json_encode($response);
-                exit;
-            }
+            $flutterwave_response = curl_exec($curl);
+            if (curl_errno($curl)) throw new Exception("Curl error: " . curl_error($curl));
             curl_close($curl);
 
-            $res = json_decode($response);
-
+            $res = json_decode($flutterwave_response);
             if ($res->status === 'success') {
-                // Return payment link to the front-end
                 echo json_encode([
                     'status' => 'success',
                     'link' => $res->data->link
                 ]);
-            } else {
-                // throw new Exception("Payment initialization failed: " . $res->message);
-                $response = [
-                    'status' => 'error',
-                    'message' => 'Payment failed: ' . $res->message . '<br> Please try again.'
-                ];
-                echo json_encode($response);
                 exit;
+            } else {
+                throw new Exception("Payment failed: " . $res->message);
             }
-        } elseif ($paymentOption == '2') {
-            // Direct Transfer
-            $response = [
+        } elseif (in_array($paymentOption, [2, 3])) {
+            // Direct Transfer or Cash on Delivery
+            echo json_encode([
                 'status' => 'success',
-                'message' => 'Direct Transfer Payment Option',
+                'message' => 'Proceed with your selected payment option',
                 'link' => ORDER . $order_id
-            ];
-            echo json_encode($response);
-            // exit;
-
-        } elseif ($paymentOption == '3') {
-            // Cash on Delivery
-            $response = [
-                'status' => 'success',
-                'message' => 'Direct Transfer Payment Option',
-                'link' => ORDER . $order_id
-            ];
-            echo json_encode($response);
-            // exit;
-        } elseif ($paymentOption == '4') {
-
+            ]);
+            exit;
+        } elseif ($paymentOption === 4) {
+            // WhatsApp Order
             $plural_mainMSG = ($itemCount > 1) ? "these items:" : "this item:";
-            $mainMSG = 'Hi, Olnee Luxury' . "!\r\n\r\n";
-            $mainMSG .= 'I would like to buy ' . $plural_mainMSG . "\r\n\r\n";
-
-            $mainMSG .= $sendMessage . "\r\n\r\n";
+            $mainMSG = "Hi, Olnee Luxury!\r\n\r\nI would like to buy $plural_mainMSG\r\n\r\n";
+            $mainMSG .= $sendMessage . "\r\n";
             $mainMSG .= "💰Discount: *-₦" . number_format($discount, 2) . "*\r\n";
             $mainMSG .= "💰Total Price: *₦" . number_format($total, 2) . "*\r\n\r\n";
-            $mainMSG .= '👤 Customer\'s Name: ' . $fullName . "\r\n\r\n";
-            $mainMSG .= '*DELIVERY DETAILS:* ' . "\r\n";
-            $mainMSG .= 'Name: ' . $fullName . "\r\n";
-            $mainMSG .= 'Phone: ' . $phone . "\r\n";
-            $mainMSG .= 'Address: ' . $location . "\r\n";
-            $mainMSG .= 'Customer\'s Extra Note: ' . $notes . "\r\n";
-            $mainMSG .= 'Thank you!' . "\r\n";
+            $mainMSG .= "*DELIVERY DETAILS:*\r\nName: $fullName\r\nPhone: $phone\r\nAddress: $location\r\nNote: $notes\r\n";
+            $mainMSG .= "---\r\nView my order: " . ORDER . $order_id;
 
-            $mainMSG .= "---\r\n\r\nYou can view my order details here: " . ORDER . $order_id;
-
-            // WhatsApp
-            $response = [
+            echo json_encode([
                 'status' => 'success',
-                'message' => 'WhatsApp Payment Option',
-                // 'link' => WHATSAPP_ORDER . $order_id
+                'message' => 'Redirecting to WhatsApp...',
                 'link' => 'https://api.whatsapp.com/send?phone=' . PHONE . '&text=' . rawurlencode($mainMSG)
-            ];
-            echo json_encode($response);
-            // exit;
-        } else {
-            // WhatsApp
-            $response = [
-                'status' => 'info',
-                'message' => 'There was an error with the selected payment option'
-            ];
-            echo json_encode($response);
+            ]);
             exit;
+        } else {
+            throw new Exception("Invalid payment option selected.");
         }
-
-        $subject = "You have a New Order on ". COMPANY. " 📦📦";
-        $emailSent = sendEmail(
-            $to = $email,
-            $toName = $fname,
-            $subject,
-            '../email/neworder.html', // Path to the email template
-            $response,
-            [
-                'COMPANY' => COMPANY,
-                'BASE_URL' => BASE_URL,
-                'ORDER_ITEMS' => $sendmail,
-                'ORDER_LINK' => ORDER_DETAILS . $order_id,
-                'CUSTOMER_NAME' => $fullName,
-                'CUSTOMER_PHONE' => $phone,
-                'YEAR' => FOOTERYEAR
-            ],
-            $from = MAIL,
-            $fromName = COMPANY,
-            $replyTo = REPLY_TO,
-        );
     } catch (Exception $e) {
-        // Rollback the transaction if there's an error
         $conn->rollback();
-        error_log($e->getMessage());
+        $status = $e->getCode() === 1001 ? 'info' : 'error';
+
+        http_response_code(400);
         echo json_encode([
-            'status' => 'error',
+            'status' => $status,
             'message' => $e->getMessage()
         ]);
+        // echo json_encode([
+        //     'status' => 'error',
+        //     'message' => $e->getMessage()
+        // ]);
+        exit;
     }
 } else {
     echo json_encode([
         'status' => 'error',
-        'message' => 'Invalid request method'
+        'message' => 'Invalid request method.'
     ]);
     exit;
 }
-$conn->close();
+
+
+// $conn->close();

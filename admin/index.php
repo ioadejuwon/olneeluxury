@@ -15,7 +15,7 @@ if (!isset($_SESSION['user_id'])) {
 
 include_once "ad_comp/adm-head.php";
 include_once "ad_comp/adm-header.php";
-
+// $error = '';
 $sql = mysqli_query($conn, "SELECT * FROM olnee_admin WHERE user_id = '{$_SESSION['user_id']}'");
 $row = mysqli_fetch_assoc($sql);
 

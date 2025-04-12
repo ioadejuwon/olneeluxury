@@ -67,11 +67,23 @@ function addToCart(productId) {
     var discountedPrice = productElement.data('discounted-price') || productPrice;
     var selectedYards = parseInt(productElement.find('input[name="yards"]').val()) || 1;
 
+    let availableYards = parseInt(productElement.data('available-yards')) || 0; // 👈 assuming you pass this in
+
+
     // Check if the item already exists in the cart
     let existingItem = cartItems.find(item => item.product_id === productId);
 
     if (existingItem) {
-        existingItem.yards += selectedYards; // Increase Yards if item exists
+
+        let newTotal = existingItem.yards + selectedYards;
+        if (newTotal > availableYards) {
+            showNotification(`Only ${availableYards} yards left in stock.`, 'info'); // yellow notification
+            return;
+        }
+
+        existingItem.yards = newTotal;
+
+        // existingItem.yards += selectedYards; // Increase Yards if item exists
         showNotification('Yards increased.', 'success');
         // Remove product if it is already in the cart
         // cartItems.filter(item => item.product_id !== productId);
@@ -453,7 +465,7 @@ function updateCheckoutTotal() {
     discountAmount = Math.min(discountAmount, subtotal);
 
     let total = subtotal - discountAmount + shippingCost; // Apply discount
-    
+
     total = total < 0 ? 0 : total; // Ensure total is not negative
     // Update UI
     $('#subtotal').text(formatCurrency(subtotal));
@@ -595,7 +607,20 @@ $('#checkoutForm').on('submit', function (event) {
         },
         error: function (jqXHR, textStatus, errorThrown) {
             // console.error('Error:', textStatus, errorThrown); // Log any errors
-            showNotification('An error occurred while processing your request.', 'error');
+            // showNotification('An error occurred while processing your request.', 'error');
+
+            let message = 'An error occurred while processing your request.';
+            let status = 'error';
+
+            try {
+                const response = JSON.parse(jqXHR.responseText);
+                if (response.message) message = response.message;
+                if (response.status) status = response.status;
+            } catch (e) {
+                // Failed to parse JSON, fallback to default
+            }
+
+            showNotification(message, status);
         }
     });
 });

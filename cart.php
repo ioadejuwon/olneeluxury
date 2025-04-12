@@ -16,7 +16,7 @@ include_once "comp/header.php";
       <div class="row justify-cente text-left">
         <div class="col-auto">
           <div data-anim="slide-up delay-1">
-            <h1 class="page-header__title text-white"><?php echo $couponPercent ?>Shop Cart</h1>
+            <h1 class="page-header__title text-white">Shop Cart</h1>
           </div>
 
           <div data-anim="slide-up delay-2">
@@ -78,7 +78,7 @@ include_once "comp/header.php";
         <div class="row justify-end y-gap-30">
           <div class="col-xl-12">
             <div class="d-flex justify-end border-dark">
-              <input style="border: solid 1px grey !important; width: 300px;" class="mr-4 rounded-8 px-25 py-10 form-control" id="couponCode" type="text" name="code" value="<?php echo $couponcode ?>" placeholder="Enter Coupon Code">
+              <input style="border: solid 1px grey !important; width: 300px;" class="mr-4 rounded-8 px-25 py-10 form-control" id="couponCode" type="text" name="code" value="" placeholder="Enter Coupon Code">
               <button class="button text-white -md fw-500 -deep-green-1 ml-10" type="submit" onclick="applyCoupon()">Apply<span class="lg:d-none">&nbsp;Coupon</span></button>
             </div>
           </div>

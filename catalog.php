@@ -197,8 +197,8 @@ include_once "comp/header.php"
                         $original_price = '&#8358;' . number_format($price);
                         $discounted_price = '&#8358;' . number_format($dis_price);
                         $product_id = $row_prod['productid'];
-
-                        $availability = $row_prod['availability'];
+                        $availableYards = (int)$row_prod['yards'];
+                        $availability = (int)$row_prod['availability'];
 
                         // Get the thumbnail image
                         $prodsql_img_thumbnail = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '$product_id' AND thumbnail = 1");
@@ -207,8 +207,8 @@ include_once "comp/header.php"
                         // $image_path_thumbnail = 'admin/' . $row_prod_img_thumbnail['image_path'];
                         // $product_img = $image_path_thumbnail;
 
-                        $image_path_thumbnail = $row_prod_img_thumbnail['image_path'];
-                        if (!empty($image_path_thumbnail)) {
+                        // $image_path_thumbnail = $row_prod_img_thumbnail['image_path'];
+                        if (!empty($row_prod_img_thumbnail['image_path'])) {
                             $image_path_thumbnail2 = $row_prod_img_thumbnail['image_path'];
                         }else{
                             $image_path_thumbnail2 = DEFAULT_IMG;

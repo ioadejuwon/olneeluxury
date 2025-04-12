@@ -77,7 +77,7 @@ if ($count_row_orders > 0) {
 				$response['status'] = 'error';
 				$response['message'] = 'Email template not found: ' . $templatePath;
 			} else {
-				$order_status = $orderStatus;
+				$order_status = $response['order_status'];
 				$subject = "Status Update on your Order #" . $orderid . " 📦📦";
 				$emailSent = sendEmail(
 					$to = $customeremail,

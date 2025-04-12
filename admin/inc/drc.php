@@ -105,5 +105,5 @@ $host = $_SERVER['HTTP_HOST']; // Get the host (domain name)
 $uri = $_SERVER['REQUEST_URI']; // Get the current request URI
 $current_url = $protocol . $host . $uri; // Combine the protocol, host, and URI to get the full URL
 // echo "Current URL: $current_url"; // Output the current URL
-$t = $pagetitle;
+// $t = $pagetitle;
 

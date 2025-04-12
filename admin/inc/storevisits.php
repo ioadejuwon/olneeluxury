@@ -1,7 +1,7 @@
 <?php
 // ini_set('session.gc_maxlifetime', 72); // 2 hours
 // session_set_cookie_params(72);
-session_start();
+// session_start();
 
 include_once 'config.php';
 include_once "drc.php";

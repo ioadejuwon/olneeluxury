@@ -12,7 +12,7 @@ session_start();
 $error = null;
 $response = array();
 
-$url = $_GET['url'];
+
 
 // if (isset($_POST['login'])) {
 //     $email = mysqli_real_escape_string($conn, $_POST['email']);
@@ -57,6 +57,8 @@ $url = $_GET['url'];
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $pword = mysqli_real_escape_string($conn, $_POST['pword']);
+    $url = mysqli_real_escape_string($conn, $_POST['url']);
+    // $url = $_GET['url'];
     if (! empty($email) && ! empty($pword)) {
 
 
@@ -81,7 +83,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
                     // Send success response
                     $response['status'] = 'success';
                     $response['message'] = 'User login';
-                    $response['redirect_url'] = DASHBOARD;
+                    // $response['redirect_url'] = DASHBOARD;
+                    $response['redirect_url'] = ! empty( $url ) ? $url : DASHBOARD; // Add redirect URL to response
                 } else {
                     // Incorrect email or password
                     $response['status'] = 'error';

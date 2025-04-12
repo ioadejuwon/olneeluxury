@@ -232,21 +232,7 @@
                 <div class="header-cart bg-white -dark-bg-dark-1 rounded-8 outline-green" style="width: 500px;">
 
 
-                  <section class=" section-b mt-30 tf-page-header bg-light-3 ml-10 mr-10 rounded-8" style="display: none; ">
-                    <!-- <div class="section-bg__item bg-light-6"></div> -->
-                    <div class="container ">
-                      <div class="row y-gap-20 justify-center text-center">
-                        <div class="col-12">
-                          <div class="sectionTitle ">
-                            <h4 class="sectionTitle__titl ">Your cart is empty</h4>
-                            <p class="sectionTitle__text h6">You may check out all the available products and add some to your cart from the catalog</p>
-                          </div>
-
-                        </div>
-                      </div>
-                    </div>
-                  </section>
-
+                  
                   <div class="px-30 pt-30 pb-10" id="headerCart">
                     <div class="row justify-between x-gap-40 pb-20">
                       <div class="col">

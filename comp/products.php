@@ -1,9 +1,7 @@
 <div class="w-1/5 xl:w-1/3 lg:w-1/2 sm:w-1/2">
 
     <div id="productForm" class="productCard -type-1 text-center"
-        data-product-id="<?php echo $product_id; ?>" data-price="<?php echo $price; ?>"
-        data-image="<?php echo $image_path_thumbnail; ?>" data-name="<?php echo $product_name; ?>"
-        data-discounted-price="<?php echo $dis_price; ?>">
+        data-product-id="<?php echo $product_id; ?>" data-price="<?php echo $price; ?>" data-image="<?php echo $image_path_thumbnail; ?>" data-name="<?php echo $product_name; ?>" data-discounted-price="<?php echo $dis_price; ?>" data-available-yards="<?php echo $availableYards; ?>">
         <div class="productCard__image">
             <div class="ratio ratio-63:57">
                 <img class="absolute-full-center rounded-8"
@@ -40,7 +38,7 @@
             </div>
             <?php
 
-            if ($availability == 1) {
+            if ($availability == 1 && $availableYards > 0) {
             ?>
                 <div class="productCard__button d-inline-block add_to_cart_bt" style="width: 100% !important">
                     <button type="button" class="button fs-16 w-100 text-white -deep-green-1  mt-5 add-to-cart-btn" data-product-id="<?php echo $product_id; ?>"
@@ -51,7 +49,7 @@
 
             <?php
 
-            } elseif ($availability == 0) {
+            } elseif ($availability == 0 || $availableYards < 1) {
             ?>
                 <div class="productCard__button d-inline-block" style="width: 100% !important">
                     <button disabled type="button" class="button fs-16 w-100 text-white -yellow-3  mt-5"
