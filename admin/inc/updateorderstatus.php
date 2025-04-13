@@ -82,7 +82,7 @@ if ($count_row_orders > 0) {
 			} else {
 				$order_status = $response['order_status'];
 				$subject = "Status Update on your Order #" . $orderid . " 📦📦";
-				$emailSent = sendNewMail(
+				$emailSent9 = sendNewMail(
 					$to = $customeremail,
 					$toName = $fname,
 					$subject,
@@ -102,7 +102,7 @@ if ($count_row_orders > 0) {
 					$fromName = COMPANY,
 					$replyTo = REPLY_TO,
 				);
-				if ($emailSent) {
+				if ($emailSent9) {
 					$response['status'] = 'success';
 					$response['message'] = 'Order status updated successfully and email sent.';
 					// $response['message'] = 'Email sent successfully.';
