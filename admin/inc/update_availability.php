@@ -1,6 +1,5 @@
 <?php
 include_once 'config.php';
-include_once "drc.php";
 
 $response = ['success' => false, 'message' => ''];
 
@@ -15,19 +14,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
+    // Ensure status is either 0 or 1
+    if (!in_array($status, [0, 1], true)) {
+        $response['message'] = 'Invalid status value. It should be 0 or 1.';
+        echo json_encode($response);
+        exit();
+    }
+
     // Update the availability in the database
     $query = "UPDATE products SET availability = ? WHERE productid = ?";
-    
+
     if ($stmt = $conn->prepare($query)) {
         $stmt->bind_param("is", $status, $product_id);
-        
+
         if ($stmt->execute()) {
             $response['success'] = true;
-            if($status == 1) {
-                $response['message'] = 'Product is now available.';
-            } else {
-                $response['message'] = 'Product is now unavailable.';
-            }
+            $response['message'] = ($status == 1) ? 'Product is now available.' : 'Product is now unavailable.';
+            // if ($status == 1) {
+            //     $response['message'] = 'Product is now available.';
+            // } else {
+            //     $response['message'] = 'Product is now unavailable.';
+            // }
             // $response['message'] = 'Availability updated successfully.';
         } else {
             $response['message'] = 'Error: ' . $stmt->error;
@@ -43,3 +50,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 echo json_encode($response);
+exit();

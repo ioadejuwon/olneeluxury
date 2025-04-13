@@ -18,12 +18,29 @@ $row = mysqli_fetch_assoc($sql);
 // $unique_id = $row["user_id"];
 $fname = !empty($row["fname"]) ? $row["fname"] : "No info entered";
 $lname = !empty($row["fname"]) ? $row["lname"] : "No info entered";
-$uname = !empty($row["fname"]) ? $row["uname"] : "No info entered";
+// $uname = !empty($row["fname"]) ? $row["uname"] : "No info entered";
 // $countryCode = $row['countryCode'];
 $admin_phone = $row['admin_phone'];
 $admin_phone = (!empty($phoneNumber)) ?  $phoneNumber : 'No phone number entered';
 $admin_email = $row['admin_email'];
 $admin_email = !empty($admin_email) ? $admin_email : "No admin email entered";
+
+$admin_level = $row['admin_level'];
+
+if ($admin_level == 0) {
+    $admin_type = "No admin level entered.";
+} elseif ($admin_level == 1) {
+    $admin_type = "Level 1 Clearance.";
+} elseif ($admin_level == 2) {
+    $admin_type = "Level 2 Clearance.";
+} elseif ($admin_level == 3) {
+    $admin_type = "Level 3 Clearance.";
+} elseif ($admin_level == 4) {
+    $admin_type = "Level 4 Clearance.";
+} else {
+    $admin_type = "Could not retrieve level.";
+}
+
 
 $admin_address = $row['admin_address'];
 $admin_state = $row['admin_state'];
@@ -56,7 +73,7 @@ $store_country = !empty($store_country) ? $store_country : "No store country ent
 $delivery = !empty($row_store["deliveryPolicy"]) ? $row_store["deliveryPolicy"] : "No Delivery Policy entered";
 $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No Return Policy entered";
 ?>
-<?php include_once "ad_comp/adm-sidebar.php" ?>
+<?php include_once "ad_comp/adm-sidebar.php"; ?>
 <div class="dashboard__content bg-light-4">
     <div class="row pb- mb-10">
         <div class="col-auto">
@@ -128,8 +145,8 @@ $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No 
                                         <div class="text-16 lh-1  text-dark-1 mb-10">Phone</div>
                                         <div class="text-18 fw-500 lh-1 mt-10"><?php echo $admin_phone; ?> </div>
                                     </div>
-                                    <div class="col-md-6 d-none">
-                                        <div class="text-16 lh-1  text-dark-1 mb-10">Admin Type</div>
+                                    <div class="col-md-6 d-non">
+                                        <div class="text-16 lh-1  text-dark-1 mb-10">Admin Level</div>
                                         <div class="text-18 fw-500 lh-1 mt-10"><?php echo $admin_type ?> </div>
                                     </div>
                                     <div class="col-md-6">

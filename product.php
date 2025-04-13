@@ -26,6 +26,7 @@ $availableYards = (int)$row_prod['yards'];
 $availability = (int)$row_prod['availability'];
 
 $pagetitle = $product_name;
+$ref = $product_id;
 
 include_once "comp/head.php";
 include_once "comp/header.php";

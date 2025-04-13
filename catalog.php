@@ -1,15 +1,10 @@
-<style>
-
-</style>
 <?php
-
-
 $pagetitle = "Catalog";
 include_once "comp/head.php";
-include_once "comp/header.php"
+include_once "comp/header.php";
+// $ref = $pagetitle;
+// require_once "admin/inc/storevisits.php";
 ?>
-
-
 
 <section class="page-header -type-1 mt-60 text-white">
     <div class="overlay"> </div>
@@ -20,7 +15,6 @@ include_once "comp/header.php"
                     <div data-anim="slide-up delay-1">
                         <h1 class="page-header__title text-white">Our Catalog</h1>
                     </div>
-
                     <div data-anim="slide-up delay-2">
                         <p class="page-header__text">
                             We’re on a mission to deliver Comfortable Clothing at a reasonable
@@ -210,7 +204,7 @@ include_once "comp/header.php"
                         // $image_path_thumbnail = $row_prod_img_thumbnail['image_path'];
                         if (!empty($row_prod_img_thumbnail['image_path'])) {
                             $image_path_thumbnail2 = $row_prod_img_thumbnail['image_path'];
-                        }else{
+                        } else {
                             $image_path_thumbnail2 = DEFAULT_IMG;
                         }
                         $image_path_thumbnail = 'admin/' . $image_path_thumbnail2;

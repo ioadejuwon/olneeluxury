@@ -22,8 +22,8 @@ include_once "comp/head.php";
 include_once "comp/header.php";
 
 
-
-
+$ref = $category_id;
+require_once "admin/inc/storevisits.php";
 ?>
 
 

@@ -1,16 +1,12 @@
 <?php
-// require 'db.php'; // Your database connection file
 include_once 'config.php';
-include_once "randno.php";
-include_once "drc.php";
-
 
 $response = array(); // Initialize response array
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["couponCode"])) {
     $code = trim($_POST["couponCode"]);
 
-    $stmt = $conn->prepare("SELECT * FROM olnee_coupons WHERE couponCode = ?");
+    $stmt = $conn->prepare("SELECT couponName, couponType, couponValue FROM olnee_coupons WHERE couponCode = ?");
     $stmt->bind_param("s", $code);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -25,7 +21,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["couponCode"])) {
             ]
         ]);
     } else {
-        echo json_encode(["success" => false]);
+        $response = ["success" => false, "message" => "Coupon code is invalid or expired."];
     }
+    $stmt->close();
+    $conn->close();
+} else {
+    $response = ["success" => false, "message" => "Invalid request method or missing couponCode."];
 }
-?>

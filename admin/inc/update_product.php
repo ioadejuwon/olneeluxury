@@ -38,6 +38,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
+    // Validate price and discount_price to ensure they are numbers and non-negative
+    if (!is_numeric($price) || $price < 0) {
+        $response['message'] = 'Invalid price value. It must be a positive number.';
+        echo json_encode($response);
+        exit();
+    }
+
+    if (!is_numeric($discount_price) || $discount_price < 0) {
+        $response['message'] = 'Invalid discount price value. It must be a positive number.';
+        echo json_encode($response);
+        exit();
+    }
+    // Sanitize and cast the numeric fields
+    $yards = (int)$yards;
+    $price = (float)$price;
+    $discount_price = (float)$discount_price;
+
     // Update the product details in the database
     $sql = "UPDATE products SET 
             producttitle = ?, 
@@ -75,3 +92,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 echo json_encode($response);
+exit();

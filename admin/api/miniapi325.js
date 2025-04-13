@@ -87,31 +87,31 @@ function hasVisitedRecently(key, expirationTime = 120000) {
     return false;
 }
 
-function markVisit(key) {
-    localStorage.setItem(key, JSON.stringify({ timestamp: Date.now() }));
-}
+// function markVisit(key) {
+//     localStorage.setItem(key, JSON.stringify({ timestamp: Date.now() }));
+// }
 
-function trackVisit() {
-    const backhalf = getLastPathSegment();
-    const visitKey = 'visited_' + backhalf;
+// function trackVisit() {
+//     const backhalf = getLastPathSegment();
+//     const visitKey = 'visited_' + backhalf;
 
-    if (!hasVisitedRecently(visitKey)) {
-        fetch('admin/inc/storevisits.php?ref=' + encodeURIComponent(backhalf))
-            .then(response => {
-                if (response.ok) {
-                    console.log('Tracked visit:', backhalf);
-                    markVisit(visitKey);
-                } else {
-                    console.error('Failed to track visit.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-    } else {
-        console.log('Visit already tracked recently:', backhalf);
-    }
-}
+//     if (!hasVisitedRecently(visitKey)) {
+//         fetch('admin/inc/storevisits.php?ref=' + encodeURIComponent(backhalf))
+//             .then(response => {
+//                 if (response.ok) {
+//                     console.log('Tracked visit:', backhalf);
+//                     markVisit(visitKey);
+//                 } else {
+//                     console.error('Failed to track visit.');
+//                 }
+//             })
+//             .catch(error => {
+//                 console.error('Error:', error);
+//             });
+//     } else {
+//         console.log('Visit already tracked recently:', backhalf);
+//     }
+// }
 
 // Run it on page load
 // document.addEventListener("DOMContentLoaded", trackVisit);
@@ -148,6 +148,4 @@ $(document).ready(function () {
     // $('.close-btn-notification').on('click', function () {
     //     $('.scrolling-message').fadeOut();
     // });
-
-
 });

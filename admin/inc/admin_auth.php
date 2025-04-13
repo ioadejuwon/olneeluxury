@@ -228,7 +228,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_account'])) {
 }
 
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_password'])) {
     // Initialize the response array
     $response = ['status' => 'error', 'message' => ''];
@@ -240,11 +239,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_password'])) {
     // $fullname = $fname . ' ' . $lname;
     // Check if any field is empty
     if (empty($pword) || empty($cpass) || empty($newpword)) {
-        $response['message'] = 'Please fill all the fieldd2s.';
+        $response['message'] = 'Please fill all the fields.';
     } elseif ($cpass != $newpword) {
         $response['message'] = 'New Password do not match';
     } else {
-        $sql = "SELECT * FROM olnee_users WHERE user_id = ?";
+        $sql = "SELECT * FROM olnee_admin WHERE user_id = ?";
         $stmt = mysqli_stmt_init($conn);
 
         if (mysqli_stmt_prepare($stmt, $sql)) {
@@ -253,12 +252,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_password'])) {
             $result = mysqli_stmt_get_result($stmt);
             if ($row = mysqli_fetch_assoc($result)) {
                 if ($newpass == $confirmpass) {
-                    $enc_pass = $row['pwordhash'];
+                    $enc_pass = $row['pword_hash'];
                     // $2y$10$TP3kRfWlDs25pZxpFLr.1eQN/j2u9ipMBBD2mzwM0EwW33VksMI7W
                     if (password_verify($pword, $enc_pass)) {
                         $newpasshash = password_hash($newpword, PASSWORD_BCRYPT);
                         // Prepare the SQL statement with placeholders
-                        $updateuser = "UPDATE olnee_users SET pwordhash = ? WHERE user_id=?";
+                        $updateuser = "UPDATE olnee_admin SET pword_hash = ? WHERE user_id=?";
                         $stmt = mysqli_stmt_init($conn);
                         // Create a prepared statement
                         if (mysqli_stmt_prepare($stmt, $updateuser)) {
@@ -270,7 +269,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_password'])) {
                                     // $stmt->close();// Close the statement
                                     // Success response
                                     $response['status'] = 'success';
-                                    $response['message'] = 'User details updated successfully.';
+                                    $response['message'] = 'Password updated successfully.';
                                     // $response['brandName'] = $brand_name;
                                     // $response['brandInfo'] = $brand_info;
                                     // $response['brandCategory'] = $brand_category;

@@ -7,10 +7,6 @@ include_once "inc/config.php";
 $pagetitle = "Coupon Codes";
 include_once "inc/drc.php";
 
-$uriSegments = explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
-$inventorycode = $uriSegments[$inventoryvalue];
-$v = mysqli_real_escape_string($conn, $inventorycode);
-
 
 if (!isset($_SESSION['user_id'])) {
 	header("location: " . ADMIN_LOGIN . "?url=" . $current_url . "&t=" . $pagetitle); // redirect to login page if not signed in
@@ -23,7 +19,7 @@ if (!isset($_SESSION['user_id'])) {
 
 include_once "ad_comp/adm-head.php";
 include_once "ad_comp/adm-header.php";
-$sql = mysqli_query($conn, "SELECT * FROM olnee_admin WHERE user_id = '{$_SESSION['user_id']}'");
+$sql = mysqli_query($conn, "SELECT * FROM olnee_admin WHERE user_id = '{$user_id}'");
 $row = mysqli_fetch_assoc($sql);
 $fname = $row['fname'];
 include_once "ad_comp/adm-sidebar.php";

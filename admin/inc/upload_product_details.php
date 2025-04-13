@@ -19,7 +19,8 @@ if (empty($_POST['producttitle']) || empty($_POST['productdescription']) || empt
     $discount_price = isset($_POST['discount_price']) ? (int)$_POST['discount_price'] : 0;
     $productdescription = htmlspecialchars($_POST['productdescription']);
     $shortdescription = htmlspecialchars($_POST['shortdescription']);
-    $product_id = $productID;
+    // $product_id = $productID;
+    $product_id = generateProductID();
 
     // Insert form data into the products table
     $insertFormDataQuery = "INSERT INTO products (productid, producttitle, user_id, yards, productcategory, price, discount_price, productdescription, shortdescription, availability) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1)";

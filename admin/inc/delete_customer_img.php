@@ -1,5 +1,5 @@
 <?php
-header('Content-Type: application/json'); // Let the client know we're sending JSON
+header('Content-Type: application/json');
 
 include_once 'config.php';
 include_once 'drc.php';
@@ -7,22 +7,27 @@ include_once 'drc.php';
 $response = array('status' => 'error', 'message' => 'Invalid request');
 
 if (isset($_GET['img_id'])) {
-    // $imgdelete_id = mysqli_real_escape_string($conn, $_GET['productid']);
-    $imglink = mysqli_real_escape_string($conn, $_GET['img_id']);
+    $imglink = $_GET['img_id'];
 
-    $selectprod_img = mysqli_query($conn, "SELECT * FROM olnee_customer_cam WHERE img_id = '{$imglink}'");
-    $pimgrowdelete = mysqli_fetch_assoc($selectprod_img);
+    // Select image info securely
+    $stmt = $conn->prepare("SELECT * FROM olnee_customer_cam WHERE img_id = ?");
+    $stmt->bind_param("s", $imglink);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $pimgrowdelete = $result->fetch_assoc();
+    $stmt->close();
 
     if ($pimgrowdelete) {
         $img = '../' . $pimgrowdelete['image_path'];
 
-        // Attempt to delete the file
+        // Delete file from filesystem
         if (file_exists($img) && unlink($img)) {
-           
-            // Delete the DB record
-            $sql2 = mysqli_query($conn, "DELETE FROM olnee_customer_cam WHERE img_id = '{$imglink}'");
 
-            if ($sql2) {
+            // Delete image record from DB securely
+            $stmtDel = $conn->prepare("DELETE FROM olnee_customer_cam WHERE img_id = ?");
+            $stmtDel->bind_param("s", $imglink);
+
+            if ($stmtDel->execute()) {
                 $response = array(
                     'status' => 'success',
                     'message' => 'Image deleted successfully',
@@ -34,6 +39,8 @@ if (isset($_GET['img_id'])) {
                     'message' => 'Image record could not be deleted'
                 );
             }
+
+            $stmtDel->close();
         } else {
             $response = array(
                 'status' => 'info',
@@ -49,3 +56,4 @@ if (isset($_GET['img_id'])) {
 }
 
 echo json_encode($response);
+exit;

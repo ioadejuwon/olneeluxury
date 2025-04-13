@@ -1,5 +1,5 @@
 <?php
-header('Content-Type: application/json'); // Let the client know we're sending JSON
+header('Content-Type: application/json');
 
 include_once 'config.php';
 include_once 'drc.php';
@@ -7,34 +7,41 @@ include_once 'drc.php';
 $response = array('status' => 'error', 'message' => 'Invalid request');
 
 if (isset($_GET['productid']) && isset($_GET['img_id'])) {
-    $imgdelete_id = mysqli_real_escape_string($conn, $_GET['productid']);
-    $imglink = mysqli_real_escape_string($conn, $_GET['img_id']);
+    $productId = $_GET['productid'];
+    $imgId = $_GET['img_id'];
 
-    $selectprod_img = mysqli_query($conn, "SELECT * FROM product_images WHERE product_id = '{$imgdelete_id}' AND img_id = '{$imglink}'");
-    $pimgrowdelete = mysqli_fetch_assoc($selectprod_img);
+    // Step 1: Fetch the image details securely
+    $stmt = $conn->prepare("SELECT * FROM product_images WHERE product_id = ? AND img_id = ?");
+    $stmt->bind_param("ss", $productId, $imgId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $pimgrowdelete = $result->fetch_assoc();
+    $stmt->close();
 
     if ($pimgrowdelete) {
         $img = '../' . $pimgrowdelete['image_path'];
 
-        // Attempt to delete the file
+        // Step 2: Delete the image file from the server
         if (file_exists($img) && unlink($img)) {
-            // Check if it was a thumbnail
+
+            // Step 3: If the image was a thumbnail, update another one
             if ($pimgrowdelete['thumbnail'] == 1) {
-                $sqlUpdate = "UPDATE product_images SET thumbnail = 1 WHERE product_id = ?";
-                $stmtUpdate = mysqli_prepare($conn, $sqlUpdate);
-                mysqli_stmt_bind_param($stmtUpdate, "s", $imgdelete_id);
-                mysqli_stmt_execute($stmtUpdate);
-                mysqli_stmt_close($stmtUpdate);
+                $sqlUpdate = "UPDATE product_images SET thumbnail = 1 WHERE product_id = ? LIMIT 1";
+                $stmtUpdate = $conn->prepare($sqlUpdate);
+                $stmtUpdate->bind_param("s", $productId);
+                $stmtUpdate->execute();
+                $stmtUpdate->close();
             }
 
-            // Delete the DB record
-            $sql2 = mysqli_query($conn, "DELETE FROM product_images WHERE img_id = '{$imglink}' AND product_id = '{$imgdelete_id}'");
+            // Step 4: Delete the image record securely
+            $stmtDel = $conn->prepare("DELETE FROM product_images WHERE product_id = ? AND img_id = ?");
+            $stmtDel->bind_param("ss", $productId, $imgId);
 
-            if ($sql2) {
+            if ($stmtDel->execute()) {
                 $response = array(
                     'status' => 'success',
                     'message' => 'Product image deleted successfully',
-                    'img_id' => $imglink
+                    'img_id' => $imgId
                 );
             } else {
                 $response = array(
@@ -42,6 +49,8 @@ if (isset($_GET['productid']) && isset($_GET['img_id'])) {
                     'message' => 'Product image record could not be deleted'
                 );
             }
+
+            $stmtDel->close();
         } else {
             $response = array(
                 'status' => 'info',
@@ -57,3 +66,4 @@ if (isset($_GET['productid']) && isset($_GET['img_id'])) {
 }
 
 echo json_encode($response);
+exit;

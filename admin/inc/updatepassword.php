@@ -8,7 +8,7 @@ include_once 'randno.php';
 
 session_start();
 
-
+header('Content-Type: application/json');
 $error = null;
 $response = array();
 
@@ -199,8 +199,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_password'])) {
     // Check if any field is empty
     if (empty($pword) || empty($cpass) || empty($newpword)) {
         $response['message'] = 'Please fill all the fieldd2s.';
+        echo json_encode($response);
+        exit;
     } elseif ($cpass != $newpword) {
         $response['message'] = 'New Password do not match';
+        echo json_encode($response);
+        exit;
     } else {
         $sql = "SELECT * FROM olnee_users WHERE user_id = ?";
         $stmt = mysqli_stmt_init($conn);
@@ -225,18 +229,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_password'])) {
                             mysqli_stmt_bind_param($stmt, "ss", $newpasshash, $user_id);
                             if (mysqli_stmt_execute($stmt)) {
                                 if (mysqli_stmt_affected_rows($stmt) > 0) {
-                                    // $stmt->close();// Close the statement
                                     // Success response
                                     $response['status'] = 'success';
                                     $response['message'] = 'User details updated successfully.';
-                                    // $response['brandName'] = $brand_name;
-                                    // $response['brandInfo'] = $brand_info;
-                                    // $response['brandCategory'] = $brand_category;
-                                    // $response['storeMsg'] = urldecode($newstoremessage);
-                                    // $response['countryCode'] = $bizcountrycode;
-                                    // $response['phoneNumber'] = $bizphonenumber;
-                                    // $response['address'] = $address;
-                                    // $response['country'] = $country;
                                 } else {
                                     $response = ['success' => false, 'message' => 'Database error 2: ' . mysqli_stmt_error($stmt)];
                                 }
@@ -260,16 +255,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_password'])) {
             $response['status'] = 'error';
             $response['message'] = 'Failed to prepare select statement.';
         }
-
-
-
-
-
         echo json_encode($response);
-        exit;
+        // exit;
     }
     // Output the response in JSON format
-    header('Content-Type: application/json');
     echo json_encode($response);
     exit;
 }

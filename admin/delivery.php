@@ -7,10 +7,6 @@ include_once "inc/config.php";
 $pagetitle = "Delivery";
 include_once "inc/drc.php";
 
-$uriSegments = explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
-$inventorycode = $uriSegments[$inventoryvalue];
-$v = mysqli_real_escape_string($conn, $inventorycode);
-
 
 if (!isset($_SESSION['user_id'])) {
 	header("location: " . ADMIN_LOGIN . "?url=" . $current_url . "&t=" . $pagetitle); // redirect to login page if not signed in

@@ -43,4 +43,3 @@ if (isset($_POST['image_id']) && isset($_POST['product_id'])) {
 echo json_encode($response);
 
 mysqli_close($conn);
-?>
