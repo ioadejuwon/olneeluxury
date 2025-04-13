@@ -92,10 +92,10 @@ if ($count_row_orders > 0) {
 						'ORDER_ID' => $orderid,
 						'ORDER_STATUS' => $order_status,
 						'CUSTOMER_NAME' => $fullName,
-						'BRAND_EMAIL' => MAIL,
+						'BRAND_EMAIL' => BRAND_EMAIL,
 						'YEAR' => FOOTERYEAR
 					],
-					$from = MAIL,
+					$from = BRAND_EMAIL,
 					$fromName = COMPANY,
 					$replyTo = REPLY_TO,
 				);
