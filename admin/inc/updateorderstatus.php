@@ -72,7 +72,7 @@ if ($count_row_orders > 0) {
 
 		}
 
-
+		
 
 			$templatePath = '../email/orderupdate.html';
 
@@ -82,7 +82,7 @@ if ($count_row_orders > 0) {
 			} else {
 				$order_status = $response['order_status'];
 				$subject = "Status Update on your Order #" . $orderid . " 📦📦";
-				$emailSent9 = sendNewMail(
+				$emailSent = sendNewMail(
 					$to = $customeremail,
 					$toName = $fname,
 					$subject,
@@ -102,13 +102,13 @@ if ($count_row_orders > 0) {
 					$fromName = COMPANY,
 					$replyTo = REPLY_TO,
 				);
-				if ($emailSent9) {
+				if ($emailSent) {
 					$response['status'] = 'success';
 					$response['message'] = 'Order status updated successfully and email sent.';
 					// $response['message'] = 'Email sent successfully.';
 				} else {
 					$response['status'] = 'error';
-					$response['message'] = "Email failedp: " . ($response['email_error'] ?? 'Unknown error');
+					$response['message'] = "Email failed: " . ($response['email_error'] ?? 'Unknown error');
 				}
 				
 			}
