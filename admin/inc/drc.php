@@ -12,7 +12,7 @@ define('NAIRA', '₦');
 define('DOLLAR', '$');
 define('EURO', '€');
 
-define('BRAND_EMAIL', 'tech@olneeluxury.com');
+define('BRAND_EMAIL', 'admin@olneeluxury.com');
 define('REPLY_TO', 'tech@olneeluxury.com');
 define('COMPANY', 'Olnee Luxury');
 
