@@ -8,7 +8,7 @@ require 'vendor/autoload.php'; // Load PHPMailer
 include_once 'admin/inc/env.php'; // Load DRC
 
 
-function sendEmail($to, $toName, $subject, $htmlFile, &$response, $placeholders = [], $from = MAIL, $fromName = COMPANY, $replyTo = null, $cc = [], $bcc = [], $attachments = [])
+function sendEmail($to, $toName, $subject, $htmlFile, &$response, $placeholders = [], $from = BRAND_EMAIL, $fromName = COMPANY, $replyTo = null, $cc = [], $bcc = [], $attachments = [])
 {
     $mail = new PHPMailer(true);
     // $mail->SMTPDebug = 3; // Shows connection and authentication steps
@@ -23,7 +23,7 @@ function sendEmail($to, $toName, $subject, $htmlFile, &$response, $placeholders 
         $mail->isSMTP();
         $mail->Host       = 'smtp.hostinger.com'; // Replace with your SMTP server
         $mail->SMTPAuth   = true;
-        $mail->Username   = MAIL; // Must match `setFrom`
+        $mail->Username   = BRAND_EMAIL; // Must match `setFrom`
         $mail->Password   = EMAIL_PASSWORD; // SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = 587; // 465 for SSL, 587 for TLS
