@@ -72,7 +72,7 @@ if ($count_row_orders > 0) {
 
 		}
 
-		
+
 
 			$templatePath = '../email/orderupdate.html';
 
@@ -108,7 +108,7 @@ if ($count_row_orders > 0) {
 					// $response['message'] = 'Email sent successfully.';
 				} else {
 					$response['status'] = 'error';
-					$response['message'] = "Email failed: " . ($response['email_error'] ?? 'Unknown error');
+					$response['message'] = "Email failedp: " . ($response['email_error'] ?? 'Unknown error');
 				}
 				
 			}
