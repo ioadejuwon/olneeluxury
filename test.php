@@ -53,8 +53,8 @@ $mail = new PHPMailer(true);
 //     $mail->CharSet    = 'UTF-8';
 
 //     // Recipients
-//     $mail->setFrom('tech@olneeluxury.com', 'Olnee Luxury');
-//     $mail->addAddress('ioadejuwon@gmail.com'); // Your test receiver email
+    // $mail->setFrom('tech@olneeluxury.com', 'Olnee Luxury');
+    // $mail->addAddress('ioadejuwon@gmail.com'); // Your test receiver email
 
 //     // Content
 //     $mail->isHTML(true);
@@ -81,8 +81,8 @@ try {
     $mail->CharSet    = 'UTF-8';
 
     // Recipients
-    $mail->setFrom('yourname@yourdomain.com', 'Your Name');
-    $mail->addAddress('receiver@example.com', 'Receiver');
+    $mail->setFrom('tech@olneeluxury.com', 'Olnee Luxury');
+    $mail->addAddress('ioadejuwon@gmail.com'); // Your test receiver email
 
     // Content
     $mail->isHTML(true);
