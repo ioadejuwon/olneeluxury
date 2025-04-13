@@ -255,6 +255,25 @@ function updateOrderStatus(status) {
             }
             else if (response.status == 'info') {
                 showNotification(response.message, 'info'); // Yellow notification
+                $('#orderStatusText').text(response.order_status);
+
+                console.log('Status level ' + response.order_status_level);
+                // Force flex display for "Payment Failed"
+                if (Number(response.order_status_level) === 0) {
+                    $('#paymentFailedStep').css('display', 'flex');
+                } else {
+                    $('#paymentFailedStep').hide();
+                }
+
+                // Clear all steps first
+                for (let i = 1; i <= 4; i++) {
+                    $('#step' + i).removeClass('bg-deep-green-1 text-white');
+                }
+
+                // Add classes to completed steps
+                for (let i = 1; i <= Number(response.order_status_level); i++) {
+                    $('#step' + i).addClass('bg-deep-green-1 text-white');
+                }
             } else if (response.status == 'error') {
                 showNotification(response.message, 'error'); // Red notification
             } else {

@@ -48,25 +48,25 @@ if ($count_row_orders > 0) {
 			$response['status'] = 'success';
 			$response['order_status_level'] = $status;
 			if ($status == 1) {
-				$response['order_status'] = 'Payment Pending';
+				$orderStatus = 'Payment Pending';
 				$response['message'] = 'Order updated to Payment Pending';
 			} elseif ($status == 2) {
-				$response['order_status'] = 'Payment Confirmed';
+				$orderStatus = 'Payment Confirmed';
 				$response['message'] = 'Order updated to Payment Confirmed';
 			} elseif ($status == 3) {
-				$response['order_status'] = 'Processed';
+				$orderStatus = 'Processed';
 				$response['message'] = 'Order updated to Order Processed';
 			} elseif ($status == 4) {
-				$response['order_status'] = 'Delivered';
+				$orderStatus = 'Delivered';
 				$response['message'] = 'Order updated to Order Delivered';
 			} elseif ($status == 0) {
-				$response['order_status'] = 'Payment Failed';
+				$orderStatus = 'Payment Failed';
 				
 				$response['message'] = 'Order updated to Payment Failed';
 			} else {
 				$response['message'] = 'Order not updated.';
 			}
-			// $response['order_status'] = $orderStatus;
+			
 
 
 
@@ -79,8 +79,9 @@ if ($count_row_orders > 0) {
 			if (!file_exists($templatePath)) {
 				$response['status'] = 'error';
 				$response['message'] = 'Email template not found: ' . $templatePath;
+				exit;
 			} else {
-				$order_status = $response['order_status'];
+				$order_status = $orderStatus;
 				$subject = "Status Update on your Order #" . $orderid . " 📦📦";
 				$emailSent = sendNewMail(
 					$to = $customeremail,
@@ -95,6 +96,7 @@ if ($count_row_orders > 0) {
 						'ORDER_ID' => $orderid,
 						'ORDER_STATUS' => $order_status,
 						'CUSTOMER_NAME' => $fullName,
+						'FIRST_NAME' => $fname,
 						'BRAND_EMAIL' => BRAND_EMAIL,
 						'YEAR' => FOOTERYEAR
 					],
@@ -104,12 +106,13 @@ if ($count_row_orders > 0) {
 				);
 				if ($emailSent) {
 					$response['status'] = 'success';
-					$response['message'] = 'Order status updated successfully and email sent.';
+					$response['message'] = 'Order status updated successfully.';
 					// $response['message'] = 'Email sent successfully.';
 				} else {
-					$response['status'] = 'error';
-					$response['message'] = "Email failed: " . ($response['email_error'] ?? 'Unknown error');
+					$response['status'] = 'info';
+					$response['message'] = "Order Updated but Email failed: " . ($response['email_error'] ?? 'Unknown error');
 				}
+				$response['order_status'] = $orderStatus;
 				
 			}
 	}
