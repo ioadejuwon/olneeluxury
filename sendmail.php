@@ -21,7 +21,7 @@ function sendNewMail($to, $toName, $subject, $htmlFile, &$response, $placeholder
         // SMTP Configuration
         $mail->CharSet = 'UTF-8'; // ✅ Ensure proper emoji encoding
         $mail->isSMTP();
-        $mail->Host       = 'smtp.hostinger.com'; // Replace with your SMTP server
+        $mail->Host       = 'smtp.titan.email'; // Replace with your SMTP server
         $mail->SMTPAuth   = true;
         $mail->Username   = BRAND_EMAIL; // Must match `setFrom`
         $mail->Password   = EMAIL_PASSWORD; // SMTP password
