@@ -70,6 +70,9 @@ if ($count_row_orders > 0) {
 
 
 
+		}
+
+		
 
 			$templatePath = '../email/orderupdate.html';
 
@@ -109,7 +112,6 @@ if ($count_row_orders > 0) {
 				}
 				
 			}
-		}
 	}
 } else {
 	$response['status'] = 'error';
