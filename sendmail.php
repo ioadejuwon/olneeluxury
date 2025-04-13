@@ -8,7 +8,7 @@ require 'vendor/autoload.php'; // Load PHPMailer
 include_once 'admin/inc/env.php'; // Load DRC
 
 
-function sendEmail($to, $toName, $subject, $htmlFile, &$response, $placeholders = [], $from = BRAND_EMAIL, $fromName = COMPANY, $replyTo = null, $cc = [], $bcc = [], $attachments = [])
+function sendNewMail($to, $toName, $subject, $htmlFile, &$response, $placeholders = [], $from = BRAND_EMAIL, $fromName = COMPANY, $replyTo = null, $cc = [], $bcc = [], $attachments = [])
 {
     $mail = new PHPMailer(true);
     // $mail->SMTPDebug = 3; // Shows connection and authentication steps
