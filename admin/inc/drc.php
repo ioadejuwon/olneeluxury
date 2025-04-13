@@ -12,13 +12,16 @@ define('NAIRA', '₦');
 define('DOLLAR', '$');
 define('EURO', '€');
 
+// SMTP DETAILS
+
 define('BRAND_EMAIL', 'admin@olneeluxury.com');
 define('REPLY_TO', 'tech@olneeluxury.com');
 define('COMPANY', 'Olnee Luxury');
-
-define('PHONE', '2348108806808');
 define('MAIL', 'tech@olneeluxury.com');
 define('DEFAULT_IMG', 'product-img/product.png');
+
+
+define('PHONE', '2348108806808');
 define('CUSTOMERS_IMG_DIR', 'customers-cam/');
 define('PRODUCTS_IMG_DIR', 'product-img/');
 

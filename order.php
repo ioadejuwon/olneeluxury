@@ -14,6 +14,7 @@ $count_row_orders = $result->num_rows;
 
 if ($count_row_orders < 1) {
     header("location: " . SHOP);
+    exit;
 }
 include_once "comp/head.php";
 include_once "comp/header.php";
@@ -128,7 +129,7 @@ include_once "comp/header.php";
                         <div class="col-md-3 col-sm-6">
                             <div class="shopCompleted-info__item">
                                 <div class="subtitle">Order Number</div>
-                                <div class="title text-purple-1 mt-5 uppercase"><?php echo $order_id ?></div>
+                                <div class="title text-purple-1 mt-5 uppercase">#<?php echo $order_id ?></div>
                             </div>
                         </div>
 
@@ -156,7 +157,7 @@ include_once "comp/header.php";
                         <div class="col-md-3 col-sm-6">
                             <div class="shopCompleted-info__item">
                                 <div class="subtitle">Status</div>
-                                <div class="title text-purple-1 mt-5"><?php echo $status ?></div>
+                                <div class="title text-purple-1 mt-5"><?php echo $pay_status ?></div>
                             </div>
                         </div>
 
