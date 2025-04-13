@@ -84,7 +84,7 @@ function sendNewMail($to, $toName, $subject, $htmlFile, &$response, $placeholder
         return true;
     } catch (Exception $e) {
         // $response['message'] = "Mail error: " . $mail->ErrorInfo;
-        $response['message'] = "Mail error: " . ($mail->ErrorInfo ?: $e->getMessage());
+        $response['message'] = "Mail errorp: " . ($mail->ErrorInfo ?: $e->getMessage());
         $response['email_error'] = $e->getMessage(); // Optional: store raw exception
         error_log("PHPMailer Exception: " . $e->getMessage()); // Optional: Log it for debugging
 
