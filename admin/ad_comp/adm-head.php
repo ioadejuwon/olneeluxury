@@ -19,12 +19,12 @@
     <meta property="og:image" content="assets/img/admincover.png" />
 	<meta name="twitter:image" content="assets/img/admincover.png" />
 
-    <meta name="twitter:site" content="@jointerabyte" />
+    <meta name="twitter:site" content="@olnee_luxury" />
     <meta name="twitter:card" content="summary" />
 
-    <meta name="application-name" content="Terabyte" />
+    <meta name="application-name" content="Olnee Luxury" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-title" content="Terabyte" />
+    <meta name="apple-mobile-web-app-title" content="Olnee Luxury" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="msapplication-TileColor" content="#ffffff" />

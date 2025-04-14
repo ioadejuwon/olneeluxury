@@ -18,6 +18,10 @@ include_once "admin/inc/drc.php";
     <meta property="og:url" content="https://olneeluxury.com" />
     <meta name="og:description" content="Experience the Perfect Blend of Style and Comfort with our Premium Men’s Fabric." />
 
+
+    <meta property="og:image" content="admin/assets/img/admincover.png" />
+	<meta name="twitter:image" content="admin/assets/img/admincover.png" />
+
     <meta name="twitter:site" content="@" />
     <meta name="twitter:card" content="summary" />
 
