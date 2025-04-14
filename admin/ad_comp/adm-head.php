@@ -16,8 +16,8 @@
     <meta property="og:url" content="https://olneeluxury.com" />
     <meta name="og:description" content="Experience the Perfect Blend of Style and Comfort with our Premium Men’s Fabric." />
 
-    <meta property="og:image" content="admin/assets/img/admincover.png" />
-	<meta name="twitter:image" content="admin/assets/img/admincover.png" />
+    <meta property="og:image" content="assets/img/admincover.png" />
+	<meta name="twitter:image" content="assets/img/admincover.png" />
 
     <meta name="twitter:site" content="@jointerabyte" />
     <meta name="twitter:card" content="summary" />
