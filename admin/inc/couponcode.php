@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $couponvalue = (int)$_POST['value'];
         $date = date("D., jS M.");
 
-        $couponid = $coupon_id; // Generate a unique ID
+        $couponid = generateCouponID(); // Generate a unique ID
         // $category_link = $domainstore . $biz_id . '?category=' . $categoryID;
 
         // Check if the category already exists using a prepared statement

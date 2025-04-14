@@ -421,14 +421,19 @@ function applyCoupon() {
         data: { couponCode: code },
         dataType: "json",
         success: function (response) {
-            if (response.success) {
+            if (response.status === 'success') {
                 // Store discount details in local storage
                 localStorage.setItem("cartDiscount", JSON.stringify(response.discount));
                 showNotification('Discount Applied: ' + response.discount.couponName, 'info');
                 updateCartTotal();
+            } else if (response.status == 'info') {
+                showNotification(response.message, 'info'); // Yellow notification
+            } else if (response.status == 'error') {
+                showNotification(response.message, 'error'); // Red notification
             } else {
                 showNotification('Invalid or expired coupon.', 'error');
             }
+            
         },
         error: function (jqXHR, textStatus, errorThrown) {
             // console.error('Error:', textStatus, errorThrown); // Log any errors
