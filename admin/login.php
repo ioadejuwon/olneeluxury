@@ -18,7 +18,6 @@ if (isset($_GET['url'])) {
 } else {
     $url = '';
 }
-// include_once "header.php"; 
 
 ?>
 
