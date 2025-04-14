@@ -7,7 +7,7 @@ include_once "inc/drc.php";
 if ( empty( $_GET['t'] ) ) {
 	$pagetitle = "Login";
 }else{
-  echo $pagetitle = $_GET['t'];
+  $pagetitle = $_GET['t']. ' - Olnee Luxury';
 }
 include_once "ad_comp/adm-head.php";
 $error = '';
@@ -18,6 +18,7 @@ if (isset($_GET['url'])) {
 } else {
     $url = '';
 }
+// include_once "header.php"; 
 
 ?>
 
