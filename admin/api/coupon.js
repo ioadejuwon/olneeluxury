@@ -35,7 +35,7 @@ $(document).ready(function () {
                 if (response.status === 'success') {
                     // Append new category to the table only if the category was created successfully
                     $('#couponTableBody').prepend(
-                        `<tr><td class="underline">` + response.couponname + `</td><td>` + response.couponcode + `</td> <td>` + response.coupontype + `</td><td>` + response.couponvalue + `</td><td>` + response.coupondate + `</td></tr>`
+                        `<tr><td class="underline">` + response.couponname + `</td><td>` + response.couponcode + `</td> <td class="lg:d-none">` + response.coupontype + `</td><td>` + response.couponvalue + `</td><td>` + response.coupondate + `</td></tr>`
                     );
 
                     setTimeout(function () {

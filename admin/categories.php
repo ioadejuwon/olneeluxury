@@ -20,9 +20,61 @@
   }
 
   .dropzone .dz-message {
-    color: #888;
+    color: #888 !important;
     font-weight: 500;
   }
+
+  
+/* 
+
+  .preview-container {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .dz-preview {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+  }
+
+  .dz-image {
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
+
+  .dz-filename{
+    color: black !important;
+  }
+  .dz-size{
+    color: black !important;
+  }
+  .dz-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .dz-details {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dz-remove {
+    color: red !important;
+    cursor: pointer;
+    margin-top: 4px;
+    font-size: 12px;
+  } */
 </style>
 <?php
 
@@ -146,6 +198,7 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories ORDER BY creat
                             <div class="col-12 mt-3">
                               <label class="form-label">Category Image</label>
                               <div id="dropzoneEdit-<?php echo $category_id; ?>" class="dropzone dropzoneEdit"></div>
+                              <div id="previewContainer-<?php echo $category_id; ?>" class="preview-container"></div>
                             </div>
 
                             <div class="col-12 mt-4 border-top pt-3">
@@ -155,7 +208,7 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories ORDER BY creat
                             </div>
                           </form>
 
-                         
+
 
                         </div>
                       </div>
@@ -222,7 +275,9 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories ORDER BY creat
           <div class="col-12">
             <label class="text-16 lh-1 fw-500 text-dark-1 mb-2">Category Image <span class="text-danger">*</span></label>
             <div id="dropzoneArea" class="dropzone"></div>
+            <div id="previewContainer" class="preview-container"></div>
           </div>
+          
 
           <div class="d-flex w-100  border-top-dark mt-5">
             <button class="button -md -deep-green-1 text-white flex-fill" type="submit" id="submitBtn">

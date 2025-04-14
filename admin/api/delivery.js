@@ -122,11 +122,15 @@ $(document).ready(function () {
             data: { delivery_id: deliveryid },
             dataType: 'json',
             success: function (response) {
-                if (response.status) {
+                if (response.status === 'success') {
                     // Hide the modal
                     $('#delete-' + deliveryid).modal('hide');
                     deliveryElement.remove(); // Remove the product element from the DOM
                     showNotification(response.message, 'success'); // Show notification
+                } else if (response.status == 'info') {
+                    showNotification(response.message, 'info'); // Yellow notification
+                } else if (response.status == 'error') {
+                    showNotification(response.message, 'error'); // Red notification
                 } else {
                     showNotification(response.message, 'error'); // Red notification
                 }

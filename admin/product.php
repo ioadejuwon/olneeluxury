@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css"> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script> -->
 <?php
 
 session_start();
@@ -164,7 +164,7 @@ $fname = $row['fname'];
                               </a>
 
                               <a href="<?php echo $image_path_thumbnail; ?>" class="d-none gallery__item js-gallery  d-flex items-center mt-20" data-gallery="<?php echo $product_id ?>">
-                                <div class="fa-regular fa-eye"></div>
+                                <div class="fa-regular fa-images"></div>
                                 <div class="text-17 lh-1 fw-500 ml-12">Images</div>
                               </a>
 

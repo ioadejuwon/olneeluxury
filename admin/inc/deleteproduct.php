@@ -31,7 +31,7 @@ if (isset($_POST['product_id'])) {
     $stmtDeleteProduct = $conn->prepare("DELETE FROM products WHERE productid = ?");
     $stmtDeleteProduct->bind_param("s", $delete_id);
     if ($stmtDeleteProduct->execute()) {
-        $response['status'] = true;
+        $response['status'] = 'success';
         $response['message'] = 'Product deleted successfully';
     }
     $stmtDeleteProduct->close();

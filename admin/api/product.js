@@ -36,7 +36,6 @@ $(document).ready(function () {
                 if (response.status === 'success') {
                     // console.log(response);
                     // showNotification(response.message, 'info'); // Show notification
-                    // showNotification(response.message2, 'info'); // Show notification
                     window.location.href = 'image?productid=' + response.product_id; // Redirect on success
                 } else if (response.status == 'info') {
                     showNotification(response.message, 'info'); // Yellow notification
@@ -65,11 +64,15 @@ $(document).ready(function () {
             data: { product_id: productId },
             dataType: 'json',
             success: function (response) {
-                if (response.status) {
+                if (response.status === 'success') {
                     // Hide the modal
                     $('#delete-' + productId).modal('hide');
                     productElement.remove(); // Remove the product element from the DOM
                     showNotification(response.message, 'success'); // Show notification
+                } else if (response.status == 'info') {
+                    showNotification(response.message, 'info'); // Yellow notification
+                } else if (response.status == 'error') {
+                    showNotification(response.message, 'error'); // Red notification
                 } else {
                     showNotification(response.message, 'error'); // Red notification
                 }
@@ -93,12 +96,7 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (response) {
                 if (response.status === 'success') {
-                    // console.log(response);
-                    // showNotification(response.message, 'info'); // Show notification
-                    // showNotification(response.message2, 'info'); // Show notification
-                    // window.location.href = 'image?productid=' + response.product_id; // Redirect on success
                     showNotification(response.message, 'success'); // Yellow notification
-
                     setTimeout(() => {
                         window.location.href = 'product';
                     }, 2000);
@@ -131,7 +129,7 @@ $(document).ready(function () {
             data: { product_id: productId, status: newStatus },
             dataType: "json",
             success: function (response) {
-                if (response.success) {
+                if (response.status === 'success') {
                     // Update the UI
                     link.data("status", newStatus);
                     link.find("#availability-text").text(newStatus ? "Available" : "Unavailable");
@@ -145,6 +143,10 @@ $(document).ready(function () {
                     }
 
                     showNotification(response.message, "success");
+                } else if (response.status == 'info') {
+                    showNotification(response.message, 'info'); // Yellow notification
+                } else if (response.status == 'error') {
+                    showNotification(response.message, 'error'); // Red notification
                 } else {
                     console.error("Error updating availability:", response.message);
                     showNotification(response.message, "error");
@@ -161,13 +163,13 @@ $(document).ready(function () {
 
     $(document).on('click', '.delete-image-btn', function (e) {
         e.preventDefault();
-    
+
         const $btn = $(this);
         const productId = $btn.data('productid');
         const imgId = $btn.data('imgid');
         const targetId = $btn.data('targetid');
         const modalId = $btn.closest('.modal').attr('id');
-    
+
         $.ajax({
             url: 'inc/delete_img.php',
             type: 'GET',
@@ -202,38 +204,38 @@ $(document).ready(function () {
             }
         });
     });
-    
 
 
-        // $(document).on('click', '.delete-image-btn', function (e) {
-        //     e.preventDefault(); // prevent link from navigating
 
-        //     const $btn = $(this);
-        //     const productId = $btn.data('productid');
-        //     const imgId = $btn.data('imgid');
+    // $(document).on('click', '.delete-image-btn', function (e) {
+    //     e.preventDefault(); // prevent link from navigating
 
-        //     // Optional: Confirm deletion
-        //     if (!confirm("Are you sure you want to delete this image?")) return;
+    //     const $btn = $(this);
+    //     const productId = $btn.data('productid');
+    //     const imgId = $btn.data('imgid');
 
-        //     $.ajax({
-        //         url: 'inc/delete_img.php',
-        //         type: 'GET',
-        //         data: {
-        //             productid: productId,
-        //             img_id: imgId
-        //         },
-        //         success: function (response) {
-        //             // You can handle the response here
-        //             // e.g. remove the image container or show a notification
-        //             $btn.closest('.image-container').remove(); // if wrapped in a container
-        //             console.log("Image deleted:", response);
-        //         },
-        //         error: function (xhr, status, error) {
-        //             console.error("Error deleting image:", error);
-        //             alert("An error occurred while deleting the image.");
-        //         }
-        //     });
-        // });
+    //     // Optional: Confirm deletion
+    //     if (!confirm("Are you sure you want to delete this image?")) return;
+
+    //     $.ajax({
+    //         url: 'inc/delete_img.php',
+    //         type: 'GET',
+    //         data: {
+    //             productid: productId,
+    //             img_id: imgId
+    //         },
+    //         success: function (response) {
+    //             // You can handle the response here
+    //             // e.g. remove the image container or show a notification
+    //             $btn.closest('.image-container').remove(); // if wrapped in a container
+    //             console.log("Image deleted:", response);
+    //         },
+    //         error: function (xhr, status, error) {
+    //             console.error("Error deleting image:", error);
+    //             alert("An error occurred while deleting the image.");
+    //         }
+    //     });
+    // });
 
 
 });
@@ -278,12 +280,29 @@ document.querySelectorAll('.thumbnail-form').forEach(form => {
 
 // Dropzone for image upload begin
 Dropzone.options.productImagesDropzone = {
+    previewTemplate: `
+  <div class="dz-preview dz-file-preview">
+    <div class="dz-image">
+      <img data-dz-thumbnail />
+    </div>
+    <div class="dz-details">
+      <div class="dz-filename">
+        <span data-dz-name></span>
+      </div>
+      <div class="dz-size" data-dz-size></div>
+      <a href="javascript:void(0);" class="dz-remove" data-dz-remove>
+        Remove
+      </a>
+    </div>
+  </div>
+`,
+previewsContainer: "#previewContainer", // 👈 redirect previews here
     paramName: 'file', // The name that will be used to transfer the file
     autoProcessQueue: false, // Disable automatic upload
     parallelUploads: 10,
     maxFilesize: 3, // MB
     acceptedFiles: '.png,.jpg,.jpeg,.gif',
-    addRemoveLinks: true,
+    addRemoveLinks: false,
     success: function (file, response) {
         console.log('File uploaded successfully:', response);
 

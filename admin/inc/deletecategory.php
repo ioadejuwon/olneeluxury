@@ -2,7 +2,7 @@
 include_once 'config.php';
 include_once "drc.php";
 
-$response = array('status' => false, 'message' => 'Category could not be deleted');
+$response = array('status' => 'error', 'message' => 'Category could not be deleted');
 
 if (isset($_POST['category_id'])) {
     $delete_id = $_POST['category_id'];
@@ -11,7 +11,7 @@ if (isset($_POST['category_id'])) {
     $stmt->bind_param("s", $delete_id);
 
     if ($stmt->execute()) {
-        $response['status'] = true;
+        $response['status'] = 'success';
         $response['message'] = 'Category deleted successfully';
     }
 

@@ -1,11 +1,13 @@
 <?php
 include_once 'config.php';
 
-$response = ['success' => false, 'message' => ''];
+$response = ['status' => 'error', 'message' => ''];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $product_id = $_POST["product_id"];
-    $status = $_POST["status"];
+    // $status = $_POST["status"];
+    $status = (int) $_POST["status"];
+
 
     // Validate input data: Use `isset()` instead of `empty()` to allow status = 0
     if (!isset($product_id) || !isset($status)) {
@@ -28,14 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bind_param("is", $status, $product_id);
 
         if ($stmt->execute()) {
-            $response['success'] = true;
+            $response['status'] = 'success';
             $response['message'] = ($status == 1) ? 'Product is now available.' : 'Product is now unavailable.';
-            // if ($status == 1) {
-            //     $response['message'] = 'Product is now available.';
-            // } else {
-            //     $response['message'] = 'Product is now unavailable.';
-            // }
-            // $response['message'] = 'Availability updated successfully.';
         } else {
             $response['message'] = 'Error: ' . $stmt->error;
         }

@@ -2,9 +2,8 @@
 header('Content-Type: application/json');
 
 include_once 'config.php';
-include_once "drc.php";
 
-$response = array('status' => false, 'message' => 'Delivery rate could not be deleted');
+$response = array('status' => 'error', 'message' => 'Delivery rate could not be deleted');
 
 if (isset($_POST['delivery_id'])) {
     $deliveryId = $_POST['delivery_id'];
@@ -14,7 +13,7 @@ if (isset($_POST['delivery_id'])) {
     $stmt->bind_param("s", $deliveryId);
 
     if ($stmt->execute()) {
-        $response['status'] = true;
+        $response['status'] = 'success';
         $response['message'] = 'Delivery rate deleted successfully';
     } else {
         $response['message'] = 'Failed to delete delivery rate';

@@ -49,9 +49,30 @@ if (isset($_FILES['categoryimg']) && $_FILES['categoryimg']['error'] === UPLOAD_
     }
 
     if ($file_size > 3145728) { // 3MB
-        echo json_encode(['status' => 'error', 'message' => 'Image exceeds 3MB limit']);
-        exit;
+        
     }
+
+
+    // Fetch the current image path to delete the old image
+    $stmt = $conn->prepare("SELECT categoryimg FROM olnee_categories WHERE categoryid = ?");
+    $stmt->bind_param("s", $category_id);
+    $stmt->execute();
+    $stmt->bind_result($old_img_path);
+    $stmt->fetch();
+    $stmt->close();
+
+    // Unlink the old image if it exists and is a file
+    if ($old_img_path) {
+        $full_old_img_path = '../' . $old_img_path;
+        if (file_exists($full_old_img_path) && is_file($full_old_img_path)) {
+            unlink($full_old_img_path);
+        }else{
+            echo json_encode(['status' => 'error', 'message' => 'Coukd not delete old image']);
+        exit;
+        }
+    }
+
+
 
     // Generate unique name and upload
     $unique_name = $category_id . '-' . generateCatID();

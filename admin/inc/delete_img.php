@@ -2,7 +2,6 @@
 header('Content-Type: application/json');
 
 include_once 'config.php';
-include_once 'drc.php';
 
 $response = array('status' => 'error', 'message' => 'Invalid request');
 

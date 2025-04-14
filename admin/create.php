@@ -39,20 +39,20 @@ include_once "ad_comp/adm-sidebar.php"
                             <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">
                                 Product Name<span class="text-red-1">*</span>
                             </label>
-                            <input type="text" name="producttitle" value="<?php echo $producttitle ?>" placeholder="Enter the name of the product" required>
+                            <input type="text" name="producttitle" value="" placeholder="Enter the name of the product" required>
                             <input type="hidden" name="user_id" value="<?php echo $user_id ?>" placeholder="">
                         </div>
                         <div class="col-md-6">
                             <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">
                                 Available Yards <span class="text-red-1">*</span>
                             </label>
-                            <input type="number" name="yards" min="0.5" value="<?php echo $yards ?>" placeholder="Enter Available Yards." required>
+                            <input type="number" name="yards" min="0.5" value="" placeholder="Enter Available Yards." required>
                         </div>
                         <div class="col-md-6">
                             <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">
                                 Product category <span class="text-red-1">*</span>
                             </label>
-                            <select class="selectize wide js-selectize" name="productcategory" value="<?php echo $category ?>" required>
+                            <select class="selectize wide js-selectize" name="productcategory" value="" required>
                                 <option value="none">Choose category</option>
                                 <?php
                                 while ($row_categories = mysqli_fetch_assoc($categories)) {
@@ -79,13 +79,13 @@ include_once "ad_comp/adm-sidebar.php"
                             <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">
                                 Short Description <span class="text-red-1">*</span>
                             </label>
-                            <textarea placeholder="Write a catchy short description about the product." rows="4" name="shortdescription" value="<?php echo $shortdescription ?>" required></textarea>
+                            <textarea placeholder="Write a catchy short description about the product." rows="4" name="shortdescription" value="" required></textarea>
                         </div>
                         <div class="col-12">
                             <label class="text-16 lh-1 fw-500 text-dark-1 mb-5">
                                 Product Description <span class="text-red-1">*</span>
                             </label>
-                            <textarea placeholder="Write a longer description about the product." rows="7" name="productdescription" value="<?php echo $productdescription ?>" required></textarea>
+                            <textarea placeholder="Write a longer description about the product." rows="7" name="productdescription" value="" required></textarea>
                         </div>
                         <div class="row y-gap-20 justify-between mb-10">
                             <div class="col-auto">

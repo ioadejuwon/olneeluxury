@@ -6,10 +6,12 @@
 
       <div class="col-auto">
         <div class="header-left d-flex items-center">
-          <div class="header__logo pr-0 xl:pr-0 md:pr-0 pt-15">
+          <div class="header__logo pr-0 xl:pr-0 md:pr-0 pt-">
             <a data-barba="" href="<?php echo HOME ?>">
-              <!-- <img src="admin/assets/img/logo.png" alt="logo" width="50px"> -->
-              <h2>Olnee Luxury</h2>
+              <img class="no-big-screen" src="admin/assets/img/logo.png" alt="logo" width="60%">
+              <img class="lg:d-none" src="admin/assets/img/logo.png" alt="logo" width="30%">
+              <!-- <img src="admin/assets/img/logo.png" alt="logo" width="40%"> -->
+              <!-- <h2>Olnee Luxury</h2> -->
             </a>
           </div>
         </div>
@@ -232,7 +234,7 @@
                 <div class="header-cart bg-white -dark-bg-dark-1 rounded-8 outline-green" style="width: 500px;">
 
 
-                  
+
                   <div class="px-30 pt-30 pb-10" id="headerCart">
                     <div class="row justify-between x-gap-40 pb-20">
                       <div class="col">

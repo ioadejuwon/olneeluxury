@@ -106,14 +106,18 @@ $(document).ready(function () {
             data: { category_id: categoryId },
             dataType: 'json',
             success: function (response) {
-                if (response.status) {
-                    // Hide the modal
-                    $('#delete-' + categoryId).modal('hide');
-                    categoryElement.remove(); // Remove the product element from the DOM
-                    showNotification(response.message, 'success'); // Show notification
-                } else {
-                    showNotification(response.message, 'error'); // Red notification
-                }
+              if (response.status === 'success') {
+                  // Hide the modal
+                  $('#delete-' + categoryId).modal('hide');
+                  categoryElement.remove(); // Remove the product element from the DOM
+                  showNotification(response.message, 'success'); // Show notification
+              } else if (response.status == 'info') {
+                  showNotification(response.message, 'info'); // Yellow notification
+              } else if (response.status == 'error') {
+                  showNotification(response.message, 'error'); // Red notification
+              } else {
+                  showNotification(response.message, 'error'); // Red notification
+              }
             },
             error: function (xhr, status, error) {
                 showNotification('An error occurred while trying to delete the product.', 'error');
@@ -127,13 +131,30 @@ Dropzone.autoDiscover = false;
 
 const dz = new Dropzone("#dropzoneArea", {
   url: "inc/category.php", // This is where your image goes
+  previewTemplate: `
+  <div class="dz-preview dz-file-preview">
+    <div class="dz-image">
+      <img data-dz-thumbnail />
+    </div>
+    <div class="dz-details">
+      <div class="dz-filename">
+        <span data-dz-name></span>
+      </div>
+      <div class="dz-size" data-dz-size></div>
+      <a href="javascript:void(0);" class="dz-remove" data-dz-remove>
+        Remove
+      </a>
+    </div>
+  </div>
+`,
+previewsContainer: "#previewContainer", // 👈 redirect previews here
   autoProcessQueue: false,
   uploadMultiple: false,
   maxFiles: 1,
   acceptedFiles: "image/*",
   paramName: "categoryimg",
   dictDefaultMessage: "Click here or drop an image<br/>here for category image.",
-  addRemoveLinks: true,
+  addRemoveLinks: false,
   init: function() {
     const dropzone = this;
 
@@ -225,8 +246,12 @@ const dz = new Dropzone("#dropzoneArea", {
           $('#modal-categories').modal('hide');
         }, 500);
     
+      } else if (response.status == 'info') {
+          showNotification(response.message, 'info'); // Yellow notification
+      } else if (response.status == 'error') {
+          showNotification(response.message, 'error'); // Red notification
       } else {
-        showNotification(response.message || "Something went wrong", "error");
+          showNotification(response.message || "Something went wrong", "error");
       }
     });
 
@@ -306,98 +331,6 @@ const dz = new Dropzone("#dropzoneArea", {
   }
 });
 
-
-// Dropzone.autoDiscover = false;
-
-// document.querySelectorAll(".dropzoneEdit").forEach(function(el) {
-//   const categoryId = el.id.replace("dropzoneEdit-", "");
-//   const form = document.getElementById("editForm-" + categoryId);
-//   const input = document.getElementById("categoryname-" + categoryId);
-
-//   const myDropzone = new Dropzone(el, {
-//     url: "inc/editcategory.php",
-//     autoProcessQueue: false,
-//     maxFiles: 1,
-//     acceptedFiles: "image/*",
-//     uploadMultiple: false,
-//     paramName: "categoryimg",
-//     addRemoveLinks: true,
-//     dictDefaultMessage: "Click or drop an image here to update category image.",
-
-//     init: function () {
-//       const dz = this;
-
-//       form.addEventListener("submit", function (e) {
-//         e.preventDefault();
-
-//         const name = input.value.trim();
-
-//         if (!name) {
-//           showNotification("Please enter a category name", "error");
-//           return;
-//         }
-
-//         dz.options.params = {
-//           categoryname: name,
-//           categoryid: categoryId,
-//           action: "edit"
-//         };
-
-//         if (dz.getAcceptedFiles().length > 0) {
-//           dz.processQueue();
-//         } else {
-//           updateCategoryWithoutImage(categoryId, name);
-//         }
-//       });
-
-//       dz.on("success", function (file, response) {
-//         if (typeof response === "string") response = JSON.parse(response);
-//         if (response.status === "success") {
-//           showNotification(response.message, "success");
-//           dz.removeAllFiles();
-//           $("#edit-" + categoryId).modal("hide");
-//         } else {
-//           showNotification(response.message || "Update failed", "error");
-//         }
-//       });
-
-//       dz.on("error", function (file, message) {
-//         showNotification(message, "error");
-//       });
-//     }
-//   });
-// });
-
-
-// function updateCategoryWithoutImage(categoryId, name) {
-//   $.ajax({
-//     url: "inc/editcategory.php",
-//     type: "POST",
-//     data: {
-//       categoryid: categoryId,
-//       categoryname: name,
-//       action: "edit"
-//     },
-//     success: function(response) {
-//       try {
-//         const response = JSON.parse(response);
-//         if (response.status === "success") {
-//           showNotification(response.message, 'success');
-//           $("#edit-" + categoryId).modal("hide");
-//         } else {
-//           showNotification(response.message || "Something went wrong", "error");
-//         }
-//       } catch (e) {
-//         showNotification("Unexpected server response", "error");
-//       }
-//     },
-//     error: function() {
-//       showNotification("Network error while updating category", "error");
-//     }
-//   });
-// }
-
-
 Dropzone.autoDiscover = false;
 
 document.querySelectorAll(".dropzoneEdit").forEach(function(el) {
@@ -406,13 +339,36 @@ document.querySelectorAll(".dropzoneEdit").forEach(function(el) {
   const input = document.getElementById("categoryname-" + categoryId);
 
   const myDropzone = new Dropzone(el, {
+
     url: "inc/editcategory.php",
+    previewTemplate: `
+    <div class="dz-preview dz-file-preview">
+      <div class="dz-image">
+        <img data-dz-thumbnail />
+      </div>
+      <div class="dz-details">
+        <div class="dz-filename">
+          <span data-dz-name></span>
+        </div>
+        <div class="dz-size" data-dz-size></div>
+        <a href="javascript:void(0);" class="dz-remove" data-dz-remove>
+          Remove
+        </a>
+      </div>
+    </div>
+  `,
+  previewsContainer: "#previewContainer-" + categoryId, // 👈 redirect previews here
     autoProcessQueue: false,
     maxFiles: 1,
+    maxFilesize: 3, // ✅ limit file size to 3MB
+    dictFileTooBig: "File is too big ({{filesize}}MB). Max filesize: {{maxFilesize}}MB.",
+    dictRemoveFile: "Remove image.",
     acceptedFiles: "image/*",
     uploadMultiple: false,
     paramName: "categoryimg",
-    addRemoveLinks: true,
+    addRemoveLinks: false,
+    // upload_max_filesize: 20M,
+    // post_max_size: 25M,
     dictDefaultMessage: "Click or drop an image here to update category image.",
 
     init: function () {
@@ -427,6 +383,7 @@ document.querySelectorAll(".dropzoneEdit").forEach(function(el) {
           showNotification("Please enter a category name", "error");
           return;
         }
+ 
 
         dz.options.params = {
           categoryname: name,
@@ -444,12 +401,16 @@ document.querySelectorAll(".dropzoneEdit").forEach(function(el) {
       dz.on("success", function (file, response) {
         if (typeof response === "string") response = JSON.parse(response);
         if (response.status === "success") {
-          showNotification(response.message, "success");
-          document.querySelector(".name-" + categoryId).textContent = dz.options.params.categoryname;
-          dz.removeAllFiles();
-          $("#edit-" + categoryId).modal("hide");
+            showNotification(response.message, "success");
+            document.querySelector(".name-" + categoryId).textContent = dz.options.params.categoryname;
+            dz.removeAllFiles();
+            $("#edit-" + categoryId).modal("hide");
+        } else if (response.status == 'info') {
+            showNotification(response.message, 'info'); // Yellow notification
+        } else if (response.status == 'error') {
+            showNotification(response.message, 'error'); // Red notification
         } else {
-          showNotification(response.message || "Update failed", "error");
+            showNotification(response.message || "Update failed", "error");
         }
       });
 
@@ -488,9 +449,6 @@ function updateCategoryWithoutImage(categoryId, name) {
     }
   });
 }
-
-
-// const d3z = new Dropzone("#dropzoneEdit", {
 //   url: "inc/category.php", // This is where your image goes
 //   autoProcessQueue: false,
 //   uploadMultiple: false,

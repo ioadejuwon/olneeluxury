@@ -72,12 +72,12 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories");
 
           <form action="inc/upload_images.php" class="dropzone" id="product-images-dropzone">
             <input type="hidden" name="productid" id="product_id" value="<?php echo $_GET['productid']; ?>">
+            
           </form>
+          <div id="previewContainer" class="preview-container"></div>
           <!-- <button type="button" id="upload-button">Upload Images</button> -->
 
-          <div class="row justify-end">
-
-            <div id="error-message"></div>
+          <div class="row justify-end mt-10">
             <div class="col-auto">
               <button class="button -md -deep-green-1 text-white" type="submit" id="upload-button">
                 Upload Product
