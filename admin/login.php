@@ -7,7 +7,7 @@ include_once "inc/drc.php";
 if ( empty( $_GET['t'] ) ) {
 	$pagetitle = "Login";
 }else{
-  $pagetitle = $_GET['t'];
+  echo $pagetitle = $_GET['t'];
 }
 include_once "ad_comp/adm-head.php";
 $error = '';
