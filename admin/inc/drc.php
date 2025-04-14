@@ -24,6 +24,7 @@ define('DEFAULT_IMG', 'product-img/product.png');
 define('PHONE', '2348108806808');
 define('CUSTOMERS_IMG_DIR', 'customers-cam/');
 define('PRODUCTS_IMG_DIR', 'product-img/');
+define('CATEGORY_IMG_DIR', 'cat-img/');
 
 // Check if the site is running locally or on a hosting site
 if ($_SERVER['HTTP_HOST'] == 'localhost:8888') {

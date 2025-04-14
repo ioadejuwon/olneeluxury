@@ -1,4 +1,29 @@
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js"></script> -->
+<link rel="stylesheet" href="assets/dropzone/dropzone.min.css">
+<script src="assets/dropzone/dropzone.min.js"></script>
+<style>
+  /* .dropzone { */
+  /* border: 1px dashed #6c757d; */
+  /* background: #f8f9fa; */
+  /* padding: 30px; */
+  /* text-align: center; */
+  /* border-radius: 10px; */
+  /* cursor: pointer; */
+  /* } */
+
+  .dropzone {
+    border: 1px dashed #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+  }
+
+  .dropzone .dz-message {
+    color: #888;
+    font-weight: 500;
+  }
+</style>
 <?php
 
 session_start();
@@ -34,9 +59,6 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories ORDER BY creat
       <a data-toggle="modal" data-target="#modal-categories" class="button -icon -deep-green-1 text-white">Add New Category</a>
     </div>
   </div>
-
-
-
   <div class="row y-gap-30 pt-30">
     <div class="col-xl-12 col-md-12">
       <div class="rounded-16 text-white shadow-4 h-100">
@@ -51,11 +73,7 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories ORDER BY creat
           </thead>
           <tbody id="categoryTableBody">
             <?php
-
-
-
             $count_row_cateegories = mysqli_num_rows($categories);
-
             if ($count_row_cateegories != 0) {
               while ($row_categories = mysqli_fetch_assoc($categories)) {
                 $categoryname = $row_categories['categoryName'];
@@ -66,7 +84,7 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories ORDER BY creat
                 $count_row_store = mysqli_num_rows($products_cat);
             ?>
                 <tr id="category-<?php echo $category_id; ?>">
-                  <td><?php echo $categoryname ?></td>
+                  <td class="name-<?php echo $category_id; ?>"><?php echo $categoryname ?></td>
                   <td><?php echo $count_row_store ?></td>
                   <td class="dropdown">
                     <!-- <img src="assets/img/icons/more_horiz.png" alt="" width="50%"> -->
@@ -85,14 +103,12 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories ORDER BY creat
                       <div class="modal-content">
                         <div class="modal-header">
                           <!-- <h5 class="modal-title"></h5> -->
-                          <h2 class="modal-title h4">Add Coupon Code</h2>
+                          <h2 class="modal-title h4">Delete Category</h2>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <img src="assets/img/icons/close.png" alt="close" width="30%">
                           </button>
                         </div>
                         <div class="modal-body p-4">
-
-
                           <p class="text-dark">Are you sure you want to delete the category "<span class="fw-600"><?php echo $categoryname ?></span>". This process is irreversible.</p>
                           <p class="text-dark">The products currently listed under the category "<span class="fw-600"><?php echo $categoryname ?></span>" will still be available.</p>
                           <ul class="row gx-4 mt-4">
@@ -109,6 +125,44 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories ORDER BY creat
                       </div>
                     </div>
                   </div>
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="edit-<?php echo $category_id; ?>" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Edit Category</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <img src="assets/img/icons/close.png" alt="close" width="30%">
+                          </button>
+                        </div>
+                        <div class="modal-body pt-0">
+                          <form id="editForm-<?php echo $category_id; ?>" class="editForm contact-form row y-gap-10" data-categoryid="<?php echo $category_id; ?>" enctype="multipart/form-data">
+                            <div class="col-12">
+                              <label class="form-label text-16 lh-1 fw-500 text-dark-1 mb-2">Category Name <span class="text-danger">*</span></label>
+                              <input type="text" class="form-control" name="categoryname" id="categoryname-<?php echo $category_id; ?>" value="<?php echo htmlspecialchars($categoryname); ?>" placeholder="Enter category name" required>
+                            </div>
+
+                            <div class="col-12 mt-3">
+                              <label class="form-label">Category Image</label>
+                              <div id="dropzoneEdit-<?php echo $category_id; ?>" class="dropzone dropzoneEdit"></div>
+                            </div>
+
+                            <div class="col-12 mt-4 border-top pt-3">
+                              <button class="button -md -deep-green-1 text-white flex-fill" type="submit" id="submit">
+                                Edit Category
+                              </button>
+                            </div>
+                          </form>
+
+                         
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
                 </div>
               <?php
               }
@@ -143,10 +197,7 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories ORDER BY creat
             ?>
           </tbody>
         </table>
-
-
       </div>
-
     </div>
   </div>
 </div>
@@ -162,31 +213,49 @@ $categories = mysqli_query($conn, "SELECT * FROM olnee_categories ORDER BY creat
         </button>
       </div>
       <div class="modal-body pt-0">
-        <form class="contact-form row y-gap-10" id="categoryForm" method="POST">
-          <h4 class="text-16 lh-1 fw-500 text-dark-1">Category Name <span class="text-error-1">*</span> </h4>
-          <!-- <div id="error-message"></div> -->
-          <div class="col-12" id="">
-            <input type="text" name="categoryname" id="category" placeholder="Enter the name of the category" required>
+        <form id="categoryForm" class="contact-form row y-gap-10" enctype="multipart/form-data">
+          <div class="col-12">
+            <label class="text-16 lh-1 fw-500 text-dark-1 mb-2">Category Name <span class="text-danger">*</span></label>
+            <input type="text" name="categoryname" id="categoryname" placeholder="Enter category name" required><br><br>
+          </div>
+
+          <div class="col-12">
+            <label class="text-16 lh-1 fw-500 text-dark-1 mb-2">Category Image <span class="text-danger">*</span></label>
+            <div id="dropzoneArea" class="dropzone"></div>
           </div>
 
           <div class="d-flex w-100  border-top-dark mt-5">
-            <!-- <button type="button" class="button -md -deep-green-1 flex-fill" data-dismiss="modal">Close</button> -->
-            <!-- <button type="button" class="button -md -deep-green-1 flex-fill">Save changes</button> -->
-            <button class="button -md -deep-green-1 text-white flex-fill" type="submit" id="submit">
+            <button class="button -md -deep-green-1 text-white flex-fill" type="submit" id="submitBtn">
               Add Category
             </button>
           </div>
         </form>
-
-
       </div>
     </div>
   </div>
 </div>
 
 
-<script src="api/category2.js"></script>
+<script src="api/category5.js"></script>
 <?php
 include_once "ad_comp/adm-footer.php";
 include_once "ad_comp/adm-tail.php";
 ?>
+
+<!-- <form class="contact-form row y-gap-10 d-none" id="categoryFom" method="POST">
+
+  <div class="col-12" id="">
+    <label class="text-16 lh-1 fw-500 text-dark-1 mb-2">Category Name <span class="text-error-1">*</span> </label>
+    <input type="text" name="categoryname" id="category" placeholder="Enter the name of the category" required>
+  </div>
+
+  <div class="col-12" id="">
+    <input type="file" class="form-control" id="categoryimg" name="categoryimg" accept="image/*">
+  </div>
+
+  <div class="d-flex w-100  border-top-dark mt-5">
+    <button class="button -md -deep-green-1 text-white flex-fill" type="submit" id="submit">
+      Add Category
+    </button>
+  </div>
+</form> -->

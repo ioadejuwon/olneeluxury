@@ -36,6 +36,10 @@ function generateCamID() {
     return "cam-" . getName(3) . '-' . getName(3);
 }
 
+function generateCatID() {
+    return getName(3);
+}
+
 function generateCartID() {
     return "cart-" . getName(3);
 }

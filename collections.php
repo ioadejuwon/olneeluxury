@@ -47,10 +47,18 @@ include_once "comp/header.php";
                 while ($row_categories = mysqli_fetch_assoc($categories)) {
                     $categoryname = $row_categories['categoryName'];
                     $category_id = $row_categories["categoryid"];
+                    // $category_img = 'admin/'.$row_categories["categoryimg"];
+
+                    if (!empty($row_categories['categoryimg'])) {
+                        $category_thumbnail = $row_categories['categoryimg'];
+                    } else {
+                        $category_thumbnail = DEFAULT_IMG;
+                    }
+                    $category_thumbnail = 'admin/' . $category_thumbnail;
                 ?>
 
                 <div class="swiper-slid col-lg-3">
-                    <div class=" bg-light-1 rounded-8 with-image-bg " style="background-image: url('admin/assets/img/landing.jpg');">
+                    <div class=" bg-light-1 rounded-8 with-image-bg " style="background-image: url('<?php echo $category_thumbnail ?>');">
                         <div class="eventCard -type-3 rounded-8">
                             <div class="eventCard__date">
                                 <h3 class="text-30 lh-12 fw-600 ml-15 text-white capitalise"><?php echo $categoryname ?></h3>
