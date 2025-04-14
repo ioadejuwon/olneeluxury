@@ -136,13 +136,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $conn->prepare("INSERT INTO olnee_categories (categoryid, categoryimg, categoryName) VALUES (?, ?, ?)");
         $stmt->bind_param("sss", $category_id, $FileLocation, $category_name);
 
-        // if ($stmt->execute()) {
-        //     echo json_encode(['status' => 'success', 'message' => 'Category created successfully!']);
-        // } else {
-        //     echo json_encode(['status' => 'error', 'message' => 'Error: ' . $stmt->error]);
-        //     exit;
-        // }
-
         if ($stmt->execute()) {
             $response = [
                 'status' => 'success',

@@ -54,16 +54,7 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 		exit;
 	}
 	
-	
-	if ($newstoremessage == '' ) {
-		$newstoremessage = 'I would like to make enquires about your business.';
-	}elseif ( strlen( $newstoremessage ) > 100 ) {
-		// Handle the error
-		$response = [ 'status' => 'error', 'message' => 'Enquiry Message is to long! Keep it under 100 characters' ];
-		echo json_encode($response);
-		exit;
-	}
-	
+
 	// Prepare the SQL statement with placeholders
 	$updatelink = "UPDATE olnee_storedata SET deliveryPolicy=?, returnPolicy=?, contact_phone = ?, contact_email = ?, store_address = ?, store_state = ?, store_country = ?";
 	$stmt = mysqli_stmt_init( $conn );
@@ -77,14 +68,6 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 				// Success response
 				$response['status'] = 'success';
 				$response['message'] = 'Store details updated successfully.';
-				$response['brandName'] = $brand_name;
-				$response['brandInfo'] = $brand_info;
-				$response['brandCategory'] = $brand_category;
-				$response['storeMsg'] = urldecode( $newstoremessage );
-				$response['countryCode'] = $bizcountrycode;
-				$response['phoneNumber'] = $bizphonenumber;
-				$response['address'] = $address;
-				$response['country'] = $country;
 			} else {
 				// Error response
 				$response['status'] = 'info';

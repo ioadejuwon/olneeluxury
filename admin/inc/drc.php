@@ -76,6 +76,7 @@ define('CATEGORIES', ADMIN_URL.'categories');
 define('PRODUCTS', ADMIN_URL.'product');
 define('REVIEWS', ADMIN_URL.'reviews');
 define('ADM_PICTURES', ADMIN_URL.'pictures');
+define('ADM_PROFILES', ADMIN_URL.'admin');
 define('ORDERS', ADMIN_URL.'orders');
 define('DELIVERY', ADMIN_URL.'delivery');
 define('COUPON', ADMIN_URL.'coupon');
@@ -111,3 +112,28 @@ $current_url = $protocol . $host . $uri; // Combine the protocol, host, and URI 
 // echo "Current URL: $current_url"; // Output the current URL
 // $t = $pagetitle;
 
+
+function timeAgo($datetime, $full = false) {
+    $now = new DateTime(); // Current time
+    $ago = new DateTime($datetime); // Input time
+    $diff = $now->diff($ago); // Difference between the two times
+    // Time units
+    $units = [
+        'year' => $diff->y,
+        'month' => $diff->m,
+        'day' => $diff->d,
+        'hour' => $diff->h,
+        'minute' => $diff->i,
+        'second' => $diff->s,
+    ];
+    // Filter out empty units
+    foreach ($units as $unit => $value) {
+        if ($value) {
+            $timeAgo[] = $value . ' ' . $unit . ($value > 1 ? 's' : '');
+        }
+    }
+    if (!$full) {
+        $timeAgo = array_slice($timeAgo, 0, 1); // Show only the first non-zero unit
+    }
+    return $timeAgo ? implode(', ', $timeAgo) . ' ago' : 'just now';
+}

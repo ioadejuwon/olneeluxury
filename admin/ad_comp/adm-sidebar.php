@@ -63,6 +63,12 @@
         Customers' Cam
       </a>
     </div>
+    <div class="sidebar__item">
+      <a href="<?php echo ADM_PROFILES ?>" class="d-flex items-center text-17 lh-1 fw-500 ">
+        <i class="text-20 icon-comment mr-15"></i>
+        Admin Profiles
+      </a>
+    </div>
     <div class="sidebar__item d-none">
       <a href="<?php echo REVIEWS ?>" class="d-flex items-center text-17 lh-1 fw-500 ">
         <i class="text-20 icon-comment mr-15"></i>

@@ -96,7 +96,9 @@ include_once "ad_comp/adm-sidebar.php"
                   $cus_address = $cus_street . ", " . $cus_city . ", " . $cus_state . ", " . $cus_country;
 
                   $cus_date = $row_orders['created_at'];
-                  $date = strtotime($cus_date);
+                  // $date = strtotime($cus_date);
+                  $date = timeAgo($cus_date);
+                  // date('jS F', $date)
 
                   $cus_notes = $row_orders['notes'];
 
@@ -134,7 +136,7 @@ include_once "ad_comp/adm-sidebar.php"
                     <!-- <td><?php echo $cus_email ?></td> -->
                     <td><?php echo $pay_status ?></td>
                     <td class="price"><?php echo $pay_total ?></td>
-                    <td><?php echo date('jS F', $date) ?></td>
+                    <td class="text-right"><?php echo $date ?></td>
                     <!-- <td><?php echo $cus_phone ?></td>
                       <td><?php echo $cus_address ?></td>
                       <td><?php echo $cus_notes ?></td> -->

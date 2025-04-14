@@ -44,16 +44,16 @@ $deliveries = mysqli_query($conn, "SELECT * FROM olnee_coupons");
 		<div class="col-xl-12 col-md-12">
 			<div class="rounded-16 text-white shadow-4 h-100">
 
-				<!-- <div class="table-responsive"> -->
+				<div class="table-responsive">
 				<table class="table w-100">
 					<thead>
 						<tr>
 							<!-- <th>S/N</th> -->
 							<th><span class="lg:d-none">Coupon&nbsp;</span>Name</th>
 							<th><span class="lg:d-none">Coupon&nbsp;</span>Code</th>
-							<th><span class="lg:d-none">Coupon&nbsp;</span>Type</th>
+							<th class="lg:d-none"><span class="lg:d-none">Coupon&nbsp;</span>Type</th>
 							<th><span class="lg:d-none">Coupon&nbsp;</span>Value</th>
-							<th>Date Created</th>
+							<th class="text-right">Date<span class="lg:d-none">&nbsp;Created</span></th>
 						</tr>
 					</thead>
 					<tbody id="couponTableBody">
@@ -87,8 +87,8 @@ $deliveries = mysqli_query($conn, "SELECT * FROM olnee_coupons");
 
 								$created_at = $row['created_at'];
 								$date = strtotime($created_at);
-								$dateformat = date('D., jS M.', $date);
-								$deliveryCost = '&#8358;' . number_format($deliveryCost, 2);
+								// $dateformat = date('D., jS M.', $date);
+								$dateformat = timeAgo($created_at);
 								// $biz_id = $row['$biz_id'];  
 
 
@@ -102,13 +102,13 @@ $deliveries = mysqli_query($conn, "SELECT * FROM olnee_coupons");
 									<td>
 										<?php echo $couponCode ?>
 									</td>
-									<td>
+									<td class="lg:d-none">
 										<?php echo $couponType ?>
 									</td>
 									<td>
 										<?php echo $couponValue ?>
 									</td>
-									<td>
+									<td class="text-right">
 										<?php echo $dateformat ?>
 									</td>
 
@@ -141,7 +141,7 @@ $deliveries = mysqli_query($conn, "SELECT * FROM olnee_coupons");
 
 					</tbody>
 				</table>
-				<!-- </div> -->
+				</div>
 
 			</div>
 		</div>

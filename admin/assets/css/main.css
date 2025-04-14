@@ -9995,7 +9995,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .border-light {
-  border: 1px solid var(--color-light-5);
+  border: 1px solid var(--color-light-2) !important;
 }
 
 .border-dark-1-lg {

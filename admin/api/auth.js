@@ -86,41 +86,6 @@ $(document).ready(function () {
     });
     // Signup Form End
 
-    // Edit Account Form Begin
-    $('#edit_account').on('submit', function (event) {
-        event.preventDefault(); // Prevent the default form submission
-        // Get the password and confirmation password values
-        $.ajax({
-            type: 'POST',
-            url: 'inc/account_auth.php',
-            data: $(this).serialize() + '&edit_account=true', // Serialize form data
-            dataType: 'json',
-            success: function (response) {
-                // Clear any previous notifications
-                if (response.status == 'success') {
-                    // console.log(response);
-                    showNotification(response.message, 'success'); // Show notification
-                    setTimeout(() => {
-                        // window.location.href = response.redirect_url; // Redirect on success
-                    }, 2000);
-                } else if (response.status == 'info') {
-                    showNotification(response.message, 'info'); // Yellow notification
-                } else if (response.status == 'error') {
-                    showNotification(response.message, 'error'); // Red notification
-                } else {
-                    showNotification('Error 2: ' + response.message, 'error');
-                }
-            },
-            error: function (xhr, status, error) {
-                // Handle errors (e.g., network issues)
-                // $('#errorMessage').html(`<p class="fw-300 text-error-1">An error occurred: ${error}</p>`);
-                showNotification(`An error occurred while processing your request. ${error}`, `error`);
-                showNotification(`An error occurred while processing your request. ${xhr}`, `error`);
-            }
-        });
-    });
-    // Edit Account Form Form End
-
 
 
 

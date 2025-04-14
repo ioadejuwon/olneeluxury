@@ -1,7 +1,5 @@
 <?php
-
 session_start();
-
 include_once "inc/config.php";
 $pagetitle = "Settings";
 include_once "inc/drc.php";
@@ -11,22 +9,15 @@ if (!isset($_SESSION['user_id'])) {
 } else {
     $user_id = $_SESSION['user_id'];
 }
-include_once "ad_comp/adm-head.php";
-include_once "ad_comp/adm-header.php";
+
 $sql = mysqli_query($conn, "SELECT * FROM olnee_admin WHERE user_id = '{$_SESSION['user_id']}'");
 $row = mysqli_fetch_assoc($sql);
-// $unique_id = $row["user_id"];
 $fname = !empty($row["fname"]) ? $row["fname"] : "No info entered";
 $lname = !empty($row["fname"]) ? $row["lname"] : "No info entered";
-// $uname = !empty($row["fname"]) ? $row["uname"] : "No info entered";
-// $countryCode = $row['countryCode'];
 $admin_phone = $row['admin_phone'];
-// $admin_phone = (!empty($admin_phone)) ?  $admin_phone : 'No phone number entered';
 $admin_email = $row['admin_email'];
 $admin_email = !empty($admin_email) ? $admin_email : "No admin email entered";
-
 $admin_level = $row['admin_level'];
-
 if ($admin_level == 0) {
     $admin_type = "No admin level entered.";
 } elseif ($admin_level == 1) {
@@ -41,11 +32,18 @@ if ($admin_level == 0) {
     $admin_type = "Could not retrieve level.";
 }
 
+if ($admin_level < 4) {
+    header("location: " . DASHBOARD); // redirect to login page if not signed in
+    exit; // Make sure to exit after sending the redirection header
+}
+
+include_once "ad_comp/adm-head.php";
+include_once "ad_comp/adm-header.php";
+
 
 $admin_address = $row['admin_address'];
 $admin_state = $row['admin_state'];
 $admin_country = $row['admin_country'];
-
 $address = $admin_address . ", " . $admin_state . ", " . $admin_country;
 $address = strlen($address > 4) ? $address : "No address entered";
 // $address = !empty($address) ? $address : "No address entered";
@@ -54,22 +52,15 @@ $address = strlen($address > 4) ? $address : "No address entered";
 
 $sql_store = mysqli_query($conn, "SELECT * FROM olnee_storedata");
 $row_store = mysqli_fetch_assoc($sql_store);
-// $unique_id = $row["user_id"];
-
 $contact_phone = $row_store['contact_phone'];
-
 $contact_email = $row_store['contact_email'];
 $contact_email = !empty($contact_email) ? $contact_email : "No contact email entered";
-
 $store_address = $row_store['store_address'];
 $store_address = !empty($store_address) ? $store_address : "No store address entered";
-
 $store_state = $row_store['store_state'];
 $store_state = !empty($store_state) ? $store_state : "No store state entered";
-
 $store_country = $row_store['store_country'];
 $store_country = !empty($store_country) ? $store_country : "No store country entered";
-
 $delivery = !empty($row_store["deliveryPolicy"]) ? $row_store["deliveryPolicy"] : "No Delivery Policy entered";
 $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No Return Policy entered";
 ?>
@@ -77,8 +68,8 @@ $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No 
 <div class="dashboard__content bg-light-4">
     <div class="row pb- mb-10">
         <div class="col-auto">
-            <h2 class="text-30 lh-12 fw-700">Settings </h2>
-            <div class="mt-5">Your can check your store settings.</div>
+            <h2 class="text-30 lh-12 fw-700">Admin Settings </h2>
+            <div class="mt-5">Your can manage your Admin settings.</div>
         </div>
     </div>
     <div class="row y-gap-30">
@@ -88,36 +79,79 @@ $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No 
                     <div class="tabs__controls d-flex x-gap-30 items-center pt-20 px-30 border-bottom-light js-tabs-controls pb-8">
                         <button class="tabs__button text-light-1 js-tabs-button is-active"
                             data-tab-target=".-profile" type="button">
-                            Profile
+                            Admin Accounts
                         </button>
                         <button class="tabs__button text-light-1 js-tabs-button d-non"
-                            data-tab-target=".-edit-profile" type="button">
-                            Edit Profile
-                        </button>
-                        <button class="tabs__button text-light-1 js-tabs-button" data-tab-target=".-store-info"
-                            type="button">
-                            Store information
-                        </button>
-                        <button class="tabs__button text-light-1 js-tabs-button d-noe" data-tab-target=".-social-info"
-                            type="button">
-                            Social Profiles
-                        </button>
-             
-                        <button class="tabs__button text-light-1 js-tabs-button" data-tab-target=".-change-password"
-                            type="button">
-                            Change Password
-                        </button>
-
-                        <button class="tabs__button text-light-1 js-tabs-button d-none" data-tab-target=".-tab-item-5"
-                            type="button">
-                            Notifications
-                        </button>
-                        <button class="tabs__button text-light-1 js-tabs-button d-none" data-tab-target=".-tab-item-6"
-                            type="button">
-                            Close Account
+                            data-tab-target=".-add-admin" type="button">
+                            Add Admin
                         </button>
                     </div>
                     <div class="tabs__content py-30 px-30 js-tabs-content">
+                        <div class="tabs__pane -add-admin is-active">
+                            <div class="row y-gap-20 x-gap-20 items-center d-none">
+                                <div class="col-auto">
+                                    <!-- <img class="size-100" src="assets/img/dashboard/edit/1.png" alt="image"> -->
+                                </div>
+                                <div class="col-auto">
+                                    <div class="text-16 fw-500 text-dark-1">Your avatar</div>
+                                    <div class="text-14 lh-1 mt-10">PNG or JPG no bigger than 800px wide and tall.</div>
+                                    <div class="d-flex x-gap-10 y-gap-10 flex-wrap pt-15">
+                                        <div>
+                                            <div
+                                                class="d-flex justify-center items-center size-40 rounded-8 bg-light-3">
+                                                <div class="icon-cloud text-16"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div
+                                                class="d-flex justify-center items-center size-40 rounded-8 bg-light-3">
+                                                <div class="icon-bin text-16"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-top-light">
+                                <h3>Add New Admin</h3>
+                                <form action="#" id="add_admin" class="contact-form row y-gap-10">
+                                    <div class="col-md-6">
+                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">First Name</label>
+                                        <input type="text" name="fname" value="<?php echo $fname; ?>" placeholder="First Name">
+                                        <input type="hidden" name="user_id" value="<?php echo $user_id; ?>" placeholder="First Name">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Last Name</label>
+                                        <input type="text" name="lname" value="<?php echo $lname; ?>" placeholder="Last Name">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Phone</label>
+                                        <input type="number" name="admin_phone" value="<?php echo $admin_phone; ?>" placeholder="Phone">
+                                    </div>
+                                    <!-- <div class="col-md-6">
+                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Email Address</label>
+                                        <input type="email" name="admin_email" value="<?php echo $admin_email; ?>" placeholder="Email Address">
+                                    </div> -->
+                                    <div class="col-md-6">
+                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Address</label>
+                                        <input type="text" name="admin_address" value="<?php echo $admin_address; ?>" placeholder=" Address">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">State</label>
+                                        <input type="text" name="admin_state" value="<?php echo $admin_state; ?>" placeholder="State">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Country</label>
+                                        <input type="text" name="admin_country" value="<?php echo $admin_country; ?>" placeholder="Country">
+                                    </div>
+
+
+                                    <div class="col-12">
+                                        <button class="button -md -deep-green-1 text-white">Update Profile</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
                         <div class="tabs__pane -profile is-activ">
                             <div class="row y-gap-20 x-gap-20 items-center d-none">
                                 <div class="col-auto">
@@ -159,7 +193,7 @@ $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No 
                             </div>
                         </div>
 
-                        <div class="tabs__pane -edit-profile is-active">
+                        <div class="tabs__pane -edit-profile is-activ">
                             <div class="row y-gap-20 x-gap-20 items-center d-none">
                                 <div class="col-auto">
                                     <!-- <img class="size-100" src="assets/img/dashboard/edit/1.png" alt="image"> -->
@@ -223,6 +257,7 @@ $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No 
                             </div>
                         </div>
 
+
                         <div class="tabs__pane -store-info">
 
                             <div>
@@ -262,7 +297,6 @@ $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No 
                                 </form>
                             </div>
                         </div>
-
                         <div class="tabs__pane -change-password">
                             <form id="edit_password" method="POST" class="input-form row y-gap-30">
                                 <div class="col-md-7">
@@ -298,13 +332,12 @@ $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No 
                                 </div>
                             </form>
                         </div>
-
                         <div class="tabs__pane -social-info">
                             <form id="edit_socials" class="contact-form row y-gap-30">
                                 <div class="col-md-6">
                                     <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Instagram handle</label>
                                     <input type="text" name="instagram" placeholder="Instagram Profile">
-                                    <input type="hidden" name="user_id" value="<?php echo $user_id ?>">
+                                    <input type="text" name="user_id" value="user_id" placeholder="Instagram Profile">
                                 </div>
                                 <div class="col-md-6">
                                     <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Twitter handle</label>
@@ -319,6 +352,9 @@ $return = !empty($row_store["returnPolicy"]) ? $row_store["returnPolicy"] : "No 
                                 </div>
                             </form>
                         </div>
+
+
+
 
                         <div class="tabs__pane -tab-item-5">
                             <form action="#" class="contact-form">

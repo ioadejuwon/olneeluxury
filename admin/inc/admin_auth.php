@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
                     $response['status'] = 'success';
                     $response['message'] = 'User login';
                     // $response['redirect_url'] = DASHBOARD;
-                    $response['redirect_url'] = ! empty( $url ) ? $url : DASHBOARD; // Add redirect URL to response
+                    $response['redirect_url'] = ! empty($url) ? $url : DASHBOARD; // Add redirect URL to response
                 } else {
                     // Incorrect email or password
                     $response['status'] = 'error';
@@ -182,37 +182,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_account'])) {
     $user_id = trim($_POST['user_id']);
     $fname = trim($_POST['fname']);
     $lname = trim($_POST['lname']);
-    $email = trim($_POST['email']);
+    // $admin_email = trim($_POST['admin_email']);
+    $admin_phone = trim($_POST['admin_phone']);
+    $admin_address = trim($_POST['admin_address']);
+    $admin_state = trim($_POST['admin_state']);
+    $admin_country = trim($_POST['admin_country']);
 
     // $fullname = $fname . ' ' . $lname;
     // Check if any field is empty
-    if (empty($fname) || empty($lname) || empty($email)) {
+    if (empty($fname) || empty($lname)) {
         $response['message'] = 'Please fill all the fieldds.';
-    } elseif ($cpass != $newpword) {
-        $response['message'] = 'New Password do not match';
-    } elseif (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        // Validate the email format
-        $response['message'] = 'Invalid Email address.';
-    } else {
+    }
+    // elseif (! filter_var($admin_email, FILTER_VALIDATE_EMAIL)) {
+    //     // Validate the email format
+    //     $response['message'] = 'Invalid Email address.';
+    // }
+    else {
         // Prepare the SQL statement with placeholders
-        $updateuser = "UPDATE olnee_users SET fname = ?, lname = ?, email = ? WHERE user_id=?";
+        $updateadmin = "UPDATE olnee_admin SET fname = ?, lname = ?, admin_phone = ?, admin_address = ?, admin_state = ?, admin_country = ? WHERE user_id = ?";
         $stmt = mysqli_stmt_init($conn);
         // Create a prepared statement
-        if (mysqli_stmt_prepare($stmt, $updateuser)) {
-            $pwordhash = password_hash($pword, PASSWORD_BCRYPT);
+        if (mysqli_stmt_prepare($stmt, $updateadmin)) {
             // Bind the parameters to the prepared statement
-            mysqli_stmt_bind_param($stmt, "ssss", $fname, $lname, $email, $user_id);
+            mysqli_stmt_bind_param($stmt, "sssssss", $fname, $lname, $admin_phone, $admin_address, $admin_state, $admin_country, $user_id);
             if (mysqli_stmt_execute($stmt)) {
                 if (mysqli_stmt_affected_rows($stmt) > 0) {
+                    $address = $admin_address . ", " . $admin_state . ", " . $admin_country;
                     // $stmt->close();// Close the statement
                     // Success response
-                    $response['status'] = 'success';
-                    $response['message'] = 'User details updated successfully.';
+                    $response = [
+                        'status' => 'success',
+                        'message' => 'Admin details updated successfully.',
+                        'admin_first_name' => $fname,
+                        'admin_last_name' => $lname,
+                        // 'admin_email' => $admin_email,
+                        'admin_phone' => $admin_phone,
+                        'admin_address' => $address,
+                    ];
                 } else {
-                    $response = ['success' => false, 'message' => 'Database error 2: ' . mysqli_stmt_error($stmt)];
+                    $response = [
+                        'status' => 'info',
+                        'message' => 'Details not updated, Please make changes and try again.'
+                    ];
                 }
             } else {
-                $response = ['success' => false, 'message' => 'Database error 1: ' . mysqli_stmt_error($stmt)];
+                $response = [
+                    'status' => 'error',
+                    'message' => 'Update not execeuted.'
+                ];
             }
             mysqli_stmt_close($stmt); // Close statement in both cases
         } else {
@@ -225,6 +242,128 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_account'])) {
     header('Content-Type: application/json');
     echo json_encode($response);
     exit;
+}
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admin_update'])) {
+    // Initialize the response array
+    $response = ['status' => 'error', 'message' => ''];
+    // Trim and sanitize inputs
+    $admin_id = trim($_POST['admin_id']);
+    $fname = trim($_POST['fname']);
+    $lname = trim($_POST['lname']);
+    $admin_email = trim($_POST['admin_email']);
+    $admin_phone = trim($_POST['admin_phone']);
+    $admin_level = $_POST['admin_level'];
+    $admin_address = trim($_POST['admin_address']);
+    $admin_state = trim($_POST['admin_state']);
+    $admin_country = trim($_POST['admin_country']);
+
+    // $fullname = $fname . ' ' . $lname;
+    // Check if any field is empty
+    if (empty($fname) || empty($lname)) {
+        $response['message'] = 'Please fill all the fieldds.';
+    }
+    // elseif (! filter_var($admin_email, FILTER_VALIDATE_EMAIL)) {
+    //     // Validate the email format
+    //     $response['message'] = 'Invalid Email address.';
+    // }
+    else {
+        // Prepare the SQL statement with placeholders
+        $updateadmin = "UPDATE olnee_admin SET fname = ?, lname = ?, admin_phone = ?, admin_email = ?, admin_level = ?, admin_address = ?, admin_state = ?, admin_country = ? WHERE user_id = ?";
+        $stmt = mysqli_stmt_init($conn);
+        // Create a prepared statement
+        if (mysqli_stmt_prepare($stmt, $updateadmin)) {
+            // Bind the parameters to the prepared statement
+            mysqli_stmt_bind_param($stmt, "sssssssss", $fname, $lname, $admin_phone, $admin_email, $admin_level, $admin_address, $admin_state, $admin_country, $admin_id);
+            if (mysqli_stmt_execute($stmt)) {
+                if (mysqli_stmt_affected_rows($stmt) > 0) {
+                    $address = $admin_address . ", " . $admin_state . ", " . $admin_country;
+                    // $stmt->close();// Close the statement
+                    // Success response
+                    $response = [
+                        'status' => 'success',
+                        'message' => 'Admin details updated successfully.',
+                        'admin_first_name' => $fname,
+                        'admin_last_name' => $lname,
+                        // 'admin_email' => $admin_email,
+                        'admin_phone' => $admin_phone,
+                        'admin_address' => $address,
+                    ];
+                } else {
+                    $response = [
+                        'status' => 'info',
+                        'message' => 'Details not updated, Please make changes and try again.'
+                    ];
+                }
+            } else {
+                $response = [
+                    'status' => 'error',
+                    'message' => 'Update not execeuted.'
+                ];
+            }
+            mysqli_stmt_close($stmt); // Close statement in both cases
+        } else {
+            $response = ['success' => false, 'message' => 'Failed to prepare statement: ' . mysqli_stmt_error($stmt)];
+        }
+        echo json_encode($response);
+        exit;
+    }
+    // Output the response in JSON format
+    header('Content-Type: application/json');
+    echo json_encode($response);
+    exit;
+}
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_socials'])) {
+    header('Content-Type: application/json');
+    // Initialize the response array
+    $response = ['status' => 'error', 'message' => ''];
+    // Trim and sanitize inputs
+    $twitter = trim($_POST['twitter']);
+    $instagram = trim($_POST['instagram']);
+    $facebook = trim($_POST['facebook']);
+
+
+    // Prepare the SQL statement with placeholders
+    $updateadmin = "UPDATE olnee_storedata SET twitter = ?, instagram = ?, facebook = ? WHERE id = 1";
+    $stmt = mysqli_stmt_init($conn);
+    // Create a prepared statement
+    if (mysqli_stmt_prepare($stmt, $updateadmin)) {
+        // Bind the parameters to the prepared statement
+        mysqli_stmt_bind_param($stmt, "sss", $twitter, $instagram, $facebook);
+        if (mysqli_stmt_execute($stmt)) {
+            if (mysqli_stmt_affected_rows($stmt) > 0) {
+                // $stmt->close();// Close the statement
+                // Success response
+                $response = [
+                    'status' => 'success',
+                    'message' => 'Social details updated successfully.',
+                ];
+            } else {
+                $response = [
+                    'status' => 'info',
+                    'message' => 'Details not updated, Please make changes and try again.'
+                ];
+            }
+        } else {
+            $response = [
+                'status' => 'error',
+                'message' => 'Update not execeuted.'
+            ];
+        }
+        mysqli_stmt_close($stmt); // Close statement in both cases
+    } else {
+        $response = ['success' => false, 'message' => 'Failed to prepare statement: ' . mysqli_stmt_error($stmt)];
+    }
+    
+    echo json_encode($response);
+    exit;
+
+    // Output the response in JSON format
+    
+
 }
 
 
