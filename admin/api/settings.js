@@ -236,5 +236,38 @@ $(document).ready(function () {
     });
     // Edit Socials Form Form End
 
+        // Edit Socials Form Begin
+        $('#admin_new').on('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission
+            // Get the password and confirmation password values
+            $.ajax({
+                type: 'POST',
+                url: 'inc/admin_auth.php',
+                data: $(this).serialize() + '&admin_new=true', // Serialize form data
+                dataType: 'json',
+                success: function (response) {
+                    if (response.status == 'success') {
+                        // console.log(response);
+                        showNotification(response.message, 'success'); // Show notification
+                        // setTimeout(() => {
+                        //     // window.location.href = response.redirect_url; // Redirect on success
+                        // }, 2000);
+                    } else if (response.status == 'info') {
+                        showNotification(response.message, 'info'); // Yellow notification
+                    } else if (response.status == 'error') {
+                        showNotification(response.message, 'error'); // Red notification
+                    } else {
+                        showNotification('Error 2: ' + response.message, 'error');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // Handle errors (e.g., network issues)
+                    showNotification(`An error occurred while processing your request. ${error}`, `error`);
+                    showNotification(`An error occurred while processing your request. ${xhr}`, `error`);
+                }
+            });
+        });
+        // Edit Socials Form Form End
+
 
 });

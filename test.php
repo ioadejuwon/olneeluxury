@@ -34,13 +34,21 @@
 
 
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+// use PHPMailer\PHPMailer\PHPMailer;
+// use PHPMailer\PHPMailer\Exception;
 
-require 'vendor/autoload.php'; // Or adjust path to PHPMailer if not using Composer
+// require 'vendor/autoload.php'; // Or adjust path to PHPMailer if not using Composer
 
-$mail = new PHPMailer(true);
-
-
+// $mail = new PHPMailer(true);
 
 
+
+
+
+$pwordhash = password_hash('Password', PASSWORD_BCRYPT);
+echo $pwordhash;
+
+
+echo '<br><br>';
+
+echo password_verify('Password', $pwordhash);

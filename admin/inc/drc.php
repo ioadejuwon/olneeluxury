@@ -116,6 +116,7 @@ $current_url = $protocol . $host . $uri; // Combine the protocol, host, and URI 
 function timeAgo($datetime, $full = false) {
     $now = new DateTime(); // Current time
     $ago = new DateTime($datetime); // Input time
+    $ago->modify('-1 hour'); // Adjust for server being 1 hour behind
     $diff = $now->diff($ago); // Difference between the two times
     // Time units
     $units = [

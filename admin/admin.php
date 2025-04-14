@@ -36,7 +36,7 @@ include_once "ad_comp/adm-header.php";
 			</div>
 		</div>
 		<div class="col-auto md:mt-10 md:mb-10 mt-5">
-			<a data-toggle="modal" data-target="#modal-coupon-rate" class="button -icon -deep-green-1 text-white">Add New Admin</a>
+			<a data-toggle="modal" data-target="#modal-add-admin" class="button -icon -deep-green-1 text-white">Add New Admin</a>
 		</div>
 	</div>
 	<div class="row y-gap-30 pt-30">
@@ -134,9 +134,9 @@ include_once "ad_comp/adm-header.php";
 										</div>
 
 										<div class="row justify-end mt-10" style="    --bs-gutter-x: 5px;">
-										<div class="col-auto">
-											<button class="button -md -deep-green-1 text-white">Update Profile</button>
-										</div>
+											<div class="col-auto">
+												<button class="button -md -deep-green-1 text-white">Update Profile</button>
+											</div>
 										</div>
 									</form>
 								</div>
@@ -270,7 +270,7 @@ include_once "ad_comp/adm-header.php";
 									<h2 class="h1">
 										<?php
 										// if () {
-											
+
 										// } else {
 										// 	if (strlen() > 20) {
 										// 		echo substr( 0, 20) . '...';
@@ -327,6 +327,78 @@ include_once "ad_comp/adm-header.php";
 
 	</div>
 </div>
+
+<div class="modal fade" id="modal-add-admin" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header border-bottom-dark">
+				<h5 class="modal-title">Add Coupon Code</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<img src="assets/img/icons/close.png" alt="close" width="30%">
+				</button>
+			</div>
+			<div class="modal-body pt-0">
+				<form action="#" id="admin_new" class="contact-form row y-gap-10">
+					<div class="col-md-6">
+						<label class="text-16 lh-1 fw-500 text-dark-1 mb-10">First Name</label>
+						<input type="text" name="fname" value="" placeholder="First Name">
+						<input type="hidden" name="admin_id" value="<?php echo $user_id ?>">
+					</div>
+					<div class="col-md-6">
+						<label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Last Name</label>
+						<input type="text" name="lname" value="" placeholder="Last Name">
+					</div>
+					<div class="col-md-6">
+						<label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Username</label>
+						<input type="text" name="username" value="" placeholder="UserName">
+					</div>
+					<div class="col-md-6">
+						<label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Email Address</label>
+						<input type="email" name="admin_email" value="" placeholder="Email Address">
+					</div>
+					<div class="col-md-6">
+						<label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Phone</label>
+						<input type="number" name="admin_phone" value="" placeholder="Phone">
+					</div>
+					<div class="col-md-6">
+						<label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Clearnace Level</label>
+						<select name="admin_level" value="" id="">
+							<option value="">Choose a Level</option>
+							<option value="0">Level 0</option>
+							<option value="1">Level 1</option>
+							<option value="2">Level 2</option>
+							<option value="3">Level 3</option>
+						</select>
+					</div>
+
+					<div class="col-md-12">
+						<label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Address</label>
+						<input type="text" name="admin_address" value="" placeholder=" Address">
+					</div>
+					<div class="col-md-6">
+						<label class="text-16 lh-1 fw-500 text-dark-1 mb-10">State</label>
+						<input type="text" name="admin_state" value="" placeholder="State">
+					</div>
+					<div class="col-md-6">
+						<label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Country</label>
+						<input type="text" name="admin_country" value="" placeholder="Country">
+					</div>
+
+					<div class="d-flex w-100  border-top-dark">
+						<!-- <button type="button" class="button -md -deep-green-1 flex-fill" data-dismiss="modal">Close</button> -->
+						<!-- <button type="button" class="button -md -deep-green-1 flex-fill">Save changes</button> -->
+						<button class="button -md -deep-green-1 text-white flex-fill" type="submit" id="submit">
+							Add New Admin
+						</button>
+					</div>
+				</form>
+
+				
+			</div>
+		</div>
+	</div>
+</div>
+
 <script src="api/settings.js"></script>
 <?php
 include_once "ad_comp/adm-footer.php";

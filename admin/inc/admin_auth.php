@@ -191,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_account'])) {
     // $fullname = $fname . ' ' . $lname;
     // Check if any field is empty
     if (empty($fname) || empty($lname)) {
-        $response['message'] = 'Please fill all the fieldds.';
+        $response['message'] = 'Please fill all the fields.';
     }
     // elseif (! filter_var($admin_email, FILTER_VALIDATE_EMAIL)) {
     //     // Validate the email format
@@ -262,7 +262,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admin_update'])) {
     // $fullname = $fname . ' ' . $lname;
     // Check if any field is empty
     if (empty($fname) || empty($lname)) {
-        $response['message'] = 'Please fill all the fieldds.';
+        $response['message'] = 'Please fill all the fields.';
     }
     // elseif (! filter_var($admin_email, FILTER_VALIDATE_EMAIL)) {
     //     // Validate the email format
@@ -316,6 +316,93 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admin_update'])) {
 }
 
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admin_new'])) {
+    header('Content-Type: application/json');
+    // Initialize the response array
+    $response = ['status' => 'error', 'message' => ''];
+    // Trim and sanitize inputs
+    $admin_id = trim($_POST['admin_id']);
+    $user_id = generateUserID();
+    $fname = trim($_POST['fname']);
+    $lname = trim($_POST['lname']);
+    $username = trim($_POST['username']);
+    $admin_email = trim($_POST['admin_email']);
+    $admin_phone = trim($_POST['admin_phone']);
+    $admin_level = $_POST['admin_level'];
+    $admin_address = trim($_POST['admin_address']);
+    $admin_state = trim($_POST['admin_state']);
+    $admin_country = trim($_POST['admin_country']);
+    $pwordhash = password_hash('Password', PASSWORD_BCRYPT);
+
+
+    // $fullname = $fname . ' ' . $lname;
+    // Check if any field is empty
+    if (empty($fname) || empty($lname)) {
+        $response['message'] = 'Please fill all the fields.';
+        echo json_encode($response);
+        exit;
+    }
+
+    if (! filter_var($admin_email, FILTER_VALIDATE_EMAIL)) {
+        // Validate the email format
+        $response['message'] = 'Invalid Email address.';
+        echo json_encode($response);
+        exit;
+    }
+   
+    // Check if the category already exists using a prepared statement
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM olnee_admin WHERE admin_email = ? ");
+    $stmt->bind_param("s", $admin_email);
+    $stmt->execute();
+    $stmt->bind_result($count_row);
+    $stmt->fetch();
+    $stmt->close();
+
+    if ($count_row > 0) {
+        $response['status'] = 'error';
+        $response['message'] = 'Email Address already exists!';
+        echo json_encode($response);
+        exit;
+    }
+
+
+    // Prepare the SQL statement with placeholders
+    $insertFormDataQuery = "INSERT INTO olnee_admin (fname, lname, admin_phone, username, admin_email, admin_level, admin_address, admin_state, admin_country,  added_by, pword_hash, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $stmt = mysqli_prepare($conn, $insertFormDataQuery);
+
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "sssssissssss", $fname, $lname, $username, $admin_phone, $admin_email, $admin_level, $admin_address, $admin_state, $admin_country, $admin_id, $pwordhash, $user_id);
+
+        if (mysqli_stmt_execute($stmt)) {
+            if (mysqli_stmt_affected_rows($stmt) > 0) {
+                $address = $admin_address . ", " . $admin_state . ", " . $admin_country;
+                // $stmt->close();// Close the statement
+                // Success response
+                $response = [
+                    'status' => 'success',
+                    'message' => 'Admin details updated successfully.',
+                    'admin_first_name' => $fname,
+                    'admin_last_name' => $lname,
+                    // 'admin_email' => $admin_email,
+                    'admin_phone' => $admin_phone,
+                    'admin_address' => $address,
+                ];
+            } else {
+                $response = [
+                    'status' => 'info',
+                    'message' => 'Details not updated, Please make changes and try again.'
+                ];
+            }
+        }
+    }
+
+
+    // Output the response in JSON format
+    echo json_encode($response);
+    exit;
+}
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_socials'])) {
     header('Content-Type: application/json');
     // Initialize the response array
@@ -357,12 +444,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_socials'])) {
     } else {
         $response = ['success' => false, 'message' => 'Failed to prepare statement: ' . mysqli_stmt_error($stmt)];
     }
-    
+
     echo json_encode($response);
     exit;
 
     // Output the response in JSON format
-    
+
 
 }
 
