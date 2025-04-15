@@ -22,7 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $date = date("D., jS M.");
 
         $couponid = generateCouponID(); // Generate a unique ID
-        // $category_link = $domainstore . $biz_id . '?category=' . $categoryID;
 
         // Check if the category already exists using a prepared statement
         $stmt = $conn->prepare("SELECT COUNT(*) FROM olnee_coupons WHERE couponCode = ?");
