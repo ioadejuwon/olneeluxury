@@ -2,14 +2,14 @@
 include_once 'config.php'; // Include your database configuration
 include_once 'randno.php';
 include_once 'drc.php';
-
+ 
 header('Content-Type: application/json'); // Ensure the content type is JSON
 
 $response = []; // Initialize response array
 
 if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
     $product_id = $_POST['product_id'];
-    $img_id = $imgID;
+    $img_id = generateImageID();
     $uploadLocation = PRODUCTS_IMG_DIR; // Make sure this directory exists and is writable
     $uploadDir = '../'. $uploadLocation; // Make sure this directory exists and is writable
 
