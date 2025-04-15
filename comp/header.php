@@ -48,11 +48,11 @@
             <div class="mobile-footer px-20 py-20 border-top-light js-mobile-footer">
               <div class="mobile-footer__number">
                 <div class="text-17 fw-500 text-dark-1">Call us</div>
-                <div class="text-17 fw-500 text-purple-1">08108806808</div>
+                <div class="text-17 fw-500 text-purple-1">0000</div>
               </div>
 
               <div class="lh-2 mt-10">
-                <div>Ajebamidele,<br> Ibadan Rd, Osun State.</div>
+                <div>kkkkk, Lagos State.</div>
                 <div>hello@olneeluxury.com</div>
               </div>
 
