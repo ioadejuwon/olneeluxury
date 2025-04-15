@@ -1,5 +1,6 @@
 <?php
 $pagetitle = "Home";
+$t = $pagetitle .' -  Olnee Luxury';
 $ref = $pagetitle;
 include_once "comp/head.php";
 include_once "comp/header.php";
