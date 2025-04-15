@@ -12,7 +12,7 @@ $response = [];
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     try {
-        $order_id = $orderID;
+        $order_id = generateOrderID();
         $firstName = $_POST['firstName'];
         $lastName = $_POST['lastName'];
         $fullName = $firstName . ' ' . $lastName;
