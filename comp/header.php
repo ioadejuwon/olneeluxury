@@ -8,9 +8,9 @@
         <div class="header-left d-flex items-center">
           <div class="header__logo pr-0 xl:pr-0 md:pr-0 pt-">
             <a data-barba="" href="<?php echo HOME ?>">
-              <img class="no-big-screen" src="admin/assets/img/logo.png" alt="logo" width="40%">
-              <img class="lg:d-none" src="admin/assets/img/logo.png" alt="logo" width="30%">
-              <!-- <img src="admin/assets/img/logo.png" alt="logo" width="40%"> -->
+              <!-- <img class="no-big-screen" src="admin/assets/img/logo.png" alt="logo" width="40%"> -->
+              <!-- <img class="lg:d-none" src="admin/assets/img/logo.png" alt="logo" width="30%"> -->
+              <img src="admin/assets/img/logo.png" alt="logo" width="30%">
               <!-- <h2>Olnee Luxury</h2> -->
             </a>
           </div>
