@@ -198,7 +198,7 @@ function displayCartItems() {
                         <div style="width: 100px; height: 100px; background-image: url('${item.image}'); background-size: cover; background-position: center; border-radius: 8px;"></div>
                     </td>
                     <td class="pt0  md:pt-30">
-                        <div class="fw-500 text-dark-1">${item.name}</div>
+                        <div class="fw-500 text-dark-1 capitalize-each">${item.name}</div>
                     </td>
                     <td  class="pt-40  md:pt-30">
                         <p class="cart-price price">${item.price}</p>
@@ -270,7 +270,7 @@ function displayCartHeader() {
                             <div class="col-2" style="width: 60px; height: 60px; background-image: url('${item.image}'); background-size: cover; background-position: center; border-radius: 8px;">
                             </div>
                             <div class="col-8 pl-5">
-                                <div class="text-dark-1 lh-15 h4 fw-500 text-line-clamp-1 mb-0">${item.name} </div>
+                                <div class="text-dark-1 lh-15 h4 fw-500 text-line-clamp-1 mb-0 capitalize-each">${item.name} </div>
                                 <div class="d-flex items-center mt-">
                                     <div class="text-18 lh-12 fw-500 text-dark-1"><span class="price">₦${item.price}</span> <span class="text-dark-1 h5">x ${item.yards} ${statement}</span></div>
                                 </div>
