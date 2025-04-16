@@ -669,7 +669,7 @@ $(document).ready(function () {
     });
 
 
-
+    capitalizeEachWordByClass('capitalize-each');
     updateCartTotal();
     updateCheckoutTotal();
     updateCartItemCount();
