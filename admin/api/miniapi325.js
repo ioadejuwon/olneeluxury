@@ -136,6 +136,16 @@ function hasVisitedRecently(key, expirationTime = 120000) {
 //     });
 //   });
 
+function capitalizeEachWordByClass(className) {
+    const elements = document.querySelectorAll(`.${className}`);
+
+    elements.forEach(element => {
+        element.textContent = element.textContent
+            .split(' ')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+            .join(' ');
+    });
+}
 
 $(document).ready(function () {
     // trackVisit(); // Track the visit
@@ -144,6 +154,7 @@ $(document).ready(function () {
     // setTimeout(formatAllPrices, 500); // Slight delay in case prices are dynamically loaded
     copyButton();
 
+    capitalizeEachWordByClass('capitalize-each');
 
     // $('.close-btn-notification').on('click', function () {
     //     $('.scrolling-message').fadeOut();

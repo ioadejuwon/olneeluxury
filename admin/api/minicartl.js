@@ -110,6 +110,7 @@ function addToCart(productId) {
     updateCartItemCount();
     displayCartItems();
     displayCartHeader();
+    capitalizeEachWordByClass('capitalize-each');
 
     // updateQuickAddButtons(); // Update button UI
     updateCartButtonText(productId);
@@ -234,6 +235,7 @@ function displayCartItems() {
         });
     }
 
+    capitalizeEachWordByClass('capitalize-each');
     updateCartTotal();
     formatAllPrices(); // Ensure prices are formatted
 }
@@ -291,6 +293,7 @@ function displayCartHeader() {
         });
 
     }
+    capitalizeEachWordByClass('capitalize-each');
     updateCartTotal();
     formatAllPrices(); // Ensure prices are formatted
 }
@@ -340,13 +343,13 @@ function displayCheckoutItems() {
                     </figure>
                     <div class="content">
                         <div class="info">
-                            <p class="name text-line-clamp-">${item.name}</p>
+                            <p class="name text-line-clamp- capitalize-each">${item.name}</p>
                         </div>
                         <span class="price">₦${totalPrice}</span>
                     </div>
                 </li>
                 <div class="d-flex justify-between px-30" data-product-id="${item.product_id}">
-                    <div class="py-15 text-grey "> ${item.name} x ${item.yards}</div>
+                    <div class="py-15 text-grey capitalize-each"> ${item.name} x ${item.yards}</div>
                     <div class="py-15 text-grey price">${totalPrice}</div>
                 </div>
             `);
@@ -373,6 +376,7 @@ function removeCartItem(productId) {
     displayCheckoutItems();
     updateCheckoutTotal();
     updateCartButtonText(productId);
+    capitalizeEachWordByClass('capitalize-each');
 
     showNotification('Product removed from cart.', 'error');
 }
@@ -427,6 +431,7 @@ function updateYards(productId, change) {
     updateCartTotal();
     displayCartItems();
     displayCartHeader();
+    capitalizeEachWordByClass('capitalize-each');
 }
 
 // Apply Coupon
@@ -651,6 +656,10 @@ $('#checkoutForm').on('submit', function (event) {
     });
 });
 // Submit form for payment end
+
+
+// Example usage
+
 
 // ======================== Event Listeners ========================
 

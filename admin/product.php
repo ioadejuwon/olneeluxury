@@ -203,7 +203,7 @@ $fname = $row['fname'];
                           </div>
                         </div>
                         <div class="productCard__content mt-15">
-                          <h4 class="text-17 fw-600 mt- text-line-clamp-1 mb-1"><?php echo $product_name; ?></h4>
+                          <h4 class="text-17 fw-600 mt- text-line-clamp-1 mb-1 capitalize-each"><?php echo $product_name; ?></h4>
                           <div class="text-17 fw-500 text-deep-green-1 mt- price">
                             <?php echo $price; ?>
                           </div>
