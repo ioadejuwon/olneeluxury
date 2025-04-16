@@ -1,16 +1,16 @@
 <div id="notification-container"></div>
 
 <header data-anim="fade" data-add-bg="bg-whte" class="header -type-4 -shadow bg-white border-bottom-light js-header is-in-view d-non justify-center">
-  <div class="container md:py-10">
+  <div class="container md:py-20">
     <div class="row justify-between items-center">
 
       <div class="col-auto">
         <div class="header-left d-flex items-center">
           <div class="header__logo pr-0 xl:pr-0 md:pr-0 pt-">
             <a data-barba="" href="<?php echo HOME ?>">
-              <!-- <img class="no-big-screen" src="admin/assets/img/logo.png" alt="logo" width="40%"> -->
-              <!-- <img class="lg:d-none" src="admin/assets/img/logo.png" alt="logo" width="30%"> -->
-              <img src="admin/assets/img/logo.png" alt="logo" width="30%">
+              <img class="no-big-screen" src="admin/assets/img/logo.png" alt="logo" style="width: 90px">
+              <img class="lg:d-none" src="admin/assets/img/logo.png" alt="logo" style="width: 90px">
+              <!-- <img src="admin/assets/img/logo.png" alt="logo" width="30%"> -->
               <!-- <h2>Olnee Luxury</h2> -->
             </a>
           </div>
@@ -94,7 +94,7 @@
         <div class="header-right d-flex items-center">
           <div class="header-right__icons text-white d-flex items-center">
 
-            <div class="pr-20 sm:pr-15 no-icon">
+            <div class="pr-20 sm:pr-15 lg:d-non">
               <button class="d-flex items-center text-dark-1" data-el-toggle=".js-search-toggle">
                 <i class="text-20 icon icon-search"></i>
               </button>
@@ -146,7 +146,7 @@
               </div>
             </div>
 
-            <div class="relative  px-20 sm:px-15 -before-border no-icon-2">
+            <div class="relative  px-20 sm:px-15 -before-border lg:d-non">
               <button class="d-flex items-center  text-dark-1" data-el-toggle=".js-cart-toggle">
                 <!-- <button class="d-flex items-center text-dark-1 cart-toggle-btn"> -->
                 <i class="text-20 icon icon-basket"></i>
@@ -159,8 +159,6 @@
               <div class="toggle-element js-cart-toggle js-click-dropdown">
 
                 <div class="header-cart bg-white -dark-bg-dark-1 rounded-8 outline-green" style="width: 500px;">
-
-
                   <section class=" section-b mt-30 tf-page-header bg-light-3 ml-10 mr-10 rounded-8" style="display: none; ">
                     <!-- <div class="section-bg__item bg-light-6"></div> -->
                     <div class="container ">
@@ -170,7 +168,6 @@
                             <h4 class="sectionTitle__titl ">Your cart is empty</h4>
                             <p class="sectionTitle__text h6">You may check out all the available products and add some to your cart from the catalog</p>
                           </div>
-
                         </div>
                       </div>
                     </div>
