@@ -9,7 +9,7 @@
   <script src="admin/assets/js/mainw.js"></script>
   <script src="admin/assets/js/scripts0.js"></script>
   
-  <script src="admin/api/miniapi325.js"></script>
+  <script src="admin/api/miniapi3259.js"></script>
   <script src="admin/api/minicartl.js"></script>
   
 </body>

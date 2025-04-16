@@ -8,7 +8,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="assets/js/vendors.js"></script>
     <script src="assets/js/mainw.js"></script>
-    <script src="api/miniapi325.js"></script>
+    <script src="api/miniapi3259.js"></script>
     <script src="assets/js/scripts0.js"></script>
 </body>
 </html>
