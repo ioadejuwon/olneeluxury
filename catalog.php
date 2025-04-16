@@ -182,15 +182,16 @@ include_once "comp/header.php";
 
                 <div class="row y-gap-30 pt-">
                     <?php
-                    $records_per_page = 3; // Set the number of records per page
+                    $records_per_page = 10; // Set the number of records per page
                     $current_page = isset($_GET['page']) ? (int) $_GET['page'] : 1; // Get the current page number from the query string or default to 1
                     $offset = ($current_page - 1) * $records_per_page; // Calculate the offset
 
-                    // $prodsql = mysqli_query($conn, "SELECT * FROM products WHERE availability = 1");
-                    $prodsql = mysqli_query($conn, "SELECT * FROM products ORDER BY RAND() LIMIT $records_per_page OFFSET $offset");
+                    $query = mysqli_query($conn, "SELECT * FROM products ORDER BY RAND() LIMIT $records_per_page OFFSET $offset");
+
+                    $prodsql = mysqli_query($conn, "SELECT * FROM products ");
                     $total_products = mysqli_num_rows($prodsql);
                     $total_pages = ceil($total_products / $records_per_page); // Calculate the total number of pages
-                    while ($row_prod = mysqli_fetch_assoc($prodsql)) {
+                    while ($row_prod = mysqli_fetch_assoc($query)) {
                         $product_name = $row_prod['producttitle']; // Assuming the column name for the product name is 'product_name'
                         $price = $row_prod['price']; // Assuming the column name for the original price is 'original_price'
                         $dis_price = $row_prod['discount_price']; // Assuming the column name for the discounted price is 'discounted_price'
@@ -251,57 +252,66 @@ include_once "comp/header.php";
                     </div>
                 </div>
 
-                <div class="row justify-center pt-60 lg:pt-40">
-                    <div class="col-auto">
+                <?php
+                if ($total_pages > 1) {
 
 
-                        <div class="pagination -buttons">
-                            <?php if ($current_page > 1) : ?>
-                                <a href="?page=<?php echo ($current_page - 1); ?>">
-                                    <button class="pagination__button -prev">
-                                        <i class="icon icon-chevron-left"></i>
-                                    </button>
-                                </a>
-                            <?php endif; ?>
+                ?>
 
-                            <div class="pagination__count">
-                                <?php
-                                $pages_to_show = 2; // Number of pages to show around the current page
 
-                                // Show the first page and ellipsis if necessary
-                                if ($current_page > $pages_to_show + 1) {
-                                    echo '<a href="?page=1">1</a>';
-                                    if ($current_page > $pages_to_show + 2) {
-                                        echo '<span>...</span>';
+                    <div class="row justify-center pt-60 lg:pt-40">
+                        <div class="col-auto">
+                            <div class="pagination -buttons">
+                                <?php if ($current_page > 1) : ?>
+                                    <a href="?page=<?php echo ($current_page - 1); ?>">
+                                        <button class="pagination__button -prev">
+                                            <i class="icon icon-chevron-left"></i>
+                                        </button>
+                                    </a>
+                                <?php endif; ?>
+
+                                <div class="pagination__count">
+                                    <?php
+                                    $pages_to_show = 2; // Number of pages to show around the current page
+
+                                    // Show the first page and ellipsis if necessary
+                                    if ($current_page > $pages_to_show + 1) {
+                                        echo '<a href="?page=1">1</a>';
+                                        if ($current_page > $pages_to_show + 2) {
+                                            echo '<span>...</span>';
+                                        }
                                     }
-                                }
 
-                                // Show pages around the current page
-                                for ($i = max(1, $current_page - $pages_to_show); $i <= min($total_pages, $current_page + $pages_to_show); $i++) {
-                                    echo '<a href="?page=' . $i . '"' . ($i == $current_page ? ' class="-count-is-active"' : '') . '>' . $i . '</a>';
-                                }
-
-                                // Show the last page and ellipsis if necessary
-                                if ($current_page < $total_pages - $pages_to_show) {
-                                    if ($current_page < $total_pages - $pages_to_show - 1) {
-                                        echo '<span>...</span>';
+                                    // Show pages around the current page
+                                    for ($i = max(1, $current_page - $pages_to_show); $i <= min($total_pages, $current_page + $pages_to_show); $i++) {
+                                        echo '<a href="?page=' . $i . '"' . ($i == $current_page ? ' class="-count-is-active"' : '') . '>' . $i . '</a>';
                                     }
-                                    echo '<a href="?page=' . $total_pages . '">' . $total_pages . '</a>';
-                                }
-                                ?>
+
+                                    // Show the last page and ellipsis if necessary
+                                    if ($current_page < $total_pages - $pages_to_show) {
+                                        if ($current_page < $total_pages - $pages_to_show - 1) {
+                                            echo '<span>...</span>';
+                                        }
+                                        echo '<a href="?page=' . $total_pages . '">' . $total_pages . '</a>';
+                                    }
+                                    ?>
+                                </div>
+
+                                <?php if ($current_page < $total_pages) : ?>
+                                    <a href="?page=<?php echo ($current_page + 1); ?>">
+                                        <button class="pagination__button -next">
+                                            <i class="icon icon-chevron-right"></i>
+                                        </button>
+                                    </a>
+                                <?php endif; ?>
                             </div>
 
-                            <?php if ($current_page < $total_pages) : ?>
-                                <a href="?page=<?php echo ($current_page + 1); ?>">
-                                    <button class="pagination__button -next">
-                                        <i class="icon icon-chevron-right"></i>
-                                    </button>
-                                </a>
-                            <?php endif; ?>
                         </div>
-
                     </div>
-                </div>
+
+                <?php
+                }
+                ?>
 
             </div>
         </div>
