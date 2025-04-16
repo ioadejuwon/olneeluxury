@@ -14,7 +14,7 @@
       <div class="row y-gap-30 justify-center pt-10 lg:pt-20" style="margin:0% auto;" data-anim-child="slide-up delay-2">
 
         <?php
-        $prodsql = mysqli_query($conn, "SELECT * FROM products LIMIT 4");
+        $prodsql = mysqli_query($conn, "SELECT * FROM products ORDER BY RAND() LIMIT 4 ");
         while ($row_prod = mysqli_fetch_assoc($prodsql)) {
           $product_name = $row_prod['producttitle']; // Assuming the column name for the product name is 'product_name'
           $price = $row_prod['price']; // Assuming the column name for the original price is 'original_price'

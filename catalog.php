@@ -182,7 +182,7 @@ include_once "comp/header.php";
 
                 <div class="row y-gap-30 pt-">
                     <?php
-                    $records_per_page = 15; // Set the number of records per page
+                    $records_per_page = 20; // Set the number of records per page
                     $current_page = isset($_GET['page']) ? (int) $_GET['page'] : 1; // Get the current page number from the query string or default to 1
                     $offset = ($current_page - 1) * $records_per_page; // Calculate the offset
 
@@ -230,27 +230,7 @@ include_once "comp/header.php";
                     ?>
                 </div>
 
-                <div class="row justify-center pt-60 lg:pt-40 d-none">
-                    <div class="col-auto">
-                        <div class="pagination -buttons">
-                            <button class="pagination__button -prev">
-                                <i class="icon icon-chevron-left"></i>
-                            </button>
-
-                            <div class="pagination__count">
-                                <a href="#">1</a>
-                                <a class="-count-is-active" href="#">2</a>
-                                <a href="#">3</a>
-                                <span>...</span>
-                                <a href="#">67</a>
-                            </div>
-
-                            <button class="pagination__button -next">
-                                <i class="icon icon-chevron-right"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+         
 
                 <?php
                 if ($total_pages > 1) {
