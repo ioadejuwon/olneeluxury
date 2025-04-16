@@ -416,6 +416,20 @@ function fetchFiltered(timeframe) {
 
 
 
+function capitalizeEachWordByClass(className) {
+    const elements = document.querySelectorAll(`.${className}`);
+
+    elements.forEach(element => {
+        element.textContent = element.textContent
+            .split(' ')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+            .join(' ');
+    });
+}
+
+// Example usage
+capitalizeEachWordByClass('capitalize-each');
+
 
 // const grid = document.querySelector('.grid');
 
