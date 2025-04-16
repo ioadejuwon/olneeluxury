@@ -156,7 +156,7 @@
               </button>
 
               <!-- <div class="toggle-element js-cart-toggle"> -->
-              <div class="toggle-element js-cart-toggle js-click-dropdown">
+              <div class="toggle-element js-cart-toggle js-click-dropdown js-stay-open" id="cartDropdown">
 
                 <div class="header-cart bg-white -dark-bg-dark-1 rounded-8 outline-green" style="width: 500px;">
                   <section class=" section-b mt-30 tf-page-header bg-light-3 ml-10 mr-10 rounded-8" style="display: none; ">

@@ -86,6 +86,6 @@ include_once "comp/header.php";
 
   <?php
   include_once "comp/cart.php";
-  include_once "comp/footer.php";
+  // include_once "comp/footer.php";
   include_once "comp/tail.php";
   ?>

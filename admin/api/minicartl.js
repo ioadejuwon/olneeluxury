@@ -226,6 +226,7 @@ function displayCartItems() {
                         <p class="cart-total price">${totalPrice}</p>
                     </td>
                     <td  class="pt-30 md:pt-30">
+                    
                         <button class='remove-cart link remove' onclick="removeCartItem('${item.product_id}')"><img src="admin/assets/img/icons/close.png" alt="close" width="30%"></button>
                     </td>
                 </tr>
@@ -276,7 +277,11 @@ function displayCartHeader() {
                             </div>
                     
                             <div class="col-1 text-right">
-                                <button class='remove-cart link remove' onclick="removeCartItem('${item.product_id}')"><img src="admin/assets/img/icons/close.png" alt="close" width="70%" style="min-width: 14px;"></button>
+                                <button class='remove-cart link remove' onclick="removeCartItem('${item.product_id}')">
+                                    <img src="admin/assets/img/icons/close.png" alt="close" width="70%" style="min-width: 14px;">
+                                </button>
+                             
+
                             </div>
                         </div>
                     </div>
@@ -289,6 +294,22 @@ function displayCartHeader() {
     updateCartTotal();
     formatAllPrices(); // Ensure prices are formatted
 }
+
+// document.addEventListener('click', function (e) {
+//     console.log('I got here');
+//     const removeBtn = e.target.closest('.remove-cart');
+//     if (removeBtn) {
+//       e.stopPropagation(); // prevent cart dropdown from closing
+  
+//       const productId = removeBtn.getAttribute('data-product-id');
+//       if (productId) {
+//         console.log('None');
+//         removeCartItem(productId); // this should now work
+//       } else {
+//         console.warn("Missing data-product-id on .remove-cart button");
+//       }
+//     }
+//   });
 
 // ======================== Checkout Display ========================
 

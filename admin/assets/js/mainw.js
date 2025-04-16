@@ -683,9 +683,98 @@
   }
 
  
+  // function clickElToggle() {
+  //   const target = document.querySelectorAll('[data-el-toggle]')
+  //   if (!target) return
+  
+  //   target.forEach(el => {
+  //     const attr = el.getAttribute('data-el-toggle')
+  //     const openElement = document.querySelector(attr)
+  
+  //     const attrActive = el.getAttribute('data-el-toggle-active')
+  //     const activeElement = document.querySelector(attrActive)
+      
+  //     el.addEventListener('click', () => {
+  //       const allDD = document.querySelectorAll('.js-click-dropdown.-is-el-visible')
+  //       if (allDD) {
+  //         allDD.forEach((el) => el.classList.remove('-is-el-visible'))
+  //       }
+        
+  //       const allActiveDD = document.querySelectorAll('.-is-dd-active')
+  //       if (allActiveDD) {
+  //         allActiveDD.forEach((el) => el.classList.remove('-is-dd-active'))
+  //       }
+  
+  //       openElement.classList.toggle('-is-el-visible')
+  //       if (activeElement) 
+  //         activeElement.classList.toggle('-is-dd-active')
+  //     })
+  //   });
+  // }
+
+  // function clickElToggle() {
+  //   const toggles = document.querySelectorAll('[data-el-toggle]');
+  //   if (!toggles) return;
+  
+  //   let currentlyOpen = null;
+  
+  //   toggles.forEach(toggle => {
+  //     const dropdownSelector = toggle.getAttribute('data-el-toggle');
+  //     const dropdown = document.querySelector(dropdownSelector);
+  
+  //     const activeSelector = toggle.getAttribute('data-el-toggle-active');
+  //     const activeElement = document.querySelector(activeSelector);
+  
+  //     toggle.addEventListener('click', (event) => {
+  //       event.stopPropagation();
+  
+  //       // Toggle dropdown visibility
+  //       const isOpen = dropdown.classList.contains('-is-el-visible');
+  
+  //       // Close all others
+  //       document.querySelectorAll('.js-click-dropdown.-is-el-visible').forEach(d => {
+  //         d.classList.remove('-is-el-visible');
+  //       });
+  //       document.querySelectorAll('.-is-dd-active').forEach(a => {
+  //         a.classList.remove('-is-dd-active');
+  //       });
+  
+  //       if (!isOpen) {
+  //         dropdown.classList.add('-is-el-visible');
+  //         if (activeElement) activeElement.classList.add('-is-dd-active');
+  //         currentlyOpen = { dropdown, toggle, activeElement };
+  //       } else {
+  //         currentlyOpen = null;
+  //       }
+  //     });
+  //   });
+  
+  //   document.addEventListener('click', (event) => {
+  //     if (
+  //       currentlyOpen &&
+  //       !currentlyOpen.dropdown.contains(event.target) &&
+  //       !currentlyOpen.toggle.contains(event.target)
+  //     ) {
+  //       currentlyOpen.dropdown.classList.remove('-is-el-visible');
+  //       if (currentlyOpen.activeElement) {
+  //         currentlyOpen.activeElement.classList.remove('-is-dd-active');
+  //       }
+  //       currentlyOpen = null;
+  //     }
+  //   });
+  
+  //   // 🔐 Prevent any clicks inside the dropdown from bubbling up and closing it
+  //   document.querySelectorAll('.js-click-dropdown').forEach(dropdown => {
+  //     dropdown.addEventListener('click', (event) => {
+  //       event.stopPropagation();
+  //     });
+  //   });
+  // }
+
+
   function clickElToggle() {
     const toggles = document.querySelectorAll('[data-el-toggle]');
-    if (!toggles) return;
+    if (!toggles.length) return;
   
     let currentlyOpen = null;
   
@@ -694,20 +783,19 @@
       const dropdown = document.querySelector(dropdownSelector);
   
       const activeSelector = toggle.getAttribute('data-el-toggle-active');
-      const activeElement = document.querySelector(activeSelector);
+      const activeElement = activeSelector ? document.querySelector(activeSelector) : null;
   
       toggle.addEventListener('click', (event) => {
         event.stopPropagation();
   
-        // Toggle dropdown visibility
         const isOpen = dropdown.classList.contains('-is-el-visible');
   
-        // Close all others
+        // Close all other dropdowns
         document.querySelectorAll('.js-click-dropdown.-is-el-visible').forEach(d => {
-          d.classList.remove('-is-el-visible');
+          if (d !== dropdown) d.classList.remove('-is-el-visible');
         });
         document.querySelectorAll('.-is-dd-active').forEach(a => {
-          a.classList.remove('-is-dd-active');
+          if (a !== activeElement) a.classList.remove('-is-dd-active');
         });
   
         if (!isOpen) {
@@ -715,11 +803,14 @@
           if (activeElement) activeElement.classList.add('-is-dd-active');
           currentlyOpen = { dropdown, toggle, activeElement };
         } else {
+          dropdown.classList.remove('-is-el-visible');
+          if (activeElement) activeElement.classList.remove('-is-dd-active');
           currentlyOpen = null;
         }
       });
     });
   
+    // Close dropdown if clicked outside
     document.addEventListener('click', (event) => {
       if (
         currentlyOpen &&
@@ -734,13 +825,95 @@
       }
     });
   
-    // 🔐 Prevent any clicks inside the dropdown from bubbling up and closing it
+    // Prevent clicks inside dropdown from closing it
     document.querySelectorAll('.js-click-dropdown').forEach(dropdown => {
       dropdown.addEventListener('click', (event) => {
         event.stopPropagation();
       });
     });
+  
+    // ✅ Event delegation for remove-cart buttons
+    // document.addEventListener('click', function (e) {
+    //   const removeBtn = e.target.closest('.remove-cart');
+    //   if (removeBtn) {
+    //     e.stopPropagation(); // 👈 Important: prevent dropdown close
+  
+    //     const productId = removeBtn.getAttribute('data-product-id');
+    //     if (productId) {
+    //       removeCartItem(productId); // ✅ Call your existing function
+    //     }
+    //   }
+    // });
+    
   }
+  
+  // // Call the function when DOM is ready
+  // document.addEventListener('DOMContentLoaded', () => {
+  //   clickElToggle();
+  // });
+
+  
+  // function clickElToggle() {
+  //   const toggles = document.querySelectorAll('[data-el-toggle]');
+  //   if (!toggles) return;
+  
+  //   let currentlyOpen = null;
+  
+  //   toggles.forEach(toggle => {
+  //     const dropdownSelector = toggle.getAttribute('data-el-toggle');
+  //     const dropdown = document.querySelector(dropdownSelector);
+  
+  //     const activeSelector = toggle.getAttribute('data-el-toggle-active');
+  //     const activeElement = document.querySelector(activeSelector);
+  
+  //     toggle.addEventListener('click', (event) => {
+  //       event.stopPropagation();
+  
+  //       const isOpen = dropdown.classList.contains('-is-el-visible');
+  
+  //       // Close all other dropdowns
+  //       document.querySelectorAll('.js-click-dropdown.-is-el-visible').forEach(d => {
+  //         if (d !== dropdown) d.classList.remove('-is-el-visible');
+  //       });
+  
+  //       document.querySelectorAll('.-is-dd-active').forEach(a => {
+  //         if (a !== activeElement) a.classList.remove('-is-dd-active');
+  //       });
+  
+  //       if (!isOpen) {
+  //         dropdown.classList.add('-is-el-visible');
+  //         if (activeElement) activeElement.classList.add('-is-dd-active');
+  //         currentlyOpen = { dropdown, toggle, activeElement };
+  //       } else {
+  //         dropdown.classList.remove('-is-el-visible');
+  //         if (activeElement) activeElement.classList.remove('-is-dd-active');
+  //         currentlyOpen = null;
+  //       }
+  //     });
+  //   });
+  
+  //   // Handle click outside
+  //   document.addEventListener('click', (event) => {
+  //     if (!currentlyOpen) return;
+  
+  //     const { dropdown, toggle, activeElement } = currentlyOpen;
+  
+  //     const clickedInsideDropdown = dropdown.contains(event.target);
+  //     const clickedToggle = toggle.contains(event.target);
+  
+  //     const isSticky = dropdown.classList.contains('js-stay-open'); // Use this for cart
+  
+  //     if (!clickedInsideDropdown && !clickedToggle) {
+  //       if (!isSticky) {
+  //         dropdown.classList.remove('-is-el-visible');
+  //         if (activeElement) activeElement.classList.remove('-is-dd-active');
+  //         currentlyOpen = null;
+  //       }
+  //     }
+  //   });
+  // }
+  
+  
   
 
   function dropDown() {
