@@ -102,9 +102,10 @@
               <div class="toggle-element js-search-toggle">
                 <div class="header-search pt-90 bg-white shadow-4">
                   <div class="container">
-                    <form action="<?php echo SEARCH ?>">
+                    
                       <div class="header-search__field">
                         <div class="icon icon-search text-dark-1"></div>
+                        <form action="<?php echo SEARCH ?>">
                         <input type="text"
                           name="s"
                           value="<?php
@@ -114,12 +115,12 @@
                                   ?>"
                           class="col-12 text-18 lh-12 text-dark-1 fw-500"
                           placeholder="What products are you looking for?">
-
-                        <button class="d-flex items-center justify-center size-40 rounded-full bg-purple-3" data-el-toggle=".js-search-toggle">
+                          </form>
+                        <button class="d-flex items-center justify-center size-40 rounded-full" data-el-toggle=".js-search-toggle">
                           <img src="admin/assets/img/icons/close.png" alt="icon" width="50%">
                         </button>
                       </div>
-                    </form>
+
 
                     <div class="header-search__content mt-30">
                       <div class="text-17 text-dark-1 fw-500">Popular Products Now</div>
