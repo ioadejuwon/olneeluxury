@@ -182,7 +182,7 @@ include_once "comp/header.php";
 
                 <div class="row y-gap-30 pt-">
                     <?php
-                    $records_per_page = 1; // Set the number of records per page
+                    $records_per_page = 3; // Set the number of records per page
                     $current_page = isset($_GET['page']) ? (int) $_GET['page'] : 1; // Get the current page number from the query string or default to 1
                     $offset = ($current_page - 1) * $records_per_page; // Calculate the offset
 
