@@ -113,12 +113,50 @@ $current_url = $protocol . $host . $uri; // Combine the protocol, host, and URI 
 // $t = $pagetitle;
 
 
+// function timeAgo($datetime, $full = false) {
+//     $now = new DateTime(); // Current time
+//     $ago = new DateTime($datetime); // Input time
+//     $ago->modify('-1 hour'); // Adjust for server being 1 hour behind
+//     $diff = $now->diff($ago); // Difference between the two times
+//      // Initialize the array!
+//      $timeAgo = [];
+//     // Time units
+//     $units = [
+//         'year' => $diff->y,
+//         'month' => $diff->m,
+//         'day' => $diff->d,
+//         'hour' => $diff->h,
+//         'minute' => $diff->i,
+//         'second' => $diff->s,
+//     ];
+//     // Filter out empty units
+//     foreach ($units as $unit => $value) {
+//         if ($value) {
+//             $timeAgo[] = $value . ' ' . $unit . ($value > 1 ? 's' : '');
+//         }
+//     }
+//     if (!$full) {
+//         $timeAgo = array_slice($timeAgo, 0, 1); // Show only the first non-zero unit
+//     }
+//     return $timeAgo ? implode(', ', $timeAgo) . ' ago' : 'Just now';
+// }
+
 function timeAgo($datetime, $full = false) {
-    $now = new DateTime(); // Current time
-    $ago = new DateTime($datetime); // Input time
-    $ago->modify('-1 hour'); // Adjust for server being 1 hour behind
-    $diff = $now->diff($ago); // Difference between the two times
-    // Time units
+    $now = new DateTime();
+    
+    // ADD THIS: if it's a number (timestamp), format it
+    if (is_numeric($datetime)) {
+        $datetime = date('Y-m-d H:i:s', $datetime);
+    }
+
+    $ago = new DateTime($datetime);
+    $ago->modify('-1 hour'); // server adjustment
+    $isFuture = $ago > $now;
+
+    $diff = $now->diff($ago);
+
+    $timeAgo = [];
+
     $units = [
         'year' => $diff->y,
         'month' => $diff->m,
@@ -127,14 +165,18 @@ function timeAgo($datetime, $full = false) {
         'minute' => $diff->i,
         'second' => $diff->s,
     ];
-    // Filter out empty units
     foreach ($units as $unit => $value) {
         if ($value) {
             $timeAgo[] = $value . ' ' . $unit . ($value > 1 ? 's' : '');
         }
     }
     if (!$full) {
-        $timeAgo = array_slice($timeAgo, 0, 1); // Show only the first non-zero unit
+        $timeAgo = array_slice($timeAgo, 0, 1);
     }
-    return $timeAgo ? implode(', ', $timeAgo) . ' ago' : 'just now';
+
+    if ($timeAgo) {
+        return implode(', ', $timeAgo) . ($isFuture ? ' from now' : ' ago');
+    } else {
+        return 'just now';
+    }
 }

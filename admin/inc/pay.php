@@ -148,22 +148,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             $res = json_decode($flutterwave_response);
             if ($res->status === 'success') {
-                echo json_encode([
+                $response = [
                     'status' => 'success',
+                    'message' => 'Redirecting to payment page...',
                     'link' => $res->data->link
-                ]);
-                exit;
+                ];
+                echo json_encode($response);
+                // exit;
             } else {
                 throw new Exception("Payment failed: " . $res->message);
             }
         } elseif (in_array($paymentOption, [2, 3])) {
             // Direct Transfer or Cash on Delivery
-            echo json_encode([
+            $response = [
                 'status' => 'success',
                 'message' => 'Proceed with your selected payment option',
                 'link' => ORDER . $order_id
-            ]);
-            exit;
+            ];
+            echo json_encode($response);
+            // exit;
         } elseif ($paymentOption === 4) {
             // WhatsApp Order
             $plural_mainMSG = ($itemCount > 1) ? "these items:" : "this item:";
@@ -174,14 +177,131 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $mainMSG .= "*DELIVERY DETAILS:*\r\nName: $fullName\r\nPhone: $phone\r\nAddress: $location\r\nNote: $notes\r\n";
             $mainMSG .= "---\r\nView my order: " . ORDER . $order_id;
 
-            echo json_encode([
+            $response = [
                 'status' => 'success',
                 'message' => 'Redirecting to WhatsApp...',
                 'link' => 'https://api.whatsapp.com/send?phone=' . PHONE . '&text=' . rawurlencode($mainMSG)
-            ]);
-            exit;
+            ];
+            echo json_encode($response);
+            // exit;
         } else {
             throw new Exception("Invalid payment option selected.");
+        }
+
+
+        $templatePath = '../email/checkorder.html';
+
+        if (!file_exists($templatePath)) {
+            $response['status'] = 'error';
+            $response['message'] = 'Email template not found: ' . $templatePath;
+            exit;
+        } else {
+            $subject = "We just recieved your order #" . $orderid . " 📦📦";
+            $emailSent = sendNewMail(
+                $to = $customeremail,
+                $fname,
+                $subject,
+                $templatePath, // Path to the email template
+                $response,
+
+                [
+                    'COMPANY' => COMPANY,
+                    'BASE_URL' => BASE_URL,
+                    'ORDER_ITEMS' => $sendMail,
+                    'ORDER_LINK' => ORDER . $order_id,
+                    'CUSTOMER_NAME' => $fullName,
+                    'CUSTOMER_PHONE' => $phone,
+                    'YEAR' => FOOTERYEAR
+                ],
+                BRAND_EMAIL,
+                COMPANY,
+                REPLY_TO,
+            );
+            if ($emailSent) {
+                $response['status'] = 'success';
+                $response['message'] = 'Order status updated successfully.';
+
+                $templatePath = '../email/neworder.html';
+
+                if (!file_exists($templatePath)) {
+                    $response['status'] = 'error';
+                    $response['message'] = 'Email template not found: ' . $templatePath;
+                    exit;
+                } else {
+                    $subject = "You have a new order #" . $orderid . " 📦📦";
+                    $emailSent = sendNewMail(
+                        $to = BRAND_EMAIL,
+                        COMPANY,
+                        $subject,
+                        $templatePath, // Path to the email template
+                        $response,
+
+                        [
+                            'COMPANY' => COMPANY,
+                            'BASE_URL' => BASE_URL,
+                            'ORDER_ITEMS' => $sendMail,
+                            'ORDER_LINK' => ORDER_DETAILS . $order_id,
+                            'CUSTOMER_NAME' => $fullName,
+                            'CUSTOMER_PHONE' => $phone,
+                            'YEAR' => FOOTERYEAR
+                        ],
+                        BRAND_EMAIL,
+                        COMPANY,
+                        REPLY_TO,
+                    );
+                    if ($emailSent) {
+                        $response['status'] = 'success';
+                        $response['message'] = 'Order status updated successfully.';
+                        // $response['message'] = 'Email sent successfully.';
+                    } else {
+                        $response['status'] = 'info';
+                        $response['message'] = "Order Updated but Email failed: " . ($response['email_error'] ?? 'Unknown error');
+                    }
+                }
+
+                // $response['message'] = 'Email sent successfully.';
+            } else {
+                $response['status'] = 'info';
+                $response['message'] = "Order Updated but Email failed: " . ($response['email_error'] ?? 'Unknown error');
+            }
+
+            // $templatePath = '../email/neworder.html';
+
+            // if (!file_exists($templatePath)) {
+            //     $response['status'] = 'error';
+            //     $response['message'] = 'Email template not found: ' . $templatePath;
+            //     exit;
+            // } else {
+            //     $subject = "We just recieved your order #" . $orderid . " 📦📦";
+            //     $emailSent = sendNewMail(
+            //         $to = $customeremail,
+            //         $fname,
+            //         $subject,
+            //         $templatePath, // Path to the email template
+            //         $response,
+
+            //         [
+            //             'COMPANY' => COMPANY,
+            //             'BASE_URL' => BASE_URL,
+            //             'ORDER_ITEMS' => $sendMail,
+            //             'ORDER_LINK' => ORDER_DETAILS . $order_id,
+            //             'CUSTOMER_NAME' => $fullName,
+            //             'CUSTOMER_PHONE' => $phone,
+            //             'YEAR' => FOOTERYEAR
+            //         ],
+            //         BRAND_EMAIL,
+            //         COMPANY,
+            //         REPLY_TO,
+            //     );
+            //     if ($emailSent) {
+            //         $response['status'] = 'success';
+            //         $response['message'] = 'Order status updated successfully.';
+            //         // $response['message'] = 'Email sent successfully.';
+            //     } else {
+            //         $response['status'] = 'info';
+            //         $response['message'] = "Order Updated but Email failed: " . ($response['email_error'] ?? 'Unknown error');
+            //     }
+            // }
         }
     } catch (Exception $e) {
         $conn->rollback();
