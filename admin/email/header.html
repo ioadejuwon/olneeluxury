@@ -72,43 +72,6 @@
 <body>
     <div class="email-container">
         <div class="email-header">
-            <img src="https://web.martville.app/email/img/logomail.png" alt="" style="width:100% !important"/>
+            <img src="{{BASE_URL}}admin/email/img/logomail.png" alt="" style="width:100% !important"/>
         </div>
-        <div class="email-body">
-            <p>Hello {{BUSINESS_NAME}},</p>
-            <p>
-                {{CUSTOMER_NAME}} just made payment online for #{{ORDER_ID}}.
-            </p>
-            <p>
-                You can use the button below to process their order.
-            </p>
-            <p style="text-align: center;">
-                <a href="{{ORDER_LINK}}" class="email-button">
-                    <strong>
-                        Process Order
-                    </strong>
-                </a>
-            </p>
-            <p>
-                If {{CUSTOMER_NAME}} has not reached out to you yet, you can reach out to them on here <a href="tel:{{CUSTOMER_PHONE}}">{{CUSTOMER_PHONE}}</a>.
-            </p>
-            <p>Thank you for being a valued customer!</p>
-            <p>Best regards,<br>MartVille.</p>
-        </div>
-        <div class="email-footer">
-            <p>&copy; {{YEAR}}  <a href="https://martville.app" style="text-decoration:none; color:#FCB514;">MartVille</a>. All rights reserved.</p>
-            <p>
-                <a href="https://instagram.com/usemartville" target="_blank" style="text-decoration:none;">
-                    <img src="https://web.martville.app/email/img/ig.png" width="20" height="20" alt="Instagram"/>
-                </a>
-                <a href="https://wa.me/2348108806808" target="_blank" style="text-decoration:none; margin-left: 32px;">
-                    <img src="https://web.martville.app/email/img/wa.png" width="20" height="20"  alt="WhatsApp"/>
-                </a>                      
-                <a href="https://twitter.com/usemartville" target="_blank" style="text-decoration:none; margin-left: 32px;">
-                    <img src="https://web.martville.app/email/img/x.png" width="20" height="20" alt="Twitter"/>
-                </a>
-            </p>
-        </div>
-    </div>
-</body>
-</html>
+        

@@ -1,23 +1,25 @@
 <div class="email-body">
-    <p>Hello {{COMPANY}},</p>
+    <p>Hello {{CUSTOMER_NAME}},</p>
     <p>
-        You just received a new order from {{CUSTOMER_NAME}}.
+        We have recieved your order with #{{ORDER_ID}}.
     </p>
     <p>
-        They got the following items:
+        You got the following items:
         <br />
         {{ORDER_ITEMS}}
+    </p>
+    <p>
+        You can use the button below to check your order.
     </p>
     <p style="text-align: center;">
         <a href="{{ORDER_LINK}}" class="email-button">
             <strong>
-                Process Order
+                Check Order
             </strong>
         </a>
     </p>
     <p>
-        If {{CUSTOMER_NAME}} has not reached out to you yet, you can reach out to them on here <a
-            href="tel:{{CUSTOMER_PHONE}}">{{CUSTOMER_PHONE}}</a>.
+        If you have made payment, there is nothing more to do, but if you haven't, please make payment so your order can be processed.
     </p>
     <p>Thank you for being a valued customer!</p>
     <p>Best regards,<br>{{COMPANY}}.</p>
