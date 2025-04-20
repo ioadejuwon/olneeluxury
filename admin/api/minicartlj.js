@@ -450,7 +450,7 @@ function applyCoupon() {
             if (response.status === 'success') {
                 // Store discount details in local storage
                 localStorage.setItem("cartDiscount", JSON.stringify(response.discount));
-                showNotification('Discount Applied: ' + response.discount.couponName, 'info');
+                showNotification('Discount Applied: ' + response.discount.couponName, 'success');
                 updateCartTotal();
             } else if (response.status == 'info') {
                 showNotification(response.message, 'info'); // Yellow notification

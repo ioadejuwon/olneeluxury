@@ -137,7 +137,7 @@ function hasVisitedRecently(key, expirationTime = 120000) {
 //   });
 
 function capitalizeEachWordByClass(className) {
-    console.log('I got heeree...')
+    // console.log('I got heeree...')
     const elements = document.querySelectorAll(`.${className}`);
 
     elements.forEach(element => {
