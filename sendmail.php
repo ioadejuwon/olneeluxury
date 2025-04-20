@@ -8,8 +8,22 @@ require 'vendor/autoload.php'; // Load PHPMailer
 include_once 'admin/inc/env.php'; // Load DRC
 
 
-function sendNewMail($to, $toName, $subject, $htmlFile, &$response, $placeholders = [], $from = BRAND_EMAIL, $fromName = COMPANY, $replyTo = null, $cc = [], $bcc = [], $attachments = [])
-{
+function sendNewMail(
+    $to,
+    $toName,
+    $subject,
+    $bodyFile,
+    &$response,
+    $placeholders = [],
+    $from = BRAND_EMAIL,
+    $fromName = COMPANY,
+    $replyTo = null,
+    $cc = [],
+    $bcc = [],
+    $attachments = [],
+    $headerFile = 'admin/email/header.html',
+    $footerFile = 'admin/email/footer.html'
+) {
     $mail = new PHPMailer(true);
     // $mail->SMTPDebug = 3; // Shows connection and authentication steps
     // $mail->Debugoutput = function ($str, $level) {
@@ -52,16 +66,35 @@ function sendNewMail($to, $toName, $subject, $htmlFile, &$response, $placeholder
         }
 
         // Load email content from HTML file
-        if (!file_exists($htmlFile)) {
-            throw new Exception("Email template file not found: $htmlFile");
-        }
+        // if (!file_exists($htmlFile)) {
+        //     throw new Exception("Email template file not found: $htmlFile");
+        // }
 
-        $message = file_get_contents($htmlFile);
+        // $message = file_get_contents($htmlFile);
 
         // Replace placeholders in the HTML content
         // foreach ($placeholders as $key => $value) {
         //     $message = str_replace("{{{$key}}}", $value, $message);
         // }
+
+        // Load header, body, and footer
+        if (!file_exists($bodyFile)) {
+            throw new Exception("Email body template not found: $bodyFile");
+        }
+        if (!file_exists($headerFile)) {
+            throw new Exception("Email header template not found: $headerFile");
+        }
+        if (!file_exists($footerFile)) {
+            throw new Exception("Email footer template not found: $footerFile");
+        }
+
+        $header = file_get_contents($headerFile);
+        $body = file_get_contents($bodyFile);
+        $footer = file_get_contents($footerFile);
+
+        // Merge them together
+        $message = $header . $body . $footer;
+
 
         foreach ($placeholders as $key => $value) {
             $message = str_replace("{{{$key}}}", $value ?? '', $message);
@@ -79,7 +112,7 @@ function sendNewMail($to, $toName, $subject, $htmlFile, &$response, $placeholder
         // error_log("SMTP Username: " . $mail->Username);
         // error_log("SMTP Port: " . $mail->Port);
         // error_log("SMTP Secure: " . $mail->SMTPSecure);
-        
+
         $mail->send();
         return true;
     } catch (Exception $e) {
