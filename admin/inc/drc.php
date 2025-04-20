@@ -150,7 +150,7 @@ function timeAgo($datetime, $full = false) {
     }
 
     $ago = new DateTime($datetime);
-    $ago->modify('-2 hour'); // server adjustment
+    // $ago->modify('- hour'); // server adjustment
     $isFuture = $ago > $now;
 
     $diff = $now->diff($ago);
