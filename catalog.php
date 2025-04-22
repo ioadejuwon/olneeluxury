@@ -230,15 +230,11 @@ include_once "comp/header.php";
                     ?>
                 </div>
 
-         
+
 
                 <?php
                 if ($total_pages > 1) {
-
-
                 ?>
-
-
                     <div class="row justify-center pt-60 lg:pt-40">
                         <div class="col-auto">
                             <div class="pagination -buttons">
@@ -277,18 +273,21 @@ include_once "comp/header.php";
                                     ?>
                                 </div>
 
-                                <?php if ($current_page < $total_pages) : ?>
+                                <?php if ($current_page < $total_pages) { ?>
                                     <a href="?page=<?php echo ($current_page + 1); ?>">
                                         <button class="pagination__button -next">
                                             <i class="icon icon-chevron-right"></i>
                                         </button>
                                     </a>
-                                <?php endif; ?>
+                                <?php }else{
+                                    echo '<button class="pagination__button -next" disabled>
+                                            <i class="icon icon-chevron-right"></i>
+                                        </button>';
+                                } ?>
                             </div>
 
                         </div>
                     </div>
-
                 <?php
                 }
                 ?>
