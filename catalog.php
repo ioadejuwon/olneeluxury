@@ -238,13 +238,23 @@ include_once "comp/header.php";
                     <div class="row justify-center pt-60 lg:pt-40">
                         <div class="col-auto">
                             <div class="pagination -buttons">
-                                <?php if ($current_page > 1) : ?>
+                                <?php
+                                if ($current_page > 1) {
+                                ?>
                                     <a href="?page=<?php echo ($current_page - 1); ?>">
                                         <button class="pagination__button -prev">
                                             <i class="icon icon-chevron-left"></i>
                                         </button>
                                     </a>
-                                <?php endif; ?>
+                                <?php
+                                } else {
+                                ?>
+                                    <button class="pagination__button -prev" disabled>
+                                        <i class="icon icon-chevron-left"></i>
+                                    </button>
+                                <?php
+                                }
+                                ?>
 
                                 <div class="pagination__count">
                                     <?php
@@ -273,17 +283,23 @@ include_once "comp/header.php";
                                     ?>
                                 </div>
 
-                                <?php if ($current_page < $total_pages) { ?>
+                                <?php
+                                if ($current_page < $total_pages) {
+                                ?>
                                     <a href="?page=<?php echo ($current_page + 1); ?>">
                                         <button class="pagination__button -next">
                                             <i class="icon icon-chevron-right"></i>
                                         </button>
                                     </a>
-                                <?php }else{
-                                    echo '<button class="pagination__button -next" disabled>
-                                            <i class="icon icon-chevron-right"></i>
-                                        </button>';
-                                } ?>
+                                <?php
+                                } else {
+                                ?>
+                                    <button class="pagination__button -next" disabled>
+                                        <i class="icon icon-chevron-right"></i>
+                                    </button>
+                                <?php
+                                }
+                                ?>
                             </div>
 
                         </div>
