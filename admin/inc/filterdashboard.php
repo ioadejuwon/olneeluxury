@@ -39,7 +39,7 @@ $order_amount = $orderrow['totalprice'];
 $total_amount =  $order_amount;
 
 // Fetch store visits
-$sql_store_visits = "SELECT COUNT(*) AS total_visits FROM olnee_storevisits WHERE backhalf = 'home'";
+$sql_store_visits = "SELECT COUNT(*) AS total_visits FROM olnee_storevisits WHERE backhalf = 'home' $whereClause";
 $stmt_visits = mysqli_prepare($conn, $sql_store_visits);
 mysqli_stmt_execute($stmt_visits);
 $result_visits = mysqli_stmt_get_result($stmt_visits);
