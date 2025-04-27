@@ -1,7 +1,7 @@
 <div id="notification-container"></div>
 
 <header data-anim="fade" data-add-bg="bg-whte" class="header -type-4 -shadow bg-white border-bottom-light js-header is-in-view d-non justify-center">
-  <div class="container md:py-20">
+  <div class="container xl:py-20 md:py-20">
     <div class="row justify-between items-center">
 
       <div class="col-auto">

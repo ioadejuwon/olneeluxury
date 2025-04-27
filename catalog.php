@@ -2,8 +2,8 @@
 $pagetitle = "Catalog";
 include_once "comp/head.php";
 include_once "comp/header.php";
-// $ref = $pagetitle;
-// require_once "admin/inc/storevisits.php";
+$ref = $pagetitle;
+require_once "admin/inc/storevisits.php";
 ?>
 
 <section class="page-header -type-1 mt-60 text-white">

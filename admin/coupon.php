@@ -45,102 +45,101 @@ $deliveries = mysqli_query($conn, "SELECT * FROM olnee_coupons");
 			<div class="rounded-16 text-white shadow-4 h-100">
 
 				<div class="table-responsive">
-				<table class="table w-100">
-					<thead>
-						<tr>
-							<!-- <th>S/N</th> -->
-							<th><span class="lg:d-none">Coupon&nbsp;</span>Name</th>
-							<th><span class="lg:d-none">Coupon&nbsp;</span>Code</th>
-							<th class="lg:d-none"><span class="lg:d-none">Coupon&nbsp;</span>Type</th>
-							<th><span class="lg:d-none">Coupon&nbsp;</span>Value</th>
-							<th class="text-right">Date<span class="lg:d-none">&nbsp;Created</span></th>
-						</tr>
-					</thead>
-					<tbody id="couponTableBody">
-						<?php
+					<table class="table w-100">
+						<thead>
+							<tr>
+								<!-- <th>S/N</th> -->
+								<th><span class="lg:d-none">Coupon&nbsp;</span>Name</th>
+								<th><span class="lg:d-none">Coupon&nbsp;</span>Code</th>
+								<th class="lg:d-none">Coupon Type</th>
+								<th><span class="lg:d-none">Coupon&nbsp;</span>Value</th>
+								<th class="lg:d-none">Coupon Expiry</th>
+								<th class="lg:d-none">Coupon Available</th>
+								<!-- <th class="text-right">Date<span class="lg:d-none">&nbsp;Created</span></th> -->
+							</tr>
+						</thead>
+						<tbody id="couponTableBody">
+							<?php
 
-						$couponquery = "SELECT * FROM olnee_coupons  ORDER BY created_at DESC ";
-						$couponresult = mysqli_query($conn, $couponquery);
-						$count_row_coupon = mysqli_num_rows($couponresult);
+							$couponquery = "SELECT * FROM olnee_coupons  ORDER BY created_at DESC ";
+							$couponresult = mysqli_query($conn, $couponquery);
+							$count_row_coupon = mysqli_num_rows($couponresult);
 
-						if ($count_row_coupon != 0) {
+							if ($count_row_coupon != 0) {
 
 
-							while ($row = mysqli_fetch_assoc($couponresult)) {
+								while ($row = mysqli_fetch_assoc($couponresult)) {
 
-								$couponName = $row['couponName'];
-								$couponCode = $row['couponCode'];
-								$couponType = $row['couponType'];
-								$couponValue = $row['couponValue'];
-								if ($couponType == 1) {
-									$couponType = 'Percentage Off';
-									$couponValue = $couponValue . '% off';
-									// $couponPercent = $row['couponPercent'];
-								} elseif ($couponType == 2) {
-									$couponType = 'Fixed amount';
-									// $couponPercent = $row['couponValue'];
-									$couponValue = NAIRA . number_format($couponValue, 2);
-								} else {
-									$couponType = 'Free Delivery';
-									$couponValue = 'Free Delivery';
+									$couponName = $row['couponName'];
+									$couponCode = $row['couponCode'];
+									$couponType = $row['couponType'];
+									$couponValue = $row['couponValue'];
+
+									$couponExpiry = $row['couponExpiry'];
+									$expiry = strtotime($couponExpiry);
+									$expiryDate = timeAgo($expiry);
+
+									$couponQuantity = $row['couponQuantity'];
+									if ($couponType == 1) {
+										$couponType = 'Percentage Off';
+										$couponValue = $couponValue . '% off';
+										// $couponPercent = $row['couponPercent'];
+									} elseif ($couponType == 2) {
+										$couponType = 'Fixed Amount';
+										// $couponPercent = $row['couponValue'];
+										$couponValue = NAIRA . number_format($couponValue, 2);
+									} else {
+										$couponType = 'Free Delivery';
+										$couponValue = 'Free Delivery';
+									}
+
+									$created_at = $row['created_at'];
+									$date = strtotime($created_at);
+									$dateformat = timeAgo($created_at);
+									// $dateformat = date('D., jS M.', $date);
+									// $biz_id = $row['$biz_id'];  
+
+
+							?>
+									<tr>
+										<td class="underline"><?php echo $couponName ?></td>
+										<td class="uppercase"><?php echo $couponCode ?></td>
+										<td class="lg:d-none"><?php echo $couponType ?></td>
+										<td><?php echo $couponValue ?></td>
+										<td class="lg:d-none"><?php echo $couponQuantity ?> coupons left</td>
+										<td class="lg:d-none"><?php echo $expiryDate ?></td>
+										
+										<!-- <td class="text-right"><?php echo $dateformat ?></td> -->
+
+									</tr>
+
+								<?php
 								}
-
-								$created_at = $row['created_at'];
-								$date = strtotime($created_at);
-								// $dateformat = date('D., jS M.', $date);
-								$dateformat = timeAgo($created_at);
-								// $biz_id = $row['$biz_id'];  
-
-
-						?>
-								<tr>
-
-									<td class="underline">
-										<?php echo $couponName ?>
+							} else {
+								// echo "No Coupon codes";
+								?>
+								<tr class="col-md-12 text-center">
+									<td colspan="5" class="p-0">
+										<div class="py-30 px-30 bg-light-4 rounded-8 border-light col-md-12 move-center">
+											<img src="assets/img/store.png" style="width:20%">
+											<h3 class=" text- fw-500 mt-20">
+												No Coupon Codes yet!
+											</h3>
+											<p class="pt-10 mb-20">
+												Add coupon codes for tem to appear here
+											</p>
+											<div class="col-md-6 move-center">
+												<a href="" class="button -md -deep-green-1 text-white p-0">Add coupon</a>
+											</div>
+										</div>
 									</td>
-
-									<td>
-										<?php echo $couponCode ?>
-									</td>
-									<td class="lg:d-none">
-										<?php echo $couponType ?>
-									</td>
-									<td>
-										<?php echo $couponValue ?>
-									</td>
-									<td class="text-right">
-										<?php echo $dateformat ?>
-									</td>
-
 								</tr>
-
 							<?php
 							}
-						} else {
-							// echo "No Coupon codes";
 							?>
-							<tr class="col-md-12 text-center">
-								<td colspan="5" class="p-0">
-									<div class="py-30 px-30 bg-light-4 rounded-8 border-light col-md-12 move-center">
-										<img src="assets/img/store.png" style="width:20%">
-										<h3 class=" text- fw-500 mt-20">
-											No Coupon Codes yet!
-										</h3>
-										<p class="pt-10 mb-20">
-											Add coupon codes for tem to appear here
-										</p>
-										<div class="col-md-6 move-center">
-											<a href="" class="button -md -deep-green-1 text-white p-0">Add coupon</a>
-										</div>
-									</div>
-								</td>
-							</tr>
-						<?php
-						}
-						?>
 
-					</tbody>
-				</table>
+						</tbody>
+					</table>
 				</div>
 
 			</div>
@@ -160,40 +159,53 @@ $deliveries = mysqli_query($conn, "SELECT * FROM olnee_coupons");
 			</div>
 			<div class="modal-body pt-0">
 
+
 				<form class="contact-form row y-gap-30" id="couponForm" method="POST">
 					<div class="col-md-6 col-12" id="coupon-name">
 						<label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Coupon Name <span class="text-error-1">*</span> </label>
-						<input type="text" class="form-control" name="couponname" id="category" placeholder="Enter the coupon name">
+						<input type="text" class="form-control" name="couponname" placeholder="Enter the coupon name">
 					</div>
+
 					<div class="col-md-6 col-12" id="coupon-code">
 						<label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Delivery Code <span class="text-error-1">*</span> </label>
-						<input type="text" class="form-control" name="couponcode" id="category" placeholder="Enter the percent off">
+						<input type="text" class="form-control" name="couponcode" placeholder="Enter the delivery code">
 					</div>
-					<div class="col-md-6 col-12" id="coupon-percent">
-						<label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Coupon Type<span class="text-error-1">*</span> </label>
-						<!-- <input type="number" class="form-control" name="percent" id="category" placeholder="Enter the percent off"> -->
-						<select name="couponType" id="">
+
+					<div class="col-md-6 col-12" id="coupon-type">
+						<label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Coupon Type <span class="text-error-1">*</span> </label>
+						<select class="form-control" name="couponType">
 							<option value="">Choose coupon type</option>
 							<option value="1">Percentage off</option>
 							<option value="2">Fixed Value</option>
 						</select>
 					</div>
+
 					<div class="col-md-6 col-12" id="coupon-value">
-						<label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Coupon Value<span class="text-error-1">*</span> </label>
-						<input type="number" class="form-control" name="value" id="category" placeholder="Enter the percent off">
+						<label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Coupon Value <span class="text-error-1">*</span> </label>
+						<input type="number" class="form-control" name="value" placeholder="Enter the value">
+					</div>
+
+					<!-- New Field: Expiry Date -->
+					<div class="col-md-6 col-12" id="coupon-expiry">
+						<label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Expiry Date <span class="text-error-1">*</span> </label>
+						<input type="date" class="form-control" name="expiry_date" style="height: 60px;">
+					</div>
+
+					<!-- New Field: Number of Coupons Available -->
+					<div class="col-md-6 col-12" id="coupon-quantity">
+						<label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Coupons Available <span cla5s="text-error-1">*</span> </label>
+						<input type="number" class="form-control" name="quantity" placeholder="Enter number of coupons">
 					</div>
 
 					<input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
 
-
-					<div class="d-flex w-100  border-top-dark">
-						<!-- <button type="button" class="button -md -deep-green-1 flex-fill" data-dismiss="modal">Close</button> -->
-						<!-- <button type="button" class="button -md -deep-green-1 flex-fill">Save changes</button> -->
+					<div class="d-flex w-100 border-top-dark">
 						<button class="button -md -deep-green-1 text-white flex-fill" type="submit" id="submit">
 							Add Coupon Code
 						</button>
 					</div>
 				</form>
+
 			</div>
 		</div>
 	</div>

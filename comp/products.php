@@ -1,4 +1,4 @@
-<div class="w-1/5 xl:w-1/3 lg:w-1/2 sm:w-1/2">
+<div class="w-1/5 xl:w-1/4 lg:w-1/2 sm:w-1/2">
 
     <div id="productForm" class="productCard -type-1 text-center"
         data-product-id="<?php echo $product_id; ?>" data-price="<?php echo $price; ?>" data-image="<?php echo $image_path_thumbnail; ?>" data-name="<?php echo $product_name; ?>" data-discounted-price="<?php echo $dis_price; ?>" data-available-yards="<?php echo $availableYards; ?>">

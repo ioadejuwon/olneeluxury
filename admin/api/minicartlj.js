@@ -25,6 +25,12 @@ function getCartItems() {
 }
 
 
+// Get coupon_id from localStorage
+function getCouponId() {
+    return JSON.parse(localStorage.getItem('cartDiscount')) || [];
+}
+
+
 // Get cart ID from localStorage
 function getCartId() {
     let cartId = localStorage.getItem('olnee_cart_id');
@@ -40,6 +46,7 @@ function saveCartItems(cartItems) {
     localStorage.setItem('olnee_cart', JSON.stringify(cartItems));
 }
 
+// Save cart items to localStorage
 function updateCartItemCount() {
     // const cart = JSON.parse(localStorage.getItem('olnee_cart')) || [];
     const cart = getCartItems();
@@ -450,7 +457,8 @@ function applyCoupon() {
             if (response.status === 'success') {
                 // Store discount details in local storage
                 localStorage.setItem("cartDiscount", JSON.stringify(response.discount));
-                showNotification('Discount Applied: ' + response.discount.couponName, 'success');
+                showNotification(response.message, 'success'); // Yellow notification
+                // showNotification('Discount Applied: ' + response.discount.couponName, 'success');
                 updateCartTotal();
             } else if (response.status == 'info') {
                 showNotification(response.message, 'info'); // Yellow notification
@@ -508,8 +516,8 @@ function updateCheckoutTotal() {
 // Restore shipping selection on checkout page
 function restoreShippingSelection() {
     let savedShipping = JSON.parse(localStorage.getItem('olnee_shipping'));
-    if (savedShipping && savedShipping.id) {
-        $('select[name="deliverycost"]').val(savedShipping.id).trigger('change');
+    if (savedShipping && savedShipping.cost) {
+        $('select[name="deliverycost"]').val(savedShipping.cost).trigger('change');
     }
 }
 
@@ -517,7 +525,7 @@ function restoreShippingSelection() {
 function clearCartAfterPayment() {
     localStorage.removeItem("olnee_cart"); // Remove cart items
     localStorage.removeItem("cartDiscount"); // Remove applied discount
-    localStorage.removeItem("olnee_shipping"); // Remove applied discount
+    // localStorage.removeItem("olnee_shipping"); // Remove applied discount
     updateCartTotal(); // Update cart total to reset displayed values
     // Optional: Redirect user or show a success message
     // alert("Payment successful! Your cart has been cleared.");
@@ -530,12 +538,12 @@ function saveCustomerDetailsToLocalStorage() {
         lastName: $('input[name="lastName"]').val(),
         phone: $('input[name="phone"]').val(),
         email: $('input[name="email"]').val(),
-        // deliveryCost: $('input[name="deliverycost"]').val(),
+        // deliveryCost: $('select[name="deliverycost"]').val(),
         street: $('input[name="street"]').val(),
         city: $('input[name="city"]').val(),
         state: $('input[name="state"]').val(),
         country: $('select[name="country"]').val(),
-        delivery: parseInt($('select[name="deliverycost"]').val()),
+        delivery: $('select[name="deliverycost"]').val(),
         notes: $('textarea[name="notes"]').val()
     };
 
@@ -561,9 +569,10 @@ function getCustomerDetails() {
 }
 
 function restoreCustomerDetails() {
+    let savedShipping = JSON.parse(localStorage.getItem('olnee_shipping'));
     let savedCustomerDetails = JSON.parse(localStorage.getItem('olnee_customerDetails'));
     if (savedCustomerDetails) {
-        // $('select[name="deliverycost"]').val(savedShipping.id).trigger('change');
+        $('select[name="deliverycost"]').val(savedShipping.cost).trigger('change');
         getCustomerDetails();
     }
 }
@@ -574,6 +583,7 @@ $('#checkoutForm').on('submit', function (event) {
 
     // Retrieve items from localStorage
     var items = getCartItems(); // Ensure it's an array
+    var couponID = getCouponId(); // Ensure it's an array
     saveCustomerDetailsToLocalStorage();// Save the customer details to local storage before processing
     // let cartItems = getCartItems();
     const paymentOptionRadio = document.querySelectorAll('input[name="radio"]');
@@ -597,6 +607,7 @@ $('#checkoutForm').on('submit', function (event) {
 
     // Add items from localStorage to formData
     formData.push({ name: 'items', value: JSON.stringify(items) });
+    formData.push({ name: 'coupon', value: JSON.stringify(couponID) });
     formData.push({ name: 'subtotal', value: parseFloat(document.getElementById('subtotal').innerText.replace(/[^\d.]/g, '')) });
     formData.push({ name: 'discount', value: parseFloat(document.getElementById('discount').innerText.replace(/[^\d.]/g, '')) });
     formData.push({ name: 'shipping', value: parseFloat(document.getElementById('shipping').innerText.replace(/[^\d.]/g, '')) });

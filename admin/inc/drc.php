@@ -175,7 +175,7 @@ function timeAgo($datetime, $full = false) {
     }
 
     if ($timeAgo) {
-        return implode(', ', $timeAgo) . ($isFuture ? ' from now' : ' ago');
+        return implode(', ', $timeAgo) . ($isFuture ? ' left' : ' ago');
     } else {
         return 'just now';
     }

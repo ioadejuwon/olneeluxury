@@ -3,6 +3,7 @@ include_once 'config.php';
 include_once 'randno.php';
 include_once 'drc.php';
 include_once 'env.php';
+include_once '../../sendmail.php';
 
 header('Content-Type: application/json');
 ini_set('display_errors', 1);
@@ -34,6 +35,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $items = json_decode($_POST['items'], true);
         if (!is_array($items) || empty($items)) {
             throw new Exception("Please add items to your cart!");
+        }
+
+        $coupon = json_decode($_POST['coupon'], true);
+        if (!is_array($coupon) && !empty($coupon)) {
+            throw new Exception("Please add coupon to your cart!");
+        } else {
+            $couponID = $coupon['couponID'] ?? null;
+            if (!$couponID) {
+                throw new Exception("Coupon ID is missing!");
+            }
         }
 
         $conn->begin_transaction();
@@ -95,12 +106,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             $stmt = $conn->prepare("INSERT INTO olnee_order_items (order_id, product_id, product_name, yards, price) VALUES (?, ?, ?, ?, ?)");
             if (!$stmt) throw new Exception("Item insert preparation failed: " . $conn->error);
-
             $stmt->bind_param("sssid", $order_id, $product_id, $product_name, $product_yards, $product_price);
             $stmt->execute();
             if ($stmt->error) throw new Exception("Item insert failed: " . $stmt->error);
             $stmt->close();
         }
+
+
+
+
+        // Update product stock
+        $stmtCouponSubtract = $conn->prepare("UPDATE olnee_coupons SET couponQuantity = couponQuantity - 1 WHERE coupon_id = ?");
+        $stmtCouponSubtract->bind_param("s", $couponID);
+        $stmtCouponSubtract->execute();
+        $stmtCouponSubtract->close();
 
         $conn->commit();
 
@@ -196,10 +215,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $response['message'] = 'Email template not found: ' . $templatePath;
             exit;
         } else {
-            $subject = "We just recieved your order #" . $orderid . " 📦📦";
+            $subject = "We just recieved your order #" . $order_id . " 📦📦";
             $emailSent = sendNewMail(
-                $to = $customeremail,
-                $fname,
+                $to = $email,
+                $firstName,
                 $subject,
                 $templatePath, // Path to the email template
                 $response,
@@ -228,7 +247,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $response['message'] = 'Email template not found: ' . $templatePath;
                     exit;
                 } else {
-                    $subject = "You have a new order #" . $orderid . " 📦📦";
+                    $subject = "You have a new order #" . $order_id . " 📦📦";
                     $emailSent = sendNewMail(
                         $to = BRAND_EMAIL,
                         COMPANY,

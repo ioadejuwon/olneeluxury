@@ -19,7 +19,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $couponcode = $_POST['couponcode'];
         $coupontype = $_POST['couponType'];
         $couponvalue = (int)$_POST['value'];
-        $date = date("D., jS M.");
+        $couponexpiry = $_POST['expiry_date'];
+        $couponquantity = (int)$_POST['quantity'];
+        // $date = date("Y-m-d H:i:s");
+        // $date = modify('-1 hour'); // Adjust for server being 1 hour behind
+        // $date = strtotime($date);
+        $datetime = new DateTime();
+        $datetime->modify('+1 hour');
+        $date = $datetime->format('Y-m-d H:i:s');
+        $date = timeAgo($date);
+
+
+        $coupondatetime = new DateTime($couponexpiry);
+        $coupondatetime->modify('+1 hour');
+        $couponDate = $coupondatetime->format('Y-m-d H:i:s');
+        $couponDate = timeAgo($couponDate);
+
 
         $couponid = generateCouponID(); // Generate a unique ID
 
@@ -48,15 +63,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         } else {
             // Insert the new category using a prepared statement
-            $stmt = $conn->prepare("INSERT INTO olnee_coupons (user_id, coupon_id, couponName, couponCode, couponType, couponValue) VALUES (?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("ssssii", $user_id, $couponid, $couponname, $couponcode, $coupontype, $couponvalue);
+            $stmt = $conn->prepare("INSERT INTO olnee_coupons (user_id, coupon_id, couponName, couponCode, couponType, couponValue, couponExpiry, couponQuantity) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("ssssiiss", $user_id, $couponid, $couponname, $couponcode, $coupontype, $couponvalue, $couponexpiry, $couponquantity);
 
             if ($stmt->execute()) {
                 $response['status'] = 'success';
                 $response['message'] = 'Coupon code added successfully!';
                 $response['couponname'] = $couponname;
                 $response['couponcode'] = $couponcode;
-                $response['coupondate'] = $date;;
+
+                $response['couponquantity'] = $couponquantity;
+                $response['couponexpiry'] = $couponDate;
+                $response['coupondate'] = $date;
                 if ($coupontype == 1) {
                     $response['coupontype'] = 'Percentage Off';
                     $response['couponvalue'] = $couponvalue . '% off';
