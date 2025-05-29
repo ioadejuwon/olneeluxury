@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (!is_array($coupon) && !empty($coupon)) {
             throw new Exception("Please add coupon to your cart!");
         } else {
-            $couponID = $coupon['couponID'] ?? null;
+            $couponID = $coupon['couponID'] ?? 'nil';
             if (!$couponID) {
                 throw new Exception("Coupon ID is missing!");
             }
