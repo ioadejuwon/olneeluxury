@@ -6,33 +6,6 @@ include_once "comp/header.php";
 $deliveries = mysqli_query($conn, "SELECT * FROM olnee_delivery");
 ?>
 <script src="https://checkout.flutterwave.com/v3.js"></script>
-<section data-anim="fade" class="breadcrumbs d-none">
-  <div class="container">
-    <div class="row">
-      <div class="col-auto">
-        <div class="breadcrumbs__content">
-
-          <div class="breadcrumbs__item ">
-            <a href="#">Home</a>
-          </div>
-
-          <div class="breadcrumbs__item ">
-            <a href="#">All courses</a>
-          </div>
-
-          <div class="breadcrumbs__item ">
-            <a href="#">User Experience Design</a>
-          </div>
-
-          <div class="breadcrumbs__item ">
-            <a href="#">User Interface</a>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 
 <section class="page-header -type-1 mt-60 text-white">
@@ -222,7 +195,7 @@ $deliveries = mysqli_query($conn, "SELECT * FROM olnee_delivery");
                 </p>
               </div>
 
-              <div class="mt-30">
+              <div class="mt-30 d-none">
                 <div class="form-radio d-flex items-center">
                   <div class="radio">
                   <input type="radio" name="radio" value="2">
@@ -239,7 +212,7 @@ $deliveries = mysqli_query($conn, "SELECT * FROM olnee_delivery");
 
 
 
-              <div class="mt-30 d-noe">
+              <div class="mt-30 d-none">
                 <div class="form-radio d-flex items-center">
                   <div class="radio">
                     <input type="radio" name="radio" value="3">

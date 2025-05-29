@@ -228,6 +228,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     'BASE_URL' => BASE_URL,
                     'ORDER_ITEMS' => $sendMail,
                     'ORDER_LINK' => ORDER . $order_id,
+                    'ORDER_ID' => $order_id,
                     'CUSTOMER_NAME' => $fullName,
                     'CUSTOMER_PHONE' => $phone,
                     'YEAR' => FOOTERYEAR
