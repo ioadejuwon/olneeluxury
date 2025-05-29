@@ -208,7 +208,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
 
-        $templatePath = '../email/checkorder.html';
+        $templatePath = '../email/customerorder.html';
 
         if (!file_exists($templatePath)) {
             $response['status'] = 'error';

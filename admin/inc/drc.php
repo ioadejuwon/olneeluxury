@@ -37,8 +37,6 @@ if ($_SERVER['HTTP_HOST'] == 'localhost:8888') {
     define('ADMIN_URL', 'http://oreoluwas-macbook-pro.local:8888/olnee/admin/');
 } else {
     // Hosting environment
-    // define('BASE_URL', 'https://bobthebuilder.shop/');
-    // define('ADMIN_URL', 'https://admin.buildwithbob.shop/');
     define('BASE_URL', 'https://olneeluxury.com/');
     define('ADMIN_URL', 'https://admin.olneeluxury.com/');
 }
