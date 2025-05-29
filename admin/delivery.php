@@ -41,161 +41,156 @@ $deliveries = mysqli_query($conn, "SELECT * FROM olnee_delivery");
 	</div>
 
 
-	<div class="row y-gap-30 pt-30 d-none">
-		<div class="col-xl-12 col-md-12">
-			<div class="rounded-16 bg-white -dark-bg-dark-1 shadow-4 h-100">
-				<div class="d-flex items-center py-20 px-30 border-bottom-light">
-					<h2 class="text-17 lh-1 fw-500">Add Delivery Location</h2>
-				</div>
-				<div class="py-30 px-30">
-					<form class="contact-form row y-gap-30" id="deliveryFormd" method="POST">
-						<div class="col-md-6 col-12" id="delivery-name">
-							<label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Delivery Name <span class="text-error-1">*</span> </label>
-							<input type="text" class="form-control" name="deliveryname" id="category" placeholder="Enter the dleivery label">
-						</div>
-						<div class="col-md-6 col-12" id="delivery-cost">
-							<label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Delivery Rate <span class="text-error-1">*</span> </label>
-							<input type="number" class="form-control" name="deliverycost" id="category" placeholder="Enter the delivery cost">
-						</div>
-						<div class="col-12">
-							<div class="">For instance, "Outside Lagos" or "Mainland" or "Island"</div>
-						</div>
-						<input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
-
-						<div class="col-md-6 col-12  justify-end">
-
-							<button class="button -md -deep-green-1 text-white" type="submit" id="submit">
-								Add Delivery Rate
-							</button>
-						</div>
-					</form>
-
-				</div>
-
-			</div>
-		</div>
-	</div>
-
 	<div class="row y-gap-30 pt-30">
 		<div class="col-xl-12 col-md-12">
 			<div class="rounded-16 text-white shadow-4 h-100">
 
 				<!-- <div class="table-responsive"> -->
-					<table class="table w-100">
-						<thead>
-							<tr>
-								<!-- <th>S/N</th> -->
-								<th><span class="lg:d-none">Delivery&nbsp;</span>Label</th>
-								<th><span class="lg:d-none">Delivery&nbsp;</span>Rate</th>
-								<th>Action</th>
-								<!-- <th>Date Created</th> -->
-							</tr>
-						</thead>
-						<tbody id="deliveryTableBody">
-							<?php
+				<table class="table w-100">
+					<thead>
+						<tr>
+							<!-- <th>S/N</th> -->
+							<th><span class="lg:d-none">Delivery&nbsp;</span>Label</th>
+							<th><span class="lg:d-none">Delivery&nbsp;</span>Rate</th>
+							<th>Action</th>
+							<!-- <th>Date Created</th> -->
+						</tr>
+					</thead>
+					<tbody id="deliveryTableBody">
+						<?php
 
-							$deliveryquery = "SELECT * FROM olnee_delivery WHERE user_id = '{$user_id}'  ORDER BY created_at DESC";
-							$deliveryresult = mysqli_query($conn, $deliveryquery);
-							$count_row_deliveries = mysqli_num_rows($deliveryresult);
+						$deliveryquery = "SELECT * FROM olnee_delivery WHERE user_id = '{$user_id}'  ORDER BY created_at DESC";
+						$deliveryresult = mysqli_query($conn, $deliveryquery);
+						$count_row_deliveries = mysqli_num_rows($deliveryresult);
 
-							if ($count_row_deliveries != 0) {
+						if ($count_row_deliveries != 0) {
 
+							while ($row = mysqli_fetch_assoc($deliveryresult)) {
 
-								while ($row = mysqli_fetch_assoc($deliveryresult)) {
+								$deliveryName = $row['deliveryName'];
+								$deliveryid = $row['deliveryID'];
+								$deliveryCost = $row['deliveryCost'];
+								$unique_id = $row['unique_id'];
+								$created_at = $row['created_at'];
+								$date = strtotime($created_at);
+								$dateformat = date('D., jS M.', $date);
+								$deliveryCost = '&#8358;' . number_format($deliveryCost, 2);
+								// $biz_id = $row['$biz_id'];  
 
-									$deliveryName = $row['deliveryName'];
-									$deliveryid = $row['deliveryID'];
-									$deliveryCost = $row['deliveryCost'];
-									$unique_id = $row['unique_id'];
-									$created_at = $row['created_at'];
-									$date = strtotime($created_at);
-									$dateformat = date('D., jS M.', $date);
-									$deliveryCost = '&#8358;' . number_format($deliveryCost, 2);
-									// $biz_id = $row['$biz_id'];  
+						?>
+								<tr id="delivery-<?php echo $deliveryid; ?>">
+									<td class="underline">
+										<?php echo $deliveryName ?>
+									</td>
+									<td>
+										<?php echo $deliveryCost ?>
+									</td>
+									<td class="dropdown">
+										<img src="assets/img/icons/more_horiz.png" alt="" width="50%">
+										<div class="dropdown-content">
+											<a data-toggle="modal" data-target="#edit-<?php echo $deliveryid; ?>">Edit Rate</a>
+											<a data-toggle="modal" data-target="#delete-<?php echo $deliveryid; ?>">Delete</a>
+										</div>
+									</td>
+								</tr>
 
-
-							?>
-									<tr id="delivery-<?php echo $deliveryid; ?>">
-										<td class="underline">
-											<?php echo $deliveryName ?>
-										</td>
-										<td>
-											<?php echo $deliveryCost ?>
-										</td>
-										<td class="dropdown">
-											<img src="assets/img/icons/more_horiz.png" alt="" width="50%">
-											<div class="dropdown-content">
-												<a data-toggle="modal" data-target="#edit-<?php echo $deliveryid; ?>">Edit Rate</a>
-												<a data-toggle="modal" data-target="#delete-<?php echo $deliveryid; ?>">Delete</a>
-											</div>
-										</td>
-									</tr>
-
-									<div id="modalTableBody">
-										<div class="modal fade" id="delete-<?php echo $deliveryid; ?>" tabindex="-1">
-											<div class="modal-dialog modal-dialog-centered">
-												<div class="modal-content">
-													<div class="modal-header">
-														<!-- <h5 class="modal-title"></h5> -->
-														<h2 class="modal-title h4">Delete Delivery Rate</h2>
-														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-															<img src="assets/img/icons/close.png" alt="close" width="30%">
-														</button>
-													</div>
-													<div class="modal-body p-4 pt-0">
-
-
-														<p class="text-dark">Are you sure you want to delete the category "<span class="fw-600"><?php echo $deliveryName ?></span>". This process is irreversible.</p>
-
-														<ul class="row gx-4 mt-4">
-															<li class="col-6 d-none">
-																<button class="button -outline-dark-3 -md w-100" data-bs-dismiss="modal">Close</button>
-																<!-- <button class="button -md -deep-green-1 text-white" type="submit" id="submit">nn</button> -->
-															</li>
-
-															<li class="col-12">
-																<a href="#" class="button -red-1 w-100 button -md -deep-green-1 text-white delete-delivery-btn" data-deliveryid="<?php echo $deliveryid; ?>">Delete Rate</a>
-															</li>
-														</ul>
-													</div>
+								<div id="modalTableBody">
+									<div class="modal fade" id="delete-<?php echo $deliveryid; ?>" tabindex="-1">
+										<div class="modal-dialog modal-dialog-centered">
+											<div class="modal-content">
+												<div class="modal-header">
+													<!-- <h5 class="modal-title"></h5> -->
+													<h2 class="modal-title h4">Delete Delivery Rate</h2>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<img src="assets/img/icons/close.png" alt="close" width="30%">
+													</button>
+												</div>
+												<div class="modal-body p-4 pt-0">
+													<p class="text-dark">Are you sure you want to delete the category "<span class="fw-600"><?php echo $deliveryName ?></span>". This process is irreversible.</p>
+													<ul class="row gx-4 mt-4">
+														<li class="col-6 d-none">
+															<button class="button -outline-dark-3 -md w-100" data-bs-dismiss="modal">Close</button>
+															<!-- <button class="button -md -deep-green-1 text-white" type="submit" id="submit">nn</button> -->
+														</li>
+														<li class="col-12">
+															<a href="#" class="button -red-1 w-100 button -md -deep-green-1 text-white delete-delivery-btn" data-deliveryid="<?php echo $deliveryid; ?>">Delete Rate</a>
+														</li>
+													</ul>
 												</div>
 											</div>
 										</div>
 									</div>
-								<?php
-								}
-							} else {
-
-								?>
-								<tr class="layout-pt-lg layout-pb-lg section-bg mt-30 empty ">
-									<div class="section-bg__item bg-light-6"></div>
-									<td colspan="6" class="container desction">
-										<div class="row y-gap-20 justify-center text-center">
-											<div class="col-auto">
-												<img src="assets/img/store.png" style="width:20%">
-												<div class="sectionTitle ">
-													<h2 class="sectionTitle__title ">No delivery rates set!</h2>
-													<p class="sectionTitle__text h4 pt-15">
-														Click the buttons below to add delviery prices
-													</p>
+									<div class="modal fade" id="edit-<?php echo $deliveryid; ?>" tabindex="-1">
+										<div class="modal-dialog modal-dialog-centered" role="document">
+											<div class="modal-content">
+												<div class="modal-header border-bottom-dark">
+													<h4 class="modal-title">Add Delivery Rate</h4>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<img src="assets/img/icons/close.png" alt="" width="20%">
+													</button>
 												</div>
-												<div class="row justify-center pt-30">
-													<div class="col-auto">
-														<a data-toggle="modal" data-target="#modal-delivery-rate" class="button -icon  -deep-green-1 text-white">
-															Add Delivery Rate <i class="icon-arrow-top-right text-13 ml-10"></i>
-														</a>
-													</div>
+												<div class="modal-body pt-0">
+
+													<form class="contact-form row y-gap-30" id="deliveryForm" method="POST">
+														<div class="col-md-6 col-12" id="delivery-name">
+															<label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Delivery Name <span class="text-error-1">*</span> </label>
+															<input type="text" class="form-control" name="deliveryname" id="category" placeholder="Enter the dleivery label">
+														</div>
+														<div class="col-md-6 col-12" id="delivery-cost">
+															<label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Delivery Rate <span class="text-error-1">*</span> </label>
+															<input type="number" class="form-control" name="deliverycost" id="category" placeholder="Enter the delivery cost">
+														</div>
+														<div class="col-12">
+															<div class="">For instance, "Outside Lagos" or "Mainland" or "Island"</div>
+														</div>
+														<input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+														<div class="d-flex w-100  border-top-dark">
+															<!-- <button type="button" class="button -md -deep-green-1 flex-fill" data-dismiss="modal">Close</button> -->
+															<!-- <button type="button" class="button -md -deep-green-1 flex-fill">Save changes</button> -->
+															<button class="button -md -deep-green-1 text-white flex-fill" type="submit" id="submit">
+																Add Delivery Rate
+															</button>
+														</div>
+													</form>
 												</div>
 											</div>
 										</div>
-									</td>
-								</tr>
+									</div>
+								</div>
 							<?php
 							}
-							?>
+						} else {
 
-						</tbody>
-					</table>
+							?>
+							<tr class="layout-pt-lg layout-pb-lg section-bg mt-30 empty ">
+								<div class="section-bg__item bg-light-6"></div>
+								<td colspan="6" class="container desction">
+									<div class="row y-gap-20 justify-center text-center">
+										<div class="col-auto">
+											<img src="assets/img/store.png" style="width:20%">
+											<div class="sectionTitle ">
+												<h2 class="sectionTitle__title ">No delivery rates set!</h2>
+												<p class="sectionTitle__text h4 pt-15">
+													Click the buttons below to add delviery prices
+												</p>
+											</div>
+											<div class="row justify-center pt-30">
+												<div class="col-auto">
+													<a data-toggle="modal" data-target="#modal-delivery-rate" class="button -icon  -deep-green-1 text-white">
+														Add Delivery Rate <i class="icon-arrow-top-right text-13 ml-10"></i>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+						<?php
+						}
+						?>
+
+					</tbody>
+				</table>
 				<!-- </div> -->
 
 			</div>

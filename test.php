@@ -45,10 +45,10 @@
 
 
 
-// $pwordhash = password_hash('Password', PASSWORD_BCRYPT);
-// echo $pwordhash;
+$pwordhash = password_hash('test', PASSWORD_BCRYPT);
+echo $pwordhash;
 
 
-// echo '<br><br>';
+echo '<br><br>';
 
-// echo password_verify('Password', $pwordhash);
+echo password_verify('test', $pwordhash);

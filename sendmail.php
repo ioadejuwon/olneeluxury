@@ -21,8 +21,8 @@ function sendNewMail(
     $cc = [],
     $bcc = [],
     $attachments = [],
-    $headerFile = 'admin/email/header.html',
-    $footerFile = 'admin/email/footer.html'
+    // $headerFile = 'admin/email/header.html',
+    // $footerFile = 'admin/email/footer.html'
 ) {
     $mail = new PHPMailer(true);
     // $mail->SMTPDebug = 3; // Shows connection and authentication steps
@@ -81,19 +81,20 @@ function sendNewMail(
         if (!file_exists($bodyFile)) {
             throw new Exception("Email body template not found: $bodyFile");
         }
-        if (!file_exists($headerFile)) {
-            throw new Exception("Email header template not found: $headerFile");
-        }
-        if (!file_exists($footerFile)) {
-            throw new Exception("Email footer template not found: $footerFile");
-        }
+        // if (!file_exists($headerFile)) {
+        //     throw new Exception("Email header template not found: $headerFile");
+        // }
+        // if (!file_exists($footerFile)) {
+        //     throw new Exception("Email footer template not found: $footerFile");
+        // }
 
-        $header = file_get_contents($headerFile);
+        // $header = file_get_contents($headerFile);
         $body = file_get_contents($bodyFile);
-        $footer = file_get_contents($footerFile);
+        // $footer = file_get_contents($footerFile);
 
         // Merge them together
-        $message = $header . $body . $footer;
+        // $message = $header . $body . $footer;
+        $message = $body;
 
 
         foreach ($placeholders as $key => $value) {
